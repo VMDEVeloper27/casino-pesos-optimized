@@ -139,9 +139,9 @@ export default function ReviewSystem({
   };
 
   const getRatingColor = (rating: number) => {
-    if (rating >= 4) { return 'text-green-400'; }
-    if (rating >= 3) { return 'text-yellow-400'; }
-    return 'text-red-400';
+    if (rating >= 4) { return 'text-green-600'; }
+    if (rating >= 3) { return 'text-yellow-600'; }
+    return 'text-red-600';
   };
 
   const getRatingLabel = (rating: number) => {
@@ -171,11 +171,11 @@ export default function ReviewSystem({
                   {[...Array(5)].map((_, i) => (
                     <Star 
                       key={i} 
-                      className={`w-5 h-5 ${i < Math.floor(averageRating) ? 'fill-green-500 text-green-500' : 'text-gray-400'}`} 
+                      className={`w-5 h-5 ${i < Math.floor(averageRating) ? 'fill-green-500 text-green-500' : 'text-gray-600'}`} 
                     />
                   ))}
                 </div>
-                <p className="text-sm text-neutral-400 mt-1">
+                <p className="text-sm text-gray-600 mt-1">
                   {totalReviews} {isSpanish ? 'reseñas' : 'reviews'}
                 </p>
               </div>
@@ -184,8 +184,8 @@ export default function ReviewSystem({
                   {getRatingLabel(averageRating)}
                 </div>
                 <div className="flex items-center gap-2 mt-2">
-                  <CheckCircle className="w-4 h-4 text-green-400" />
-                  <span className="text-sm text-neutral-400">
+                  <CheckCircle className="w-4 h-4 text-green-600" />
+                  <span className="text-sm text-gray-600">
                     {isSpanish ? '78% verificadas' : '78% verified'}
                   </span>
                 </div>
@@ -207,14 +207,14 @@ export default function ReviewSystem({
                     selectedRating === rating ? 'bg-gray-200' : 'hover:bg-gray-100'
                   }`}
                 >
-                  <span className="text-sm text-neutral-400 w-8">{rating}★</span>
+                  <span className="text-sm text-gray-600 w-8">{rating}★</span>
                   <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
                     <div 
                       className="h-full bg-gradient-to-r from-green-500 to-green-600 transition-all"
                       style={{ width: `${percentage}%` }}
                     />
                   </div>
-                  <span className="text-sm text-neutral-400 w-12 text-right">{count}</span>
+                  <span className="text-sm text-gray-600 w-12 text-right">{count}</span>
                 </button>
               );
             })}
@@ -222,7 +222,7 @@ export default function ReviewSystem({
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap gap-4 mt-6 pt-6 border-t border-neutral-700">
+        <div className="flex flex-wrap gap-4 mt-6 pt-6 border-t border-gray-200">
           <button
             onClick={() => setShowReviewForm(!showReviewForm)}
             className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-colors"
@@ -231,7 +231,7 @@ export default function ReviewSystem({
           </button>
           
           <div className="flex items-center gap-2">
-            <span className="text-sm text-neutral-400">
+            <span className="text-sm text-gray-600">
               {isSpanish ? 'Ordenar por:' : 'Sort by:'}
             </span>
             <select 
@@ -264,7 +264,7 @@ export default function ReviewSystem({
           </h3>
           <form className="space-y-4">
             <div>
-              <label className="block text-sm font-semibold text-neutral-300 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
                 {isSpanish ? 'Tu calificación' : 'Your rating'}
               </label>
               <div className="flex gap-2">
@@ -274,14 +274,14 @@ export default function ReviewSystem({
                     type="button"
                     className="p-2 hover:bg-gray-100 rounded transition-colors"
                   >
-                    <Star className="w-6 h-6 text-gray-400 hover:text-green-600 transition-colors" />
+                    <Star className="w-6 h-6 text-gray-600 hover:text-green-600 transition-colors" />
                   </button>
                 ))}
               </div>
             </div>
             
             <div>
-              <label className="block text-sm font-semibold text-neutral-300 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
                 {isSpanish ? 'Título de tu reseña' : 'Review title'}
               </label>
               <input 
@@ -292,7 +292,7 @@ export default function ReviewSystem({
             </div>
             
             <div>
-              <label className="block text-sm font-semibold text-neutral-300 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
                 {isSpanish ? 'Tu reseña' : 'Your review'}
               </label>
               <textarea 
@@ -328,13 +328,13 @@ export default function ReviewSystem({
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-start gap-3">
                 <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-                  <User className="w-5 h-5 text-neutral-400" />
+                  <User className="w-5 h-5 text-gray-600" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
                     <h4 className="font-semibold text-gray-900">{review.userName}</h4>
                     {review.verified && (
-                      <span className="flex items-center gap-1 text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">
+                      <span className="flex items-center gap-1 text-xs bg-green-500/20 text-green-600 px-2 py-1 rounded-full">
                         <CheckCircle className="w-3 h-3" />
                         {isSpanish ? 'Verificado' : 'Verified'}
                       </span>
@@ -345,11 +345,11 @@ export default function ReviewSystem({
                       {[...Array(5)].map((_, i) => (
                         <Star 
                           key={i} 
-                          className={`w-4 h-4 ${i < review.rating ? 'fill-green-500 text-green-500' : 'text-gray-400'}`} 
+                          className={`w-4 h-4 ${i < review.rating ? 'fill-green-500 text-green-500' : 'text-gray-600'}`} 
                         />
                       ))}
                     </div>
-                    <span className="text-xs text-neutral-400 flex items-center gap-1">
+                    <span className="text-xs text-gray-600 flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
                       {new Date(review.date).toLocaleDateString(isSpanish ? 'es-MX' : 'en-US', {
                         year: 'numeric',
@@ -364,20 +364,20 @@ export default function ReviewSystem({
 
             {/* Review Content */}
             <h5 className="font-semibold text-gray-900 mb-2">{review.title}</h5>
-            <p className="text-neutral-300 mb-4">{review.comment}</p>
+            <p className="text-gray-700 mb-4">{review.comment}</p>
 
             {/* Pros and Cons */}
             {(review.pros.length > 0 || review.cons.length > 0) && (
               <div className="grid md:grid-cols-2 gap-4 mb-4">
                 {review.pros.length > 0 && (
                   <div>
-                    <h6 className="text-sm font-semibold text-green-400 mb-2">
+                    <h6 className="text-sm font-semibold text-green-600 mb-2">
                       {isSpanish ? 'Pros:' : 'Pros:'}
                     </h6>
                     <ul className="space-y-1">
                       {review.pros.map((pro, i) => (
-                        <li key={i} className="text-sm text-neutral-300 flex items-start gap-2">
-                          <span className="text-green-400 mt-0.5">+</span>
+                        <li key={i} className="text-sm text-gray-700 flex items-start gap-2">
+                          <span className="text-green-600 mt-0.5">+</span>
                           {pro}
                         </li>
                       ))}
@@ -386,13 +386,13 @@ export default function ReviewSystem({
                 )}
                 {review.cons.length > 0 && (
                   <div>
-                    <h6 className="text-sm font-semibold text-red-400 mb-2">
+                    <h6 className="text-sm font-semibold text-red-600 mb-2">
                       {isSpanish ? 'Contras:' : 'Cons:'}
                     </h6>
                     <ul className="space-y-1">
                       {review.cons.map((con, i) => (
-                        <li key={i} className="text-sm text-neutral-300 flex items-start gap-2">
-                          <span className="text-red-400 mt-0.5">-</span>
+                        <li key={i} className="text-sm text-gray-700 flex items-start gap-2">
+                          <span className="text-red-600 mt-0.5">-</span>
                           {con}
                         </li>
                       ))}
@@ -410,24 +410,24 @@ export default function ReviewSystem({
                   <span className="text-sm font-semibold text-gray-900">
                     {isSpanish ? `Respuesta de ${casinoName}` : `Response from ${casinoName}`}
                   </span>
-                  <span className="text-xs text-neutral-400">
+                  <span className="text-xs text-gray-600">
                     {new Date(review.casinoResponse.date).toLocaleDateString()}
                   </span>
                 </div>
-                <p className="text-sm text-neutral-300">{review.casinoResponse.message}</p>
+                <p className="text-sm text-gray-700">{review.casinoResponse.message}</p>
               </div>
             )}
 
             {/* Helpful Votes */}
-            <div className="flex items-center gap-4 pt-4 border-t border-neutral-700">
-              <span className="text-sm text-neutral-400">
+            <div className="flex items-center gap-4 pt-4 border-t border-gray-200">
+              <span className="text-sm text-gray-600">
                 {isSpanish ? '¿Te resultó útil?' : 'Was this helpful?'}
               </span>
               <button
                 onClick={() => handleHelpfulVote(review.id, 'helpful')}
                 className={`flex items-center gap-2 px-3 py-1 rounded-lg transition-colors ${
                   helpfulVotes[review.id] === 'helpful' 
-                    ? 'bg-green-500/20 text-green-400' 
+                    ? 'bg-green-500/20 text-green-600' 
                     : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                 }`}
               >
@@ -438,7 +438,7 @@ export default function ReviewSystem({
                 onClick={() => handleHelpfulVote(review.id, 'not')}
                 className={`flex items-center gap-2 px-3 py-1 rounded-lg transition-colors ${
                   helpfulVotes[review.id] === 'not' 
-                    ? 'bg-red-500/20 text-red-400' 
+                    ? 'bg-red-500/20 text-red-600' 
                     : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                 }`}
               >
@@ -468,7 +468,7 @@ export default function ReviewSystem({
               ? (isSpanish ? `No hay reseñas de ${selectedRating} estrellas` : `No ${selectedRating}-star reviews`)
               : (isSpanish ? 'Aún no hay reseñas' : 'No reviews yet')}
           </h3>
-          <p className="text-neutral-400 mb-6">
+          <p className="text-gray-600 mb-6">
             {isSpanish 
               ? 'Sé el primero en compartir tu experiencia con este casino'
               : 'Be the first to share your experience with this casino'}
