@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Award, BookOpen, Bookmark, ChevronRight, Clock, HelpCircle, TrendingUp, User } from 'lucide-react';
 
@@ -75,6 +76,78 @@ const guides = [
     featured: true,
     excerpt: 'Identifica las señales de problemas con el juego y conoce los recursos de ayuda disponibles.',
     difficulty: 'Fácil'
+  },
+  {
+    id: 7,
+    title: 'Métodos de Pago Seguros para Casinos Online',
+    category: 'Finanzas',
+    readTime: '9 min',
+    author: 'Carlos Mendoza',
+    date: '2024-01-09',
+    image: '💳',
+    featured: false,
+    excerpt: 'Conoce los métodos de pago más seguros y cómo proteger tu información financiera en casinos online.',
+    difficulty: 'Fácil'
+  },
+  {
+    id: 8,
+    title: 'Torneos de Poker Online: Estrategias para Principiantes',
+    category: 'Estrategia',
+    readTime: '18 min',
+    author: 'Ana García',
+    date: '2024-01-08',
+    image: '♠️',
+    featured: false,
+    excerpt: 'Aprende las estrategias básicas para participar en torneos de poker online y mejorar tu juego.',
+    difficulty: 'Intermedio'
+  },
+  {
+    id: 9,
+    title: 'Casinos con Criptomonedas: Ventajas y Desventajas',
+    category: 'Finanzas',
+    readTime: '11 min',
+    author: 'Roberto Silva',
+    date: '2024-01-07',
+    image: '₿',
+    featured: false,
+    excerpt: 'Todo lo que necesitas saber sobre jugar en casinos que aceptan Bitcoin y otras criptomonedas.',
+    difficulty: 'Intermedio'
+  },
+  {
+    id: 10,
+    title: 'Análisis de Volatilidad en Slots Online',
+    category: 'Juegos',
+    readTime: '14 min',
+    author: 'María López',
+    date: '2024-01-06',
+    image: '📊',
+    featured: false,
+    excerpt: 'Entiende qué es la volatilidad en las tragamonedas y cómo afecta tu estrategia de juego.',
+    difficulty: 'Avanzado'
+  },
+  {
+    id: 11,
+    title: 'Licencias de Casino: Qué Significan y Por Qué Importan',
+    category: 'Principiantes',
+    readTime: '8 min',
+    author: 'Diego Ramírez',
+    date: '2024-01-05',
+    image: '📄',
+    featured: false,
+    excerpt: 'Aprende a identificar y evaluar las licencias de casino para jugar de forma segura.',
+    difficulty: 'Fácil'
+  },
+  {
+    id: 12,
+    title: 'Apps Móviles de Casino: Qué Buscar',
+    category: 'Juegos',
+    readTime: '10 min',
+    author: 'Laura Fernández',
+    date: '2024-01-04',
+    image: '📱',
+    featured: false,
+    excerpt: 'Guía completa para elegir la mejor app de casino móvil y jugar desde tu teléfono.',
+    difficulty: 'Fácil'
   }
 ];
 
@@ -97,6 +170,20 @@ const popularTopics = [
 ];
 
 export default function GuiasPage() {
+  const [visibleGuides, setVisibleGuides] = useState(6); // Show first 6 guides initially
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleLoadMore = async () => {
+    setIsLoading(true);
+    // Simulate loading delay
+    await new Promise(resolve => setTimeout(resolve, 500));
+    setVisibleGuides(prev => Math.min(prev + 6, guides.length));
+    setIsLoading(false);
+  };
+
+  const displayedGuides = guides.slice(0, visibleGuides);
+  const hasMoreGuides = visibleGuides < guides.length;
+
   return (
     <main className="min-h-screen bg-gray-50 pt-8 pb-16">
       <div className="container mx-auto px-4">
@@ -188,7 +275,7 @@ export default function GuiasPage() {
           <div className="lg:col-span-2 space-y-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Últimas Guías</h2>
             
-            {guides.map((guide, index) => (
+            {displayedGuides.map((guide, index) => (
               <motion.article
                 key={guide.id}
                 initial={{ opacity: 0, x: -20 }}
@@ -259,11 +346,20 @@ export default function GuiasPage() {
             ))}
             
             {/* Load More */}
-            <div className="text-center pt-8">
-              <button className="bg-white hover:bg-gray-100 text-gray-900 px-8 py-3 rounded-xl font-semibold transition-colors">
-                Cargar Más Guías
-              </button>
-            </div>
+            {hasMoreGuides && (
+              <div className="text-center pt-8">
+                <button 
+                  onClick={handleLoadMore}
+                  disabled={isLoading}
+                  className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 disabled:from-gray-400 disabled:to-gray-500 text-white px-8 py-3 rounded-xl font-semibold transition-all shadow-lg hover:shadow-xl disabled:cursor-not-allowed"
+                >
+                  {isLoading ? 'Cargando...' : 'Cargar Más Guías'}
+                </button>
+                <p className="text-gray-600 text-sm mt-2">
+                  Mostrando {visibleGuides} de {guides.length} guías
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Sidebar */}
