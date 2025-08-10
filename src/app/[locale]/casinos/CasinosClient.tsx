@@ -41,20 +41,20 @@ export default function CasinosClient({ casinos }: CasinosClientProps) {
     });
 
   return (
-    <main className="min-h-screen bg-neutral-900 pt-8 pb-16">
+    <main className="min-h-screen bg-gray-50 pt-8 pb-16">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Todos los Casinos Online
           </h1>
-          <p className="text-lg text-neutral-300 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             {filteredCasinos.length} casinos disponibles para jugadores mexicanos.
           </p>
         </div>
 
         {/* Search and Sort Bar */}
-        <div className="bg-neutral-800 rounded-xl p-4 mb-6">
+        <div className="bg-white border border-gray-200 rounded-xl p-4 mb-6 shadow-sm">
           <div className="flex flex-col lg:flex-row gap-4">
             {/* Search */}
             <div className="flex-1">
@@ -65,7 +65,7 @@ export default function CasinosClient({ casinos }: CasinosClientProps) {
                   placeholder="Buscar casino..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 bg-neutral-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
                 />
               </div>
             </div>
@@ -75,7 +75,7 @@ export default function CasinosClient({ casinos }: CasinosClientProps) {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-3 bg-neutral-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="px-4 py-3 bg-gray-50 border border-gray-200 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
               >
                 <option value="rating">Mayor Calificación</option>
                 <option value="bonus">Mayor Bono</option>
@@ -90,8 +90,8 @@ export default function CasinosClient({ casinos }: CasinosClientProps) {
         <div className="flex-1">
           {/* Results Count */}
           <div className="flex items-center justify-between mb-6">
-            <p className="text-neutral-400">
-              Mostrando <span className="text-white font-bold">{filteredCasinos.length}</span> de {casinos.length} casinos
+            <p className="text-gray-600">
+              Mostrando <span className="text-gray-900 font-bold">{filteredCasinos.length}</span> de {casinos.length} casinos
             </p>
           </div>
 
@@ -105,12 +105,12 @@ export default function CasinosClient({ casinos }: CasinosClientProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ delay: index * 0.05 }}
-                  className="bg-neutral-800 rounded-xl p-6 hover:shadow-xl transition-shadow"
+                  className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-xl transition-shadow"
                 >
                   <div className="grid lg:grid-cols-[200px,1fr,300px] gap-6">
                     {/* Casino Info */}
                     <div className="text-center lg:text-left">
-                      <div className="w-24 h-16 bg-neutral-700 rounded-lg flex items-center justify-center mx-auto lg:mx-0 mb-3 relative overflow-hidden">
+                      <div className="w-24 h-16 bg-gray-100 border border-gray-200 rounded-lg flex items-center justify-center mx-auto lg:mx-0 mb-3 relative overflow-hidden">
                         {casino.logo && casino.logo.startsWith('/') ? (
                           <Image
                             src={casino.logo}
@@ -121,76 +121,76 @@ export default function CasinosClient({ casinos }: CasinosClientProps) {
                             priority={index < 3}
                           />
                         ) : (
-                          <span className="text-2xl font-bold text-white">
+                          <span className="text-2xl font-bold text-gray-900">
                             {casino.logo || casino.name.substring(0, 3).toUpperCase()}
                           </span>
                         )}
                       </div>
-                      <h2 className="text-xl font-bold text-white mb-2">{casino.name}</h2>
+                      <h2 className="text-xl font-bold text-gray-900 mb-2">{casino.name}</h2>
                       <div className="flex items-center justify-center lg:justify-start gap-1 mb-2">
                         {[...Array(5)].map((_, i) => (
                           <Star
                             key={i}
                             className={`w-4 h-4 ${
                               i < Math.floor(casino.rating)
-                                ? 'fill-primary text-primary'
-                                : 'text-neutral-600'
+                                ? 'fill-yellow-400 text-yellow-400'
+                                : 'text-gray-300'
                             }`}
                           />
                         ))}
-                        <span className="text-white font-semibold ml-1">{casino.rating}</span>
+                        <span className="text-gray-900 font-semibold ml-1">{casino.rating}</span>
                       </div>
-                      <p className="text-xs text-neutral-400">Est. {casino.established}</p>
+                      <p className="text-xs text-gray-500">Est. {casino.established}</p>
                     </div>
 
                     {/* Details */}
                     <div>
-                      <div className="bg-gradient-to-r from-primary/20 to-accent/20 rounded-lg p-4 mb-4 border border-primary/30">
+                      <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 mb-4 border border-green-200">
                         <div className="flex items-start justify-between">
                           <div>
-                            <p className="text-sm text-neutral-400 mb-1">Bono de Bienvenida</p>
-                            <p className="text-2xl font-bold text-white">
+                            <p className="text-sm text-gray-600 mb-1">Bono de Bienvenida</p>
+                            <p className="text-2xl font-bold text-gray-900">
                               {casino.bonus.percentage}% hasta ${casino.bonus.amount.toLocaleString()} MXN
                             </p>
                             {casino.bonus.freeSpins && (
-                              <p className="text-sm text-accent mt-1">+ {casino.bonus.freeSpins} Giros Gratis</p>
+                              <p className="text-sm text-green-600 mt-1">+ {casino.bonus.freeSpins} Giros Gratis</p>
                             )}
                           </div>
                           <div className="text-right">
-                            <p className="text-xs text-neutral-400">Rollover</p>
-                            <p className="text-lg font-bold text-white">{casino.bonus.wageringRequirement}x</p>
+                            <p className="text-xs text-gray-600">Rollover</p>
+                            <p className="text-lg font-bold text-gray-900">{casino.bonus.wageringRequirement}x</p>
                           </div>
                         </div>
                       </div>
 
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                         <div>
-                          <p className="text-xs text-neutral-400">Juegos</p>
-                          <p className="text-white font-semibold">{casino.games.total}+</p>
+                          <p className="text-xs text-gray-600">Juegos</p>
+                          <p className="text-gray-900 font-semibold">{casino.games.total}+</p>
                         </div>
                         <div>
-                          <p className="text-xs text-neutral-400">Retiros</p>
-                          <p className="text-white font-semibold">{casino.withdrawalTime}</p>
+                          <p className="text-xs text-gray-600">Retiros</p>
+                          <p className="text-gray-900 font-semibold">{casino.withdrawalTime}</p>
                         </div>
                         <div>
-                          <p className="text-xs text-neutral-400">Dep. Mínimo</p>
-                          <p className="text-white font-semibold">${casino.bonus.minDeposit}</p>
+                          <p className="text-xs text-gray-600">Dep. Mínimo</p>
+                          <p className="text-gray-900 font-semibold">${casino.bonus.minDeposit}</p>
                         </div>
                         <div>
-                          <p className="text-xs text-neutral-400">Live Casino</p>
-                          <p className="text-white font-semibold">{casino.games.live} juegos</p>
+                          <p className="text-xs text-gray-600">Live Casino</p>
+                          <p className="text-gray-900 font-semibold">{casino.games.live} juegos</p>
                         </div>
                       </div>
 
                       {/* Payment Methods */}
                       <div className="flex flex-wrap gap-2 mb-4">
                         {casino.paymentMethods.slice(0, 5).map(method => (
-                          <span key={method} className="bg-neutral-700 text-neutral-300 px-3 py-1 rounded-full text-xs">
+                          <span key={method} className="bg-gray-100 border border-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs">
                             {method}
                           </span>
                         ))}
                         {casino.paymentMethods.length > 5 && (
-                          <span className="text-neutral-400 text-xs">
+                          <span className="text-gray-500 text-xs">
                             +{casino.paymentMethods.length - 5} más
                           </span>
                         )}
@@ -199,7 +199,7 @@ export default function CasinosClient({ casinos }: CasinosClientProps) {
                       {/* Features */}
                       <div className="flex flex-wrap gap-2">
                         {casino.features.slice(0, 4).map(feature => (
-                          <span key={feature} className="bg-green-900/30 text-green-400 px-2 py-1 rounded text-xs">
+                          <span key={feature} className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs border border-green-200">
                             {feature}
                           </span>
                         ))}
@@ -212,13 +212,13 @@ export default function CasinosClient({ casinos }: CasinosClientProps) {
                         href={casino.affiliateLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-black px-6 py-3 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 text-center"
+                        className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 text-center shadow-lg hover:shadow-xl"
                       >
                         Jugar Ahora
                       </a>
                       <Link 
                         href={`/es/casinos/${casino.slug}`}
-                        className="bg-neutral-700 hover:bg-neutral-600 text-white px-6 py-3 rounded-xl font-semibold text-center transition-colors"
+                        className="bg-white hover:bg-gray-50 border-2 border-gray-200 hover:border-primary-200 text-gray-900 px-6 py-3 rounded-xl font-semibold text-center transition-all"
                       >
                         Ver Reseña Completa
                       </Link>
@@ -226,15 +226,15 @@ export default function CasinosClient({ casinos }: CasinosClientProps) {
                       {/* Pros & Cons Summary */}
                       <div className="space-y-2 text-xs">
                         <div>
-                          <p className="text-green-400 font-semibold mb-1">Ventajas</p>
+                          <p className="text-green-600 font-semibold mb-1">Ventajas</p>
                           {casino.pros.slice(0, 2).map(pro => (
-                            <p key={pro} className="text-neutral-400">• {pro}</p>
+                            <p key={pro} className="text-gray-600">• {pro}</p>
                           ))}
                         </div>
                         <div>
-                          <p className="text-red-400 font-semibold mb-1">Desventajas</p>
+                          <p className="text-red-600 font-semibold mb-1">Desventajas</p>
                           {casino.cons.slice(0, 1).map(con => (
-                            <p key={con} className="text-neutral-400">• {con}</p>
+                            <p key={con} className="text-gray-600">• {con}</p>
                           ))}
                         </div>
                       </div>
@@ -248,11 +248,11 @@ export default function CasinosClient({ casinos }: CasinosClientProps) {
           {/* No Results */}
           {filteredCasinos.length === 0 && (
             <div className="text-center py-20">
-              <p className="text-2xl text-neutral-400 mb-4">No se encontraron casinos</p>
-              <p className="text-neutral-500 mb-6">Intenta ajustar tu búsqueda</p>
+              <p className="text-2xl text-gray-600 mb-4">No se encontraron casinos</p>
+              <p className="text-gray-500 mb-6">Intenta ajustar tu búsqueda</p>
               <button
                 onClick={() => setSearchQuery('')}
-                className="bg-primary text-black px-6 py-3 rounded-xl font-bold hover:bg-primary/90 transition-colors"
+                className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl"
               >
                 Limpiar Búsqueda
               </button>

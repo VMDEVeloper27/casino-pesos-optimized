@@ -82,7 +82,7 @@ export function Breadcrumbs({ items, className = '' }: BreadcrumbsProps) {
     <>
       <nav 
         aria-label="Breadcrumb" 
-        className={`bg-slate-800/50 backdrop-blur border-b border-slate-700 ${className}`}
+        className={`bg-gray-50 border-b border-gray-200 ${className}`}
       >
         <div className="container mx-auto px-4 py-3">
           <ol 
@@ -104,7 +104,7 @@ export function Breadcrumbs({ items, className = '' }: BreadcrumbsProps) {
                   {index === 0 ? (
                     <Link
                       href={item.url}
-                      className="flex items-center gap-1 text-slate-400 hover:text-white transition-colors"
+                      className="flex items-center gap-1 text-gray-600 hover:text-primary-600 transition-colors"
                       itemProp="item"
                     >
                       <Home className="w-4 h-4" />
@@ -114,7 +114,7 @@ export function Breadcrumbs({ items, className = '' }: BreadcrumbsProps) {
                     </Link>
                   ) : isLast ? (
                     <span 
-                      className="text-white font-medium"
+                      className="text-gray-900 font-medium"
                       itemProp="name"
                     >
                       {item.name}
@@ -122,7 +122,7 @@ export function Breadcrumbs({ items, className = '' }: BreadcrumbsProps) {
                   ) : (
                     <Link
                       href={item.url}
-                      className="text-slate-400 hover:text-white transition-colors"
+                      className="text-gray-600 hover:text-primary-600 transition-colors"
                       itemProp="item"
                     >
                       <span itemProp="name">{item.name}</span>
@@ -132,7 +132,7 @@ export function Breadcrumbs({ items, className = '' }: BreadcrumbsProps) {
                   <meta itemProp="position" content={String(index + 1)} />
                   
                   {!isLast && (
-                    <ChevronRight className="w-4 h-4 text-slate-600 mx-2" />
+                    <ChevronRight className="w-4 h-4 text-gray-400 mx-2" />
                   )}
                 </li>
               );

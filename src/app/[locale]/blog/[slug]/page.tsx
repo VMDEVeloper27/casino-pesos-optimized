@@ -142,56 +142,56 @@ export default async function BlogPostPage({ params }: PageProps) {
   };
   
   return (
-    <main className="min-h-screen bg-neutral-900 pt-8 pb-16">
+    <main className="min-h-screen bg-gray-50 pt-8 pb-16">
       <article className="container mx-auto px-4 max-w-4xl">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm text-neutral-400 mb-8">
-          <Link href={`/${locale}`} className="hover:text-white transition-colors">
+        <div className="flex items-center gap-2 text-sm text-gray-500 mb-8">
+          <Link href={`/${locale}`} className="hover:text-gray-900 transition-colors">
             Inicio
           </Link>
           <ChevronRight className="w-4 h-4" />
-          <Link href={`/${locale}/blog`} className="hover:text-white transition-colors">
+          <Link href={`/${locale}/blog`} className="hover:text-gray-900 transition-colors">
             Blog
           </Link>
           <ChevronRight className="w-4 h-4" />
-          <span className="text-white truncate">{post.title}</span>
+          <span className="text-gray-900 truncate">{post.title}</span>
         </div>
 
         {/* Article Header */}
         <header className="mb-8">
           <div className="flex items-center gap-4 mb-4">
-            <span className={`px-3 py-1 ${getCategoryColor(post.category)} text-white rounded-full text-sm font-semibold`}>
+            <span className={`px-3 py-1 ${getCategoryColor(post.category)} text-gray-900 rounded-full text-sm font-semibold`}>
               {post.category}
             </span>
-            <div className="flex items-center gap-2 text-sm text-neutral-400">
+            <div className="flex items-center gap-2 text-sm text-gray-500">
               <Clock className="w-4 h-4" />
               <span>{post.readTime} min de lectura</span>
             </div>
-            <div className="flex items-center gap-2 text-sm text-neutral-400">
+            <div className="flex items-center gap-2 text-sm text-gray-500">
               <Eye className="w-4 h-4" />
               <span>{post.views.toLocaleString()} vistas</span>
             </div>
           </div>
           
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
             {post.title}
           </h1>
           
-          <p className="text-lg text-neutral-300 mb-6">
+          <p className="text-lg text-gray-600 mb-6">
             {post.excerpt}
           </p>
           
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-neutral-700">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-gray-200">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center">
-                <User className="w-6 h-6 text-white" />
+                <User className="w-6 h-6 text-gray-900" />
               </div>
               <div>
-                <div className="text-white font-medium">{post.author}</div>
-                <div className="text-sm text-neutral-400">{post.authorRole}</div>
+                <div className="text-gray-900 font-medium">{post.author}</div>
+                <div className="text-sm text-gray-500">{post.authorRole}</div>
               </div>
-              <div className="text-neutral-400">•</div>
-              <div className="flex items-center gap-2 text-sm text-neutral-400">
+              <div className="text-gray-500">•</div>
+              <div className="flex items-center gap-2 text-sm text-gray-500">
                 <Calendar className="w-4 h-4" />
                 <time dateTime={post.publishedAt}>
                   {new Date(post.publishedAt).toLocaleDateString('es-MX', {
@@ -212,7 +212,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         {/* Featured Image */}
         {post.featuredImage && (
-          <div className="aspect-video bg-neutral-800 rounded-xl mb-8 overflow-hidden">
+          <div className="aspect-video bg-white rounded-xl mb-8 overflow-hidden">
             <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
               <span className="text-6xl">📰</span>
             </div>
@@ -226,12 +226,12 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         {/* Tags */}
         {post.tags && post.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-8 pb-8 border-b border-neutral-700">
+          <div className="flex flex-wrap gap-2 mb-8 pb-8 border-b border-gray-200">
             {post.tags.map(tag => (
               <Link
                 key={tag}
                 href={`/${locale}/blog?tag=${encodeURIComponent(tag)}`}
-                className="inline-flex items-center gap-1 px-3 py-1 bg-neutral-800 hover:bg-neutral-700 rounded-full text-sm text-neutral-300 transition-colors"
+                className="inline-flex items-center gap-1 px-3 py-1 bg-white hover:bg-gray-100 rounded-full text-sm text-gray-600 transition-colors"
               >
                 <Tag className="w-3 h-3" />
                 {tag}
@@ -241,15 +241,15 @@ export default async function BlogPostPage({ params }: PageProps) {
         )}
 
         {/* Author Box */}
-        <div className="bg-neutral-800 rounded-xl p-6 mb-12 border border-neutral-700">
+        <div className="bg-white rounded-xl p-6 mb-12 border border-gray-200">
           <div className="flex items-start gap-4">
             <div className="w-16 h-16 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center flex-shrink-0">
-              <User className="w-8 h-8 text-white" />
+              <User className="w-8 h-8 text-gray-900" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white mb-1">Sobre el Autor</h3>
-              <div className="text-white font-medium mb-2">{post.author}</div>
-              <p className="text-neutral-400">
+              <h3 className="text-lg font-bold text-gray-900 mb-1">Sobre el Autor</h3>
+              <div className="text-gray-900 font-medium mb-2">{post.author}</div>
+              <p className="text-gray-500">
                 {post.authorRole} en CasinosPesos. Experto en casinos online y juegos de azar con más de 5 años de experiencia en la industria.
               </p>
             </div>
@@ -259,7 +259,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         {/* Related Posts */}
         {post.relatedPosts && post.relatedPosts.length > 0 && (
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-white mb-6">Artículos Relacionados</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Artículos Relacionados</h2>
             <div className="grid md:grid-cols-3 gap-6">
               {post.relatedPosts.map((related) => (
                 <Link
@@ -267,23 +267,23 @@ export default async function BlogPostPage({ params }: PageProps) {
                   href={`/${locale}/blog/${related.slug}`}
                   className="group"
                 >
-                  <article className="bg-neutral-800 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300">
-                    <div className="aspect-video bg-neutral-700 relative overflow-hidden">
+                  <article className="bg-white rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300">
+                    <div className="aspect-video bg-gray-100 relative overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20"></div>
                       <div className="absolute top-4 left-4">
-                        <span className="px-2 py-1 bg-black/50 backdrop-blur-sm rounded text-xs font-semibold text-white">
+                        <span className="px-2 py-1 bg-black/50 backdrop-blur-sm rounded text-xs font-semibold text-gray-900">
                           {related.category}
                         </span>
                       </div>
                     </div>
                     <div className="p-4">
-                      <h3 className="font-bold text-white mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                      <h3 className="font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors line-clamp-2">
                         {related.title}
                       </h3>
-                      <p className="text-sm text-neutral-400 line-clamp-2 mb-3">
+                      <p className="text-sm text-gray-500 line-clamp-2 mb-3">
                         {related.excerpt}
                       </p>
-                      <div className="flex items-center justify-between text-xs text-neutral-500">
+                      <div className="flex items-center justify-between text-xs text-gray-400">
                         <span>{related.readTime} min</span>
                         <span>{new Date(related.publishedAt).toLocaleDateString()}</span>
                       </div>
@@ -296,10 +296,10 @@ export default async function BlogPostPage({ params }: PageProps) {
         )}
 
         {/* Navigation */}
-        <div className="flex justify-between items-center pt-8 border-t border-neutral-700">
+        <div className="flex justify-between items-center pt-8 border-t border-gray-200">
           <Link
             href={`/${locale}/blog`}
-            className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors"
+            className="flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Volver al Blog

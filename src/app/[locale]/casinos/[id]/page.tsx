@@ -112,10 +112,10 @@ export default async function CasinoDetailPage({ params }: PageProps) {
   
   if (!casino) {
     return (
-      <main className="min-h-screen bg-neutral-900 pt-8 pb-16">
+      <main className="min-h-screen bg-gray-50 pt-8 pb-16">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">Casino No Encontrado</h1>
-          <p className="text-neutral-400 mb-8">El casino que buscas no está disponible.</p>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Casino No Encontrado</h1>
+          <p className="text-gray-500 mb-8">El casino que buscas no está disponible.</p>
           <Link href={`/${locale}/casinos`} className="bg-primary text-black px-6 py-3 rounded-xl font-bold">
             Ver Todos los Casinos
           </Link>
@@ -127,27 +127,27 @@ export default async function CasinoDetailPage({ params }: PageProps) {
   const bonusText = `${casino.bonus.percentage}% hasta $${casino.bonus.amount.toLocaleString()} MXN`;
 
   return (
-    <main className="min-h-screen bg-neutral-900 pt-8 pb-16">
+    <main className="min-h-screen bg-gray-50 pt-8 pb-16">
       <div className="container mx-auto px-4">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm text-neutral-400 mb-8">
-          <Link href={`/${locale}`} className="hover:text-white transition-colors">
+        <div className="flex items-center gap-2 text-sm text-gray-500 mb-8">
+          <Link href={`/${locale}`} className="hover:text-gray-900 transition-colors">
             Inicio
           </Link>
           <ChevronRight className="w-4 h-4" />
-          <Link href={`/${locale}/casinos`} className="hover:text-white transition-colors">
+          <Link href={`/${locale}/casinos`} className="hover:text-gray-900 transition-colors">
             Casinos
           </Link>
           <ChevronRight className="w-4 h-4" />
-          <span className="text-white">{casino.name}</span>
+          <span className="text-gray-900">{casino.name}</span>
         </div>
 
         {/* Header */}
-        <div className="bg-neutral-800 rounded-xl p-8 mb-8">
+        <div className="bg-white rounded-xl p-8 mb-8">
           <div className="grid lg:grid-cols-[200px,1fr,300px] gap-8">
             {/* Logo and Rating */}
             <div className="text-center">
-              <div className="w-32 h-24 bg-neutral-700 rounded-xl flex items-center justify-center mx-auto mb-4 relative overflow-hidden">
+              <div className="w-32 h-24 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4 relative overflow-hidden">
                 {casino.logo && casino.logo.startsWith('/') ? (
                   <Image
                     src={casino.logo}
@@ -158,7 +158,7 @@ export default async function CasinoDetailPage({ params }: PageProps) {
                     priority
                   />
                 ) : (
-                  <span className="text-3xl font-bold text-white">
+                  <span className="text-3xl font-bold text-gray-900">
                     {casino.logo || casino.name.substring(0, 3).toUpperCase()}
                   </span>
                 )}
@@ -175,48 +175,48 @@ export default async function CasinoDetailPage({ params }: PageProps) {
                   />
                 ))}
               </div>
-              <p className="text-2xl font-bold text-white">{casino.rating}/5</p>
-              <p className="text-sm text-neutral-400">Calificación</p>
+              <p className="text-2xl font-bold text-gray-900">{casino.rating}/5</p>
+              <p className="text-sm text-gray-500">Calificación</p>
             </div>
 
             {/* Main Info */}
             <div>
-              <h1 className="text-4xl font-bold text-white mb-4">{casino.name}</h1>
-              <p className="text-neutral-300 mb-6">
+              <h1 className="text-4xl font-bold text-gray-900 mb-4">{casino.name}</h1>
+              <p className="text-gray-600 mb-6">
                 Establecido en {casino.established}, {casino.name} es uno de los casinos online más confiables para jugadores mexicanos.
               </p>
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
-                  <p className="text-sm text-neutral-400">Juegos</p>
-                  <p className="text-xl font-bold text-white">{casino.games.total}+</p>
+                  <p className="text-sm text-gray-500">Juegos</p>
+                  <p className="text-xl font-bold text-gray-900">{casino.games.total}+</p>
                 </div>
                 <div>
-                  <p className="text-sm text-neutral-400">Retiros</p>
-                  <p className="text-xl font-bold text-white">{casino.withdrawalTime}</p>
+                  <p className="text-sm text-gray-500">Retiros</p>
+                  <p className="text-xl font-bold text-gray-900">{casino.withdrawalTime}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-neutral-400">Licencia</p>
-                  <p className="text-xl font-bold text-white">{casino.licenses[0]}</p>
+                  <p className="text-sm text-gray-500">Licencia</p>
+                  <p className="text-xl font-bold text-gray-900">{casino.licenses[0]}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-neutral-400">Depósito Min</p>
-                  <p className="text-xl font-bold text-white">${casino.bonus.minDeposit}</p>
+                  <p className="text-sm text-gray-500">Depósito Min</p>
+                  <p className="text-xl font-bold text-gray-900">${casino.bonus.minDeposit}</p>
                 </div>
               </div>
             </div>
 
             {/* Bonus Box */}
             <div className="bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl p-6 border border-primary/30">
-              <h2 className="text-lg font-bold text-white mb-2">Bono de Bienvenida</h2>
+              <h2 className="text-lg font-bold text-gray-900 mb-2">Bono de Bienvenida</h2>
               <p className="text-2xl font-bold text-primary mb-2">{bonusText}</p>
               {casino.bonus.freeSpins && (
                 <p className="text-sm text-accent mb-4">+ {casino.bonus.freeSpins} Giros Gratis</p>
               )}
               {casino.bonus.code && (
-                <div className="bg-neutral-900/50 rounded-lg p-3 mb-4">
-                  <p className="text-xs text-neutral-400 mb-1">Código Promocional</p>
-                  <p className="text-lg font-mono font-bold text-white">{casino.bonus.code}</p>
+                <div className="bg-gray-50/50 rounded-lg p-3 mb-4">
+                  <p className="text-xs text-gray-500 mb-1">Código Promocional</p>
+                  <p className="text-lg font-mono font-bold text-gray-900">{casino.bonus.code}</p>
                 </div>
               )}
               <a 
@@ -235,8 +235,8 @@ export default async function CasinoDetailPage({ params }: PageProps) {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
             {/* Pros and Cons */}
-            <div className="bg-neutral-800 rounded-xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-6">Ventajas y Desventajas</h2>
+            <div className="bg-white rounded-xl p-8">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Ventajas y Desventajas</h2>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <h3 className="text-lg font-semibold text-green-400 mb-4 flex items-center gap-2">
@@ -247,7 +247,7 @@ export default async function CasinoDetailPage({ params }: PageProps) {
                     {casino.pros.map((pro, index) => (
                       <li key={index} className="flex items-start gap-2">
                         <Check className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
-                        <span className="text-neutral-300">{pro}</span>
+                        <span className="text-gray-600">{pro}</span>
                       </li>
                     ))}
                   </ul>
@@ -261,7 +261,7 @@ export default async function CasinoDetailPage({ params }: PageProps) {
                     {casino.cons.map((con, index) => (
                       <li key={index} className="flex items-start gap-2">
                         <X className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
-                        <span className="text-neutral-300">{con}</span>
+                        <span className="text-gray-600">{con}</span>
                       </li>
                     ))}
                   </ul>
@@ -270,61 +270,61 @@ export default async function CasinoDetailPage({ params }: PageProps) {
             </div>
 
             {/* Payment Methods */}
-            <div className="bg-neutral-800 rounded-xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <div className="bg-white rounded-xl p-8">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <CreditCard className="w-6 h-6 text-primary" />
                 Métodos de Pago
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                 {casino.paymentMethods.map((method) => (
-                  <div key={method} className="bg-neutral-700 rounded-lg p-4 text-center">
-                    <p className="text-white font-semibold">{method}</p>
+                  <div key={method} className="bg-gray-100 rounded-lg p-4 text-center">
+                    <p className="text-gray-900 font-semibold">{method}</p>
                   </div>
                 ))}
               </div>
-              <div className="bg-neutral-700/50 rounded-lg p-4">
+              <div className="bg-gray-100/50 rounded-lg p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-neutral-400">Depósito Mínimo</p>
-                    <p className="text-xl font-bold text-white">${casino.bonus.minDeposit} MXN</p>
+                    <p className="text-sm text-gray-500">Depósito Mínimo</p>
+                    <p className="text-xl font-bold text-gray-900">${casino.bonus.minDeposit} MXN</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm text-neutral-400">Tiempo de Retiro</p>
-                    <p className="text-xl font-bold text-white">{casino.withdrawalTime}</p>
+                    <p className="text-sm text-gray-500">Tiempo de Retiro</p>
+                    <p className="text-xl font-bold text-gray-900">{casino.withdrawalTime}</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Games */}
-            <div className="bg-neutral-800 rounded-xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <div className="bg-white rounded-xl p-8">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <Gamepad2 className="w-6 h-6 text-primary" />
                 Juegos Disponibles
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                 <div className="bg-gradient-to-br from-primary/10 to-accent/10 rounded-lg p-4 border border-primary/20">
-                  <p className="text-3xl font-bold text-white mb-2">{casino.games.total}+</p>
-                  <p className="text-sm text-neutral-400">Total de Juegos</p>
+                  <p className="text-3xl font-bold text-gray-900 mb-2">{casino.games.total}+</p>
+                  <p className="text-sm text-gray-500">Total de Juegos</p>
                 </div>
-                <div className="bg-neutral-700 rounded-lg p-4">
-                  <p className="text-2xl font-bold text-white mb-2">{casino.games.slots}</p>
-                  <p className="text-sm text-neutral-400">Tragamonedas</p>
+                <div className="bg-gray-100 rounded-lg p-4">
+                  <p className="text-2xl font-bold text-gray-900 mb-2">{casino.games.slots}</p>
+                  <p className="text-sm text-gray-500">Tragamonedas</p>
                 </div>
-                <div className="bg-neutral-700 rounded-lg p-4">
-                  <p className="text-2xl font-bold text-white mb-2">{casino.games.live}</p>
-                  <p className="text-sm text-neutral-400">Casino en Vivo</p>
+                <div className="bg-gray-100 rounded-lg p-4">
+                  <p className="text-2xl font-bold text-gray-900 mb-2">{casino.games.live}</p>
+                  <p className="text-sm text-gray-500">Casino en Vivo</p>
                 </div>
-                <div className="bg-neutral-700 rounded-lg p-4">
-                  <p className="text-2xl font-bold text-white mb-2">{casino.games.table}</p>
-                  <p className="text-sm text-neutral-400">Juegos de Mesa</p>
+                <div className="bg-gray-100 rounded-lg p-4">
+                  <p className="text-2xl font-bold text-gray-900 mb-2">{casino.games.table}</p>
+                  <p className="text-sm text-gray-500">Juegos de Mesa</p>
                 </div>
               </div>
             </div>
 
             {/* Bonuses */}
-            <div className="bg-neutral-800 rounded-xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <div className="bg-white rounded-xl p-8">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <Gift className="w-6 h-6 text-primary" />
                 Bonos y Promociones
               </h2>
@@ -332,26 +332,26 @@ export default async function CasinoDetailPage({ params }: PageProps) {
                 <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-6 border border-primary/20">
                   <div className="flex items-start justify-between">
                     <div>
-                      <h3 className="text-lg font-bold text-white mb-2">Bono de Bienvenida</h3>
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">Bono de Bienvenida</h3>
                       <p className="text-2xl font-bold text-primary mb-2">{bonusText}</p>
                       {casino.bonus.freeSpins && (
-                        <p className="text-sm text-accent">+ {casino.bonus.freeSpins} Giros Gratis</p>
+                        <p className="text-sm text-green-600">+ {casino.bonus.freeSpins} Giros Gratis</p>
                       )}
                     </div>
                     <div className="text-right">
-                      <p className="text-sm text-neutral-400">Rollover</p>
-                      <p className="text-xl font-bold text-white">{casino.bonus.wageringRequirement}x</p>
+                      <p className="text-sm text-gray-500">Rollover</p>
+                      <p className="text-xl font-bold text-gray-900">{casino.bonus.wageringRequirement}x</p>
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-neutral-700">
+                  <div className="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-gray-200">
                     <div>
-                      <p className="text-sm text-neutral-400">Depósito Mínimo</p>
-                      <p className="font-bold text-white">${casino.bonus.minDeposit} MXN</p>
+                      <p className="text-sm text-gray-500">Depósito Mínimo</p>
+                      <p className="font-bold text-gray-900">${casino.bonus.minDeposit} MXN</p>
                     </div>
                     {casino.bonus.code && (
                       <div>
-                        <p className="text-sm text-neutral-400">Código</p>
-                        <p className="font-bold text-white font-mono">{casino.bonus.code}</p>
+                        <p className="text-sm text-gray-500">Código</p>
+                        <p className="font-bold text-gray-900 font-mono">{casino.bonus.code}</p>
                       </div>
                     )}
                   </div>
@@ -379,8 +379,8 @@ export default async function CasinoDetailPage({ params }: PageProps) {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Quick Actions */}
-            <div className="bg-neutral-800 rounded-xl p-6 sticky top-4">
-              <h3 className="text-lg font-bold text-white mb-4">Acciones Rápidas</h3>
+            <div className="bg-white rounded-xl p-6 sticky top-4">
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Acciones Rápidas</h3>
               <div className="space-y-3">
                 <a 
                   href={casino.affiliateLink}
@@ -392,7 +392,7 @@ export default async function CasinoDetailPage({ params }: PageProps) {
                 </a>
                 <Link 
                   href={`/${locale}/casinos`}
-                  className="block w-full bg-neutral-700 hover:bg-neutral-600 text-white px-6 py-3 rounded-xl font-semibold text-center transition-colors"
+                  className="block w-full bg-gray-100 hover:bg-gray-200 text-gray-900 px-6 py-3 rounded-xl font-semibold text-center transition-colors"
                 >
                   Ver Más Casinos
                 </Link>
@@ -400,22 +400,22 @@ export default async function CasinoDetailPage({ params }: PageProps) {
             </div>
 
             {/* Casino Info */}
-            <div className="bg-neutral-800 rounded-xl p-6">
-              <h3 className="text-lg font-bold text-white mb-4">Información del Casino</h3>
+            <div className="bg-white rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Información del Casino</h3>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-neutral-400">Establecido</span>
-                  <span className="text-white font-semibold">{casino.established}</span>
+                  <span className="text-gray-500">Establecido</span>
+                  <span className="text-gray-900 font-semibold">{casino.established}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-neutral-400">Licencias</span>
-                  <span className="text-white font-semibold text-right text-sm">
+                  <span className="text-gray-500">Licencias</span>
+                  <span className="text-gray-900 font-semibold text-right text-sm">
                     {casino.licenses.join(', ')}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-neutral-400">Monedas</span>
-                  <span className="text-white font-semibold">
+                  <span className="text-gray-500">Monedas</span>
+                  <span className="text-gray-900 font-semibold">
                     {casino.currencies.join(', ')}
                   </span>
                 </div>
@@ -423,13 +423,13 @@ export default async function CasinoDetailPage({ params }: PageProps) {
             </div>
 
             {/* Features */}
-            <div className="bg-neutral-800 rounded-xl p-6">
-              <h3 className="text-lg font-bold text-white mb-4">Características</h3>
+            <div className="bg-white rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Características</h3>
               <div className="space-y-2">
                 {casino.features.map((feature) => (
                   <div key={feature} className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-green-400" />
-                    <span className="text-neutral-300">{feature}</span>
+                    <span className="text-gray-600">{feature}</span>
                   </div>
                 ))}
               </div>

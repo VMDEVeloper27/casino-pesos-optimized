@@ -188,17 +188,17 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
   ];
 
   return (
-    <main className="min-h-screen bg-neutral-900 pt-8 pb-16">
+    <main className="min-h-screen bg-gray-50 pt-8 pb-16">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Shield className="w-10 h-10 text-primary" />
-            <h1 className="text-4xl md:text-5xl font-bold text-white">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
               {isSpanish ? 'Juego Responsable' : 'Responsible Gambling'}
             </h1>
           </div>
-          <p className="text-lg text-neutral-300 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             {isSpanish 
               ? 'Tu bienestar es nuestra prioridad. El juego debe ser una forma de entretenimiento, no una fuente de problemas. Aquí encontrarás herramientas y recursos para mantener el control.'
               : 'Your wellbeing is our priority. Gambling should be a form of entertainment, not a source of problems. Here you\'ll find tools and resources to stay in control.'}
@@ -210,10 +210,10 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
           <div className="flex items-start gap-4">
             <AlertTriangle className="w-8 h-8 text-red-400 flex-shrink-0 mt-1" />
             <div>
-              <h2 className="text-xl font-bold text-white mb-2">
+              <h2 className="text-xl font-bold text-gray-900 mb-2">
                 {isSpanish ? 'Aviso Importante' : 'Important Notice'}
               </h2>
-              <p className="text-neutral-300 mb-4">
+              <p className="text-gray-600 mb-4">
                 {isSpanish 
                   ? 'El juego puede ser adictivo. Si sientes que estás perdiendo el control, busca ayuda inmediatamente. Todos los casinos recomendados ofrecen herramientas de juego responsable.'
                   : 'Gambling can be addictive. If you feel you\'re losing control, seek help immediately. All recommended casinos offer responsible gambling tools.'}
@@ -233,12 +233,12 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-2 gap-8 mb-12">
           {/* Warning Signals */}
-          <div className="bg-neutral-800 rounded-xl p-6">
-            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+          <div className="bg-white rounded-xl p-6">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
               <AlertTriangle className="w-6 h-6 text-orange-400" />
               {isSpanish ? 'Señales de Advertencia' : 'Warning Signs'}
             </h2>
-            <p className="text-neutral-300 mb-6">
+            <p className="text-gray-600 mb-6">
               {isSpanish 
                 ? 'Si identificas alguna de estas señales, es momento de buscar ayuda:'
                 : 'If you identify any of these signs, it\'s time to seek help:'}
@@ -249,19 +249,19 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
                   <span className="w-6 h-6 bg-orange-500/20 text-orange-400 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold mt-0.5">
                     {index + 1}
                   </span>
-                  <span className="text-neutral-300">{signal}</span>
+                  <span className="text-gray-600">{signal}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Self-Assessment Test */}
-          <div className="bg-neutral-800 rounded-xl p-6">
-            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+          <div className="bg-white rounded-xl p-6">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
               <HelpCircle className="w-6 h-6 text-primary" />
               {isSpanish ? 'Test de Autoevaluación' : 'Self-Assessment Test'}
             </h2>
-            <p className="text-neutral-300 mb-6">
+            <p className="text-gray-600 mb-6">
               {isSpanish 
                 ? 'Responde estas preguntas honestamente para evaluar tu relación con el juego:'
                 : 'Answer these questions honestly to assess your relationship with gambling:'}
@@ -273,8 +273,8 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
                 isSpanish ? '¿Has sentido remordimiento después de jugar?' : 'Have you felt remorse after gambling?',
                 isSpanish ? '¿Has jugado para obtener dinero para pagar deudas?' : 'Have you gambled to get money to pay debts?'
               ].map((question, index) => (
-                <div key={index} className="bg-neutral-700/50 rounded-lg p-4">
-                  <p className="text-sm text-neutral-300 mb-3">{question}</p>
+                <div key={index} className="bg-gray-100/50 rounded-lg p-4">
+                  <p className="text-sm text-gray-600 mb-3">{question}</p>
                   <div className="flex gap-4">
                     <button className="px-4 py-2 bg-green-500/20 text-green-400 rounded-lg hover:bg-green-500/30 transition-colors">
                       {isSpanish ? 'No' : 'No'}
@@ -287,7 +287,7 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
               ))}
             </div>
             <div className="mt-6 p-4 bg-primary/20 rounded-lg">
-              <p className="text-sm text-neutral-300">
+              <p className="text-sm text-gray-600">
                 {isSpanish 
                   ? 'Si respondiste "Sí" a 2 o más preguntas, considera buscar ayuda profesional.'
                   : 'If you answered "Yes" to 2 or more questions, consider seeking professional help.'}
@@ -298,15 +298,15 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
 
         {/* Tools and Resources */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-white mb-6 text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
             {isSpanish ? '🛠️ Herramientas de Control' : '🛠️ Control Tools'}
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {tools.map((tool, index) => (
-              <div key={index} className="bg-neutral-800 rounded-xl p-6 hover:bg-neutral-700 transition-colors">
+              <div key={index} className="bg-white rounded-xl p-6 hover:bg-gray-100 transition-colors">
                 <div className="text-primary mb-4">{tool.icon}</div>
-                <h3 className="text-lg font-bold text-white mb-2">{tool.title}</h3>
-                <p className="text-sm text-neutral-300">{tool.description}</p>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">{tool.title}</h3>
+                <p className="text-sm text-gray-600">{tool.description}</p>
               </div>
             ))}
           </div>
@@ -314,14 +314,14 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
 
         {/* Help Organizations */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-white mb-6 text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
             {isSpanish ? '🤝 Organizaciones de Ayuda' : '🤝 Help Organizations'}
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
             {helpOrganizations.map((org, index) => (
-              <div key={index} className="bg-gradient-to-br from-neutral-800 to-neutral-800/50 rounded-xl p-6 border border-neutral-700">
-                <h3 className="text-xl font-bold text-white mb-3">{org.name}</h3>
-                <p className="text-sm text-neutral-300 mb-4">{org.description}</p>
+              <div key={index} className="bg-gradient-to-br from-neutral-800 to-neutral-800/50 rounded-xl p-6 border border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{org.name}</h3>
+                <p className="text-sm text-gray-600 mb-4">{org.description}</p>
                 <div className="space-y-2">
                   <a 
                     href={`tel:${org.phone}`}
@@ -355,7 +355,7 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
         {/* Tips for Healthy Gaming */}
         <section className="mb-12">
           <div className="bg-gradient-to-br from-green-500/20 to-blue-500/20 rounded-xl p-8 border border-green-500/30">
-            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
               <Heart className="w-6 h-6 text-green-400" />
               {isSpanish ? 'Consejos para un Juego Saludable' : 'Tips for Healthy Gaming'}
             </h2>
@@ -363,7 +363,7 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                  <span className="text-neutral-300">
+                  <span className="text-gray-600">
                     {isSpanish 
                       ? 'Establece un presupuesto antes de jugar y respétalo'
                       : 'Set a budget before playing and stick to it'}
@@ -371,7 +371,7 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                  <span className="text-neutral-300">
+                  <span className="text-gray-600">
                     {isSpanish 
                       ? 'Nunca juegues bajo los efectos del alcohol o drogas'
                       : 'Never gamble under the influence of alcohol or drugs'}
@@ -379,7 +379,7 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                  <span className="text-neutral-300">
+                  <span className="text-gray-600">
                     {isSpanish 
                       ? 'Toma descansos regulares durante las sesiones de juego'
                       : 'Take regular breaks during gaming sessions'}
@@ -387,7 +387,7 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                  <span className="text-neutral-300">
+                  <span className="text-gray-600">
                     {isSpanish 
                       ? 'No persigas las pérdidas intentando recuperarlas'
                       : 'Don\'t chase losses trying to recover them'}
@@ -397,7 +397,7 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                  <span className="text-neutral-300">
+                  <span className="text-gray-600">
                     {isSpanish 
                       ? 'Mantén el juego como entretenimiento, no como ingreso'
                       : 'Keep gambling as entertainment, not as income'}
@@ -405,7 +405,7 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                  <span className="text-neutral-300">
+                  <span className="text-gray-600">
                     {isSpanish 
                       ? 'Equilibra el juego con otras actividades recreativas'
                       : 'Balance gambling with other recreational activities'}
@@ -413,7 +413,7 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                  <span className="text-neutral-300">
+                  <span className="text-gray-600">
                     {isSpanish 
                       ? 'Habla abiertamente sobre tus hábitos de juego'
                       : 'Talk openly about your gambling habits'}
@@ -421,7 +421,7 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                  <span className="text-neutral-300">
+                  <span className="text-gray-600">
                     {isSpanish 
                       ? 'Busca ayuda si sientes que pierdes el control'
                       : 'Seek help if you feel you\'re losing control'}
@@ -434,42 +434,42 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
 
         {/* Family Support */}
         <section className="mb-12">
-          <div className="bg-neutral-800 rounded-xl p-8">
-            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+          <div className="bg-white rounded-xl p-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
               <Users className="w-6 h-6 text-primary" />
               {isSpanish ? 'Apoyo para Familiares' : 'Support for Family Members'}
             </h2>
-            <p className="text-neutral-300 mb-6">
+            <p className="text-gray-600 mb-6">
               {isSpanish 
                 ? 'Si un ser querido tiene problemas con el juego, también puedes obtener ayuda y apoyo. No estás solo en esta situación.'
                 : 'If a loved one has gambling problems, you can also get help and support. You\'re not alone in this situation.'}
             </p>
             <div className="grid md:grid-cols-3 gap-4">
-              <div className="bg-neutral-700/50 rounded-lg p-4">
-                <h3 className="font-semibold text-white mb-2">
+              <div className="bg-gray-100/50 rounded-lg p-4">
+                <h3 className="font-semibold text-gray-900 mb-2">
                   {isSpanish ? 'Educación' : 'Education'}
                 </h3>
-                <p className="text-sm text-neutral-300">
+                <p className="text-sm text-gray-600">
                   {isSpanish 
                     ? 'Aprende sobre la adicción al juego y cómo afecta a las personas.'
                     : 'Learn about gambling addiction and how it affects people.'}
                 </p>
               </div>
-              <div className="bg-neutral-700/50 rounded-lg p-4">
-                <h3 className="font-semibold text-white mb-2">
+              <div className="bg-gray-100/50 rounded-lg p-4">
+                <h3 className="font-semibold text-gray-900 mb-2">
                   {isSpanish ? 'Comunicación' : 'Communication'}
                 </h3>
-                <p className="text-sm text-neutral-300">
+                <p className="text-sm text-gray-600">
                   {isSpanish 
                     ? 'Habla con tu ser querido sin juzgar y ofrece tu apoyo incondicional.'
                     : 'Talk to your loved one without judgment and offer unconditional support.'}
                 </p>
               </div>
-              <div className="bg-neutral-700/50 rounded-lg p-4">
-                <h3 className="font-semibold text-white mb-2">
+              <div className="bg-gray-100/50 rounded-lg p-4">
+                <h3 className="font-semibold text-gray-900 mb-2">
                   {isSpanish ? 'Límites' : 'Boundaries'}
                 </h3>
-                <p className="text-sm text-neutral-300">
+                <p className="text-sm text-gray-600">
                   {isSpanish 
                     ? 'Establece límites saludables y no habilites el comportamiento problemático.'
                     : 'Set healthy boundaries and don\'t enable problematic behavior.'}
@@ -482,10 +482,10 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
         {/* CTA Section */}
         <section className="text-center">
           <div className="bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl p-8 border border-primary/30">
-            <h2 className="text-2xl font-bold text-white mb-4">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
               {isSpanish ? '¿Necesitas Ayuda Ahora?' : 'Need Help Now?'}
             </h2>
-            <p className="text-neutral-300 mb-6 max-w-2xl mx-auto">
+            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
               {isSpanish 
                 ? 'No esperes más. La ayuda está disponible 24/7. Llama ahora y da el primer paso hacia la recuperación.'
                 : 'Don\'t wait any longer. Help is available 24/7. Call now and take the first step towards recovery.'}
@@ -500,7 +500,7 @@ export default async function JuegoResponsablePage({ params }: PageProps) {
               </a>
               <Link 
                 href={`/${locale}`}
-                className="bg-neutral-700 text-white px-8 py-4 rounded-xl font-bold hover:bg-neutral-600 transition-colors"
+                className="bg-gray-100 text-gray-900 px-8 py-4 rounded-xl font-bold hover:bg-gray-200 transition-colors"
               >
                 {isSpanish ? 'Volver al Inicio' : 'Back to Home'}
               </Link>

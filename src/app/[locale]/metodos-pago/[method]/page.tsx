@@ -291,10 +291,10 @@ export default async function PaymentMethodPage({ params }: PageProps) {
   
   if (!methodData) {
     return (
-      <main className="min-h-screen bg-neutral-900 pt-8 pb-16">
+      <main className="min-h-screen bg-gray-50 pt-8 pb-16">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">Método no encontrado</h1>
-          <p className="text-neutral-400 mb-8">El método de pago que buscas no está disponible.</p>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Método no encontrado</h1>
+          <p className="text-gray-500 mb-8">El método de pago que buscas no está disponible.</p>
           <Link 
             href={`/${locale}/metodos-pago`}
             className="bg-primary text-black px-6 py-3 rounded-xl font-bold hover:bg-primary/90 transition-colors"
@@ -309,19 +309,19 @@ export default async function PaymentMethodPage({ params }: PageProps) {
   const isSpanish = locale === 'es';
 
   return (
-    <main className="min-h-screen bg-neutral-900 pt-8 pb-16">
+    <main className="min-h-screen bg-gray-50 pt-8 pb-16">
       <div className="container mx-auto px-4">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm text-neutral-400 mb-8">
-          <Link href={`/${locale}`} className="hover:text-white transition-colors">
+        <div className="flex items-center gap-2 text-sm text-gray-500 mb-8">
+          <Link href={`/${locale}`} className="hover:text-gray-900 transition-colors">
             {isSpanish ? 'Inicio' : 'Home'}
           </Link>
           <ChevronRight className="w-4 h-4" />
-          <Link href={`/${locale}/metodos-pago`} className="hover:text-white transition-colors">
+          <Link href={`/${locale}/metodos-pago`} className="hover:text-gray-900 transition-colors">
             {isSpanish ? 'Métodos de Pago' : 'Payment Methods'}
           </Link>
           <ChevronRight className="w-4 h-4" />
-          <span className="text-white">{methodData.name}</span>
+          <span className="text-gray-900">{methodData.name}</span>
         </div>
 
         {/* Header */}
@@ -330,22 +330,22 @@ export default async function PaymentMethodPage({ params }: PageProps) {
             <div className="text-6xl">{methodData.logo}</div>
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-2">
-                <h1 className="text-3xl md:text-4xl font-bold text-white">{methodData.name}</h1>
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-900">{methodData.name}</h1>
                 <span className="bg-primary/20 text-primary px-3 py-1 rounded-full text-sm font-semibold">
                   {methodData.type}
                 </span>
               </div>
-              <p className="text-lg text-neutral-300 mb-4">{methodData.tagline}</p>
-              <p className="text-neutral-400">{methodData.description}</p>
+              <p className="text-lg text-gray-600 mb-4">{methodData.tagline}</p>
+              <p className="text-gray-500">{methodData.description}</p>
             </div>
           </div>
 
           {/* Quick Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
             {Object.entries(methodData.stats).map(([key, value]) => (
-              <div key={key} className="bg-neutral-900/50 rounded-lg p-3 text-center">
-                <div className="text-xl font-bold text-primary">{value as string}</div>
-                <div className="text-xs text-neutral-400 capitalize">
+              <div key={key} className="bg-gray-50/50 rounded-lg p-3 text-center">
+                <div className="text-xl font-bold text-primary-600">{value as string}</div>
+                <div className="text-xs text-gray-500 capitalize">
                   {key === 'stores' && (isSpanish ? 'Tiendas' : 'Stores')}
                   {key === 'banks' && (isSpanish ? 'Bancos' : 'Banks')}
                   {key === 'availability' && (isSpanish ? 'Disponibilidad' : 'Availability')}
@@ -362,8 +362,8 @@ export default async function PaymentMethodPage({ params }: PageProps) {
           <div className="lg:col-span-2 space-y-8">
             {/* How to Deposit */}
             {methodData.howToDeposit && (
-              <section className="bg-neutral-800 rounded-xl p-6">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+              <section className="bg-white rounded-xl p-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                   <CheckCircle className="w-6 h-6 text-primary" />
                   {isSpanish ? `Cómo Depositar con ${methodData.name}` : `How to Deposit with ${methodData.name}`}
                 </h2>
@@ -373,7 +373,7 @@ export default async function PaymentMethodPage({ params }: PageProps) {
                       <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
                         <span className="text-black font-bold text-sm">{index + 1}</span>
                       </div>
-                      <p className="text-neutral-300 pt-1">{step}</p>
+                      <p className="text-gray-600 pt-1">{step}</p>
                     </li>
                   ))}
                 </ol>
@@ -383,13 +383,13 @@ export default async function PaymentMethodPage({ params }: PageProps) {
             {/* Pros and Cons */}
             <section className="grid md:grid-cols-2 gap-6">
               <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                   <CheckCircle className="w-5 h-5 text-green-400" />
                   {isSpanish ? 'Ventajas' : 'Advantages'}
                 </h3>
                 <ul className="space-y-2">
                   {methodData.pros.map((pro: string, index: number) => (
-                    <li key={index} className="flex items-start gap-2 text-sm text-neutral-300">
+                    <li key={index} className="flex items-start gap-2 text-sm text-gray-600">
                       <span className="text-green-400 mt-1">✓</span>
                       {pro}
                     </li>
@@ -397,13 +397,13 @@ export default async function PaymentMethodPage({ params }: PageProps) {
                 </ul>
               </div>
               <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                   <AlertCircle className="w-5 h-5 text-red-400" />
                   {isSpanish ? 'Desventajas' : 'Disadvantages'}
                 </h3>
                 <ul className="space-y-2">
                   {methodData.cons.map((con: string, index: number) => (
-                    <li key={index} className="flex items-start gap-2 text-sm text-neutral-300">
+                    <li key={index} className="flex items-start gap-2 text-sm text-gray-600">
                       <span className="text-red-400 mt-1">✗</span>
                       {con}
                     </li>
@@ -413,17 +413,17 @@ export default async function PaymentMethodPage({ params }: PageProps) {
             </section>
 
             {/* Top Casinos */}
-            <section className="bg-neutral-800 rounded-xl p-6">
-              <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-white rounded-xl p-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <Star className="w-6 h-6 text-primary" />
                 {isSpanish ? `Mejores Casinos con ${methodData.name}` : `Best Casinos with ${methodData.name}`}
               </h2>
               <div className="space-y-4">
                 {methodData.topCasinos.map((casino) => (
-                  <div key={casino.id} className="bg-neutral-700/50 rounded-lg p-4 hover:bg-neutral-700 transition-colors">
+                  <div key={casino.id} className="bg-gray-100/50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
                     <div className="flex items-center justify-between mb-3">
                       <div>
-                        <h3 className="text-lg font-bold text-white">{casino.name}</h3>
+                        <h3 className="text-lg font-bold text-gray-900">{casino.name}</h3>
                         <div className="flex items-center gap-1 mt-1">
                           {[...Array(5)].map((_, i) => (
                             <Star 
@@ -431,7 +431,7 @@ export default async function PaymentMethodPage({ params }: PageProps) {
                               className={`w-4 h-4 ${i < Math.floor(casino.rating) ? 'fill-primary text-primary' : 'text-neutral-600'}`} 
                             />
                           ))}
-                          <span className="text-sm text-neutral-400 ml-1">{casino.rating}</span>
+                          <span className="text-sm text-gray-500 ml-1">{casino.rating}</span>
                         </div>
                       </div>
                       <Link
@@ -443,16 +443,16 @@ export default async function PaymentMethodPage({ params }: PageProps) {
                     </div>
                     <div className="grid grid-cols-3 gap-3 text-sm">
                       <div>
-                        <span className="text-neutral-400">{isSpanish ? 'Bono:' : 'Bonus:'}</span>
-                        <p className="text-white font-semibold">{casino.bonus}</p>
+                        <span className="text-gray-500">{isSpanish ? 'Bono:' : 'Bonus:'}</span>
+                        <p className="text-gray-900 font-semibold">{casino.bonus}</p>
                       </div>
                       <div>
-                        <span className="text-neutral-400">{isSpanish ? 'Dep. mín:' : 'Min dep:'}</span>
-                        <p className="text-white font-semibold">${casino.minDeposit}</p>
+                        <span className="text-gray-500">{isSpanish ? 'Dep. mín:' : 'Min dep:'}</span>
+                        <p className="text-gray-900 font-semibold">${casino.minDeposit}</p>
                       </div>
                       <div>
-                        <span className="text-neutral-400">{isSpanish ? 'Tiempo:' : 'Time:'}</span>
-                        <p className="text-white font-semibold">{casino.processingTime}</p>
+                        <span className="text-gray-500">{isSpanish ? 'Tiempo:' : 'Time:'}</span>
+                        <p className="text-gray-900 font-semibold">{casino.processingTime}</p>
                       </div>
                     </div>
                   </div>
@@ -462,20 +462,20 @@ export default async function PaymentMethodPage({ params }: PageProps) {
 
             {/* FAQs */}
             {methodData.faqs && (
-              <section className="bg-neutral-800 rounded-xl p-6">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+              <section className="bg-white rounded-xl p-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                   <HelpCircle className="w-6 h-6 text-primary" />
                   {isSpanish ? 'Preguntas Frecuentes' : 'Frequently Asked Questions'}
                 </h2>
                 <div className="space-y-4">
                   {methodData.faqs.map((faq, index) => (
                     <details key={index} className="group">
-                      <summary className="flex items-center justify-between cursor-pointer bg-neutral-700/50 rounded-lg p-4 hover:bg-neutral-700 transition-colors">
-                        <span className="font-semibold text-white pr-4">{faq.question}</span>
-                        <ChevronDown className="w-5 h-5 text-neutral-400 group-open:rotate-180 transition-transform flex-shrink-0" />
+                      <summary className="flex items-center justify-between cursor-pointer bg-gray-100/50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                        <span className="font-semibold text-gray-900 pr-4">{faq.question}</span>
+                        <ChevronDown className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform flex-shrink-0" />
                       </summary>
                       <div className="mt-2 px-4 pb-4">
-                        <p className="text-neutral-300 text-sm">{faq.answer}</p>
+                        <p className="text-gray-600 text-sm">{faq.answer}</p>
                       </div>
                     </details>
                   ))}
@@ -487,29 +487,29 @@ export default async function PaymentMethodPage({ params }: PageProps) {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Limits & Fees */}
-            <div className="bg-neutral-800 rounded-xl p-6">
-              <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+            <div className="bg-white rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
                 <DollarSign className="w-5 h-5 text-primary" />
                 {isSpanish ? 'Límites y Comisiones' : 'Limits & Fees'}
               </h3>
               
               <div className="space-y-4">
                 <div>
-                  <h4 className="text-sm font-semibold text-neutral-400 mb-2">
+                  <h4 className="text-sm font-semibold text-gray-500 mb-2">
                     {isSpanish ? 'Límites de Depósito' : 'Deposit Limits'}
                   </h4>
                   <div className="space-y-1 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-neutral-400">{isSpanish ? 'Mínimo:' : 'Minimum:'}</span>
-                      <span className="text-white font-semibold">${methodData.limits.minDeposit} MXN</span>
+                      <span className="text-gray-500">{isSpanish ? 'Mínimo:' : 'Minimum:'}</span>
+                      <span className="text-gray-900 font-semibold">${methodData.limits.minDeposit} MXN</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-neutral-400">{isSpanish ? 'Máximo:' : 'Maximum:'}</span>
-                      <span className="text-white font-semibold">${methodData.limits.maxDeposit.toLocaleString()} MXN</span>
+                      <span className="text-gray-500">{isSpanish ? 'Máximo:' : 'Maximum:'}</span>
+                      <span className="text-gray-900 font-semibold">${methodData.limits.maxDeposit.toLocaleString()} MXN</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-neutral-400">{isSpanish ? 'Diario:' : 'Daily:'}</span>
-                      <span className="text-white font-semibold">
+                      <span className="text-gray-500">{isSpanish ? 'Diario:' : 'Daily:'}</span>
+                      <span className="text-gray-900 font-semibold">
                         {typeof methodData.limits.dailyLimit === 'number' 
                           ? `$${methodData.limits.dailyLimit.toLocaleString()} MXN`
                           : methodData.limits.dailyLimit}
@@ -519,21 +519,21 @@ export default async function PaymentMethodPage({ params }: PageProps) {
                 </div>
 
                 <div>
-                  <h4 className="text-sm font-semibold text-neutral-400 mb-2">
+                  <h4 className="text-sm font-semibold text-gray-500 mb-2">
                     {isSpanish ? 'Límites de Retiro' : 'Withdrawal Limits'}
                   </h4>
                   <div className="space-y-1 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-neutral-400">{isSpanish ? 'Mínimo:' : 'Minimum:'}</span>
-                      <span className="text-white font-semibold">
+                      <span className="text-gray-500">{isSpanish ? 'Mínimo:' : 'Minimum:'}</span>
+                      <span className="text-gray-900 font-semibold">
                         {typeof methodData.limits.minWithdrawal === 'number' 
                           ? `$${methodData.limits.minWithdrawal} MXN`
                           : methodData.limits.minWithdrawal}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-neutral-400">{isSpanish ? 'Máximo:' : 'Maximum:'}</span>
-                      <span className="text-white font-semibold">
+                      <span className="text-gray-500">{isSpanish ? 'Máximo:' : 'Maximum:'}</span>
+                      <span className="text-gray-900 font-semibold">
                         {typeof methodData.limits.maxWithdrawal === 'number' 
                           ? `$${methodData.limits.maxWithdrawal.toLocaleString()} MXN`
                           : methodData.limits.maxWithdrawal}
@@ -543,17 +543,17 @@ export default async function PaymentMethodPage({ params }: PageProps) {
                 </div>
 
                 <div>
-                  <h4 className="text-sm font-semibold text-neutral-400 mb-2">
+                  <h4 className="text-sm font-semibold text-gray-500 mb-2">
                     {isSpanish ? 'Comisiones' : 'Fees'}
                   </h4>
                   <div className="space-y-1 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-neutral-400">{isSpanish ? 'Depósito:' : 'Deposit:'}</span>
-                      <span className="text-white font-semibold">{methodData.fees.deposit}</span>
+                      <span className="text-gray-500">{isSpanish ? 'Depósito:' : 'Deposit:'}</span>
+                      <span className="text-gray-900 font-semibold">{methodData.fees.deposit}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-neutral-400">{isSpanish ? 'Retiro:' : 'Withdrawal:'}</span>
-                      <span className="text-white font-semibold">{methodData.fees.withdrawal}</span>
+                      <span className="text-gray-500">{isSpanish ? 'Retiro:' : 'Withdrawal:'}</span>
+                      <span className="text-gray-900 font-semibold">{methodData.fees.withdrawal}</span>
                     </div>
                   </div>
                 </div>
@@ -562,12 +562,12 @@ export default async function PaymentMethodPage({ params }: PageProps) {
 
             {/* Quick Tips */}
             <div className="bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl p-6 border border-primary/30">
-              <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+              <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
                 <TrendingUp className="w-5 h-5 text-primary" />
                 {isSpanish ? 'Consejos Rápidos' : 'Quick Tips'}
               </h3>
               <ul className="space-y-2 text-sm">
-                <li className="flex items-start gap-2 text-neutral-300">
+                <li className="flex items-start gap-2 text-gray-600">
                   <span className="text-primary mt-1">•</span>
                   {method === 'oxxo' && (isSpanish 
                     ? 'Guarda siempre tu ticket de pago'
@@ -576,7 +576,7 @@ export default async function PaymentMethodPage({ params }: PageProps) {
                     ? 'Verifica los límites de tu banco'
                     : 'Check your bank limits')}
                 </li>
-                <li className="flex items-start gap-2 text-neutral-300">
+                <li className="flex items-start gap-2 text-gray-600">
                   <span className="text-primary mt-1">•</span>
                   {method === 'oxxo' && (isSpanish 
                     ? 'El código expira en 24-48 horas'
@@ -585,7 +585,7 @@ export default async function PaymentMethodPage({ params }: PageProps) {
                     ? 'Usa la referencia correcta'
                     : 'Use the correct reference')}
                 </li>
-                <li className="flex items-start gap-2 text-neutral-300">
+                <li className="flex items-start gap-2 text-gray-600">
                   <span className="text-primary mt-1">•</span>
                   {isSpanish 
                     ? 'Verifica bonos especiales para este método'
@@ -596,8 +596,8 @@ export default async function PaymentMethodPage({ params }: PageProps) {
 
             {/* Alternative Methods */}
             {methodData.alternatives && (
-              <div className="bg-neutral-800 rounded-xl p-6">
-                <h3 className="text-lg font-bold text-white mb-4">
+              <div className="bg-white rounded-xl p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">
                   {isSpanish ? 'Métodos Alternativos' : 'Alternative Methods'}
                 </h3>
                 <div className="space-y-3">
@@ -608,16 +608,16 @@ export default async function PaymentMethodPage({ params }: PageProps) {
                       <Link
                         key={altMethod}
                         href={`/${locale}/metodos-pago/${altMethod}`}
-                        className="flex items-center gap-3 bg-neutral-700/50 rounded-lg p-3 hover:bg-neutral-700 transition-colors group"
+                        className="flex items-center gap-3 bg-gray-100/50 rounded-lg p-3 hover:bg-gray-100 transition-colors group"
                       >
                         <span className="text-2xl">{altData.logo}</span>
                         <div className="flex-1">
-                          <h4 className="font-semibold text-white group-hover:text-primary transition-colors">
+                          <h4 className="font-semibold text-gray-900 group-hover:text-primary transition-colors">
                             {altData.name}
                           </h4>
-                          <p className="text-xs text-neutral-400">{altData.type}</p>
+                          <p className="text-xs text-gray-500">{altData.type}</p>
                         </div>
-                        <ArrowRight className="w-4 h-4 text-neutral-500 group-hover:text-primary transition-colors" />
+                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-primary transition-colors" />
                       </Link>
                     );
                   })}
@@ -626,11 +626,11 @@ export default async function PaymentMethodPage({ params }: PageProps) {
             )}
 
             {/* CTA */}
-            <div className="bg-neutral-800 rounded-xl p-6 text-center">
-              <h3 className="text-lg font-bold text-white mb-3">
+            <div className="bg-white rounded-xl p-6 text-center">
+              <h3 className="text-lg font-bold text-gray-900 mb-3">
                 {isSpanish ? '¿Listo para jugar?' : 'Ready to play?'}
               </h3>
-              <p className="text-sm text-neutral-300 mb-4">
+              <p className="text-sm text-gray-600 mb-4">
                 {isSpanish 
                   ? `Elige un casino que acepte ${methodData.name} y empieza a jugar hoy`
                   : `Choose a casino that accepts ${methodData.name} and start playing today`}

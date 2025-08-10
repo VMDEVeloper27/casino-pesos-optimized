@@ -1,6 +1,6 @@
 import { Hero } from '@/components/layout/HeroLight';
-import { CasinoCard } from '@/components/casino/CasinoCard';
-import { RelatedContent, casinoRelatedContent } from '@/components/ui/RelatedContent';
+import { CasinoCard } from '@/components/casino/CasinoCardLight';
+import { RelatedContentLight as RelatedContent, casinoRelatedContent } from '@/components/ui/RelatedContentLight';
 import { FAQStructuredData, WebsiteStructuredData } from '@/components/StructuredData';
 import { getAllCasinos } from '@/lib/casino-database';
 import { ChevronRight, Gift } from 'lucide-react';
@@ -82,13 +82,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 // Lazy load heavy comparison table
 const CasinoComparisonTable = dynamic(
-  () => import('@/components/casino/CasinoComparisonTable').then(mod => ({ default: mod.CasinoComparisonTable })),
+  () => import('@/components/casino/CasinoComparisonTableLight').then(mod => ({ default: mod.CasinoComparisonTableLight })),
   {
     loading: () => (
       <div className="flex items-center justify-center py-20">
         <div className="animate-pulse text-center">
-          <div className="w-12 h-12 bg-primary/20 rounded-full mx-auto mb-4"></div>
-          <p className="text-slate-400">Cargando comparación...</p>
+          <div className="w-12 h-12 bg-primary-100 rounded-full mx-auto mb-4"></div>
+          <p className="text-gray-500">Cargando comparación...</p>
         </div>
       </div>
     )
@@ -138,16 +138,16 @@ export default async function HomePage({ params }: HomePageProps) {
         <div className="text-center mb-16">
           <a 
             href={`/${locale}/casinos`}
-            className="inline-flex items-center gap-2 bg-slate-700 hover:bg-slate-600 border border-slate-600 text-white px-6 py-3 rounded-xl font-semibold transition-colors duration-200"
+            className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 border-2 border-gray-200 hover:border-primary-200 text-gray-900 px-6 py-3 rounded-xl font-semibold transition-all duration-200 shadow-md hover:shadow-lg"
           >
             Ver Todos los Casinos
-            <span className="text-primary">→</span>
+            <span className="text-primary-600">→</span>
           </a>
         </div>
 
         {/* Comparison Table - Lazy loaded */}
         <div className="mb-16">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-8 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
             Compara Todos los Casinos
           </h2>
           <CasinoComparisonTable 

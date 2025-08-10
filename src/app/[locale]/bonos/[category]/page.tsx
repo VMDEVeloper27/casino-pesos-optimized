@@ -194,28 +194,28 @@ export default async function BonusCategoryPage({ params }: PageProps) {
   }
 
   return (
-    <main className="min-h-screen bg-neutral-900 pt-8 pb-16">
+    <main className="min-h-screen bg-gray-50 pt-8 pb-16">
       <div className="container mx-auto px-4">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm text-neutral-400 mb-8">
-          <Link href={`/${locale}`} className="hover:text-white transition-colors">
+        <div className="flex items-center gap-2 text-sm text-gray-500 mb-8">
+          <Link href={`/${locale}`} className="hover:text-gray-900 transition-colors">
             Inicio
           </Link>
           <ChevronRight className="w-4 h-4" />
-          <Link href={`/${locale}/bonos`} className="hover:text-white transition-colors">
+          <Link href={`/${locale}/bonos`} className="hover:text-gray-900 transition-colors">
             Bonos
           </Link>
           <ChevronRight className="w-4 h-4" />
-          <span className="text-white">{data.title}</span>
+          <span className="text-gray-900">{data.title}</span>
         </div>
 
         {/* Header */}
         <div className="text-center mb-12">
           <div className="text-6xl mb-4">{data.icon}</div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             {data.title}
           </h1>
-          <p className="text-lg text-neutral-300 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             {data.description}
           </p>
         </div>
@@ -224,7 +224,7 @@ export default async function BonusCategoryPage({ params }: PageProps) {
         <div className="mb-8">
           <Link 
             href={`/${locale}/bonos`}
-            className="inline-flex items-center gap-2 text-neutral-400 hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
             Volver a todos los bonos
@@ -236,12 +236,12 @@ export default async function BonusCategoryPage({ params }: PageProps) {
           {bonuses.map((bonus: any) => (
             <div
               key={bonus.id}
-              className="bg-neutral-800 rounded-2xl p-6 hover:shadow-xl transition-all duration-300"
+              className="bg-white rounded-2xl p-6 hover:shadow-xl transition-all duration-300"
             >
               <div className="grid lg:grid-cols-[200px,1fr,250px] gap-6">
                 {/* Casino Info */}
                 <div>
-                  <h3 className="text-xl font-bold text-white mb-2">{bonus.casino}</h3>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{bonus.casino}</h3>
                   <div className="flex items-center gap-1 mb-3">
                     {[...Array(5)].map((_, i) => (
                       <Star
@@ -253,33 +253,33 @@ export default async function BonusCategoryPage({ params }: PageProps) {
                         }`}
                       />
                     ))}
-                    <span className="text-sm text-neutral-400 ml-1">({bonus.rating})</span>
+                    <span className="text-sm text-gray-500 ml-1">({bonus.rating})</span>
                   </div>
                 </div>
 
                 {/* Bonus Details */}
                 <div>
                   <div className="bg-gradient-to-r from-primary/20 to-accent/20 rounded-xl p-4 mb-4 border border-primary/30">
-                    <div className="text-2xl font-bold text-white mb-1">{bonus.amount}</div>
+                    <div className="text-2xl font-bold text-gray-900 mb-1">{bonus.amount}</div>
                     {bonus.extra && (
-                      <div className="text-sm text-accent">{bonus.extra}</div>
+                      <div className="text-sm text-green-600">{bonus.extra}</div>
                     )}
                   </div>
                   
                   <div className="flex flex-wrap gap-4 text-sm">
                     <div>
-                      <span className="text-neutral-500">Rollover:</span>
-                      <span className="text-white font-semibold ml-2">{bonus.rollover}</span>
+                      <span className="text-gray-400">Rollover:</span>
+                      <span className="text-gray-900 font-semibold ml-2">{bonus.rollover}</span>
                     </div>
                     <div>
-                      <span className="text-neutral-500">Depósito Mín:</span>
-                      <span className="text-white font-semibold ml-2">
+                      <span className="text-gray-400">Depósito Mín:</span>
+                      <span className="text-gray-900 font-semibold ml-2">
                         {bonus.minDeposit === 0 ? 'Gratis' : `$${bonus.minDeposit} MXN`}
                       </span>
                     </div>
                     {bonus.code && (
                       <div>
-                        <span className="text-neutral-500">Código:</span>
+                        <span className="text-gray-400">Código:</span>
                         <span className="text-primary font-mono font-bold ml-2">{bonus.code}</span>
                       </div>
                     )}
@@ -293,11 +293,11 @@ export default async function BonusCategoryPage({ params }: PageProps) {
                   </button>
                   <Link 
                     href={`/${locale}/casinos/${bonus.slug}`}
-                    className="bg-neutral-700 hover:bg-neutral-600 text-white px-6 py-3 rounded-xl font-semibold text-center transition-colors"
+                    className="bg-gray-100 hover:bg-gray-200 text-gray-900 px-6 py-3 rounded-xl font-semibold text-center transition-colors"
                   >
                     Ver Casino
                   </Link>
-                  <button className="text-neutral-400 hover:text-white text-sm flex items-center justify-center gap-1 transition-colors">
+                  <button className="text-gray-500 hover:text-gray-900 text-sm flex items-center justify-center gap-1 transition-colors">
                     <Info className="w-4 h-4" />
                     Términos
                   </button>
@@ -308,12 +308,12 @@ export default async function BonusCategoryPage({ params }: PageProps) {
         </div>
 
         {/* Info Section */}
-        <div className="bg-neutral-800 rounded-2xl p-8 mt-12">
-          <h2 className="text-2xl font-bold text-white mb-4">
+        <div className="bg-white rounded-2xl p-8 mt-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
             ℹ️ Sobre {data.title}
           </h2>
           <div className="prose prose-invert max-w-none">
-            <p className="text-neutral-300">
+            <p className="text-gray-600">
               {data.description} Recuerda siempre leer los términos y condiciones antes de 
               reclamar cualquier bono. Los requisitos de apuesta y las restricciones pueden 
               variar considerablemente entre casinos.
@@ -321,8 +321,8 @@ export default async function BonusCategoryPage({ params }: PageProps) {
             
             <div className="grid md:grid-cols-2 gap-6 mt-6">
               <div>
-                <h3 className="text-lg font-semibold text-white mb-2">✅ Ventajas</h3>
-                <ul className="space-y-2 text-sm text-neutral-300">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">✅ Ventajas</h3>
+                <ul className="space-y-2 text-sm text-gray-600">
                   <li>• Aumentan tu bankroll inicial</li>
                   <li>• Más tiempo de juego y diversión</li>
                   <li>• Oportunidad de ganar sin arriesgar tanto</li>
@@ -330,8 +330,8 @@ export default async function BonusCategoryPage({ params }: PageProps) {
                 </ul>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-white mb-2">⚠️ Consideraciones</h3>
-                <ul className="space-y-2 text-sm text-neutral-300">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">⚠️ Consideraciones</h3>
+                <ul className="space-y-2 text-sm text-gray-600">
                   <li>• Requisitos de apuesta obligatorios</li>
                   <li>• Tiempo límite para cumplir condiciones</li>
                   <li>• Restricciones en juegos elegibles</li>

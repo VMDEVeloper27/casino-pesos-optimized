@@ -93,17 +93,17 @@ export default function ContactoPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-neutral-900 pt-8 pb-16">
+    <main className="min-h-screen bg-gray-50 pt-8 pb-16">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
             <MessageSquare className="w-10 h-10 text-primary" />
-            <h1 className="text-4xl md:text-5xl font-bold text-white">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
               Contacto
             </h1>
           </div>
-          <p className="text-lg text-neutral-300 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             ¿Tienes preguntas, sugerencias o necesitas ayuda? Estamos aquí para ti. 
             Contáctanos y te responderemos lo antes posible.
           </p>
@@ -112,13 +112,13 @@ export default function ContactoPage() {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <div className="bg-neutral-800 rounded-xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-6">Envíanos un mensaje</h2>
+            <div className="bg-white rounded-xl p-8">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Envíanos un mensaje</h2>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-semibold text-neutral-300 mb-2">
+                    <label htmlFor="name" className="block text-sm font-semibold text-gray-600 mb-2">
                       Nombre completo *
                     </label>
                     <input
@@ -128,13 +128,13 @@ export default function ContactoPage() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full bg-neutral-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="w-full bg-gray-100 text-gray-900 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                       placeholder="Tu nombre"
                     />
                   </div>
                   
                   <div>
-                    <label htmlFor="email" className="block text-sm font-semibold text-neutral-300 mb-2">
+                    <label htmlFor="email" className="block text-sm font-semibold text-gray-600 mb-2">
                       Email *
                     </label>
                     <input
@@ -144,7 +144,7 @@ export default function ContactoPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full bg-neutral-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="w-full bg-gray-100 text-gray-900 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                       placeholder="tu@email.com"
                     />
                   </div>
@@ -152,7 +152,7 @@ export default function ContactoPage() {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="type" className="block text-sm font-semibold text-neutral-300 mb-2">
+                    <label htmlFor="type" className="block text-sm font-semibold text-gray-600 mb-2">
                       Tipo de consulta
                     </label>
                     <select
@@ -160,7 +160,7 @@ export default function ContactoPage() {
                       name="type"
                       value={formData.type}
                       onChange={handleChange}
-                      className="w-full bg-neutral-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="w-full bg-gray-100 text-gray-900 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                     >
                       <option value="general">Consulta general</option>
                       <option value="support">Soporte técnico</option>
@@ -170,7 +170,7 @@ export default function ContactoPage() {
                   </div>
                   
                   <div>
-                    <label htmlFor="subject" className="block text-sm font-semibold text-neutral-300 mb-2">
+                    <label htmlFor="subject" className="block text-sm font-semibold text-gray-600 mb-2">
                       Asunto *
                     </label>
                     <input
@@ -180,14 +180,14 @@ export default function ContactoPage() {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="w-full bg-neutral-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="w-full bg-gray-100 text-gray-900 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                       placeholder="¿En qué podemos ayudarte?"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-semibold text-neutral-300 mb-2">
+                  <label htmlFor="message" className="block text-sm font-semibold text-gray-600 mb-2">
                     Mensaje *
                   </label>
                   <textarea
@@ -197,7 +197,7 @@ export default function ContactoPage() {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full bg-neutral-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+                    className="w-full bg-gray-100 text-gray-900 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-none"
                     placeholder="Cuéntanos más detalles..."
                   />
                 </div>
@@ -233,23 +233,23 @@ export default function ContactoPage() {
           {/* Contact Information */}
           <div className="space-y-6">
             {/* Contact Cards */}
-            <div className="bg-neutral-800 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-white mb-6">Información de contacto</h3>
+            <div className="bg-white rounded-xl p-6">
+              <h3 className="text-xl font-bold text-gray-900 mb-6">Información de contacto</h3>
               <div className="space-y-4">
                 {contactInfo.map((info, index) => (
                   <div key={index} className="flex items-start gap-4">
                     <div className="flex-shrink-0">{info.icon}</div>
                     <div>
-                      <h4 className="font-semibold text-white mb-1">{info.title}</h4>
+                      <h4 className="font-semibold text-gray-900 mb-1">{info.title}</h4>
                       {info.link ? (
                         <a 
                           href={info.link}
-                          className="text-sm text-neutral-300 hover:text-primary transition-colors"
+                          className="text-sm text-gray-600 hover:text-primary transition-colors"
                         >
                           {info.content}
                         </a>
                       ) : (
-                        <p className="text-sm text-neutral-300">{info.content}</p>
+                        <p className="text-sm text-gray-600">{info.content}</p>
                       )}
                     </div>
                   </div>
@@ -259,23 +259,23 @@ export default function ContactoPage() {
 
             {/* FAQ Section */}
             <div className="bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl p-6 border border-primary/30">
-              <h3 className="text-xl font-bold text-white mb-4">Preguntas frecuentes</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Preguntas frecuentes</h3>
               <div className="space-y-3">
                 <div>
-                  <h4 className="font-semibold text-white mb-1">¿Cuánto tardan en responder?</h4>
-                  <p className="text-sm text-neutral-300">
+                  <h4 className="font-semibold text-gray-900 mb-1">¿Cuánto tardan en responder?</h4>
+                  <p className="text-sm text-gray-600">
                     Normalmente respondemos en menos de 24 horas.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-white mb-1">¿Ofrecen soporte telefónico?</h4>
-                  <p className="text-sm text-neutral-300">
+                  <h4 className="font-semibold text-gray-900 mb-1">¿Ofrecen soporte telefónico?</h4>
+                  <p className="text-sm text-gray-600">
                     Sí, estamos disponibles de lunes a domingo, 24/7.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-white mb-1">¿Puedo solicitar una reseña de un casino?</h4>
-                  <p className="text-sm text-neutral-300">
+                  <h4 className="font-semibold text-gray-900 mb-1">¿Puedo solicitar una reseña de un casino?</h4>
+                  <p className="text-sm text-gray-600">
                     Por supuesto, envíanos el nombre del casino y lo evaluaremos.
                   </p>
                 </div>
@@ -283,29 +283,29 @@ export default function ContactoPage() {
             </div>
 
             {/* Social Media */}
-            <div className="bg-neutral-800 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-white mb-4">Síguenos</h3>
-              <p className="text-sm text-neutral-300 mb-4">
+            <div className="bg-white rounded-xl p-6">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Síguenos</h3>
+              <p className="text-sm text-gray-600 mb-4">
                 Mantente actualizado con las últimas noticias y promociones.
               </p>
               <div className="flex gap-4">
                 <a 
                   href="#"
-                  className="w-10 h-10 bg-neutral-700 rounded-lg flex items-center justify-center hover:bg-primary transition-colors"
+                  className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary transition-colors"
                 >
-                  <span className="text-white">f</span>
+                  <span className="text-gray-900">f</span>
                 </a>
                 <a 
                   href="#"
-                  className="w-10 h-10 bg-neutral-700 rounded-lg flex items-center justify-center hover:bg-primary transition-colors"
+                  className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary transition-colors"
                 >
-                  <span className="text-white">X</span>
+                  <span className="text-gray-900">X</span>
                 </a>
                 <a 
                   href="#"
-                  className="w-10 h-10 bg-neutral-700 rounded-lg flex items-center justify-center hover:bg-primary transition-colors"
+                  className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary transition-colors"
                 >
-                  <span className="text-white">in</span>
+                  <span className="text-gray-900">in</span>
                 </a>
               </div>
             </div>
