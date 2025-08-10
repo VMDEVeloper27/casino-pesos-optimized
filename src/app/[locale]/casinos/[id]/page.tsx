@@ -116,7 +116,7 @@ export default async function CasinoDetailPage({ params }: PageProps) {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Casino No Encontrado</h1>
           <p className="text-gray-500 mb-8">El casino que buscas no está disponible.</p>
-          <Link href={`/${locale}/casinos`} className="bg-primary text-black px-6 py-3 rounded-xl font-bold">
+          <Link href={`/${locale}/casinos`} className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-xl font-bold transition-all">
             Ver Todos los Casinos
           </Link>
         </div>
@@ -169,7 +169,7 @@ export default async function CasinoDetailPage({ params }: PageProps) {
                     key={i}
                     className={`w-5 h-5 ${
                       i < Math.floor(casino.rating)
-                        ? 'fill-primary text-primary'
+                        ? 'fill-green-500 text-green-500'
                         : 'text-neutral-600'
                     }`}
                   />
@@ -207,11 +207,11 @@ export default async function CasinoDetailPage({ params }: PageProps) {
             </div>
 
             {/* Bonus Box */}
-            <div className="bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl p-6 border border-primary/30">
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
               <h2 className="text-lg font-bold text-gray-900 mb-2">Bono de Bienvenida</h2>
-              <p className="text-2xl font-bold text-primary mb-2">{bonusText}</p>
+              <p className="text-2xl font-bold text-green-600 mb-2">{bonusText}</p>
               {casino.bonus.freeSpins && (
-                <p className="text-sm text-accent mb-4">+ {casino.bonus.freeSpins} Giros Gratis</p>
+                <p className="text-sm text-green-600 mb-4">+ {casino.bonus.freeSpins} Giros Gratis</p>
               )}
               {casino.bonus.code && (
                 <div className="bg-gray-50/50 rounded-lg p-3 mb-4">
@@ -223,7 +223,7 @@ export default async function CasinoDetailPage({ params }: PageProps) {
                 href={casino.affiliateLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-black px-6 py-3 rounded-xl font-bold text-center transition-all duration-200 transform hover:scale-105"
+                className="block w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-xl font-bold text-center transition-all duration-200 transform hover:scale-105"
               >
                 Obtener Bono
               </a>
@@ -272,7 +272,7 @@ export default async function CasinoDetailPage({ params }: PageProps) {
             {/* Payment Methods */}
             <div className="bg-white rounded-xl p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                <CreditCard className="w-6 h-6 text-primary" />
+                <CreditCard className="w-6 h-6 text-green-600" />
                 Métodos de Pago
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
@@ -299,11 +299,11 @@ export default async function CasinoDetailPage({ params }: PageProps) {
             {/* Games */}
             <div className="bg-white rounded-xl p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                <Gamepad2 className="w-6 h-6 text-primary" />
+                <Gamepad2 className="w-6 h-6 text-green-600" />
                 Juegos Disponibles
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                <div className="bg-gradient-to-br from-primary/10 to-accent/10 rounded-lg p-4 border border-primary/20">
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200">
                   <p className="text-3xl font-bold text-gray-900 mb-2">{casino.games.total}+</p>
                   <p className="text-sm text-gray-500">Total de Juegos</p>
                 </div>
@@ -325,15 +325,15 @@ export default async function CasinoDetailPage({ params }: PageProps) {
             {/* Bonuses */}
             <div className="bg-white rounded-xl p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                <Gift className="w-6 h-6 text-primary" />
+                <Gift className="w-6 h-6 text-green-600" />
                 Bonos y Promociones
               </h2>
               <div className="space-y-4">
-                <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-6 border border-primary/20">
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-6 border border-green-200">
                   <div className="flex items-start justify-between">
                     <div>
                       <h3 className="text-lg font-bold text-gray-900 mb-2">Bono de Bienvenida</h3>
-                      <p className="text-2xl font-bold text-primary mb-2">{bonusText}</p>
+                      <p className="text-2xl font-bold text-green-600 mb-2">{bonusText}</p>
                       {casino.bonus.freeSpins && (
                         <p className="text-sm text-green-600">+ {casino.bonus.freeSpins} Giros Gratis</p>
                       )}
@@ -386,7 +386,7 @@ export default async function CasinoDetailPage({ params }: PageProps) {
                   href={casino.affiliateLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-black px-6 py-3 rounded-xl font-bold text-center transition-all duration-200"
+                  className="block w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-xl font-bold text-center transition-all duration-200"
                 >
                   Jugar Ahora
                 </a>
