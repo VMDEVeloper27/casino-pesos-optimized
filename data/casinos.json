@@ -3,7 +3,7 @@
     "id": "bet365",
     "name": "Bet365 Casino",
     "slug": "bet365",
-    "logo": "/uploads/bet365-logo.webp",
+    "logo": "/uploads/casino-logos/casino-bet365-1754855255113.svg",
     "rating": 4.9,
     "established": 2001,
     "affiliateLink": "https://bet365.com",
@@ -57,13 +57,13 @@
       "Límites conservadores"
     ],
     "status": "active",
-    "lastModified": "2025-08-10T07:55:42.411Z"
+    "lastModified": "2025-08-10T19:47:35.344Z"
   },
   {
     "id": "codere",
     "name": "Codere Casino",
     "slug": "codere",
-    "logo": "/images/codere-logo.png",
+    "logo": "/uploads/casino-logos/casino-codere-1754853783410.webp",
     "rating": 4.8,
     "established": 1980,
     "affiliateLink": "https://codere.mx",
@@ -114,7 +114,7 @@
       "App móvil mejorable"
     ],
     "status": "active",
-    "lastModified": "2025-08-10T07:55:42.411Z"
+    "lastModified": "2025-08-10T19:23:03.421Z"
   },
   {
     "id": "caliente",
@@ -471,7 +471,7 @@
     "id": "megapari",
     "name": "Megapari Casino",
     "slug": "megapari",
-    "logo": "/images/megapari-logo.png",
+    "logo": "/uploads/casino-logos/megapari-logo.webp",
     "rating": 4.4,
     "established": 2019,
     "affiliateLink": "https://megapari.mx",
@@ -588,7 +588,7 @@
     "id": "melbet",
     "name": "Melbet Casino",
     "slug": "melbet",
-    "logo": "/images/melbet-logo.png",
+    "logo": "/uploads/casino-logos/melbet-logo.webp",
     "rating": 4.3,
     "established": 2012,
     "affiliateLink": "https://melbet.mx",

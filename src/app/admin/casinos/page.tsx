@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { 
   Plus, 
@@ -11,7 +11,8 @@ import {
   Download,
   Upload,
   Filter,
-  Star
+  Star,
+  Image as ImageIcon
 } from 'lucide-react';
 
 interface Casino {
@@ -49,6 +50,8 @@ export default function AdminCasinosList() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [loading, setLoading] = useState(true);
+  const [uploadingLogo, setUploadingLogo] = useState<string | null>(null);
+  const fileInputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
 
   useEffect(() => {
     fetchCasinos();
@@ -79,6 +82,72 @@ export default function AdminCasinosList() {
       }
     } catch (error) {
       console.error('Error deleting casino:', error);
+    }
+  };
+
+  const handleLogoUpload = async (casinoId: string, file: File) => {
+    if (!file) return;
+    
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      alert('Please upload an image file');
+      return;
+    }
+    
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert('File size must be less than 5MB');
+      return;
+    }
+    
+    setUploadingLogo(casinoId);
+    
+    try {
+      // Create FormData
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('casinoId', casinoId);
+      formData.append('type', 'casino-logo');
+      
+      // Upload to media API
+      const uploadResponse = await fetch('/api/admin/media', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      if (!uploadResponse.ok) {
+        throw new Error('Failed to upload image');
+      }
+      
+      const { url } = await uploadResponse.json();
+      
+      // Update casino with new logo URL
+      const updateResponse = await fetch(`/api/admin/casinos/${casinoId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ logo: url }),
+      });
+      
+      if (updateResponse.ok) {
+        // Update local state
+        setCasinos(casinos.map(c => 
+          c.id === casinoId ? { ...c, logo: url } : c
+        ));
+        alert('Logo uploaded successfully');
+      } else {
+        throw new Error('Failed to update casino');
+      }
+    } catch (error) {
+      console.error('Error uploading logo:', error);
+      alert('Failed to upload logo. Please try again.');
+    } finally {
+      setUploadingLogo(null);
+      // Reset file input
+      if (fileInputRefs.current[casinoId]) {
+        fileInputRefs.current[casinoId]!.value = '';
+      }
     }
   };
 
@@ -193,14 +262,61 @@ export default function AdminCasinosList() {
                 <tr key={casino.id} className="border-b border-neutral-700 hover:bg-neutral-700/50 transition-colors">
                   <td className="p-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-neutral-700 rounded-lg flex items-center justify-center">
-                        <span className="text-xs font-bold text-white">
-                          {casino.logo}
-                        </span>
+                      <div className="relative group">
+                        <div className="w-12 h-12 bg-slate-700 rounded-lg flex items-center justify-center overflow-hidden">
+                          {casino.logo && casino.logo.startsWith('http') ? (
+                            <img 
+                              src={casino.logo} 
+                              alt={casino.name}
+                              className="w-full h-full object-cover"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.style.display = 'none';
+                                const parent = target.parentElement;
+                                if (parent) {
+                                  parent.innerHTML = `<span class="text-xs font-bold text-white">${casino.name.substring(0, 3).toUpperCase()}</span>`;
+                                }
+                              }}
+                            />
+                          ) : (
+                            <span className="text-xs font-bold text-white">
+                              {casino.logo || casino.name.substring(0, 3).toUpperCase()}
+                            </span>
+                          )}
+                        </div>
+                        
+                        {/* Upload overlay */}
+                        <div className="absolute inset-0 bg-black/70 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <label 
+                            htmlFor={`logo-upload-${casino.id}`}
+                            className="cursor-pointer"
+                            title="Upload Logo"
+                          >
+                            {uploadingLogo === casino.id ? (
+                              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                            ) : (
+                              <ImageIcon className="w-5 h-5 text-white" />
+                            )}
+                          </label>
+                          <input
+                            ref={(el) => fileInputRefs.current[casino.id] = el}
+                            type="file"
+                            id={`logo-upload-${casino.id}`}
+                            accept="image/*"
+                            className="hidden"
+                            onChange={(e) => {
+                              const file = e.target.files?.[0];
+                              if (file) {
+                                handleLogoUpload(casino.id, file);
+                              }
+                            }}
+                            disabled={uploadingLogo === casino.id}
+                          />
+                        </div>
                       </div>
                       <div>
                         <div className="font-semibold text-white">{casino.name}</div>
-                        <div className="text-xs text-neutral-400">ID: {casino.id}</div>
+                        <div className="text-xs text-slate-400">ID: {casino.id}</div>
                       </div>
                     </div>
                   </td>

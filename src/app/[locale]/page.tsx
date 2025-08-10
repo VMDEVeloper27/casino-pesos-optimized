@@ -85,7 +85,7 @@ const CasinoComparisonTable = dynamic(
       <div className="flex items-center justify-center py-20">
         <div className="animate-pulse text-center">
           <div className="w-12 h-12 bg-primary/20 rounded-full mx-auto mb-4"></div>
-          <p className="text-neutral-400">Cargando comparación...</p>
+          <p className="text-slate-400">Cargando comparación...</p>
         </div>
       </div>
     )
@@ -105,7 +105,7 @@ export default async function HomePage({ params }: HomePageProps) {
   const casinos = await getAllCasinos();
   
   return (
-    <main className="min-h-screen bg-neutral-900">
+    <main className="min-h-screen bg-slate-800">
       {/* Hero Section */}
       <Hero />
 
@@ -115,7 +115,7 @@ export default async function HomePage({ params }: HomePageProps) {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Casinos Destacados del Mes
           </h2>
-          <p className="text-lg text-neutral-300 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-300 max-w-2xl mx-auto">
             Estos casinos han demostrado excelencia en seguridad, variedad de juegos y rapidez en pagos.
           </p>
         </div>
@@ -135,7 +135,7 @@ export default async function HomePage({ params }: HomePageProps) {
         <div className="text-center mb-16">
           <a 
             href={`/${locale}/casinos`}
-            className="inline-flex items-center gap-2 bg-neutral-800 hover:bg-neutral-700 border border-neutral-600 text-white px-6 py-3 rounded-xl font-semibold transition-colors duration-200"
+            className="inline-flex items-center gap-2 bg-slate-700 hover:bg-slate-600 border border-slate-600 text-white px-6 py-3 rounded-xl font-semibold transition-colors duration-200"
           >
             Ver Todos los Casinos
             <span className="text-primary">→</span>
@@ -155,7 +155,7 @@ export default async function HomePage({ params }: HomePageProps) {
       </section>
 
       {/* Trust Section */}
-      <section className="bg-neutral-800 py-16">
+      <section className="bg-slate-900 py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-white mb-4">
@@ -168,28 +168,28 @@ export default async function HomePage({ params }: HomePageProps) {
                 <span className="text-2xl">🔒</span>
               </div>
               <h3 className="font-semibold text-white mb-2">100% Seguros</h3>
-              <p className="text-sm text-neutral-400">Solo casinos con licencias válidas</p>
+              <p className="text-sm text-slate-400">Solo casinos con licencias válidas</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl">💰</span>
               </div>
               <h3 className="font-semibold text-white mb-2">Bonos Exclusivos</h3>
-              <p className="text-sm text-neutral-400">Ofertas negociadas para ti</p>
+              <p className="text-sm text-slate-400">Ofertas negociadas para ti</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl">⚡</span>
               </div>
               <h3 className="font-semibold text-white mb-2">Pagos Rápidos</h3>
-              <p className="text-sm text-neutral-400">Retiros en 24-48 horas</p>
+              <p className="text-sm text-slate-400">Retiros en 24-48 horas</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl">🎯</span>
               </div>
               <h3 className="font-semibold text-white mb-2">Expertos Locales</h3>
-              <p className="text-sm text-neutral-400">Conocemos tu mercado</p>
+              <p className="text-sm text-slate-400">Conocemos tu mercado</p>
             </div>
           </div>
         </div>
@@ -202,38 +202,38 @@ export default async function HomePage({ params }: HomePageProps) {
             Preguntas Frecuentes sobre Casinos Online en México
           </h2>
           <div className="max-w-4xl mx-auto">
-            <div className="bg-neutral-800 rounded-xl p-6 mb-4">
+            <div className="bg-slate-900 rounded-xl p-6 mb-4">
               <h3 className="text-xl font-semibold text-white mb-3">
                 ¿Es legal jugar en casinos online desde México?
               </h3>
-              <p className="text-neutral-300">
+              <p className="text-slate-300">
                 Sí, es completamente legal para mexicanos jugar en casinos online con licencia internacional. 
                 La legislación mexicana no prohíbe a los ciudadanos acceder a estos sitios.
               </p>
             </div>
-            <div className="bg-neutral-800 rounded-xl p-6 mb-4">
+            <div className="bg-slate-900 rounded-xl p-6 mb-4">
               <h3 className="text-xl font-semibold text-white mb-3">
                 ¿Qué casinos aceptan depósitos con OXXO?
               </h3>
-              <p className="text-neutral-300">
+              <p className="text-slate-300">
                 Los mejores casinos como Bet365, Codere y Strendus aceptan depósitos en OXXO. 
                 Puedes depositar efectivo en cualquiera de las +19,000 tiendas OXXO del país.
               </p>
             </div>
-            <div className="bg-neutral-800 rounded-xl p-6 mb-4">
+            <div className="bg-slate-900 rounded-xl p-6 mb-4">
               <h3 className="text-xl font-semibold text-white mb-3">
                 ¿Cuánto tiempo tardan los retiros en pesos mexicanos?
               </h3>
-              <p className="text-neutral-300">
+              <p className="text-slate-300">
                 Los retiros varían desde 2 horas (PayPal, Skrill) hasta 5 días (transferencia bancaria). 
                 Los casinos top procesan retiros en menos de 24 horas.
               </p>
             </div>
-            <div className="bg-neutral-800 rounded-xl p-6 mb-4">
+            <div className="bg-slate-900 rounded-xl p-6 mb-4">
               <h3 className="text-xl font-semibold text-white mb-3">
                 ¿Son seguras las transacciones en casinos online mexicanos?
               </h3>
-              <p className="text-neutral-300">
+              <p className="text-slate-300">
                 Totalmente seguras. Los casinos recomendados usan encriptación SSL de nivel bancario 
                 y segregan fondos de jugadores. Tus depósitos están protegidos.
               </p>
@@ -248,14 +248,14 @@ export default async function HomePage({ params }: HomePageProps) {
           <h2 className="text-3xl font-bold text-white mb-4">
             ¿Listo para Empezar a Ganar?
           </h2>
-          <p className="text-lg text-neutral-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
             Únete a miles de jugadores que ya disfrutan de los mejores casinos online en pesos.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-gradient-to-r from-primary to-accent text-black px-8 py-4 rounded-xl font-bold text-lg transform hover:scale-105 transition-transform">
               Explorar Casinos →
             </button>
-            <button className="bg-neutral-800 text-white px-8 py-4 rounded-xl font-bold text-lg border border-neutral-700 hover:bg-neutral-700 transition-colors">
+            <button className="bg-slate-700 text-white px-8 py-4 rounded-xl font-bold text-lg border border-slate-600 hover:bg-slate-600 transition-colors">
               Comparar Bonos 🎁
             </button>
           </div>

@@ -4,7 +4,8 @@ type Props = {
   children: ReactNode;
 };
 
-// Root layout - locale routes will handle their own html/body tags
+// Since [locale]/layout.tsx provides html and body tags, 
+// the root layout should only return children
 export default function RootLayout({ children }: Props) {
   return children;
 }

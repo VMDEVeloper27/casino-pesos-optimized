@@ -4,44 +4,48 @@
 
 @layer base {
   :root {
-    /* Clean Professional Color Palette */
+    /* Trustworthy Design Language - Professional Color Palette */
     
-    /* Primary - Deep Blue */
-    --primary: 215 44% 41%; /* #3b5998 */
+    /* Primary - Deep Navy (Trust & Authority) */
+    --primary: 214 88% 27%; /* #1e3a8a */
     --primary-foreground: 0 0% 100%; /* #ffffff */
     
-    /* Secondary - Light Blue */
-    --secondary: 210 31% 68%; /* #8b9dc3 */
-    --secondary-foreground: 215 44% 41%; /* #3b5998 */
+    /* Secondary - Slate Blue */
+    --secondary: 215 25% 27%; /* #334155 */
+    --secondary-foreground: 0 0% 100%; /* #ffffff */
     
-    /* Accent - Light Gray */
-    --accent: 210 20% 91%; /* #dfe3ee */
-    --accent-foreground: 215 44% 41%; /* #3b5998 */
+    /* Accent - Ocean Blue (Interactive Elements) */
+    --accent: 214 95% 59%; /* #3b82f6 */
+    --accent-foreground: 0 0% 100%; /* #ffffff */
     
     /* Base Colors */
-    --background: 0 0% 97%; /* #f7f7f7 */
-    --foreground: 215 44% 41%; /* #3b5998 */
+    --background: 210 40% 98%; /* #f8fafc */
+    --foreground: 222 84% 5%; /* #0f172a */
     
     /* Card Colors */
     --card: 0 0% 100%; /* #ffffff */
-    --card-foreground: 215 44% 41%; /* #3b5998 */
+    --card-foreground: 222 84% 5%; /* #0f172a */
     
     /* Popover */
     --popover: 0 0% 100%; /* #ffffff */
-    --popover-foreground: 215 44% 41%; /* #3b5998 */
+    --popover-foreground: 222 84% 5%; /* #0f172a */
     
     /* Muted */
-    --muted: 210 20% 91%; /* #dfe3ee */
-    --muted-foreground: 210 31% 68%; /* #8b9dc3 */
+    --muted: 210 40% 98%; /* #f8fafc */
+    --muted-foreground: 215 16% 47%; /* #64748b */
     
     /* Borders */
-    --border: 210 20% 91%; /* #dfe3ee */
-    --input: 210 20% 91%; /* #dfe3ee */
-    --ring: 215 44% 41%; /* #3b5998 */
+    --border: 214 32% 91%; /* #e2e8f0 */
+    --input: 214 32% 91%; /* #e2e8f0 */
+    --ring: 214 95% 59%; /* #3b82f6 */
     
-    /* Status Colors */
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    /* Status Colors - Professional */
+    --success: 142 71% 45%; /* #10b981 */
+    --success-foreground: 0 0% 100%; /* #ffffff */
+    --warning: 38 92% 50%; /* #f59e0b */
+    --warning-foreground: 0 0% 100%; /* #ffffff */
+    --destructive: 0 84% 60%; /* #ef4444 */
+    --destructive-foreground: 0 0% 100%; /* #ffffff */
     
     /* Radius */
     --radius: 0.5rem;
@@ -86,182 +90,280 @@
 }
 
 @layer components {
-  /* Primary Button */
+  /* Professional Button System */
   .btn-primary {
-    background-color: #3b5998;
+    background-color: #1e3a8a;
     color: #ffffff;
     font-weight: 600;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(59, 89, 152, 0.2);
+    transition: all 0.15s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid transparent;
   }
   
   .btn-primary:hover {
-    background-color: #2d4373;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(59, 89, 152, 0.3);
+    background-color: #1e40af;
+    opacity: 0.95;
   }
   
   /* Secondary Button */
   .btn-secondary {
-    background-color: #8b9dc3;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #1e3a8a;
+    border: 1px solid #e2e8f0;
     font-weight: 600;
-    transition: all 0.2s ease;
+    transition: all 0.15s ease;
   }
   
   .btn-secondary:hover {
-    background-color: #7185a8;
+    background-color: #f8fafc;
+    border-color: #1e3a8a;
   }
   
   /* Outline Button */
   .btn-outline {
     background-color: transparent;
-    color: #3b5998;
-    border: 2px solid #3b5998;
+    color: #3b82f6;
+    border: 1px solid #3b82f6;
     font-weight: 600;
-    transition: all 0.2s ease;
+    transition: all 0.15s ease;
   }
   
   .btn-outline:hover {
-    background-color: #3b5998;
+    background-color: #3b82f6;
     color: #ffffff;
   }
   
-  /* Light Button */
-  .btn-light {
-    background-color: #dfe3ee;
-    color: #3b5998;
-    font-weight: 600;
+  /* Ghost Button */
+  .btn-ghost {
+    background-color: transparent;
+    color: #64748b;
+    font-weight: 500;
+    transition: all 0.15s ease;
+  }
+  
+  .btn-ghost:hover {
+    color: #1e3a8a;
+    background-color: #f8fafc;
+  }
+  
+  /* Trust Card Component */
+  .trust-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     transition: all 0.2s ease;
   }
   
-  .btn-light:hover {
-    background-color: #c9d0e3;
+  .trust-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   }
   
-  /* Card Component */
+  /* Casino Card - Professional */
   .casino-card {
     background-color: #ffffff;
-    border: 1px solid #dfe3ee;
-    box-shadow: 0 2px 8px rgba(59, 89, 152, 0.08);
-    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
   }
   
   .casino-card:hover {
-    box-shadow: 0 4px 16px rgba(59, 89, 152, 0.15);
-    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    border-color: #cbd5e1;
   }
   
-  /* Featured Card */
+  /* Featured Card - Subtle Emphasis */
   .featured-card {
     background-color: #ffffff;
-    border: 2px solid #3b5998;
-    box-shadow: 0 4px 16px rgba(59, 89, 152, 0.15);
+    border: 2px solid #1e3a8a;
+    box-shadow: 0 2px 4px rgba(30, 58, 138, 0.1);
   }
   
-  /* Input Styles */
+  /* Input Styles - Clean & Professional */
   .form-input {
     background-color: #ffffff;
-    border: 1px solid #dfe3ee;
-    color: #3b5998;
-    transition: all 0.2s ease;
+    border: 1px solid #e2e8f0;
+    color: #0f172a;
+    transition: all 0.15s ease;
+    font-weight: 500;
   }
   
   .form-input:focus {
-    border-color: #3b5998;
+    border-color: #3b82f6;
     outline: none;
-    box-shadow: 0 0 0 3px rgba(59, 89, 152, 0.1);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.08);
   }
   
-  /* Badge */
+  /* Professional Badge System */
   .badge {
-    background-color: #dfe3ee;
-    color: #3b5998;
+    background-color: #f1f5f9;
+    color: #334155;
     font-weight: 600;
     padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
+    border-radius: 0.375rem;
     font-size: 0.75rem;
+    border: 1px solid #e2e8f0;
   }
   
   .badge-primary {
-    background-color: #3b5998;
+    background-color: #1e3a8a;
     color: #ffffff;
+    border-color: #1e3a8a;
   }
   
-  .badge-secondary {
-    background-color: #8b9dc3;
+  .badge-success {
+    background-color: #10b981;
     color: #ffffff;
+    border-color: #10b981;
+  }
+  
+  .badge-warning {
+    background-color: #f59e0b;
+    color: #ffffff;
+    border-color: #f59e0b;
+  }
+  
+  /* Trust Indicators */
+  .trust-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #10b981;
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+  
+  .security-badge {
+    background-color: #dcfdf7;
+    color: #065f46;
+    border: 1px solid #6ee7b7;
   }
 }
 
 @layer utilities {
-  /* Text Colors */
+  /* Professional Text Colors */
   .text-primary {
-    color: #3b5998;
+    color: #1e3a8a;
   }
   
   .text-secondary {
-    color: #8b9dc3;
+    color: #334155;
   }
   
-  .text-light {
-    color: #dfe3ee;
+  .text-muted {
+    color: #64748b;
   }
   
-  /* Background Colors */
+  .text-accent {
+    color: #3b82f6;
+  }
+  
+  .text-success {
+    color: #10b981;
+  }
+  
+  .text-warning {
+    color: #f59e0b;
+  }
+  
+  .text-error {
+    color: #ef4444;
+  }
+  
+  /* Professional Background Colors */
   .bg-primary {
-    background-color: #3b5998;
+    background-color: #1e3a8a;
   }
   
   .bg-secondary {
-    background-color: #8b9dc3;
+    background-color: #334155;
   }
   
   .bg-accent {
-    background-color: #dfe3ee;
+    background-color: #3b82f6;
   }
   
   .bg-light {
-    background-color: #f7f7f7;
+    background-color: #f8fafc;
   }
   
   .bg-white {
     background-color: #ffffff;
   }
   
-  /* Border Colors */
+  .bg-success {
+    background-color: #10b981;
+  }
+  
+  .bg-warning {
+    background-color: #f59e0b;
+  }
+  
+  .bg-error {
+    background-color: #ef4444;
+  }
+  
+  /* Professional Border Colors */
   .border-primary {
-    border-color: #3b5998;
+    border-color: #1e3a8a;
   }
   
   .border-secondary {
-    border-color: #8b9dc3;
+    border-color: #334155;
   }
   
   .border-light {
-    border-color: #dfe3ee;
+    border-color: #e2e8f0;
   }
   
-  /* Gradient Backgrounds */
+  .border-accent {
+    border-color: #3b82f6;
+  }
+  
+  /* Minimal Gradient Backgrounds - Subtle */
   .bg-gradient-primary {
-    background: linear-gradient(135deg, #3b5998 0%, #2d4373 100%);
-  }
-  
-  .bg-gradient-secondary {
-    background: linear-gradient(135deg, #8b9dc3 0%, #7185a8 100%);
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
   }
   
   .bg-gradient-light {
-    background: linear-gradient(135deg, #ffffff 0%, #f7f7f7 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   }
   
-  /* Shadows */
+  .bg-gradient-accent {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  }
+  
+  /* Professional Shadow System */
+  .shadow-trust {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  .shadow-card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  }
+  
+  .shadow-elevated {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  }
+  
   .shadow-primary {
-    box-shadow: 0 4px 16px rgba(59, 89, 152, 0.15);
+    box-shadow: 0 2px 4px rgba(30, 58, 138, 0.1);
   }
   
-  .shadow-soft {
-    box-shadow: 0 2px 8px rgba(59, 89, 152, 0.08);
+  /* Trust & Credibility Utilities */
+  .trust-border {
+    border: 1px solid #e2e8f0;
+  }
+  
+  .trust-shadow {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  .professional-radius {
+    border-radius: 0.5rem;
+  }
+  
+  .minimal-radius {
+    border-radius: 0.25rem;
   }
 }
 
@@ -336,12 +438,40 @@ a:hover {
   }
 }
 
+@keyframes professionalSlide {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subtleGlow {
+  0%, 100% {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  50% {
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+  }
+}
+
 .animate-fadeIn {
   animation: fadeIn 0.3s ease-out;
 }
 
 .animate-pulse-slow {
   animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-professional-slide {
+  animation: professionalSlide 0.3s ease-out;
+}
+
+.animate-subtle-glow {
+  animation: subtleGlow 2s ease-in-out infinite;
 }
 
 /* Responsive Typography */

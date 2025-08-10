@@ -55,9 +55,9 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
   return (
     <div
       className={cn(
-        'relative overflow-hidden rounded-2xl border bg-gradient-to-br from-neutral-900 to-neutral-800',
+        'relative overflow-hidden rounded-2xl border bg-gradient-to-br from-slate-900 to-slate-800',
         'h-full flex flex-col min-h-[600px] animate-fadeIn',
-        featured ? 'border-primary/50 shadow-2xl' : 'border-neutral-700 shadow-lg',
+        featured ? 'border-primary/50 shadow-2xl' : 'border-slate-700 shadow-lg',
         'hover:shadow-xl transition-all duration-300'
       )}
     >
@@ -81,10 +81,10 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
             logo={casino.logo || casino.name.split(' ')[0].substring(0, 3)} 
             size="lg"
           />
-          <div className="flex items-center gap-1 bg-neutral-800 px-3 py-1 rounded-full">
+          <div className="flex items-center gap-1 bg-slate-800 px-3 py-1 rounded-full">
             <Star className="w-5 h-5 fill-primary text-primary" />
             <span className="text-lg font-bold text-white">{casino.rating}</span>
-            <span className="text-sm text-neutral-400">/5</span>
+            <span className="text-sm text-slate-400">/5</span>
           </div>
         </div>
 
@@ -108,46 +108,46 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
                 + {casino.bonus.freeSpins} Giros Gratis
               </div>
             ) : (
-              <div className="text-sm text-neutral-500">
+              <div className="text-sm text-slate-500">
                 Sin giros incluidos
               </div>
             )}
           </div>
-          <div className="flex items-center gap-4 mt-2 text-xs text-neutral-400 flex-wrap">
+          <div className="flex items-center gap-4 mt-2 text-xs text-slate-400 flex-wrap">
             <span>Min: ${casino.bonus.minDeposit}</span>
             <span>Rollover: {casino.bonus.wageringRequirement}x</span>
             {casino.bonus.code ? (
-              <span className="bg-neutral-700 px-2 py-1 rounded text-primary font-mono">
+              <span className="bg-slate-700 px-2 py-1 rounded text-primary font-mono">
                 {casino.bonus.code}
               </span>
             ) : (
-              <span className="text-neutral-600">Sin código</span>
+              <span className="text-slate-600">Sin código</span>
             )}
           </div>
         </div>
 
         {/* Features Grid */}
         <div className="grid grid-cols-2 gap-3 mb-4">
-          <div className="flex items-center gap-2 text-sm text-neutral-300">
-            <div className="w-8 h-8 rounded-lg bg-neutral-700 flex items-center justify-center">
+          <div className="flex items-center gap-2 text-sm text-slate-300">
+            <div className="w-8 h-8 rounded-lg bg-slate-700 flex items-center justify-center">
               🎰
             </div>
             <span>{casino.games.total}+ Juegos</span>
           </div>
-          <div className="flex items-center gap-2 text-sm text-neutral-300">
+          <div className="flex items-center gap-2 text-sm text-slate-300">
             <div className="w-8 h-8 rounded-lg bg-neutral-700 flex items-center justify-center text-accent">
               ⏱️
             </div>
             <span>{casino.withdrawalTime}</span>
           </div>
-          <div className="flex items-center gap-2 text-sm text-neutral-300">
+          <div className="flex items-center gap-2 text-sm text-slate-300">
             <div className="w-8 h-8 rounded-lg bg-neutral-700 flex items-center justify-center text-primary">
               💳
             </div>
             <span>{casino.paymentMethods.length} Métodos</span>
           </div>
-          <div className="flex items-center gap-2 text-sm text-neutral-300">
-            <div className="w-8 h-8 rounded-lg bg-neutral-700 flex items-center justify-center">
+          <div className="flex items-center gap-2 text-sm text-slate-300">
+            <div className="w-8 h-8 rounded-lg bg-slate-700 flex items-center justify-center">
               🎪
             </div>
             <span>{casino.games.live} En Vivo</span>
@@ -161,7 +161,7 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
             <div className="h-16 overflow-hidden">
               <ul className="space-y-1">
                 {casino.pros.slice(0, featured ? 3 : 2).map((pro, index) => (
-                  <li key={index} className="flex items-start gap-1 text-xs text-neutral-300">
+                  <li key={index} className="flex items-start gap-1 text-xs text-slate-300">
                     <Check className="w-3 h-3 text-accent mt-0.5 flex-shrink-0" />
                     <span className="leading-tight">{pro}</span>
                   </li>
@@ -174,7 +174,7 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
             <div className="h-16 overflow-hidden">
               <ul className="space-y-1">
                 {casino.cons.slice(0, 2).map((con, index) => (
-                  <li key={index} className="flex items-start gap-1 text-xs text-neutral-300">
+                  <li key={index} className="flex items-start gap-1 text-xs text-slate-300">
                     <X className="w-3 h-3 text-red-400 mt-0.5 flex-shrink-0" />
                     <span className="leading-tight">{con}</span>
                   </li>
@@ -190,13 +190,13 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
             {casino.paymentMethods.slice(0, 4).map((method) => (
               <div
                 key={method}
-                className="flex-shrink-0 bg-neutral-700 px-3 py-1 rounded-lg text-xs text-neutral-300"
+                className="flex-shrink-0 bg-slate-700 px-3 py-1 rounded-lg text-xs text-slate-300"
               >
                 {method}
               </div>
             ))}
             {casino.paymentMethods.length > 4 && (
-              <div className="flex-shrink-0 text-xs text-neutral-500">
+              <div className="flex-shrink-0 text-xs text-slate-500">
                 +{casino.paymentMethods.length - 4} más
               </div>
             )}
@@ -210,7 +210,7 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
         <div className="flex gap-3 mt-4">
           <Link
             href={`/${locale}/casinos/${casino.slug}`}
-            className="flex-1 bg-neutral-700 hover:bg-neutral-600 text-white px-4 py-3 rounded-xl font-semibold text-center transition-colors duration-200 flex items-center justify-center gap-2"
+            className="flex-1 bg-slate-700 hover:bg-slate-600 text-white px-4 py-3 rounded-xl font-semibold text-center transition-colors duration-200 flex items-center justify-center gap-2"
           >
             {locale === 'es' ? 'Leer Reseña' : 'Read Review'}
           </Link>
@@ -224,16 +224,16 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
         </div>
 
         {/* Trust Indicators */}
-        <div className="flex items-center justify-center gap-4 mt-4 pt-4 border-t border-neutral-700">
-          <div className="flex items-center gap-1 text-xs text-neutral-500">
+        <div className="flex items-center justify-center gap-4 mt-4 pt-4 border-t border-slate-700">
+          <div className="flex items-center gap-1 text-xs text-slate-500">
             <span className="text-accent">✓</span>
             <span>Licenciado</span>
           </div>
-          <div className="flex items-center gap-1 text-xs text-neutral-500">
+          <div className="flex items-center gap-1 text-xs text-slate-500">
             <span className="text-accent">✓</span>
             <span>SSL Seguro</span>
           </div>
-          <div className="flex items-center gap-1 text-xs text-neutral-500">
+          <div className="flex items-center gap-1 text-xs text-slate-500">
             <span className="text-accent">✓</span>
             <span>24/7 Soporte</span>
           </div>

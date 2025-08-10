@@ -58,6 +58,38 @@ export async function PUT(request: NextRequest, { params }: Params) {
   }
 }
 
+// Partial update casino (PATCH)
+export async function PATCH(request: NextRequest, { params }: Params) {
+  try {
+    const { id } = await params;
+    const partialUpdate = await request.json();
+    
+    const data = await fs.readFile(CASINOS_FILE, 'utf-8');
+    let casinos = JSON.parse(data);
+    
+    const index = casinos.findIndex((c: any) => c.id === id);
+    
+    if (index === -1) {
+      return NextResponse.json({ error: 'Casino not found' }, { status: 404 });
+    }
+    
+    // Partial update - only update provided fields
+    casinos[index] = { 
+      ...casinos[index], 
+      ...partialUpdate,
+      lastModified: new Date().toISOString()
+    };
+    
+    // Save to file
+    await fs.writeFile(CASINOS_FILE, JSON.stringify(casinos, null, 2));
+    
+    return NextResponse.json(casinos[index]);
+  } catch (error) {
+    console.error('Error partially updating casino:', error);
+    return NextResponse.json({ error: 'Failed to update casino' }, { status: 500 });
+  }
+}
+
 // Delete casino
 export async function DELETE(request: NextRequest, { params }: Params) {
   try {

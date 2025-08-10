@@ -155,7 +155,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
   return (
     <div className="w-full">
       {/* Filters Bar */}
-      <div className="bg-neutral-800 rounded-xl p-4 mb-6">
+      <div className="bg-slate-900 rounded-xl p-4 mb-6">
         <div className="flex items-center justify-between mb-4">
           <button
             onClick={() => setShowFilters(!showFilters)}
@@ -173,7 +173,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
           {selectedCasinos.length > 0 && (
             <button
               onClick={() => setSelectedCasinos([])}
-              className="text-sm text-neutral-400 hover:text-white transition-colors"
+              className="text-sm text-slate-400 hover:text-white transition-colors"
             >
               {locale === 'es' ? 'Limpiar selección' : 'Clear selection'} ({selectedCasinos.length})
             </button>
@@ -189,16 +189,16 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
               transition={{ duration: 0.3 }}
               className="overflow-hidden"
             >
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 pt-4 border-t border-neutral-700">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 pt-4 border-t border-slate-700">
                 {/* Rating Filter */}
                 <div>
-                  <label className="text-xs text-neutral-400 mb-1 block">
+                  <label className="text-xs text-slate-400 mb-1 block">
                     {locale === 'es' ? 'Rating Mínimo' : 'Min Rating'}
                   </label>
                   <select
                     value={filters.minRating}
                     onChange={(e) => setFilters({...filters, minRating: Number(e.target.value)})}
-                    className="w-full bg-neutral-700 text-white px-3 py-2 rounded-lg text-sm"
+                    className="w-full bg-slate-700 text-white px-3 py-2 rounded-lg text-sm"
                   >
                     <option value="0">Todos</option>
                     <option value="4">4.0+</option>
@@ -209,13 +209,13 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
 
                 {/* Payment Method Filter */}
                 <div>
-                  <label className="text-xs text-neutral-400 mb-1 block">
+                  <label className="text-xs text-slate-400 mb-1 block">
                     {locale === 'es' ? 'Método de Pago' : 'Payment Method'}
                   </label>
                   <select
                     value={filters.paymentMethod}
                     onChange={(e) => setFilters({...filters, paymentMethod: e.target.value})}
-                    className="w-full bg-neutral-700 text-white px-3 py-2 rounded-lg text-sm"
+                    className="w-full bg-slate-700 text-white px-3 py-2 rounded-lg text-sm"
                   >
                     <option value="">Todos</option>
                     <option value="PayPal">PayPal</option>
@@ -227,13 +227,13 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
 
                 {/* Currency Filter */}
                 <div>
-                  <label className="text-xs text-neutral-400 mb-1 block">
+                  <label className="text-xs text-slate-400 mb-1 block">
                     {locale === 'es' ? 'Moneda' : 'Currency'}
                   </label>
                   <select
                     value={filters.currency}
                     onChange={(e) => setFilters({...filters, currency: e.target.value})}
-                    className="w-full bg-neutral-700 text-white px-3 py-2 rounded-lg text-sm"
+                    className="w-full bg-slate-700 text-white px-3 py-2 rounded-lg text-sm"
                   >
                     <option value="">Todas</option>
                     <option value="MXN">MXN</option>
@@ -262,7 +262,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
                 <div className="flex items-end">
                   <button
                     onClick={clearFilters}
-                    className="text-sm text-neutral-400 hover:text-white transition-colors flex items-center gap-1"
+                    className="text-sm text-slate-400 hover:text-white transition-colors flex items-center gap-1"
                   >
                     <X className="w-4 h-4" />
                     {locale === 'es' ? 'Limpiar' : 'Clear'}
@@ -278,8 +278,8 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
       <div className="hidden lg:block overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-neutral-700">
-              <th className="text-left p-4 text-neutral-400 font-medium">
+            <tr className="border-b border-slate-700">
+              <th className="text-left p-4 text-slate-400 font-medium">
                 <div className="flex items-center gap-2">
                   {locale === 'es' ? 'Comparar' : 'Compare'}
                 </div>
@@ -287,7 +287,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
               <th className="text-left p-4">
                 <button
                   onClick={() => handleSort('name')}
-                  className="flex items-center gap-1 text-neutral-400 hover:text-white transition-colors font-medium"
+                  className="flex items-center gap-1 text-slate-400 hover:text-white transition-colors font-medium"
                 >
                   Casino
                   <SortIcon field="name" />
@@ -296,7 +296,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
               <th className="text-left p-4">
                 <button
                   onClick={() => handleSort('rating')}
-                  className="flex items-center gap-1 text-neutral-400 hover:text-white transition-colors font-medium"
+                  className="flex items-center gap-1 text-slate-400 hover:text-white transition-colors font-medium"
                 >
                   Rating
                   <SortIcon field="rating" />
@@ -305,7 +305,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
               <th className="text-left p-4">
                 <button
                   onClick={() => handleSort('bonus')}
-                  className="flex items-center gap-1 text-neutral-400 hover:text-white transition-colors font-medium"
+                  className="flex items-center gap-1 text-slate-400 hover:text-white transition-colors font-medium"
                 >
                   {locale === 'es' ? 'Bono' : 'Bonus'}
                   <SortIcon field="bonus" />
@@ -314,7 +314,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
               <th className="text-left p-4">
                 <button
                   onClick={() => handleSort('games')}
-                  className="flex items-center gap-1 text-neutral-400 hover:text-white transition-colors font-medium"
+                  className="flex items-center gap-1 text-slate-400 hover:text-white transition-colors font-medium"
                 >
                   {locale === 'es' ? 'Juegos' : 'Games'}
                   <SortIcon field="games" />
@@ -323,13 +323,13 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
               <th className="text-left p-4">
                 <button
                   onClick={() => handleSort('withdrawalTime')}
-                  className="flex items-center gap-1 text-neutral-400 hover:text-white transition-colors font-medium"
+                  className="flex items-center gap-1 text-slate-400 hover:text-white transition-colors font-medium"
                 >
                   {locale === 'es' ? 'Retiros' : 'Withdrawals'}
                   <SortIcon field="withdrawalTime" />
                 </button>
               </th>
-              <th className="text-left p-4 text-neutral-400 font-medium">
+              <th className="text-left p-4 text-slate-400 font-medium">
                 {locale === 'es' ? 'Características' : 'Features'}
               </th>
               <th className="text-center p-4"></th>
@@ -343,8 +343,8 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
                 className={cn(
-                  "border-b border-neutral-800 hover:bg-neutral-800/50 transition-colors",
-                  selectedCasinos.includes(casino.id) && "bg-neutral-800/30"
+                  "border-b border-slate-800 hover:bg-slate-800/50 transition-colors",
+                  selectedCasinos.includes(casino.id) && "bg-slate-800/30"
                 )}
               >
                 {/* Compare Checkbox */}
@@ -369,7 +369,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
                     />
                     <div>
                       <div className="font-semibold text-white">{casino.name}</div>
-                      <div className="text-xs text-neutral-400">
+                      <div className="text-xs text-slate-400">
                         {locale === 'es' ? 'Desde' : 'Since'} {casino.established}
                       </div>
                     </div>
@@ -381,7 +381,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
                   <div className="flex items-center gap-1">
                     <Star className="w-5 h-5 fill-primary text-primary" />
                     <span className="font-bold text-white">{casino.rating}</span>
-                    <span className="text-sm text-neutral-400">/5</span>
+                    <span className="text-sm text-slate-400">/5</span>
                   </div>
                 </td>
 
@@ -396,7 +396,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
                         +{casino.bonus.freeSpins} giros
                       </div>
                     )}
-                    <div className="text-xs text-neutral-400 mt-1">
+                    <div className="text-xs text-slate-400 mt-1">
                       Rollover: {casino.bonus.wageringRequirement}x
                     </div>
                   </div>
@@ -407,10 +407,10 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
                   <div>
                     <div className="font-semibold text-white">{casino.games.total}+</div>
                     <div className="flex gap-2 mt-1">
-                      <span className="text-xs text-neutral-400">
+                      <span className="text-xs text-slate-400">
                         🎰 {casino.games.slots}
                       </span>
-                      <span className="text-xs text-neutral-400">
+                      <span className="text-xs text-slate-400">
                         🎪 {casino.games.live}
                       </span>
                     </div>
@@ -431,7 +431,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
                     {casino.features.slice(0, 3).map((feature, idx) => (
                       <span
                         key={idx}
-                        className="text-xs bg-neutral-700 text-neutral-300 px-2 py-1 rounded"
+                        className="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded"
                       >
                         {feature}
                       </span>
@@ -444,7 +444,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
                   <div className="flex gap-2">
                     <a
                       href={`/${locale}/casinos/${casino.slug}`}
-                      className="text-sm text-neutral-400 hover:text-white transition-colors"
+                      className="text-sm text-slate-400 hover:text-white transition-colors"
                     >
                       {locale === 'es' ? 'Reseña' : 'Review'}
                     </a>
@@ -474,8 +474,8 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05 }}
             className={cn(
-              "bg-neutral-800 rounded-xl p-4 border",
-              selectedCasinos.includes(casino.id) ? "border-primary" : "border-neutral-700"
+              "bg-slate-900 rounded-xl p-4 border",
+              selectedCasinos.includes(casino.id) ? "border-primary" : "border-slate-700"
             )}
           >
             {/* Casino Header */}
@@ -520,20 +520,20 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
 
             {/* Quick Stats */}
             <div className="grid grid-cols-3 gap-2 mb-3 text-xs">
-              <div className="bg-neutral-700 rounded-lg p-2 text-center">
+              <div className="bg-slate-800 rounded-lg p-2 text-center">
                 <Gamepad className="w-4 h-4 text-primary mx-auto mb-1" />
                 <div className="text-white font-semibold">{casino.games.total}+</div>
-                <div className="text-neutral-400">Juegos</div>
+                <div className="text-slate-400">Juegos</div>
               </div>
-              <div className="bg-neutral-700 rounded-lg p-2 text-center">
+              <div className="bg-slate-800 rounded-lg p-2 text-center">
                 <Clock className="w-4 h-4 text-accent mx-auto mb-1" />
                 <div className="text-white font-semibold">{casino.withdrawalTime}</div>
-                <div className="text-neutral-400">Retiros</div>
+                <div className="text-slate-400">Retiros</div>
               </div>
-              <div className="bg-neutral-700 rounded-lg p-2 text-center">
+              <div className="bg-slate-800 rounded-lg p-2 text-center">
                 <CreditCard className="w-4 h-4 text-primary mx-auto mb-1" />
                 <div className="text-white font-semibold">{casino.paymentMethods.length}</div>
-                <div className="text-neutral-400">Métodos</div>
+                <div className="text-slate-400">Métodos</div>
               </div>
             </div>
 
@@ -541,7 +541,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
             <div className="flex gap-2">
               <a
                 href={`/${locale}/casinos/${casino.slug}`}
-                className="flex-1 bg-neutral-700 text-white text-center py-2 rounded-lg text-sm font-medium"
+                className="flex-1 bg-slate-700 text-white text-center py-2 rounded-lg text-sm font-medium"
               >
                 {locale === 'es' ? 'Ver Reseña' : 'View Review'}
               </a>
@@ -563,7 +563,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
         <motion.div
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
-          className="fixed bottom-4 left-4 right-4 lg:left-auto lg:right-4 lg:w-96 bg-neutral-900 border border-primary rounded-xl p-4 shadow-2xl z-50"
+          className="fixed bottom-4 left-4 right-4 lg:left-auto lg:right-4 lg:w-96 bg-slate-900 border border-primary rounded-xl p-4 shadow-2xl z-50"
         >
           <div className="flex items-center justify-between mb-3">
             <h3 className="font-semibold text-white">
@@ -571,7 +571,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
             </h3>
             <button
               onClick={() => setSelectedCasinos([])}
-              className="text-neutral-400 hover:text-white"
+              className="text-slate-400 hover:text-white"
             >
               <X className="w-5 h-5" />
             </button>

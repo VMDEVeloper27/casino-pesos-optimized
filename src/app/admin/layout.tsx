@@ -38,9 +38,9 @@ export default function AdminLayout({
   }
 
   return (
-    <html lang="es" className={inter.variable}>
+    <html lang="en" className={inter.variable}>
       <body className="bg-neutral-900">
-        <div className="min-h-screen bg-neutral-900 flex">
+        <div className="min-h-screen flex">
       {/* Sidebar */}
       <aside className="w-64 bg-neutral-800 border-r border-neutral-700">
         <div className="p-6">

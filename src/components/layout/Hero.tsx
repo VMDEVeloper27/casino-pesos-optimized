@@ -8,7 +8,7 @@ export function Hero() {
   // const t = useTranslations('homepage.hero');
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-neutral-900 via-purple-900/20 to-neutral-900">
+    <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       {/* Background Effects */}
       <div className="absolute inset-0">
         {/* Animated Grid */}
@@ -38,7 +38,7 @@ export function Hero() {
           </h1>
 
           {/* Subheadline */}
-          <p className="text-xl md:text-2xl text-neutral-300 mb-8 animate-fadeIn">
+          <p className="text-xl md:text-2xl text-slate-300 mb-8 animate-fadeIn">
             Encuentra casinos confiables con bonos exclusivos en MXN, ARS y COP.
             <br />
             Compara, elige y gana con total seguridad.
@@ -55,7 +55,7 @@ export function Hero() {
             </Link>
             <Link
               href="/es/bonos"
-              className="bg-neutral-800 hover:bg-neutral-700 border border-neutral-600 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 flex items-center justify-center gap-2"
+              className="bg-slate-700 hover:bg-slate-600 border border-slate-600 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 flex items-center justify-center gap-2"
             >
               🎁 Bonos Exclusivos
             </Link>
@@ -63,25 +63,25 @@ export function Hero() {
 
           {/* Trust Indicators */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 animate-fadeIn">
-            <div className="bg-neutral-800/50 backdrop-blur border border-neutral-700 rounded-xl p-4">
+            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-4">
               <Shield className="w-8 h-8 text-accent mx-auto mb-2" />
               <div className="text-lg font-bold text-white">100%</div>
-              <div className="text-sm text-neutral-400">Seguros y Licenciados</div>
+              <div className="text-sm text-slate-400">Seguros y Licenciados</div>
             </div>
-            <div className="bg-neutral-800/50 backdrop-blur border border-neutral-700 rounded-xl p-4">
+            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-4">
               <Zap className="w-8 h-8 text-primary mx-auto mb-2" />
               <div className="text-lg font-bold text-white">24-48h</div>
-              <div className="text-sm text-neutral-400">Retiros Rápidos</div>
+              <div className="text-sm text-slate-400">Retiros Rápidos</div>
             </div>
-            <div className="bg-neutral-800/50 backdrop-blur border border-neutral-700 rounded-xl p-4">
+            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-4">
               <Gift className="w-8 h-8 text-accent mx-auto mb-2" />
               <div className="text-lg font-bold text-white">$50,000</div>
-              <div className="text-sm text-neutral-400">en Bonos</div>
+              <div className="text-sm text-slate-400">en Bonos</div>
             </div>
-            <div className="bg-neutral-800/50 backdrop-blur border border-neutral-700 rounded-xl p-4">
+            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-4">
               <Trophy className="w-8 h-8 text-primary mx-auto mb-2" />
               <div className="text-lg font-bold text-white">50+</div>
-              <div className="text-sm text-neutral-400">Casinos Verificados</div>
+              <div className="text-sm text-slate-400">Casinos Verificados</div>
             </div>
           </div>
 
