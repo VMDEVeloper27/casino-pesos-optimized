@@ -124,27 +124,27 @@ export default function GuiasPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-gradient-to-r from-primary to-accent rounded-2xl p-8 mb-12 relative overflow-hidden"
+          className="bg-white border-2 border-gray-200 rounded-2xl p-8 mb-12 relative overflow-hidden shadow-lg"
         >
-          <div className="absolute top-0 right-0 text-8xl opacity-20">📚</div>
+          <div className="absolute top-0 right-0 text-8xl opacity-10 text-green-600">📚</div>
           <div className="relative z-10">
             <div className="flex items-center gap-2 mb-4">
-              <Award className="w-6 h-6 text-black fill-black" />
-              <span className="text-black font-bold text-sm">GUÍA DESTACADA</span>
+              <Award className="w-6 h-6 text-green-600 fill-green-600" />
+              <span className="text-green-700 font-bold text-sm">GUÍA DESTACADA</span>
             </div>
-            <h2 className="text-3xl font-bold text-black mb-2">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">
               Guía Definitiva para Principiantes 2024
             </h2>
-            <p className="text-black/80 mb-6 max-w-2xl">
+            <p className="text-gray-600 mb-6 max-w-2xl">
               Todo lo que necesitas saber antes de empezar a jugar en casinos online: 
               desde elegir el casino correcto hasta entender los bonos y jugar responsablemente.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="bg-black text-gray-900 px-6 py-3 rounded-xl font-bold hover:bg-black/80 transition-colors flex items-center gap-2">
+              <button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl flex items-center gap-2">
                 <BookOpen className="w-5 h-5" />
                 Leer Guía Completa
               </button>
-              <div className="flex items-center gap-4 text-black/70">
+              <div className="flex items-center gap-4 text-gray-600">
                 <span className="flex items-center gap-1">
                   <Clock className="w-4 h-4" />
                   25 min lectura
