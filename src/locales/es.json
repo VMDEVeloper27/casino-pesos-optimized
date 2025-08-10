@@ -1,0 +1,93 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "casinos": "Casinos",
+    "bonuses": "Bonos",
+    "guides": "Guías",
+    "compare": "Comparar",
+    "about": "Acerca de",
+    "contact": "Contacto"
+  },
+  "homepage": {
+    "hero": {
+      "title": "Los Mejores Casinos Online que Aceptan Pesos",
+      "subtitle": "Encuentra casinos confiables con bonos exclusivos en MXN, ARS y COP",
+      "cta_primary": "Ver Top 10 Casinos",
+      "cta_secondary": "Bonos Exclusivos",
+      "trust_secure": "100% Seguros y Licenciados",
+      "trust_fast": "Retiros Rápidos",
+      "trust_bonus": "en Bonos",
+      "trust_verified": "Casinos Verificados"
+    },
+    "featured": {
+      "title": "Casinos Destacados del Mes",
+      "subtitle": "Estos casinos han demostrado excelencia en seguridad, variedad de juegos y rapidez en pagos."
+    },
+    "comparison": {
+      "title": "Compara Todos los Casinos",
+      "filter": "Filtros",
+      "sort": "Ordenar",
+      "clear": "Limpiar"
+    },
+    "trust": {
+      "title": "¿Por Qué Confiar en CasinosPesos?",
+      "secure": "100% Seguros",
+      "secure_desc": "Solo casinos con licencias válidas",
+      "exclusive": "Bonos Exclusivos",
+      "exclusive_desc": "Ofertas negociadas para ti",
+      "fast": "Pagos Rápidos",
+      "fast_desc": "Retiros en 24-48 horas",
+      "expert": "Expertos Locales",
+      "expert_desc": "Conocemos tu mercado"
+    },
+    "cta": {
+      "title": "¿Listo para Empezar a Ganar?",
+      "subtitle": "Únete a miles de jugadores que ya disfrutan de los mejores casinos online en pesos.",
+      "explore": "Explorar Casinos",
+      "compare": "Comparar Bonos"
+    }
+  },
+  "casino": {
+    "rating": "Calificación",
+    "bonus": "Bono",
+    "games": "Juegos",
+    "payment": "Métodos de Pago",
+    "visit": "Visitar Casino",
+    "review": "Leer Reseña",
+    "play_now": "Jugar Ahora",
+    "since": "Desde",
+    "pros": "Ventajas",
+    "cons": "Desventajas",
+    "licensed": "Licenciado",
+    "secure": "SSL Seguro",
+    "support": "24/7 Soporte"
+  },
+  "bonus": {
+    "welcome": "Bono de Bienvenida",
+    "no_deposit": "Sin Depósito",
+    "free_spins": "Giros Gratis",
+    "wagering": "Requisitos de Apuesta",
+    "claim": "Reclamar Bono",
+    "up_to": "hasta",
+    "plus": "más",
+    "spins": "giros",
+    "min_deposit": "Depósito mínimo",
+    "rollover": "Rollover"
+  },
+  "footer": {
+    "description": "Tu guía confiable para ganar en pesos. Encuentra los mejores casinos online de América Latina.",
+    "casinos": "Casinos",
+    "all_casinos": "Todos los Casinos",
+    "new_casinos": "Nuevos Casinos",
+    "mobile_casinos": "Casinos Móviles",
+    "bonuses": "Bonos",
+    "no_deposit": "Sin Depósito",
+    "welcome": "Bienvenida",
+    "free_spins": "Giros Gratis",
+    "info": "Información",
+    "about": "Sobre Nosotros",
+    "responsible": "Juego Responsable",
+    "contact": "Contacto",
+    "copyright": "© 2024 CasinosPesos. Todos los derechos reservados. Juega responsablemente. 18+"
+  }
+}

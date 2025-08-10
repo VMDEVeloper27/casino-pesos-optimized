@@ -1,0 +1,645 @@
+import fs from 'fs/promises';
+import path from 'path';
+
+// Define the complete Casino type
+export interface Casino {
+  id: string;
+  name: string;
+  slug: string;
+  logo: string;
+  rating: number;
+  established: number;
+  affiliateLink: string;
+  features: string[];
+  bonus: {
+    type: string;
+    amount: number;
+    percentage: number;
+    freeSpins?: number;
+    minDeposit: number;
+    wageringRequirement: number;
+    code?: string;
+  };
+  games: {
+    total: number;
+    slots: number;
+    live: number;
+    table: number;
+  };
+  paymentMethods: string[];
+  withdrawalTime: string;
+  licenses: string[];
+  currencies: string[];
+  pros: string[];
+  cons: string[];
+  status?: string;
+  lastModified?: string;
+}
+
+// Complete casino data (all 13 casinos from the main site)
+const allCasinos: Casino[] = [
+  {
+    id: 'bet365',
+    name: 'Bet365 Casino',
+    slug: 'bet365',
+    logo: '/images/bet365-logo.png',
+    rating: 4.9,
+    established: 2001,
+    affiliateLink: 'https://bet365.com',
+    features: ['24/7 Support', 'Live Casino', 'Mobile App', 'Quick Payouts'],
+    bonus: {
+      type: 'welcome',
+      amount: 30000,
+      percentage: 100,
+      freeSpins: 200,
+      minDeposit: 200,
+      wageringRequirement: 15,
+      code: 'PESOS365'
+    },
+    games: {
+      total: 2000,
+      slots: 1500,
+      live: 200,
+      table: 300
+    },
+    paymentMethods: ['PayPal', 'OXXO', 'Visa', 'Mastercard', 'SPEI'],
+    withdrawalTime: '2-24 horas',
+    licenses: ['Gibraltar', 'Malta', 'UK'],
+    currencies: ['MXN', 'USD', 'EUR'],
+    pros: [
+      'Retiros ultra-rápidos',
+      'Excelente app móvil',
+      'Soporte 24/7 en español',
+      'Acepta OXXO y PayPal'
+    ],
+    cons: [
+      'Verificación obligatoria',
+      'Límites conservadores'
+    ],
+    status: 'active',
+    lastModified: new Date().toISOString()
+  },
+  {
+    id: 'codere',
+    name: 'Codere Casino',
+    slug: 'codere',
+    logo: '/images/codere-logo.png',
+    rating: 4.8,
+    established: 1980,
+    affiliateLink: 'https://codere.mx',
+    features: ['100% Legal México', 'OXXO', 'Salas Físicas', 'Deportes'],
+    bonus: {
+      type: 'welcome',
+      amount: 3000,
+      percentage: 200,
+      freeSpins: 200,
+      minDeposit: 100,
+      wageringRequirement: 30,
+      code: 'CODERE200'
+    },
+    games: {
+      total: 1500,
+      slots: 1200,
+      live: 100,
+      table: 200
+    },
+    paymentMethods: ['OXXO', 'SPEI', 'CoDi', 'Visa', 'Mastercard'],
+    withdrawalTime: '24-48 horas',
+    licenses: ['SEGOB México', 'España'],
+    currencies: ['MXN'],
+    pros: [
+      'Licencia SEGOB',
+      'Salas físicas en México',
+      'OXXO disponible',
+      'Marca confiable'
+    ],
+    cons: [
+      'Retiros pueden tardar',
+      'App móvil mejorable'
+    ],
+    status: 'active',
+    lastModified: new Date().toISOString()
+  },
+  {
+    id: 'caliente',
+    name: 'Caliente Casino',
+    slug: 'caliente',
+    logo: '/images/caliente-logo.png',
+    rating: 4.7,
+    established: 1916,
+    affiliateLink: 'https://caliente.mx',
+    features: ['100 años', 'Deportes', 'OXXO', 'PayPal'],
+    bonus: {
+      type: 'welcome',
+      amount: 10000,
+      percentage: 100,
+      freeSpins: 100,
+      minDeposit: 300,
+      wageringRequirement: 25,
+      code: 'CALIENTE100'
+    },
+    games: {
+      total: 1800,
+      slots: 1400,
+      live: 150,
+      table: 250
+    },
+    paymentMethods: ['PayPal', 'OXXO', 'SPEI', 'Visa', 'Mastercard', 'Astropay'],
+    withdrawalTime: '12-36 horas',
+    licenses: ['México', 'Curacao'],
+    currencies: ['MXN', 'USD'],
+    pros: [
+      'Marca histórica',
+      'Excelente sportsbook',
+      'Muchos métodos de pago',
+      'PayPal disponible'
+    ],
+    cons: [
+      'Interfaz anticuada',
+      'Soporte limitado'
+    ],
+    status: 'active',
+    lastModified: new Date().toISOString()
+  },
+  {
+    id: 'winpot',
+    name: 'WinPot Casino',
+    slug: 'winpot',
+    logo: '/images/winpot-logo.png',
+    rating: 4.6,
+    established: 2020,
+    affiliateLink: 'https://winpot.mx',
+    features: ['100% Mexicano', 'OXXO', 'Jackpots', 'Nuevo'],
+    bonus: {
+      type: 'welcome',
+      amount: 5000,
+      percentage: 150,
+      freeSpins: 150,
+      minDeposit: 150,
+      wageringRequirement: 20
+    },
+    games: {
+      total: 1200,
+      slots: 1000,
+      live: 80,
+      table: 120
+    },
+    paymentMethods: ['OXXO', 'SPEI', 'CoDi', 'Visa', 'Mastercard'],
+    withdrawalTime: '24-72 horas',
+    licenses: ['SEGOB México'],
+    currencies: ['MXN'],
+    pros: [
+      'Empresa mexicana',
+      'Licencia SEGOB',
+      'Buenos jackpots',
+      'Interfaz moderna'
+    ],
+    cons: [
+      'Poco tiempo en mercado',
+      'Catálogo limitado'
+    ],
+    status: 'active',
+    lastModified: new Date().toISOString()
+  },
+  {
+    id: 'betano',
+    name: 'Betano Casino',
+    slug: 'betano',
+    logo: '/images/betano-logo.png',
+    rating: 4.7,
+    established: 2018,
+    affiliateLink: 'https://betano.mx',
+    features: ['Aviator', 'Deportes', 'OXXO', 'Streaming'],
+    bonus: {
+      type: 'welcome',
+      amount: 20000,
+      percentage: 100,
+      freeSpins: 100,
+      minDeposit: 250,
+      wageringRequirement: 35
+    },
+    games: {
+      total: 2200,
+      slots: 1800,
+      live: 200,
+      table: 200
+    },
+    paymentMethods: ['OXXO', 'SPEI', 'PayPal', 'Visa', 'Mastercard', 'Neteller'],
+    withdrawalTime: '24-48 horas',
+    licenses: ['Malta', 'Reino Unido'],
+    currencies: ['MXN', 'USD', 'EUR'],
+    pros: [
+      'Gran variedad de juegos',
+      'Aviator disponible',
+      'Streaming deportivo',
+      'Múltiples promociones'
+    ],
+    cons: [
+      'Sin licencia mexicana',
+      'Verificación estricta'
+    ],
+    status: 'active',
+    lastModified: new Date().toISOString()
+  },
+  {
+    id: '1xbet',
+    name: '1xBet Casino',
+    slug: '1xbet',
+    logo: '/images/1xbet-logo.png',
+    rating: 4.5,
+    established: 2007,
+    affiliateLink: 'https://1xbet.mx',
+    features: ['Criptomonedas', '50+ Deportes', 'Casino Live', 'eSports'],
+    bonus: {
+      type: 'welcome',
+      amount: 76500,
+      percentage: 100,
+      freeSpins: 150,
+      minDeposit: 200,
+      wageringRequirement: 40
+    },
+    games: {
+      total: 5000,
+      slots: 4000,
+      live: 500,
+      table: 500
+    },
+    paymentMethods: ['Bitcoin', 'OXXO', 'SPEI', 'PayPal', 'Visa', 'Mastercard', 'Crypto'],
+    withdrawalTime: '15 min - 7 días',
+    licenses: ['Curacao'],
+    currencies: ['MXN', 'USD', 'EUR', 'BTC', 'ETH'],
+    pros: [
+      'Enorme catálogo',
+      'Acepta criptomonedas',
+      'Muchos deportes',
+      'Bonos generosos'
+    ],
+    cons: [
+      'Interfaz compleja',
+      'Soporte variable'
+    ],
+    status: 'active',
+    lastModified: new Date().toISOString()
+  },
+  {
+    id: 'parimatch',
+    name: 'Parimatch Casino',
+    slug: 'parimatch',
+    logo: '/images/parimatch-logo.png',
+    rating: 4.6,
+    established: 1994,
+    affiliateLink: 'https://parimatch.mx',
+    features: ['UFC Partner', 'Aviator', 'OXXO', 'Cash Out'],
+    bonus: {
+      type: 'welcome',
+      amount: 15000,
+      percentage: 150,
+      freeSpins: 100,
+      minDeposit: 200,
+      wageringRequirement: 30
+    },
+    games: {
+      total: 3000,
+      slots: 2500,
+      live: 250,
+      table: 250
+    },
+    paymentMethods: ['OXXO', 'SPEI', 'Visa', 'Mastercard', 'Astropay'],
+    withdrawalTime: '1-3 días',
+    licenses: ['Curacao', 'Cyprus'],
+    currencies: ['MXN', 'USD'],
+    pros: [
+      'Partner oficial UFC',
+      'Aviator original',
+      'Buenos bonos',
+      'App móvil excelente'
+    ],
+    cons: [
+      'Retiros pueden demorar',
+      'Verificación estricta'
+    ],
+    status: 'active',
+    lastModified: new Date().toISOString()
+  },
+  {
+    id: 'novibet',
+    name: 'Novibet Casino',
+    slug: 'novibet',
+    logo: '/images/novibet-logo.png',
+    rating: 4.7,
+    established: 2010,
+    affiliateLink: 'https://novibet.mx',
+    features: ['Super Cuotas', 'OXXO', 'Live Casino', 'Móvil'],
+    bonus: {
+      type: 'welcome',
+      amount: 8000,
+      percentage: 100,
+      freeSpins: 50,
+      minDeposit: 200,
+      wageringRequirement: 25
+    },
+    games: {
+      total: 2500,
+      slots: 2000,
+      live: 200,
+      table: 300
+    },
+    paymentMethods: ['OXXO', 'SPEI', 'PayPal', 'Visa', 'Mastercard', 'Skrill'],
+    withdrawalTime: '24-48 horas',
+    licenses: ['Malta', 'UK', 'Grecia'],
+    currencies: ['MXN', 'USD', 'EUR'],
+    pros: [
+      'Licencias europeas',
+      'Retiros rápidos',
+      'Interfaz limpia',
+      'Buenos límites'
+    ],
+    cons: [
+      'Catálogo moderado',
+      'Pocos bonos recurrentes'
+    ],
+    status: 'active',
+    lastModified: new Date().toISOString()
+  },
+  {
+    id: 'megapari',
+    name: 'Megapari Casino',
+    slug: 'megapari',
+    logo: '/images/megapari-logo.png',
+    rating: 4.4,
+    established: 2019,
+    affiliateLink: 'https://megapari.mx',
+    features: ['100+ Proveedores', 'Crypto', 'OXXO', 'TV Games'],
+    bonus: {
+      type: 'welcome',
+      amount: 50000,
+      percentage: 100,
+      freeSpins: 30,
+      minDeposit: 200,
+      wageringRequirement: 35
+    },
+    games: {
+      total: 8000,
+      slots: 7000,
+      live: 500,
+      table: 500
+    },
+    paymentMethods: ['Bitcoin', 'OXXO', 'SPEI', 'Visa', 'Mastercard', 'Crypto'],
+    withdrawalTime: '15 min - 5 días',
+    licenses: ['Curacao'],
+    currencies: ['MXN', 'USD', 'EUR', 'BTC', 'ETH', 'USDT'],
+    pros: [
+      'Catálogo gigante',
+      'Muchas criptos',
+      'TV Games únicos',
+      'Bonos variados'
+    ],
+    cons: [
+      'Interfaz saturada',
+      'Sin licencia local'
+    ],
+    status: 'active',
+    lastModified: new Date().toISOString()
+  },
+  {
+    id: 'leon',
+    name: 'Leon Casino',
+    slug: 'leon',
+    logo: '/images/leon-logo.png',
+    rating: 4.5,
+    established: 2007,
+    affiliateLink: 'https://leon.mx',
+    features: ['Ruleta Mexicana', 'OXXO', 'Cashback', 'VIP'],
+    bonus: {
+      type: 'welcome',
+      amount: 25000,
+      percentage: 100,
+      freeSpins: 100,
+      minDeposit: 300,
+      wageringRequirement: 30
+    },
+    games: {
+      total: 3500,
+      slots: 3000,
+      live: 200,
+      table: 300
+    },
+    paymentMethods: ['OXXO', 'SPEI', 'Visa', 'Mastercard', 'Muchbetter'],
+    withdrawalTime: '24-72 horas',
+    licenses: ['Curacao'],
+    currencies: ['MXN', 'USD'],
+    pros: [
+      'Ruleta mexicana',
+      'Programa VIP bueno',
+      'Cashback semanal',
+      'Muchas promociones'
+    ],
+    cons: [
+      'Soporte lento',
+      'Verificación tardada'
+    ],
+    status: 'active',
+    lastModified: new Date().toISOString()
+  },
+  {
+    id: 'melbet',
+    name: 'Melbet Casino',
+    slug: 'melbet',
+    logo: '/images/melbet-logo.png',
+    rating: 4.3,
+    established: 2012,
+    affiliateLink: 'https://melbet.mx',
+    features: ['TV Bet', 'eSports', 'Crypto', 'Multi-Live'],
+    bonus: {
+      type: 'welcome',
+      amount: 60000,
+      percentage: 100,
+      freeSpins: 290,
+      minDeposit: 200,
+      wageringRequirement: 40
+    },
+    games: {
+      total: 6000,
+      slots: 5000,
+      live: 600,
+      table: 400
+    },
+    paymentMethods: ['Bitcoin', 'OXXO', 'SPEI', 'PayPal', 'Visa', 'Mastercard'],
+    withdrawalTime: '15 min - 7 días',
+    licenses: ['Curacao'],
+    currencies: ['MXN', 'USD', 'EUR', 'BTC', 'ETH', 'USDT'],
+    pros: [
+      'Bono enorme',
+      'Muchos giros gratis',
+      'eSports completo',
+      'Multi-Live casino'
+    ],
+    cons: [
+      'Requisitos altos',
+      'Interfaz confusa'
+    ],
+    status: 'active',
+    lastModified: new Date().toISOString()
+  },
+  {
+    id: 'vulkanbet',
+    name: 'Vulkanbet Casino',
+    slug: 'vulkanbet',
+    logo: '/images/vulkanbet-logo.png',
+    rating: 4.4,
+    established: 2016,
+    affiliateLink: 'https://vulkanbet.mx',
+    features: ['Torneos', 'Drops & Wins', 'OXXO', 'Cashback'],
+    bonus: {
+      type: 'welcome',
+      amount: 15000,
+      percentage: 200,
+      freeSpins: 125,
+      minDeposit: 250,
+      wageringRequirement: 35
+    },
+    games: {
+      total: 4000,
+      slots: 3500,
+      live: 200,
+      table: 300
+    },
+    paymentMethods: ['OXXO', 'SPEI', 'Visa', 'Mastercard', 'Neosurf'],
+    withdrawalTime: '24-48 horas',
+    licenses: ['Curacao'],
+    currencies: ['MXN', 'USD', 'EUR'],
+    pros: [
+      'Torneos semanales',
+      'Drops & Wins',
+      'Cashback 12%',
+      'Buena app móvil'
+    ],
+    cons: [
+      'Sin PayPal',
+      'Catálogo estándar'
+    ],
+    status: 'active',
+    lastModified: new Date().toISOString()
+  },
+  {
+    id: 'pin-up',
+    name: 'Pin-Up Casino',
+    slug: 'pin-up',
+    logo: '/images/pinup-logo.png',
+    rating: 4.5,
+    established: 2016,
+    affiliateLink: 'https://pin-up.mx',
+    features: ['Aviator', 'Pin Coins', 'OXXO', 'Móvil'],
+    bonus: {
+      type: 'welcome',
+      amount: 25000,
+      percentage: 120,
+      freeSpins: 250,
+      minDeposit: 200,
+      wageringRequirement: 50
+    },
+    games: {
+      total: 5000,
+      slots: 4500,
+      live: 250,
+      table: 250
+    },
+    paymentMethods: ['OXXO', 'SPEI', 'Visa', 'Mastercard', 'AstroPay'],
+    withdrawalTime: '1-5 días',
+    licenses: ['Curacao'],
+    currencies: ['MXN', 'USD'],
+    pros: [
+      'Aviator original',
+      'Pin Coins rewards',
+      'Muchos giros gratis',
+      'Diseño único'
+    ],
+    cons: [
+      'Requisitos muy altos',
+      'Retiros lentos'
+    ],
+    status: 'active',
+    lastModified: new Date().toISOString()
+  }
+];
+
+// Database file path
+const DB_FILE = path.join(process.cwd(), 'data', 'casinos.json');
+
+// Get all casinos
+export async function getAllCasinos(): Promise<Casino[]> {
+  try {
+    // Try to read from file first
+    const data = await fs.readFile(DB_FILE, 'utf-8');
+    return JSON.parse(data);
+  } catch (error) {
+    // If file doesn't exist, save the complete data and return it
+    await saveCasinos(allCasinos);
+    return allCasinos;
+  }
+}
+
+// Save casinos to file
+export async function saveCasinos(casinos: Casino[]): Promise<void> {
+  const dataDir = path.dirname(DB_FILE);
+  await fs.mkdir(dataDir, { recursive: true });
+  await fs.writeFile(DB_FILE, JSON.stringify(casinos, null, 2));
+}
+
+// Get casino by ID
+export async function getCasinoById(id: string): Promise<Casino | undefined> {
+  const casinos = await getAllCasinos();
+  return casinos.find(c => c.id === id);
+}
+
+// Get casino by slug
+export async function getCasinoBySlug(slug: string): Promise<Casino | undefined> {
+  const casinos = await getAllCasinos();
+  return casinos.find(c => c.slug === slug);
+}
+
+// Update casino
+export async function updateCasino(id: string, updates: Partial<Casino>): Promise<Casino | null> {
+  const casinos = await getAllCasinos();
+  const index = casinos.findIndex(c => c.id === id);
+  
+  if (index === -1) return null;
+  
+  casinos[index] = {
+    ...casinos[index],
+    ...updates,
+    lastModified: new Date().toISOString()
+  };
+  
+  await saveCasinos(casinos);
+  return casinos[index];
+}
+
+// Add new casino
+export async function addCasino(casino: Casino): Promise<Casino> {
+  const casinos = await getAllCasinos();
+  const newCasino = {
+    ...casino,
+    lastModified: new Date().toISOString()
+  };
+  casinos.push(newCasino);
+  await saveCasinos(casinos);
+  return newCasino;
+}
+
+// Delete casino
+export async function deleteCasino(id: string): Promise<boolean> {
+  const casinos = await getAllCasinos();
+  const filtered = casinos.filter(c => c.id !== id);
+  
+  if (filtered.length === casinos.length) return false;
+  
+  await saveCasinos(filtered);
+  return true;
+}
+
+// Sync database with default data (run this to ensure all 13 casinos are saved)
+export async function syncDatabase(): Promise<void> {
+  await saveCasinos(allCasinos);
+  console.log(`Database synced with ${allCasinos.length} casinos`);
+}

@@ -1,0 +1,93 @@
+{
+  "navigation": {
+    "home": "Home",
+    "casinos": "Casinos",
+    "bonuses": "Bonuses",
+    "guides": "Guides",
+    "compare": "Compare",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "homepage": {
+    "hero": {
+      "title": "Best Online Casinos That Accept Pesos",
+      "subtitle": "Find reliable casinos with exclusive bonuses in MXN, ARS and COP",
+      "cta_primary": "View Top 10 Casinos",
+      "cta_secondary": "Exclusive Bonuses",
+      "trust_secure": "100% Safe & Licensed",
+      "trust_fast": "Fast Withdrawals",
+      "trust_bonus": "in Bonuses",
+      "trust_verified": "Verified Casinos"
+    },
+    "featured": {
+      "title": "Featured Casinos of the Month",
+      "subtitle": "These casinos have demonstrated excellence in security, game variety, and fast payouts."
+    },
+    "comparison": {
+      "title": "Compare All Casinos",
+      "filter": "Filters",
+      "sort": "Sort",
+      "clear": "Clear"
+    },
+    "trust": {
+      "title": "Why Trust CasinosPesos?",
+      "secure": "100% Secure",
+      "secure_desc": "Only licensed casinos",
+      "exclusive": "Exclusive Bonuses",
+      "exclusive_desc": "Deals negotiated for you",
+      "fast": "Fast Payments",
+      "fast_desc": "Withdrawals in 24-48 hours",
+      "expert": "Local Experts",
+      "expert_desc": "We know your market"
+    },
+    "cta": {
+      "title": "Ready to Start Winning?",
+      "subtitle": "Join thousands of players already enjoying the best online casinos with pesos.",
+      "explore": "Explore Casinos",
+      "compare": "Compare Bonuses"
+    }
+  },
+  "casino": {
+    "rating": "Rating",
+    "bonus": "Bonus",
+    "games": "Games",
+    "payment": "Payment Methods",
+    "visit": "Visit Casino",
+    "review": "Read Review",
+    "play_now": "Play Now",
+    "since": "Since",
+    "pros": "Pros",
+    "cons": "Cons",
+    "licensed": "Licensed",
+    "secure": "SSL Secure",
+    "support": "24/7 Support"
+  },
+  "bonus": {
+    "welcome": "Welcome Bonus",
+    "no_deposit": "No Deposit",
+    "free_spins": "Free Spins",
+    "wagering": "Wagering Requirements",
+    "claim": "Claim Bonus",
+    "up_to": "up to",
+    "plus": "plus",
+    "spins": "spins",
+    "min_deposit": "Min deposit",
+    "rollover": "Rollover"
+  },
+  "footer": {
+    "description": "Your trusted guide to winning with pesos. Find the best online casinos in Latin America.",
+    "casinos": "Casinos",
+    "all_casinos": "All Casinos",
+    "new_casinos": "New Casinos",
+    "mobile_casinos": "Mobile Casinos",
+    "bonuses": "Bonuses",
+    "no_deposit": "No Deposit",
+    "welcome": "Welcome",
+    "free_spins": "Free Spins",
+    "info": "Information",
+    "about": "About Us",
+    "responsible": "Responsible Gaming",
+    "contact": "Contact",
+    "copyright": "© 2024 CasinosPesos. All rights reserved. Play responsibly. 18+"
+  }
+}
