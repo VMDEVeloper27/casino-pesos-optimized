@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { ProfessionalHeader } from '@/components/layout/ProfessionalHeader';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { CountryProvider } from '@/contexts/CountryContext';
 import { FacebookPixel, GoogleAnalytics, Hotjar } from '@/components/Analytics';
 import '@/styles/globals.css';
@@ -47,7 +48,37 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={`${inter.variable} ${poppins.variable}`}>
-      <body className="bg-slate-800 text-white font-sans antialiased">
+      <head>
+        {/* Resource Hints for Performance */}
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="preconnect" href="https://connect.facebook.net" />
+        
+        {/* Preload Critical Resources */}
+        <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        
+        {/* SEO Meta Tags */}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="bingbot" content="index, follow" />
+        <meta name="author" content="CasinosPesos" />
+        <meta name="publisher" content="CasinosPesos" />
+        <meta name="copyright" content="© 2024 CasinosPesos. Todos los derechos reservados." />
+        <meta name="rating" content="adult" />
+        <meta name="distribution" content="global" />
+        <meta name="language" content={locale === 'es' ? 'Spanish' : 'English'} />
+        <meta name="geo.region" content="MX" />
+        <meta name="geo.placename" content="Mexico" />
+        <meta name="twitter:site" content="@casinospesos" />
+        <meta name="twitter:creator" content="@casinospesos" />
+        <link rel="alternate" hrefLang="es-MX" href="https://casinospesos.com/es" />
+        <link rel="alternate" hrefLang="en-US" href="https://casinospesos.com/en" />
+        <link rel="alternate" hrefLang="x-default" href="https://casinospesos.com/es" />
+      </head>
+      <body className="bg-background text-foreground font-sans antialiased">
         {/* Analytics */}
         {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
           <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
@@ -66,6 +97,9 @@ export default async function LocaleLayout({
           <NextIntlClientProvider locale={locale} messages={messages}>
             {/* Professional Header - Matching Your Reference Design */}
             <ProfessionalHeader locale={locale} />
+            
+            {/* Breadcrumbs */}
+            <Breadcrumbs />
 
             {/* Main Content */}
             <div className="min-h-screen">
@@ -73,43 +107,108 @@ export default async function LocaleLayout({
             </div>
 
             {/* Footer */}
-            <footer className="bg-slate-900 border-t border-slate-700 mt-16">
-              <div className="container mx-auto px-4 py-12">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                  <div>
-                    <h3 className="font-semibold text-white mb-4">CasinosPesos</h3>
-                    <p className="text-sm text-slate-400">
+            <footer className="bg-slate-900 border-t border-slate-700 mt-8 sm:mt-12 md:mt-16">
+              <div className="container mx-auto px-4 py-8 sm:py-10 md:py-12">
+                {/* Mobile-first responsive grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                  {/* Brand Section - Full width on mobile */}
+                  <div className="col-span-1 sm:col-span-2 lg:col-span-1 text-center sm:text-left">
+                    <h3 className="font-semibold text-white mb-3 text-lg">CasinosPesos</h3>
+                    <p className="text-sm text-slate-400 max-w-md mx-auto sm:mx-0">
                       Tu guía confiable para ganar en pesos. Encuentra los mejores casinos online de América Latina.
                     </p>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-white mb-4">Casinos</h4>
+                  
+                  {/* Casinos Section */}
+                  <div className="text-center sm:text-left">
+                    <h4 className="font-semibold text-white mb-3 text-base">Casinos</h4>
                     <ul className="space-y-2 text-sm">
-                      <li><a href={`/${locale}/casinos`} className="text-slate-400 hover:text-white">Todos los Casinos</a></li>
-                      <li><a href={`/${locale}/casinos/nuevos`} className="text-slate-400 hover:text-white">Nuevos Casinos</a></li>
-                      <li><a href={`/${locale}/casinos/movil`} className="text-slate-400 hover:text-white">Casinos Móviles</a></li>
+                      <li>
+                        <a href={`/${locale}/casinos`} 
+                           className="text-slate-400 hover:text-white transition-colors inline-block py-1">
+                          Todos los Casinos
+                        </a>
+                      </li>
+                      <li>
+                        <a href={`/${locale}/casinos/nuevos`} 
+                           className="text-slate-400 hover:text-white transition-colors inline-block py-1">
+                          Nuevos Casinos
+                        </a>
+                      </li>
+                      <li>
+                        <a href={`/${locale}/casinos/movil`} 
+                           className="text-slate-400 hover:text-white transition-colors inline-block py-1">
+                          Casinos Móviles
+                        </a>
+                      </li>
                     </ul>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-white mb-4">Bonos</h4>
+                  
+                  {/* Bonos Section */}
+                  <div className="text-center sm:text-left">
+                    <h4 className="font-semibold text-white mb-3 text-base">Bonos</h4>
                     <ul className="space-y-2 text-sm">
-                      <li><a href={`/${locale}/bonos/sin-deposito`} className="text-slate-400 hover:text-white">Sin Depósito</a></li>
-                      <li><a href={`/${locale}/bonos/bienvenida`} className="text-slate-400 hover:text-white">Bienvenida</a></li>
-                      <li><a href={`/${locale}/bonos/giros-gratis`} className="text-slate-400 hover:text-white">Giros Gratis</a></li>
+                      <li>
+                        <a href={`/${locale}/bonos/sin-deposito`} 
+                           className="text-slate-400 hover:text-white transition-colors inline-block py-1">
+                          Sin Depósito
+                        </a>
+                      </li>
+                      <li>
+                        <a href={`/${locale}/bonos/bienvenida`} 
+                           className="text-slate-400 hover:text-white transition-colors inline-block py-1">
+                          Bienvenida
+                        </a>
+                      </li>
+                      <li>
+                        <a href={`/${locale}/bonos/giros-gratis`} 
+                           className="text-slate-400 hover:text-white transition-colors inline-block py-1">
+                          Giros Gratis
+                        </a>
+                      </li>
                     </ul>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-white mb-4">Información</h4>
+                  
+                  {/* Information Section */}
+                  <div className="text-center sm:text-left">
+                    <h4 className="font-semibold text-white mb-3 text-base">Información</h4>
                     <ul className="space-y-2 text-sm">
-                      <li><a href={`/${locale}/blog`} className="text-slate-400 hover:text-white">Blog</a></li>
-                      <li><a href={`/${locale}/sobre-nosotros`} className="text-slate-400 hover:text-white">Sobre Nosotros</a></li>
-                      <li><a href={`/${locale}/juego-responsable`} className="text-slate-400 hover:text-white">Juego Responsable</a></li>
-                      <li><a href={`/${locale}/contacto`} className="text-slate-400 hover:text-white">Contacto</a></li>
+                      <li>
+                        <a href={`/${locale}/blog`} 
+                           className="text-slate-400 hover:text-white transition-colors inline-block py-1">
+                          Blog
+                        </a>
+                      </li>
+                      <li>
+                        <a href={`/${locale}/sobre-nosotros`} 
+                           className="text-slate-400 hover:text-white transition-colors inline-block py-1">
+                          Sobre Nosotros
+                        </a>
+                      </li>
+                      <li>
+                        <a href={`/${locale}/juego-responsable`} 
+                           className="text-slate-400 hover:text-white transition-colors inline-block py-1">
+                          Juego Responsable
+                        </a>
+                      </li>
+                      <li>
+                        <a href={`/${locale}/contacto`} 
+                           className="text-slate-400 hover:text-white transition-colors inline-block py-1">
+                          Contacto
+                        </a>
+                      </li>
                     </ul>
                   </div>
                 </div>
-                <div className="border-t border-slate-700 mt-8 pt-8 text-center text-sm text-slate-500">
-                  <p>© 2024 CasinosPesos. Todos los derechos reservados. Juega responsablemente. 18+</p>
+                
+                {/* Copyright Section - Always centered */}
+                <div className="border-t border-slate-700 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center">
+                  <p className="text-xs sm:text-sm text-slate-500 px-4">
+                    © 2024 CasinosPesos. Todos los derechos reservados.
+                  </p>
+                  <p className="text-xs sm:text-sm text-slate-500 mt-2">
+                    Juega responsablemente. 18+
+                  </p>
                 </div>
               </div>
             </footer>

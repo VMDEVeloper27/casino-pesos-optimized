@@ -7,7 +7,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Menu, 
   X, 
-  ChevronDown, 
+  ChevronDown,
+  ChevronRight,
+  Check,
   Globe,
   Search,
   Target,
@@ -24,36 +26,21 @@ interface ProfessionalHeaderProps {
 
 export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const pathname = usePathname();
-  const { selectedCountry, setSelectedCountry, isCountrySelectorOpen, setIsCountrySelectorOpen } = useCountry();
+  const { selectedCountry } = useCountry();
 
-  // Professional navigation items matching the reference design
+  // Simplified navigation items without dropdowns
   const navItems = [
     { 
       label: locale === 'es' ? 'Casinos' : 'Casinos', 
       href: `/${locale}/casinos`,
-      icon: Target,
-      hasDropdown: true,
-      dropdownItems: [
-        { label: locale === 'es' ? 'Todos los Casinos' : 'All Casinos', href: `/${locale}/casinos` },
-        { label: locale === 'es' ? 'Nuevos Casinos' : 'New Casinos', href: `/${locale}/casinos/nuevos` },
-        { label: locale === 'es' ? 'Casinos en Vivo' : 'Live Casinos', href: `/${locale}/casinos/en-vivo` },
-        { label: locale === 'es' ? 'Casinos Móviles' : 'Mobile Casinos', href: `/${locale}/casinos/movil` },
-      ]
+      icon: Target
     },
     { 
       label: locale === 'es' ? 'Bonos' : 'Bonuses', 
       href: `/${locale}/bonos`,
       icon: Gift,
-      badge: 'HOT', // Only this section has the HOT badge
-      hasDropdown: true,
-      dropdownItems: [
-        { label: locale === 'es' ? 'Sin Depósito' : 'No Deposit', href: `/${locale}/bonos/sin-deposito` },
-        { label: locale === 'es' ? 'Bienvenida' : 'Welcome', href: `/${locale}/bonos/bienvenida` },
-        { label: locale === 'es' ? 'Giros Gratis' : 'Free Spins', href: `/${locale}/bonos/giros-gratis` },
-        { label: locale === 'es' ? 'Cashback' : 'Cashback', href: `/${locale}/bonos/cashback` },
-      ]
+      badge: 'HOT'
     },
     { 
       label: locale === 'es' ? 'Guías' : 'Guides', 
@@ -71,12 +58,10 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
     },
   ];
 
-  // Close menus on route change
+  // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
-    setActiveDropdown(null);
-    setIsCountrySelectorOpen(false);
-  }, [pathname, setIsCountrySelectorOpen]);
+  }, [pathname]);
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -90,21 +75,10 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
     };
   }, [isMobileMenuOpen]);
 
-  const handleCountrySelect = (country: typeof countries[0]) => {
-    setSelectedCountry(country);
-    setIsCountrySelectorOpen(false);
-    
-    // Redirect to appropriate locale if different
-    if (country.locale !== locale) {
-      const newPath = pathname.replace(`/${locale}`, `/${country.locale}`);
-      window.location.href = newPath;
-    }
-  };
-
   return (
     <>
-      {/* Professional Dark Header */}
-      <header className="bg-slate-900 sticky top-0 z-50">
+      {/* Professional Light Header */}
+      <header className="bg-white border-b border-border sticky top-0 z-50 shadow-soft">
         {/* Desktop Header */}
         <div className="hidden lg:block">
           <div className="container mx-auto px-6">
@@ -112,138 +86,58 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
               {/* Professional Logo - Orange Circle with C */}
               <Link href={`/${locale}`} className="flex items-center gap-3 group">
                 <div className="relative">
-                  {/* Orange circle logo matching reference */}
-                  <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center group-hover:from-orange-400 group-hover:to-orange-500 transition-all shadow-lg">
+                  {/* Professional blue logo */}
+                  <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center group-hover:from-primary-400 group-hover:to-primary-500 transition-all shadow-medium">
                     <span className="text-white font-bold text-xl">C</span>
                   </div>
                 </div>
                 <div>
-                  <span className="font-bold text-xl text-white group-hover:text-orange-400 transition-colors">
+                  <span className="font-bold text-xl text-primary-800 group-hover:text-primary-600 transition-colors">
                     CasinosPesos
                   </span>
-                  <div className="text-xs text-gray-400 -mt-1">
+                  <div className="text-xs text-gray-500 -mt-1">
                     {locale === 'es' ? 'Análisis Profesional' : 'Professional Analysis'}
                   </div>
                 </div>
               </Link>
 
-              {/* Clean Navigation with Icons */}
+              {/* Clean Navigation without Dropdowns */}
               <nav className="flex items-center gap-6">
                 {navItems.map((item) => (
-                  <div key={item.label} className="relative">
-                    {item.hasDropdown ? (
-                      <>
-                        <button
-                          onMouseEnter={() => setActiveDropdown(item.label)}
-                          onMouseLeave={() => setActiveDropdown(null)}
-                          className={cn(
-                            "flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-white hover:text-orange-400 group",
-                            pathname.startsWith(item.href) && "text-orange-400"
-                          )}
-                        >
-                          {item.icon && <item.icon className="w-4 h-4" />}
-                          <span>{item.label}</span>
-                          {item.badge && (
-                            <span className="bg-orange-500 text-white text-xs px-2 py-0.5 rounded-full font-bold ml-1">
-                              {item.badge}
-                            </span>
-                          )}
-                          <ChevronDown className="w-4 h-4 opacity-60 group-hover:opacity-100 transition-all" />
-                        </button>
-
-                        {/* Professional Dropdown */}
-                        <AnimatePresence>
-                          {activeDropdown === item.label && (
-                            <motion.div
-                              initial={{ opacity: 0, y: 10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, y: 10 }}
-                              transition={{ duration: 0.15 }}
-                              onMouseEnter={() => setActiveDropdown(item.label)}
-                              onMouseLeave={() => setActiveDropdown(null)}
-                              className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-200 p-2 z-50"
-                            >
-                              {item.dropdownItems?.map((dropdownItem) => (
-                                <Link
-                                  key={dropdownItem.href}
-                                  href={dropdownItem.href}
-                                  className="flex items-center p-3 rounded-lg text-gray-700 hover:text-orange-600 hover:bg-orange-50 transition-all font-medium"
-                                >
-                                  <span>{dropdownItem.label}</span>
-                                </Link>
-                              ))}
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </>
-                    ) : (
-                      <Link
-                        href={item.href}
-                        className={cn(
-                          "flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-white hover:text-orange-400",
-                          pathname.startsWith(item.href) && "text-orange-400"
-                        )}
-                      >
-                        {item.icon && <item.icon className="w-4 h-4" />}
-                        <span>{item.label}</span>
-                      </Link>
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={cn(
+                      "flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-gray-700 hover:text-primary-600 hover:bg-primary-50",
+                      pathname.startsWith(item.href) && "text-primary-600 bg-primary-50"
                     )}
-                  </div>
+                  >
+                    {item.icon && <item.icon className="w-4 h-4" />}
+                    <span>{item.label}</span>
+                    {item.badge && (
+                      <span className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs px-2 py-0.5 rounded-full font-bold ml-1 animate-pulse-slow">
+                        {item.badge}
+                      </span>
+                    )}
+                  </Link>
                 ))}
               </nav>
 
               {/* Right Side Actions */}
               <div className="flex items-center gap-4">
-                {/* Mexico Country Selector matching reference */}
-                <div className="relative">
-                  <button
-                    onClick={() => setIsCountrySelectorOpen(!isCountrySelectorOpen)}
-                    className="flex items-center gap-2 px-3 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white transition-all"
-                  >
-                    <Globe className="w-4 h-4" />
-                    <span className="text-sm">{selectedCountry.flag}</span>
-                    <span className="text-sm font-medium">
-                      {selectedCountry.code === 'MX' ? 'México' : selectedCountry.name}
-                    </span>
-                    <ChevronDown className={cn("w-4 h-4 transition-transform", isCountrySelectorOpen && "rotate-180")} />
-                  </button>
-
-                  <AnimatePresence>
-                    {isCountrySelectorOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.15 }}
-                        className="absolute top-full right-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-200 p-2 z-50"
-                      >
-                        {countries.map((country) => (
-                          <button
-                            key={country.code}
-                            onClick={() => handleCountrySelect(country)}
-                            className={cn(
-                              "w-full flex items-center gap-3 p-3 rounded-lg text-left transition-all",
-                              selectedCountry.code === country.code
-                                ? "bg-orange-50 text-orange-600"
-                                : "text-gray-700 hover:text-orange-600 hover:bg-orange-50"
-                            )}
-                          >
-                            <span className="text-lg">{country.flag}</span>
-                            <div>
-                              <div className="font-medium">{country.name}</div>
-                              <div className="text-xs text-gray-500">{country.currency}</div>
-                            </div>
-                          </button>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                {/* Simple Country Badge */}
+                <div className="flex items-center gap-2 px-3 py-2 bg-gray-100 rounded-lg text-gray-700 border border-gray-200">
+                  <Globe className="w-4 h-4 text-primary-500" />
+                  <span className="text-sm">{selectedCountry.flag}</span>
+                  <span className="text-sm font-medium">
+                    {selectedCountry.code === 'MX' ? 'México' : selectedCountry.name}
+                  </span>
                 </div>
 
                 {/* Orange CTA Button matching reference */}
                 <Link
                   href={`/${locale}/casinos`}
-                  className="px-6 py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-semibold rounded-lg transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+                  className="px-6 py-2.5 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold rounded-xl transition-all shadow-medium hover:shadow-large transform hover:scale-105"
                 >
                   {locale === 'es' ? 'Jugar Ahora' : 'Play Now'}
                 </Link>
@@ -254,15 +148,15 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
 
         {/* Mobile Header */}
         <div className="lg:hidden">
-          <div className="flex items-center justify-between p-4">
+          <div className="flex items-center justify-between p-3">
             {/* Mobile Logo */}
             <Link href={`/${locale}`} className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm">
                 <span className="text-white font-bold text-lg">C</span>
               </div>
-              <div>
-                <span className="font-bold text-lg text-white">CasinosPesos</span>
-                <div className="text-xs text-gray-400 -mt-1">
+              <div className="min-w-0">
+                <span className="font-bold text-base sm:text-lg text-primary-800 truncate block">CasinosPesos</span>
+                <div className="text-xs text-gray-500 -mt-1 hidden sm:block">
                   {locale === 'es' ? 'Análisis Profesional' : 'Professional Analysis'}
                 </div>
               </div>
@@ -271,7 +165,7 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-lg text-white"
+              className="w-10 h-10 flex items-center justify-center bg-gray-100 border border-gray-200 rounded-lg text-gray-700 hover:bg-gray-200 transition-colors"
             >
               <AnimatePresence mode="wait">
                 {isMobileMenuOpen ? (
@@ -322,15 +216,15 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="lg:hidden fixed top-0 right-0 bottom-0 w-80 bg-slate-900 z-50 overflow-y-auto shadow-xl"
+              className="lg:hidden fixed top-0 right-0 bottom-0 w-[min(80vw,320px)] bg-white z-50 overflow-y-auto shadow-2xl mobile-menu-panel border-l border-gray-200"
             >
               <div className="p-6">
                 {/* Close button */}
                 <div className="flex justify-between items-center mb-6">
-                  <span className="font-semibold text-white">Menu</span>
+                  <span className="font-semibold text-gray-900">Menu</span>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-lg text-white"
+                    className="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-lg text-gray-700 hover:bg-gray-200 transition-colors"
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -345,14 +239,14 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
                       className={cn(
                         "flex items-center gap-3 p-4 rounded-lg transition-all font-medium",
                         pathname.startsWith(item.href)
-                          ? "bg-orange-500/20 text-orange-400"
-                          : "text-gray-300 hover:text-orange-400 hover:bg-gray-800"
+                          ? "bg-primary-50 text-primary-600 border-l-4 border-primary-500"
+                          : "text-gray-700 hover:text-primary-600 hover:bg-gray-50"
                       )}
                     >
                       {item.icon && <item.icon className="w-5 h-5" />}
                       <span>{item.label}</span>
                       {item.badge && (
-                        <span className="bg-orange-500 text-white text-xs px-2 py-0.5 rounded-full font-bold ml-auto">
+                        <span className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs px-2 py-0.5 rounded-full font-bold ml-auto animate-pulse-slow">
                           {item.badge}
                         </span>
                       )}
@@ -360,31 +254,18 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
                   ))}
                 </nav>
 
-                {/* Country selector */}
-                <div className="mt-8 p-4 bg-gray-800 rounded-lg">
-                  <h3 className="text-white font-medium mb-3 flex items-center gap-2">
-                    <Globe className="w-5 h-5 text-orange-400" />
-                    {locale === 'es' ? 'País' : 'Country'}
+                {/* Current Country Display */}
+                <div className="mt-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <h3 className="text-gray-900 font-medium mb-3 flex items-center gap-2">
+                    <Globe className="w-5 h-5 text-primary-500" />
+                    {locale === 'es' ? 'Región' : 'Region'}
                   </h3>
-                  <div className="space-y-2">
-                    {countries.slice(0, 4).map((country) => (
-                      <button
-                        key={country.code}
-                        onClick={() => handleCountrySelect(country)}
-                        className={cn(
-                          "w-full flex items-center gap-3 p-3 rounded-lg text-left transition-all",
-                          selectedCountry.code === country.code
-                            ? "bg-orange-500/20 text-orange-400"
-                            : "text-gray-300 hover:text-orange-400 hover:bg-gray-700"
-                        )}
-                      >
-                        <span className="text-lg">{country.flag}</span>
-                        <div>
-                          <div className="font-medium text-sm">{country.name}</div>
-                          <div className="text-xs text-gray-500">{country.currency}</div>
-                        </div>
-                      </button>
-                    ))}
+                  <div className="flex items-center gap-3 p-3 bg-white rounded-lg border border-primary-200">
+                    <span className="text-2xl">{selectedCountry.flag}</span>
+                    <div>
+                      <div className="font-medium text-gray-900">{selectedCountry.name}</div>
+                      <div className="text-sm text-primary-600">{selectedCountry.currency}</div>
+                    </div>
                   </div>
                 </div>
 
@@ -392,7 +273,7 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
                 <div className="mt-6">
                   <Link
                     href={`/${locale}/casinos`}
-                    className="block w-full p-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white text-center font-semibold rounded-lg hover:from-orange-400 hover:to-orange-500 transition-all shadow-lg"
+                    className="block w-full p-4 bg-gradient-to-r from-green-500 to-green-600 text-white text-center font-semibold rounded-xl hover:from-green-600 hover:to-green-700 transition-all shadow-medium hover:shadow-large"
                   >
                     {locale === 'es' ? 'Ver Mejores Casinos' : 'View Best Casinos'}
                   </Link>
@@ -403,53 +284,6 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
         )}
       </AnimatePresence>
 
-      {/* Country Selector Bottom Sheet (Mobile) */}
-      <AnimatePresence>
-        {isCountrySelectorOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="lg:hidden fixed inset-0 bg-black/50 z-50"
-              onClick={() => setIsCountrySelectorOpen(false)}
-            />
-            <motion.div
-              initial={{ y: '100%' }}
-              animate={{ y: 0 }}
-              exit={{ y: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="lg:hidden fixed bottom-0 left-0 right-0 bg-slate-900 rounded-t-xl shadow-xl z-50 p-6"
-            >
-              <div className="w-12 h-1 bg-gray-600 rounded-full mx-auto mb-6" />
-              <h3 className="text-white font-semibold text-lg mb-4 flex items-center gap-2">
-                <Globe className="w-5 h-5 text-orange-400" />
-                {locale === 'es' ? 'Seleccionar País' : 'Select Country'}
-              </h3>
-              <div className="grid grid-cols-2 gap-2 max-h-64 overflow-y-auto">
-                {countries.map((country) => (
-                  <button
-                    key={country.code}
-                    onClick={() => handleCountrySelect(country)}
-                    className={cn(
-                      "flex items-center gap-3 p-3 rounded-lg text-left transition-all",
-                      selectedCountry.code === country.code
-                        ? "bg-orange-500/20 text-orange-400"
-                        : "text-gray-300 hover:text-orange-400 hover:bg-gray-800"
-                    )}
-                  >
-                    <span className="text-lg">{country.flag}</span>
-                    <div>
-                      <div className="font-medium text-sm">{country.name}</div>
-                      <div className="text-xs text-gray-500">{country.currency}</div>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </>
   );
 }

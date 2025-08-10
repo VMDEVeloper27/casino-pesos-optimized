@@ -51,11 +51,14 @@ export function CasinoLogo({ name, logo, size = 'md', className = '' }: CasinoLo
       <div className={`${sizeClasses[size]} ${className} relative overflow-hidden rounded-lg flex items-center justify-center bg-neutral-800`}>
         <Image
           src={logo}
-          alt={`${name} logo`}
+          alt={`${name} Casino Logo - Juega en ${name} online con pesos mexicanos, bonos exclusivos y retiros rápidos`}
+          title={`${name} - Casino online confiable en México`}
           width={imageSizes[size].width}
           height={imageSizes[size].height}
           className="object-contain"
-          priority
+          loading="lazy"
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwABmX/9k="
         />
       </div>
     );

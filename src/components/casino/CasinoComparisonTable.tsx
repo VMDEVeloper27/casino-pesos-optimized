@@ -189,7 +189,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
               transition={{ duration: 0.3 }}
               className="overflow-hidden"
             >
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 pt-4 border-t border-slate-700">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 sm:gap-4 pt-4 border-t border-slate-700">
                 {/* Rating Filter */}
                 <div>
                   <label className="text-xs text-slate-400 mb-1 block">
@@ -466,7 +466,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
       </div>
 
       {/* Mobile Card View */}
-      <div className="lg:hidden space-y-4">
+      <div className="lg:hidden space-y-3">
         {sortedCasinos.map((casino, index) => (
           <motion.div
             key={casino.id}
@@ -474,7 +474,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05 }}
             className={cn(
-              "bg-slate-900 rounded-xl p-4 border",
+              "bg-slate-900 rounded-xl p-3 sm:p-4 border",
               selectedCasinos.includes(casino.id) ? "border-primary" : "border-slate-700"
             )}
           >

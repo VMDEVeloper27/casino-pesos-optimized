@@ -56,7 +56,7 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
     <div
       className={cn(
         'relative overflow-hidden rounded-2xl border bg-gradient-to-br from-slate-900 to-slate-800',
-        'h-full flex flex-col min-h-[600px] animate-fadeIn',
+        'h-full flex flex-col min-h-[500px] sm:min-h-[600px] animate-fadeIn casino-card',
         featured ? 'border-primary/50 shadow-2xl' : 'border-slate-700 shadow-lg',
         'hover:shadow-xl transition-all duration-300'
       )}
@@ -73,7 +73,7 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
       {/* Top Accent Line */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary" />
 
-      <div className="p-6 flex flex-col h-full">
+      <div className="p-4 sm:p-6 flex flex-col h-full casino-card-content">
         {/* Header */}
         <div className="flex items-start justify-between mb-4">
           <CasinoLogo 
@@ -92,14 +92,14 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
         <h3 className="text-xl font-bold text-white mb-4">{casino.name}</h3>
 
         {/* Bonus Section */}
-        <div className="bg-gradient-to-r from-primary/20 to-accent/20 rounded-xl p-4 mb-4 border border-primary/30">
+        <div className="bg-gradient-to-r from-primary/20 to-accent/20 rounded-xl p-3 sm:p-4 mb-4 border border-primary/30">
           <div className="flex items-center gap-2 mb-2">
             <span className="text-primary text-lg">🎁</span>
             <span className="text-sm font-semibold text-primary">
               {locale === 'es' ? 'Bono de Bienvenida' : 'Welcome Bonus'}
             </span>
           </div>
-          <div className="text-2xl font-bold text-white mb-1">
+          <div className="text-xl sm:text-2xl font-bold text-white mb-1">
             {casino.bonus.percentage}% hasta ${casino.bonus.amount.toLocaleString()} MXN
           </div>
           <div className="h-6 flex items-center">
@@ -186,7 +186,7 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
 
         {/* Payment Methods */}
         <div className="mb-4">
-          <div className="h-10 flex items-center gap-2 overflow-x-auto pb-2">
+          <div className="h-10 flex items-center gap-2 overflow-x-auto pb-2 payment-methods-container">
             {casino.paymentMethods.slice(0, 4).map((method) => (
               <div
                 key={method}

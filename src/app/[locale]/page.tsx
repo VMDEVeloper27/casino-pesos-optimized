@@ -1,7 +1,10 @@
-import { Hero } from '@/components/layout/Hero';
+import { Hero } from '@/components/layout/HeroLight';
 import { CasinoCard } from '@/components/casino/CasinoCard';
+import { RelatedContent, casinoRelatedContent } from '@/components/ui/RelatedContent';
 import { FAQStructuredData, WebsiteStructuredData } from '@/components/StructuredData';
 import { getAllCasinos } from '@/lib/casino-database';
+import { ChevronRight, Gift } from 'lucide-react';
+import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -105,17 +108,17 @@ export default async function HomePage({ params }: HomePageProps) {
   const casinos = await getAllCasinos();
   
   return (
-    <main className="min-h-screen bg-slate-800">
+    <main className="min-h-screen bg-background">
       {/* Hero Section */}
       <Hero />
 
       {/* Featured Casinos */}
       <section className="container mx-auto px-4 py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Casinos Destacados del Mes
           </h2>
-          <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Estos casinos han demostrado excelencia en seguridad, variedad de juegos y rapidez en pagos.
           </p>
         </div>
@@ -152,44 +155,78 @@ export default async function HomePage({ params }: HomePageProps) {
             locale={locale}
           />
         </div>
+        
+        {/* Related Content Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+          <div className="lg:col-span-2">
+            <RelatedContent 
+              title={locale === 'es' ? 'Contenido Destacado' : 'Featured Content'}
+              items={casinoRelatedContent(locale)}
+              locale={locale}
+            />
+          </div>
+          <div>
+            <RelatedContent 
+              title={locale === 'es' ? 'Guías Populares' : 'Popular Guides'}
+              items={[
+                {
+                  title: locale === 'es' ? 'Cómo Elegir un Casino' : 'How to Choose a Casino',
+                  href: `/${locale}/guias/como-elegir-casino`,
+                  description: locale === 'es' ? 'Factores clave a considerar' : 'Key factors to consider'
+                },
+                {
+                  title: locale === 'es' ? 'Estrategias de Blackjack' : 'Blackjack Strategies',
+                  href: `/${locale}/guias/estrategias-blackjack`,
+                  description: locale === 'es' ? 'Mejora tus probabilidades' : 'Improve your odds'
+                },
+                {
+                  title: locale === 'es' ? 'Slots con Mejor RTP' : 'Best RTP Slots',
+                  href: `/${locale}/guias/mejores-rtp-slots`,
+                  description: locale === 'es' ? 'Máquinas con mayor retorno' : 'Highest return machines'
+                }
+              ]}
+              locale={locale}
+            />
+          </div>
+        </div>
       </section>
 
       {/* Trust Section */}
-      <section className="bg-slate-900 py-16">
+      <section className="bg-gray-50 border-y border-gray-200 py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
               ¿Por Qué Confiar en CasinosPesos?
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl">🔒</span>
               </div>
-              <h3 className="font-semibold text-white mb-2">100% Seguros</h3>
-              <p className="text-sm text-slate-400">Solo casinos con licencias válidas</p>
+              <h3 className="font-semibold text-gray-900 mb-2">100% Seguros</h3>
+              <p className="text-sm text-gray-600">Solo casinos con licencias válidas</p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl">💰</span>
               </div>
-              <h3 className="font-semibold text-white mb-2">Bonos Exclusivos</h3>
-              <p className="text-sm text-slate-400">Ofertas negociadas para ti</p>
+              <h3 className="font-semibold text-gray-900 mb-2">Bonos Exclusivos</h3>
+              <p className="text-sm text-gray-600">Ofertas negociadas para ti</p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl">⚡</span>
               </div>
-              <h3 className="font-semibold text-white mb-2">Pagos Rápidos</h3>
-              <p className="text-sm text-slate-400">Retiros en 24-48 horas</p>
+              <h3 className="font-semibold text-gray-900 mb-2">Pagos Rápidos</h3>
+              <p className="text-sm text-gray-600">Retiros en 24-48 horas</p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl">🎯</span>
               </div>
-              <h3 className="font-semibold text-white mb-2">Expertos Locales</h3>
-              <p className="text-sm text-slate-400">Conocemos tu mercado</p>
+              <h3 className="font-semibold text-gray-900 mb-2">Expertos Locales</h3>
+              <p className="text-sm text-gray-600">Conocemos tu mercado</p>
             </div>
           </div>
         </div>
@@ -198,42 +235,42 @@ export default async function HomePage({ params }: HomePageProps) {
       {/* FAQ Section for SEO */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
             Preguntas Frecuentes sobre Casinos Online en México
           </h2>
           <div className="max-w-4xl mx-auto">
-            <div className="bg-slate-900 rounded-xl p-6 mb-4">
-              <h3 className="text-xl font-semibold text-white mb-3">
+            <div className="bg-white border border-gray-200 rounded-xl p-6 mb-4 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
                 ¿Es legal jugar en casinos online desde México?
               </h3>
-              <p className="text-slate-300">
+              <p className="text-gray-600">
                 Sí, es completamente legal para mexicanos jugar en casinos online con licencia internacional. 
                 La legislación mexicana no prohíbe a los ciudadanos acceder a estos sitios.
               </p>
             </div>
-            <div className="bg-slate-900 rounded-xl p-6 mb-4">
-              <h3 className="text-xl font-semibold text-white mb-3">
+            <div className="bg-white border border-gray-200 rounded-xl p-6 mb-4 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
                 ¿Qué casinos aceptan depósitos con OXXO?
               </h3>
-              <p className="text-slate-300">
+              <p className="text-gray-600">
                 Los mejores casinos como Bet365, Codere y Strendus aceptan depósitos en OXXO. 
                 Puedes depositar efectivo en cualquiera de las +19,000 tiendas OXXO del país.
               </p>
             </div>
-            <div className="bg-slate-900 rounded-xl p-6 mb-4">
-              <h3 className="text-xl font-semibold text-white mb-3">
+            <div className="bg-white border border-gray-200 rounded-xl p-6 mb-4 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
                 ¿Cuánto tiempo tardan los retiros en pesos mexicanos?
               </h3>
-              <p className="text-slate-300">
+              <p className="text-gray-600">
                 Los retiros varían desde 2 horas (PayPal, Skrill) hasta 5 días (transferencia bancaria). 
                 Los casinos top procesan retiros en menos de 24 horas.
               </p>
             </div>
-            <div className="bg-slate-900 rounded-xl p-6 mb-4">
-              <h3 className="text-xl font-semibold text-white mb-3">
+            <div className="bg-white border border-gray-200 rounded-xl p-6 mb-4 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
                 ¿Son seguras las transacciones en casinos online mexicanos?
               </h3>
-              <p className="text-slate-300">
+              <p className="text-gray-600">
                 Totalmente seguras. Los casinos recomendados usan encriptación SSL de nivel bancario 
                 y segregan fondos de jugadores. Tus depósitos están protegidos.
               </p>
@@ -243,21 +280,29 @@ export default async function HomePage({ params }: HomePageProps) {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-primary/20 to-accent/20 py-16">
+      <section className="bg-gradient-to-r from-primary-50 to-secondary-50 py-16 border-t border-gray-200">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
             ¿Listo para Empezar a Ganar?
           </h2>
-          <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
             Únete a miles de jugadores que ya disfrutan de los mejores casinos online en pesos.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-gradient-to-r from-primary to-accent text-black px-8 py-4 rounded-xl font-bold text-lg transform hover:scale-105 transition-transform">
-              Explorar Casinos →
-            </button>
-            <button className="bg-slate-700 text-white px-8 py-4 rounded-xl font-bold text-lg border border-slate-600 hover:bg-slate-600 transition-colors">
-              Comparar Bonos 🎁
-            </button>
+            <Link
+              href="/es/casinos"
+              className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-8 py-4 rounded-xl font-bold text-lg transform hover:scale-105 transition-all shadow-lg hover:shadow-xl inline-flex items-center justify-center gap-2"
+            >
+              Explorar Casinos 
+              <ChevronRight className="w-5 h-5" />
+            </Link>
+            <Link
+              href="/es/bonos"
+              className="bg-white hover:bg-gray-50 text-gray-900 px-8 py-4 rounded-xl font-bold text-lg border-2 border-gray-200 hover:border-primary-200 transition-all shadow-md hover:shadow-lg inline-flex items-center justify-center gap-2"
+            >
+              <Gift className="w-5 h-5 text-red-500" />
+              Comparar Bonos
+            </Link>
           </div>
         </div>
       </section>
