@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import mobile-specific fixes */
+@import './mobile-fixes.css';
+
 @layer base {
   :root {
     /* Trustworthy Design Language - Professional Color Palette */

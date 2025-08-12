@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { BreadcrumbStructuredData, CasinoStructuredData } from '@/components/StructuredData';
 import ReviewSystem from '@/components/ReviewSystem';
+import CopyButton from '@/components/CopyButton';
 import { getCasinoBySlug } from '@/lib/casino-database';
 import type { Metadata } from 'next';
 
@@ -214,9 +215,14 @@ export default async function CasinoDetailPage({ params }: PageProps) {
                 <p className="text-sm text-green-600 mb-4">+ {casino.bonus.freeSpins} Giros Gratis</p>
               )}
               {casino.bonus.code && (
-                <div className="bg-gray-50/50 rounded-lg p-3 mb-4">
-                  <p className="text-xs text-gray-500 mb-1">Código Promocional</p>
-                  <p className="text-lg font-mono font-bold text-gray-900">{casino.bonus.code}</p>
+                <div className="bg-white/50 rounded-lg p-3 mb-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs text-gray-500 mb-1">Código Promocional</p>
+                      <p className="text-lg font-mono font-bold text-gray-900">{casino.bonus.code}</p>
+                    </div>
+                    <CopyButton text={casino.bonus.code} />
+                  </div>
                 </div>
               )}
               <a 
@@ -349,9 +355,12 @@ export default async function CasinoDetailPage({ params }: PageProps) {
                       <p className="font-bold text-gray-900">${casino.bonus.minDeposit} MXN</p>
                     </div>
                     {casino.bonus.code && (
-                      <div>
-                        <p className="text-sm text-gray-500">Código</p>
-                        <p className="font-bold text-gray-900 font-mono">{casino.bonus.code}</p>
+                      <div className="col-span-2">
+                        <p className="text-sm text-gray-500 mb-1">Código Promocional</p>
+                        <div className="flex items-center gap-2">
+                          <p className="font-bold text-gray-900 font-mono">{casino.bonus.code}</p>
+                          <CopyButton text={casino.bonus.code} />
+                        </div>
                       </div>
                     )}
                   </div>

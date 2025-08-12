@@ -6,6 +6,7 @@ import { Search, SlidersHorizontal, Star, X } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Casino } from '@/lib/casino-database';
+import CopyButton from '@/components/CopyButton';
 
 interface CasinosClientProps {
   casinos: Casino[];
@@ -55,7 +56,7 @@ export default function CasinosClient({ casinos }: CasinosClientProps) {
 
         {/* Search and Sort Bar */}
         <div className="bg-white border border-gray-200 rounded-xl p-4 mb-6 shadow-sm">
-          <div className="flex flex-col lg:flex-row gap-4">
+          <div className="flex flex-col lg:flex-row gap-4" suppressHydrationWarning>
             {/* Search */}
             <div className="flex-1">
               <div className="relative">
@@ -118,7 +119,9 @@ export default function CasinosClient({ casinos }: CasinosClientProps) {
                             width={96}
                             height={64}
                             className="object-contain"
-                            priority={index < 3}
+                            loading={index < 3 ? "eager" : "lazy"}
+                            placeholder="blur"
+                            blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='64'%3E%3Crect width='96' height='64' fill='%23f3f4f6'/%3E%3C/svg%3E"
                           />
                         ) : (
                           <span className="text-2xl font-bold text-gray-900">
@@ -146,20 +149,31 @@ export default function CasinosClient({ casinos }: CasinosClientProps) {
                     {/* Details */}
                     <div>
                       <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 mb-4 border border-green-200">
-                        <div className="flex items-start justify-between">
-                          <div>
-                            <p className="text-sm text-gray-600 mb-1">Bono de Bienvenida</p>
-                            <p className="text-2xl font-bold text-gray-900">
-                              {casino.bonus.percentage}% hasta ${casino.bonus.amount.toLocaleString()} MXN
-                            </p>
-                            {casino.bonus.freeSpins && (
-                              <p className="text-sm text-green-600 mt-1">+ {casino.bonus.freeSpins} Giros Gratis</p>
-                            )}
+                        <div>
+                          <div className="flex items-start justify-between mb-3">
+                            <div>
+                              <p className="text-sm text-gray-600 mb-1">Bono de Bienvenida</p>
+                              <p className="text-2xl font-bold text-gray-900">
+                                {casino.bonus.percentage}% hasta ${casino.bonus.amount.toLocaleString()} MXN
+                              </p>
+                              {casino.bonus.freeSpins && (
+                                <p className="text-sm text-green-600 mt-1">+ {casino.bonus.freeSpins} Giros Gratis</p>
+                              )}
+                            </div>
+                            <div className="text-right">
+                              <p className="text-xs text-gray-600">Rollover</p>
+                              <p className="text-lg font-bold text-gray-900">{casino.bonus.wageringRequirement}x</p>
+                            </div>
                           </div>
-                          <div className="text-right">
-                            <p className="text-xs text-gray-600">Rollover</p>
-                            <p className="text-lg font-bold text-gray-900">{casino.bonus.wageringRequirement}x</p>
-                          </div>
+                          {casino.bonus.code && (
+                            <div className="flex items-center gap-2 bg-white/50 rounded-lg px-3 py-2">
+                              <div className="flex-1">
+                                <p className="text-xs text-gray-600">Código:</p>
+                                <p className="font-mono font-bold text-gray-900">{casino.bonus.code}</p>
+                              </div>
+                              <CopyButton text={casino.bonus.code} />
+                            </div>
+                          )}
                         </div>
                       </div>
 

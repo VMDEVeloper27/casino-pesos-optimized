@@ -1,94 +1,63 @@
 import Link from 'next/link';
-import { Home, Search, Gamepad2, Gift } from 'lucide-react';
+import { Home, Search, ArrowLeft } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center px-4">
-      <div className="max-w-2xl mx-auto text-center">
-        {/* 404 Animation */}
-        <div className="relative mb-8">
-          <h1 className="text-9xl font-bold text-slate-700">404</h1>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-6xl animate-bounce">🎰</div>
+    <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+      <div className="max-w-lg mx-auto text-center">
+        {/* Casino Chip 404 Icon */}
+        <div className="mb-8">
+          <div className="w-32 h-32 bg-gradient-to-br from-green-600 to-green-700 rounded-full flex items-center justify-center mx-auto shadow-xl border-8 border-white ring-4 ring-green-200 relative">
+            <div className="absolute inset-2 border-4 border-dashed border-green-200 rounded-full opacity-60"></div>
+            <span className="text-white font-bold text-5xl relative z-10">404</span>
           </div>
         </div>
-        
+
         {/* Error Message */}
-        <h2 className="text-3xl font-bold text-white mb-4">
-          ¡Ups! Página No Encontrada
-        </h2>
-        <p className="text-lg text-slate-300 mb-8">
-          Parece que esta página se fue al casino y no ha vuelto. 
-          Mientras tanto, te sugerimos explorar nuestras mejores opciones.
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          Página No Encontrada
+        </h1>
+        <p className="text-lg text-gray-600 mb-8">
+          Lo sentimos, la página que buscas no existe o ha sido movida.
         </p>
-        
-        {/* Quick Links */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
-            href="/es"
-            className="flex items-center justify-center gap-3 bg-slate-800 hover:bg-slate-700 text-white px-6 py-4 rounded-xl transition-all group"
+            href="/"
+            className="flex items-center justify-center gap-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 shadow-lg"
           >
-            <Home className="w-5 h-5 group-hover:scale-110 transition-transform" />
-            <span className="font-semibold">Ir al Inicio</span>
+            <Home className="w-5 h-5" />
+            Ir al Inicio
           </Link>
-          
           <Link
             href="/es/casinos"
-            className="flex items-center justify-center gap-3 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-black px-6 py-4 rounded-xl transition-all group font-semibold"
+            className="flex items-center justify-center gap-2 bg-white hover:bg-gray-50 border-2 border-gray-200 hover:border-green-200 text-gray-900 px-6 py-3 rounded-xl font-semibold transition-all"
           >
-            <Gamepad2 className="w-5 h-5 group-hover:scale-110 transition-transform" />
-            <span>Ver Casinos</span>
+            <Search className="w-5 h-5" />
+            Ver Casinos
           </Link>
         </div>
-        
-        {/* Popular Pages */}
-        <div className="bg-slate-800/50 backdrop-blur rounded-xl p-6">
-          <h3 className="text-lg font-semibold text-white mb-4">
-            Páginas Populares
-          </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <Link
-              href="/es/bonos"
-              className="flex flex-col items-center gap-2 text-slate-400 hover:text-white transition-colors"
-            >
-              <Gift className="w-8 h-8" />
-              <span className="text-sm">Bonos</span>
+
+        {/* Helpful Links */}
+        <div className="mt-12 pt-8 border-t border-gray-200">
+          <p className="text-sm text-gray-500 mb-4">Enlaces útiles:</p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Link href="/es/bonos" className="text-green-600 hover:text-green-700 font-medium text-sm">
+              Mejores Bonos
             </Link>
-            <Link
-              href="/es/comparar"
-              className="flex flex-col items-center gap-2 text-slate-400 hover:text-white transition-colors"
-            >
-              <Search className="w-8 h-8" />
-              <span className="text-sm">Comparar</span>
+            <span className="text-gray-300">•</span>
+            <Link href="/es/juegos" className="text-green-600 hover:text-green-700 font-medium text-sm">
+              Juegos de Casino
             </Link>
-            <Link
-              href="/es/guias"
-              className="flex flex-col items-center gap-2 text-slate-400 hover:text-white transition-colors"
-            >
-              <span className="text-2xl">📚</span>
-              <span className="text-sm">Guías</span>
-            </Link>
-            <Link
-              href="/es/blog"
-              className="flex flex-col items-center gap-2 text-slate-400 hover:text-white transition-colors"
-            >
-              <span className="text-2xl">📰</span>
-              <span className="text-sm">Blog</span>
+            <span className="text-gray-300">•</span>
+            <Link href="/es/promociones" className="text-green-600 hover:text-green-700 font-medium text-sm">
+              Promociones
             </Link>
           </div>
         </div>
-        
-        {/* Search Suggestion */}
-        <div className="mt-8 text-sm text-slate-500">
-          <p>
-            ¿Buscabas algo específico? Prueba con el{' '}
-            <Link href="/es/casinos" className="text-primary hover:text-primary/80 underline">
-              buscador de casinos
-            </Link>
-          </p>
-        </div>
       </div>
-    </div>
+    </main>
   );
 }
 

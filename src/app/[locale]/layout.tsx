@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { ProfessionalHeader } from '@/components/layout/ProfessionalHeader';
+import Footer from '@/components/layout/Footer';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { CountryProvider } from '@/contexts/CountryContext';
 import { FacebookPixel, GoogleAnalytics, Hotjar } from '@/components/Analytics';
@@ -114,111 +115,7 @@ export default async function LocaleLayout({
             </div>
 
             {/* Footer */}
-            <footer className="bg-gray-100 border-t border-gray-200 mt-8 sm:mt-12 md:mt-16">
-              <div className="container mx-auto px-4 py-8 sm:py-10 md:py-12">
-                {/* Mobile-first responsive grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-                  {/* Brand Section - Full width on mobile */}
-                  <div className="col-span-1 sm:col-span-2 lg:col-span-1 text-center sm:text-left">
-                    <h3 className="font-semibold text-gray-900 mb-3 text-lg">CasinosPesos</h3>
-                    <p className="text-sm text-gray-600 max-w-md mx-auto sm:mx-0">
-                      Tu guía confiable para ganar en pesos. Encuentra los mejores casinos online de América Latina.
-                    </p>
-                  </div>
-                  
-                  {/* Casinos Section */}
-                  <div className="text-center sm:text-left">
-                    <h4 className="font-semibold text-gray-900 mb-3 text-base">Casinos</h4>
-                    <ul className="space-y-2 text-sm">
-                      <li>
-                        <a href={`/${locale}/casinos`} 
-                           className="text-gray-600 hover:text-primary-600 transition-colors inline-block py-1">
-                          Todos los Casinos
-                        </a>
-                      </li>
-                      <li>
-                        <a href={`/${locale}/casinos/nuevos`} 
-                           className="text-gray-600 hover:text-primary-600 transition-colors inline-block py-1">
-                          Nuevos Casinos
-                        </a>
-                      </li>
-                      <li>
-                        <a href={`/${locale}/casinos/movil`} 
-                           className="text-gray-600 hover:text-primary-600 transition-colors inline-block py-1">
-                          Casinos Móviles
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                  
-                  {/* Bonos Section */}
-                  <div className="text-center sm:text-left">
-                    <h4 className="font-semibold text-gray-900 mb-3 text-base">Bonos</h4>
-                    <ul className="space-y-2 text-sm">
-                      <li>
-                        <a href={`/${locale}/bonos/sin-deposito`} 
-                           className="text-gray-600 hover:text-primary-600 transition-colors inline-block py-1">
-                          Sin Depósito
-                        </a>
-                      </li>
-                      <li>
-                        <a href={`/${locale}/bonos/bienvenida`} 
-                           className="text-gray-600 hover:text-primary-600 transition-colors inline-block py-1">
-                          Bienvenida
-                        </a>
-                      </li>
-                      <li>
-                        <a href={`/${locale}/bonos/giros-gratis`} 
-                           className="text-gray-600 hover:text-primary-600 transition-colors inline-block py-1">
-                          Giros Gratis
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                  
-                  {/* Information Section */}
-                  <div className="text-center sm:text-left">
-                    <h4 className="font-semibold text-gray-900 mb-3 text-base">Información</h4>
-                    <ul className="space-y-2 text-sm">
-                      <li>
-                        <a href={`/${locale}/blog`} 
-                           className="text-gray-600 hover:text-primary-600 transition-colors inline-block py-1">
-                          Blog
-                        </a>
-                      </li>
-                      <li>
-                        <a href={`/${locale}/sobre-nosotros`} 
-                           className="text-gray-600 hover:text-primary-600 transition-colors inline-block py-1">
-                          Sobre Nosotros
-                        </a>
-                      </li>
-                      <li>
-                        <a href={`/${locale}/juego-responsable`} 
-                           className="text-gray-600 hover:text-primary-600 transition-colors inline-block py-1">
-                          Juego Responsable
-                        </a>
-                      </li>
-                      <li>
-                        <a href={`/${locale}/contacto`} 
-                           className="text-gray-600 hover:text-primary-600 transition-colors inline-block py-1">
-                          Contacto
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                
-                {/* Copyright Section - Always centered */}
-                <div className="border-t border-gray-200 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center">
-                  <p className="text-xs sm:text-sm text-gray-500 px-4">
-                    © 2024 CasinosPesos. Todos los derechos reservados.
-                  </p>
-                  <p className="text-xs sm:text-sm text-gray-500 mt-2">
-                    Juega responsablemente. 18+
-                  </p>
-                </div>
-              </div>
-            </footer>
+            <Footer />
           </NextIntlClientProvider>
         </CountryProvider>
       </body>

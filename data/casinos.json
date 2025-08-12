@@ -3,7 +3,7 @@
     "id": "bet365",
     "name": "Bet365 Casino",
     "slug": "bet365",
-    "logo": "/uploads/casino-logos/casino-bet365-1754855255113.svg",
+    "logo": "/uploads/casino-logos/casino-bet365-1754990025079.svg",
     "rating": 4.9,
     "established": 2001,
     "affiliateLink": "https://bet365.com",
@@ -57,13 +57,13 @@
       "Límites conservadores"
     ],
     "status": "active",
-    "lastModified": "2025-08-10T19:47:35.344Z"
+    "lastModified": "2025-08-12T09:13:45.090Z"
   },
   {
     "id": "codere",
     "name": "Codere Casino",
     "slug": "codere",
-    "logo": "/uploads/casino-logos/casino-codere-1754853783410.webp",
+    "logo": "/uploads/casino-logos/casino-codere-1754990014676.png",
     "rating": 4.8,
     "established": 1980,
     "affiliateLink": "https://codere.mx",
@@ -114,7 +114,7 @@
       "App móvil mejorable"
     ],
     "status": "active",
-    "lastModified": "2025-08-10T19:23:03.421Z"
+    "lastModified": "2025-08-12T09:13:34.708Z"
   },
   {
     "id": "caliente",
