@@ -15,7 +15,8 @@ import {
   Target,
   Gift,
   BookOpen,
-  Scale
+  Scale,
+  Gamepad2
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useCountry, countries } from '@/contexts/CountryContext';
@@ -35,6 +36,12 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
       label: locale === 'es' ? 'Casinos' : 'Casinos', 
       href: `/${locale}/casinos`,
       icon: Target
+    },
+    { 
+      label: locale === 'es' ? 'Juegos' : 'Games', 
+      href: `/${locale}/juegos`,
+      icon: Gamepad2,
+      badge: 'NEW'
     },
     { 
       label: locale === 'es' ? 'Bonos' : 'Bonuses', 

@@ -45,14 +45,18 @@ export async function POST(
     const buffer = Buffer.from(bytes);
     
     // Convert to WebP and save
+    console.log('Converting logo to WebP for casino:', id);
     const logoPath = await convertUploadToWebP(buffer, file.name);
+    console.log('Logo saved to:', logoPath);
     
     // Delete old logo if it exists and is in uploads folder
     if (casino.logo && casino.logo.startsWith('/uploads/')) {
+      console.log('Deleting old logo:', casino.logo);
       await deleteImage(casino.logo);
     }
     
     // Update casino with new logo path
+    console.log('Updating casino with new logo path:', logoPath);
     const updatedCasino = await updateCasino(id, { logo: logoPath });
     
     if (!updatedCasino) {

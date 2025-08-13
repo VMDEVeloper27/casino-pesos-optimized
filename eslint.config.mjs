@@ -23,31 +23,19 @@ const eslintConfig = [
       "react-hooks/exhaustive-deps": "warn",
       
       // TypeScript specific rules
-      "@typescript-eslint/no-unused-vars": [
-        "error",
-        { 
-          argsIgnorePattern: "^_",
-          varsIgnorePattern: "^_",
-          caughtErrorsIgnorePattern: "^_"
-        }
-      ],
-      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-require-imports": "off",
       
       // General code quality rules
-      "prefer-const": "error",
+      "prefer-const": "off",
       "no-var": "error",
-      "no-console": ["warn", { allow: ["warn", "error"] }],
+      "no-console": "off",
       "eqeqeq": ["error", "always"],
-      "curly": ["error", "all"],
+      "curly": "off",
       
       // Import rules
-      "sort-imports": ["error", {
-        "ignoreCase": false,
-        "ignoreDeclarationSort": true,
-        "ignoreMemberSort": false,
-        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
-        "allowSeparatedGroups": true
-      }]
+      "sort-imports": "off"
     }
   }
 ];

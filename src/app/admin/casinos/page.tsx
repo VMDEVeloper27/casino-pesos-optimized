@@ -299,7 +299,11 @@ export default function AdminCasinosList() {
                             )}
                           </label>
                           <input
-                            ref={(el) => fileInputRefs.current[casino.id] = el}
+                            ref={(el) => {
+                              if (el) {
+                                fileInputRefs.current[casino.id] = el;
+                              }
+                            }}
                             type="file"
                             id={`logo-upload-${casino.id}`}
                             accept="image/*"

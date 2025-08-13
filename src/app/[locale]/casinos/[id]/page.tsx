@@ -1,9 +1,10 @@
-import { ArrowLeft, Check, ChevronRight, CreditCard, Gamepad2, Gift, Star, Users, X } from 'lucide-react';
+import { ArrowLeft, Check, ChevronRight, CreditCard, Gamepad2, Gift, Star, Users, X, Calculator } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BreadcrumbStructuredData, CasinoStructuredData } from '@/components/StructuredData';
 import ReviewSystem from '@/components/ReviewSystem';
 import CopyButton from '@/components/CopyButton';
+import BonusCalculator from '@/components/BonusCalculator';
 import { getCasinoBySlug } from '@/lib/casino-database';
 import type { Metadata } from 'next';
 
@@ -366,6 +367,24 @@ export default async function CasinoDetailPage({ params }: PageProps) {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* Bonus Calculator */}
+            <div className="bg-white rounded-xl p-6 mt-8">
+              <div className="flex items-center gap-2 mb-4">
+                <Calculator className="w-5 h-5 text-green-600" />
+                <h2 className="text-2xl font-bold text-gray-900">Calculadora de Bonos</h2>
+              </div>
+              <p className="text-gray-600 mb-6">
+                Calcula cuánto necesitas apostar para liberar el bono de {casino.name}.
+              </p>
+              <BonusCalculator
+                bonusPercentage={casino.bonus.percentage}
+                maxBonus={casino.bonus.amount}
+                wageringRequirement={casino.bonus.wageringRequirement}
+                minDeposit={casino.bonus.minDeposit}
+                casinoName={casino.name}
+              />
             </div>
 
             {/* Reviews */}

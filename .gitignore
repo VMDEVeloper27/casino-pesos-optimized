@@ -44,6 +44,9 @@ next-env.d.ts
 *.backup
 *.sql
 
+# data directory for casino persistence
+/data
+
 # IDE
 .idea
 .vscode

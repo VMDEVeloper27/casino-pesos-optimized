@@ -96,7 +96,7 @@ interface PageProps {
   };
 } */
 
-const categories = [
+const blogPosts = [
   {
     slug: 'nuevos-casinos-mexico-enero-2024',
     title: 'Los 5 Nuevos Casinos Online que Llegan a México en Enero 2024',
@@ -175,6 +175,15 @@ const categories = [
     featured: true,
     image: '/images/blog/regulacion-mexico.jpg'
   }
+];
+
+const categories = [
+  { name: 'Todos', value: '', icon: '📚' },
+  { name: 'Noticias', value: 'Noticias', icon: '📰' },
+  { name: 'Guías', value: 'Guías', icon: '📖' },
+  { name: 'Bonos', value: 'Bonos', icon: '🎁' },
+  { name: 'Juegos', value: 'Juegos', icon: '🎮' },
+  { name: 'Legal', value: 'Legal', icon: '⚖️' }
 ];
 
 export default function BlogPage({ params }: PageProps) {

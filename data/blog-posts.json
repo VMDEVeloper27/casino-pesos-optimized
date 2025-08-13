@@ -8,7 +8,12 @@
     "author": "Carlos Mendoza",
     "authorRole": "Experto en Casinos",
     "category": "Guías",
-    "tags": ["bonos", "guías", "principiantes", "estrategia"],
+    "tags": [
+      "bonos",
+      "guías",
+      "principiantes",
+      "estrategia"
+    ],
     "featuredImage": "/images/blog/bonos-casino-guide.jpg",
     "publishedAt": "2024-01-15T10:00:00Z",
     "updatedAt": "2024-01-15T10:00:00Z",
@@ -19,7 +24,12 @@
     "seo": {
       "metaTitle": "Guía Completa de Bonos de Casino 2024 | CasinosPesos",
       "metaDescription": "Aprende todo sobre bonos de casino en México: tipos, requisitos de apuesta, estrategias y los mejores bonos disponibles en 2024.",
-      "keywords": ["bonos casino", "bonos sin depósito", "giros gratis", "requisitos apuesta"]
+      "keywords": [
+        "bonos casino",
+        "bonos sin depósito",
+        "giros gratis",
+        "requisitos apuesta"
+      ]
     }
   },
   {
@@ -31,7 +41,12 @@
     "author": "María González",
     "authorRole": "Analista de Juegos",
     "category": "Juegos",
-    "tags": ["tragamonedas", "slots", "RTP", "jackpot"],
+    "tags": [
+      "tragamonedas",
+      "slots",
+      "RTP",
+      "jackpot"
+    ],
     "featuredImage": "/images/blog/best-slots-mexico.jpg",
     "publishedAt": "2024-01-18T14:30:00Z",
     "updatedAt": "2024-01-18T14:30:00Z",
@@ -49,7 +64,12 @@
     "author": "Roberto Jiménez",
     "authorRole": "Especialista Fintech",
     "category": "Pagos",
-    "tags": ["pagos", "OXXO", "SPEI", "criptomonedas"],
+    "tags": [
+      "pagos",
+      "OXXO",
+      "SPEI",
+      "criptomonedas"
+    ],
     "featuredImage": "/images/blog/payment-methods.jpg",
     "publishedAt": "2024-01-20T09:15:00Z",
     "updatedAt": "2024-01-20T09:15:00Z",
@@ -67,12 +87,17 @@
     "author": "Ana Rodríguez",
     "authorRole": "Abogada Especialista",
     "category": "Legal",
-    "tags": ["regulación", "legal", "SEGOB", "licencias"],
+    "tags": [
+      "regulación",
+      "legal",
+      "SEGOB",
+      "licencias"
+    ],
     "featuredImage": "/images/blog/mexico-regulation.jpg",
     "publishedAt": "2024-01-22T11:00:00Z",
     "updatedAt": "2024-01-22T11:00:00Z",
     "readTime": 7,
-    "views": 1432,
+    "views": 1433,
     "likes": 76,
     "status": "published"
   },
@@ -85,7 +110,12 @@
     "author": "Diego Fernández",
     "authorRole": "Profesional de Blackjack",
     "category": "Estrategia",
-    "tags": ["blackjack", "estrategia", "cartas", "tabla de manos"],
+    "tags": [
+      "blackjack",
+      "estrategia",
+      "cartas",
+      "tabla de manos"
+    ],
     "featuredImage": "/images/blog/blackjack-strategy.jpg",
     "publishedAt": "2024-01-25T16:45:00Z",
     "updatedAt": "2024-01-25T16:45:00Z",
@@ -103,7 +133,12 @@
     "author": "Luis Martínez",
     "authorRole": "Tech Reviewer",
     "category": "Tecnología",
-    "tags": ["móvil", "apps", "iOS", "Android"],
+    "tags": [
+      "móvil",
+      "apps",
+      "iOS",
+      "Android"
+    ],
     "featuredImage": "/images/blog/mobile-casinos.jpg",
     "publishedAt": "2024-01-28T13:20:00Z",
     "updatedAt": "2024-01-28T13:20:00Z",

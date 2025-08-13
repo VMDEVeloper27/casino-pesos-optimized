@@ -8,10 +8,11 @@ import {
 // GET single blog post
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const post = await getBlogPostById(params.id);
+    const { id } = await context.params;
+    const post = await getBlogPostById(id);
     
     if (!post) {
       return NextResponse.json({ error: 'Post not found' }, { status: 404 });
@@ -27,12 +28,13 @@ export async function GET(
 // PUT update blog post
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await context.params;
     const data = await request.json();
     
-    const updatedPost = await updateBlogPost(params.id, data);
+    const updatedPost = await updateBlogPost(id, data);
     
     if (!updatedPost) {
       return NextResponse.json({ error: 'Post not found' }, { status: 404 });
@@ -48,10 +50,11 @@ export async function PUT(
 // DELETE blog post
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const success = await deleteBlogPost(params.id);
+    const { id } = await context.params;
+    const success = await deleteBlogPost(id);
     
     if (!success) {
       return NextResponse.json({ error: 'Post not found' }, { status: 404 });

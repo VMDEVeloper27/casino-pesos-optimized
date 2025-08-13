@@ -1,8 +1,27 @@
-import { PrismaClient } from '@prisma/client';
 import { cookies } from 'next/headers';
 import crypto from 'crypto';
 
-const prisma = new PrismaClient();
+// Simple in-memory user store (in production, use a database)
+interface User {
+  id: string;
+  email: string;
+  password: string;
+  name: string;
+  role: string;
+  isActive: boolean;
+}
+
+// In-memory storage for demo purposes
+const users: User[] = [
+  {
+    id: '1',
+    email: process.env.ADMIN_EMAIL || 'admin@casinosite.com',
+    password: crypto.createHash('sha256').update(process.env.ADMIN_PASSWORD || 'Admin123!@#').digest('hex'),
+    name: 'Admin',
+    role: 'SUPER_ADMIN',
+    isActive: true,
+  }
+];
 
 // Simple password hashing (in production, use bcrypt)
 export function hashPassword(password: string): string {
@@ -43,16 +62,9 @@ export async function getSession() {
   }
   
   // In a real app, validate token against database
-  // For now, just decode it
+  // For now, return the admin user if token exists
   try {
-    // Simplified session retrieval
-    const user = await prisma.user.findFirst({
-      where: {
-        isActive: true,
-      },
-    });
-    
-    return user;
+    return users.find(u => u.isActive);
   } catch (error) {
     return null;
   }
@@ -65,9 +77,7 @@ export async function destroySession() {
 // User authentication
 export async function authenticate(email: string, password: string) {
   try {
-    const user = await prisma.user.findUnique({
-      where: { email },
-    });
+    const user = users.find(u => u.email === email);
     
     if (!user || !user.isActive) {
       return null;
@@ -100,26 +110,6 @@ export function hasPermission(userRole: string, requiredRole: string): boolean {
 
 // Create default admin user if none exists
 export async function ensureAdminUser() {
-  try {
-    const adminExists = await prisma.user.findFirst({
-      where: {
-        role: 'SUPER_ADMIN',
-      },
-    });
-    
-    if (!adminExists) {
-      await prisma.user.create({
-        data: {
-          email: process.env.ADMIN_EMAIL || 'admin@casinosite.com',
-          password: hashPassword(process.env.ADMIN_PASSWORD || 'Admin123!@#'),
-          name: 'Admin',
-          role: 'SUPER_ADMIN',
-          isActive: true,
-        },
-      });
-      console.log('Default admin user created');
-    }
-  } catch (error) {
-    console.error('Error ensuring admin user:', error);
-  }
+  // Admin user is already in the users array
+  console.log('Admin user available:', process.env.ADMIN_EMAIL || 'admin@casinosite.com');
 }

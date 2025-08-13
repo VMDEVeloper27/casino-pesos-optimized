@@ -1,5 +1,11 @@
-import fs from 'fs/promises';
-import path from 'path';
+// Only import fs/path on server side
+let fs: any;
+let path: any;
+
+if (typeof window === 'undefined') {
+  fs = require('fs').promises;
+  path = require('path');
+}
 
 // Define the complete Casino type
 export interface Casino {
@@ -778,10 +784,15 @@ const allCasinos: Casino[] = [
   }
 ];
 
-// Database file path
-const DB_FILE = path.join(process.cwd(), 'data', 'casinos.json');
+// Database file path (only used on server)
+const DB_FILE = typeof window === 'undefined' && path ? path.join(process.cwd(), 'data', 'casinos.json') : '';
 
 // Get all casinos
+// Synchronous version for client components
+export function getAllCasinosSync(): Casino[] {
+  return allCasinos;
+}
+
 export async function getAllCasinos(): Promise<Casino[]> {
   try {
     return allCasinos;
@@ -838,6 +849,145 @@ export async function getCasinosByFilters(filters: {
     console.error('Error filtering casinos:', error);
     return [];
   }
+}
+
+// Update a casino
+export async function updateCasino(id: string, updates: Partial<Casino>): Promise<Casino | null> {
+  try {
+    const index = allCasinos.findIndex(c => c.id === id);
+    
+    if (index === -1) {
+      console.error('Casino not found:', id);
+      return null;
+    }
+    
+    // Update the casino in memory
+    allCasinos[index] = {
+      ...allCasinos[index],
+      ...updates,
+      lastModified: new Date().toISOString()
+    };
+    
+    // Optionally save to file for persistence
+    await saveCasinosToFile();
+    
+    return allCasinos[index];
+  } catch (error) {
+    console.error('Error updating casino:', error);
+    return null;
+  }
+}
+
+// Add a new casino
+export async function addCasino(casino: Casino): Promise<Casino | null> {
+  try {
+    // Check if casino already exists
+    if (allCasinos.find(c => c.id === casino.id)) {
+      console.error('Casino already exists:', casino.id);
+      return null;
+    }
+    
+    // Add to array
+    allCasinos.push({
+      ...casino,
+      lastModified: new Date().toISOString()
+    });
+    
+    // Optionally save to file for persistence
+    await saveCasinosToFile();
+    
+    return casino;
+  } catch (error) {
+    console.error('Error adding casino:', error);
+    return null;
+  }
+}
+
+// Delete a casino
+export async function deleteCasino(id: string): Promise<boolean> {
+  try {
+    const index = allCasinos.findIndex(c => c.id === id);
+    
+    if (index === -1) {
+      console.error('Casino not found:', id);
+      return false;
+    }
+    
+    // Remove from array
+    allCasinos.splice(index, 1);
+    
+    // Optionally save to file for persistence
+    await saveCasinosToFile();
+    
+    return true;
+  } catch (error) {
+    console.error('Error deleting casino:', error);
+    return false;
+  }
+}
+
+// Save casinos to file for persistence
+async function saveCasinosToFile(): Promise<void> {
+  try {
+    // Only save in development mode to avoid file system access in production
+    if (process.env.NODE_ENV === 'development') {
+      const dataDir = path.join(process.cwd(), 'data');
+      const filePath = path.join(dataDir, 'casinos.json');
+      
+      // Ensure directory exists
+      await fs.mkdir(dataDir, { recursive: true });
+      
+      // Write to file
+      await fs.writeFile(
+        filePath, 
+        JSON.stringify(allCasinos, null, 2),
+        'utf-8'
+      );
+      
+      console.log('Casinos saved to file');
+    }
+  } catch (error) {
+    console.error('Error saving casinos to file:', error);
+    // Don't throw - this is optional persistence
+  }
+}
+
+// Load casinos from file if it exists
+async function loadCasinosFromFile(): Promise<void> {
+  try {
+    if (process.env.NODE_ENV === 'development') {
+      const filePath = path.join(process.cwd(), 'data', 'casinos.json');
+      
+      // Check if file exists
+      try {
+        await fs.access(filePath);
+        const data = await fs.readFile(filePath, 'utf-8');
+        const loadedCasinos = JSON.parse(data);
+        
+        // Merge with existing casinos (prefer file data)
+        loadedCasinos.forEach((casino: Casino) => {
+          const index = allCasinos.findIndex(c => c.id === casino.id);
+          if (index !== -1) {
+            allCasinos[index] = casino;
+          } else {
+            allCasinos.push(casino);
+          }
+        });
+        
+        console.log('Casinos loaded from file');
+      } catch (error) {
+        // File doesn't exist, use default data
+        console.log('No casinos file found, using default data');
+      }
+    }
+  } catch (error) {
+    console.error('Error loading casinos from file:', error);
+  }
+}
+
+// Initialize by loading from file if available
+if (typeof window === 'undefined') {
+  loadCasinosFromFile();
 }
 
 // Export the casinos array directly for backward compatibility
