@@ -1893,28 +1893,186 @@ export const games: Game[] = [
   }
 ];
 
-// Helper functions
+// Server-side only modules
+let fs: any;
+let path: any;
+
+if (typeof window === 'undefined') {
+  fs = require('fs').promises;
+  path = require('path');
+}
+
+// Data persistence functions (server-side only)
+const GAMES_DATA_FILE = path?.join(process.cwd(), 'data', 'games.json');
+
+async function loadGamesFromFile(): Promise<Game[]> {
+  if (typeof window !== 'undefined') return games;
+  
+  try {
+    const dataDir = path.dirname(GAMES_DATA_FILE);
+    try {
+      await fs.access(dataDir);
+    } catch {
+      await fs.mkdir(dataDir, { recursive: true });
+    }
+    
+    try {
+      const data = await fs.readFile(GAMES_DATA_FILE, 'utf-8');
+      return JSON.parse(data);
+    } catch {
+      // If file doesn't exist, save current games
+      await saveGamesToFile(games);
+      return games;
+    }
+  } catch (error) {
+    console.error('Error loading games:', error);
+    return games;
+  }
+}
+
+async function saveGamesToFile(gamesData: Game[]): Promise<void> {
+  if (typeof window !== 'undefined') return;
+  
+  try {
+    const dataDir = path.dirname(GAMES_DATA_FILE);
+    await fs.mkdir(dataDir, { recursive: true });
+    await fs.writeFile(GAMES_DATA_FILE, JSON.stringify(gamesData, null, 2));
+  } catch (error) {
+    console.error('Error saving games:', error);
+  }
+}
+
+// CRUD Operations
+export async function getAllGames(): Promise<Game[]> {
+  if (typeof window === 'undefined') {
+    return await loadGamesFromFile();
+  }
+  return games;
+}
+
+export function getAllGamesSync(): Game[] {
+  return games;
+}
+
+export async function getGameById(id: string): Promise<Game | undefined> {
+  const allGames = await getAllGames();
+  return allGames.find(game => game.id === id);
+}
+
+export async function createGame(gameData: Omit<Game, 'id'>): Promise<Game> {
+  const allGames = await getAllGames();
+  
+  const newGame: Game = {
+    ...gameData,
+    id: `game-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+  };
+  
+  allGames.push(newGame);
+  await saveGamesToFile(allGames);
+  
+  return newGame;
+}
+
+export async function updateGame(id: string, updates: Partial<Game>): Promise<Game | null> {
+  const allGames = await getAllGames();
+  const gameIndex = allGames.findIndex(game => game.id === id);
+  
+  if (gameIndex === -1) {
+    return null;
+  }
+  
+  allGames[gameIndex] = {
+    ...allGames[gameIndex],
+    ...updates,
+    id // Ensure ID doesn't change
+  };
+  
+  await saveGamesToFile(allGames);
+  return allGames[gameIndex];
+}
+
+export async function deleteGame(id: string): Promise<boolean> {
+  const allGames = await getAllGames();
+  const filteredGames = allGames.filter(game => game.id !== id);
+  
+  if (filteredGames.length === allGames.length) {
+    return false; // Game not found
+  }
+  
+  await saveGamesToFile(filteredGames);
+  return true;
+}
+
+export async function bulkImportGames(newGames: Game[]): Promise<number> {
+  const allGames = await getAllGames();
+  
+  // Add new games, avoiding duplicates by ID
+  const existingIds = new Set(allGames.map(g => g.id));
+  const gamesToAdd = newGames.filter(g => !existingIds.has(g.id));
+  
+  const updatedGames = [...allGames, ...gamesToAdd];
+  await saveGamesToFile(updatedGames);
+  
+  return gamesToAdd.length;
+}
+
+// Helper functions - These use the persisted data
+let cachedGames: Game[] | null = null;
+
+function getGamesSync(): Game[] {
+  // On client, always return static games to avoid hydration issues
+  if (typeof window !== 'undefined') {
+    return games;
+  }
+  
+  // On server, try to load from file
+  if (fs && path) {
+    try {
+      // Use cached games if available (per-request cache on server)
+      if (cachedGames) {
+        return cachedGames;
+      }
+      
+      const GAMES_DATA_FILE = path.join(process.cwd(), 'data', 'games.json');
+      const data = require('fs').readFileSync(GAMES_DATA_FILE, 'utf-8');
+      cachedGames = JSON.parse(data);
+      return cachedGames;
+    } catch {
+      // If file doesn't exist or error, return static games
+      return games;
+    }
+  }
+  
+  // Fallback to static games
+  return games;
+}
+
 export function getGamesByType(type: Game['type']): Game[] {
-  return games.filter(game => game.type === type);
+  const allGames = getGamesSync();
+  return allGames.filter(game => game.type === type);
 }
 
 export function getGamesByProvider(provider: string): Game[] {
-  return games.filter(game => game.provider === provider);
+  const allGames = getGamesSync();
+  return allGames.filter(game => game.provider === provider);
 }
 
 export function getGamesByCasino(casinoId: string): Game[] {
-  return games.filter(game => game.availableAt.includes(casinoId));
+  const allGames = getGamesSync();
+  return allGames.filter(game => game.availableAt.includes(casinoId));
 }
 
 export function getPopularGames(limit: number = 10): Game[] {
-  return [...games]
+  const allGames = getGamesSync();
+  return [...allGames]
     .sort((a, b) => b.popularity - a.popularity)
     .slice(0, limit);
 }
 
 export function searchGames(query: string): Game[] {
+  const allGames = getGamesSync();
   const lowercaseQuery = query.toLowerCase();
-  return games.filter(game => 
+  return allGames.filter(game => 
     game.name.toLowerCase().includes(lowercaseQuery) ||
     game.provider.toLowerCase().includes(lowercaseQuery) ||
     game.theme?.toLowerCase().includes(lowercaseQuery) ||
@@ -1923,19 +2081,22 @@ export function searchGames(query: string): Game[] {
 }
 
 export function getGameBySlug(slug: string): Game | undefined {
-  return games.find(game => game.slug === slug);
+  const allGames = getGamesSync();
+  return allGames.find(game => game.slug === slug);
 }
 
 export function getUniqueProviders(): string[] {
-  return [...new Set(games.map(game => game.provider))].sort();
+  const allGames = getGamesSync();
+  return [...new Set(allGames.map(game => game.provider))].sort();
 }
 
 export function getGameTypes(): Array<{ value: Game['type']; label: string; count: number }> {
+  const allGames = getGamesSync();
   return [
-    { value: 'slot', label: 'Tragamonedas', count: games.filter(g => g.type === 'slot').length },
-    { value: 'live', label: 'Casino en Vivo', count: games.filter(g => g.type === 'live').length },
-    { value: 'table', label: 'Juegos de Mesa', count: games.filter(g => g.type === 'table').length },
-    { value: 'crash', label: 'Crash Games', count: games.filter(g => g.type === 'crash').length },
-    { value: 'instant', label: 'Instantáneos', count: games.filter(g => g.type === 'instant').length }
+    { value: 'slot', label: 'Tragamonedas', count: allGames.filter(g => g.type === 'slot').length },
+    { value: 'live', label: 'Casino en Vivo', count: allGames.filter(g => g.type === 'live').length },
+    { value: 'table', label: 'Juegos de Mesa', count: allGames.filter(g => g.type === 'table').length },
+    { value: 'crash', label: 'Crash Games', count: allGames.filter(g => g.type === 'crash').length },
+    { value: 'instant', label: 'Instantáneos', count: allGames.filter(g => g.type === 'instant').length }
   ];
 }

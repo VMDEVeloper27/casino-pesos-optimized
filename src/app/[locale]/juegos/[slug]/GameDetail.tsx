@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Game } from '@/lib/game-database';
-import { games, getGamesByProvider, getGamesByType } from '@/lib/game-database';
+import { getGamesByProvider, getGamesByType } from '@/lib/game-database';
 import { getAllCasinosSync } from '@/lib/casino-database';
 
 interface GameDetailProps {
@@ -32,8 +32,10 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
   ).filter((casino): casino is NonNullable<typeof casino> => casino !== undefined && casino !== null);
   
   // Get similar games
-  const similarGames = games
-    .filter(g => g.id !== game.id && (g.type === game.type || g.provider === game.provider))
+  const similarByType = getGamesByType(game.type);
+  const similarByProvider = getGamesByProvider(game.provider);
+  const similarGames = [...new Set([...similarByType, ...similarByProvider])]
+    .filter(g => g.id !== game.id)
     .slice(0, 6);
 
   const handleFullscreen = () => {

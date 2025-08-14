@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import GameBrowser from './GameBrowser';
-import { games } from '@/lib/game-database';
+import { getAllGames } from '@/lib/game-database';
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -29,6 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function JuegosPage({ params, searchParams }: PageProps) {
   const { locale } = await params;
   const { type, provider, search } = await searchParams;
+  const games = await getAllGames();
 
   return (
     <GameBrowser 

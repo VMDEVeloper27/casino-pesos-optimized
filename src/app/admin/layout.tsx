@@ -67,7 +67,7 @@ export default function AdminLayout({
               href="/admin/casinos"
               className="flex items-center gap-3 px-4 py-3 rounded-lg text-neutral-300 hover:bg-neutral-700 hover:text-white transition-colors"
             >
-              <Gamepad2 className="w-5 h-5" />
+              <Shield className="w-5 h-5" />
               <span>Casinos</span>
             </Link>
             
@@ -77,6 +77,22 @@ export default function AdminLayout({
             >
               <Plus className="w-5 h-5" />
               <span>Add Casino</span>
+            </Link>
+            
+            <Link
+              href="/admin/games"
+              className="flex items-center gap-3 px-4 py-3 rounded-lg text-neutral-300 hover:bg-neutral-700 hover:text-white transition-colors"
+            >
+              <Gamepad2 className="w-5 h-5" />
+              <span>Games</span>
+            </Link>
+            
+            <Link
+              href="/admin/games/new"
+              className="flex items-center gap-3 px-4 py-3 rounded-lg text-neutral-300 hover:bg-neutral-700 hover:text-white transition-colors"
+            >
+              <Plus className="w-5 h-5" />
+              <span>Add Game</span>
             </Link>
             
             <Link

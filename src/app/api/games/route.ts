@@ -1,44 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import type { APIResponse, Game } from '@/types'
-
-// Mock data - replace with actual database queries
-const mockGames: Game[] = [
-  {
-    id: '1',
-    name: 'Starburst',
-    slug: 'starburst',
-    provider: 'NetEnt',
-    type: 'slot',
-    image: '/images/games/starburst.jpg',
-    rating: 4.7,
-    volatility: 'low',
-    rtp: 96.09,
-    maxWin: 50000,
-    minBet: 0.10,
-    maxBet: 100,
-    freePlay: true,
-    demoUrl: '/games/starburst/demo',
-    description: 'Una de las tragamonedas más populares de todos los tiempos...',
-    features: ['Wilds Expansivos', 'Re-Spins', 'Gráficos Brillantes']
-  },
-  {
-    id: '2',
-    name: 'Book of Dead',
-    slug: 'book-of-dead',
-    provider: 'Play\'n GO',
-    type: 'slot',
-    image: '/images/games/book-of-dead.jpg',
-    rating: 4.8,
-    volatility: 'high',
-    rtp: 94.25,
-    maxWin: 5000,
-    minBet: 0.01,
-    maxBet: 100,
-    freePlay: true,
-    description: 'Aventura épica en el antiguo Egipto con giros gratis...',
-    features: ['Giros Gratis', 'Símbolo Especial Expansivo', 'Jackpot']
-  }
-]
+import { getAllGames } from '@/lib/game-database';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
@@ -49,10 +10,12 @@ export async function GET(request: NextRequest) {
     const page = parseInt(searchParams.get('page') || '1')
     const limit = parseInt(searchParams.get('limit') || '12')
     const search = searchParams.get('search')
-    const sortBy = searchParams.get('sortBy') || 'rating'
+    const sortBy = searchParams.get('sortBy') || 'popularity'
     const sortOrder = searchParams.get('sortOrder') || 'desc'
     
-    let filteredGames = mockGames
+    // Get all games from the database
+    let allGames = await getAllGames();
+    let filteredGames = [...allGames];
 
     // Apply filters
     if (type) {
@@ -66,8 +29,11 @@ export async function GET(request: NextRequest) {
     }
 
     if (search) {
+      const searchLower = search.toLowerCase();
       filteredGames = filteredGames.filter(game =>
-        game.name.toLowerCase().includes(search.toLowerCase())
+        game.name.toLowerCase().includes(searchLower) ||
+        game.provider.toLowerCase().includes(searchLower) ||
+        game.theme?.toLowerCase().includes(searchLower)
       )
     }
 
@@ -76,20 +42,20 @@ export async function GET(request: NextRequest) {
       let comparison = 0
       
       switch (sortBy) {
-        case 'rating':
-          comparison = a.rating - b.rating
+        case 'popularity':
+          comparison = (a.popularity || 0) - (b.popularity || 0)
           break
         case 'name':
           comparison = a.name.localeCompare(b.name)
           break
         case 'rtp':
-          comparison = a.rtp - b.rtp
+          comparison = (a.rtp || 0) - (b.rtp || 0)
           break
         case 'maxWin':
-          comparison = a.maxWin - b.maxWin
+          comparison = (a.maxWin || 0) - (b.maxWin || 0)
           break
         default:
-          comparison = a.rating - b.rating
+          comparison = (a.popularity || 0) - (b.popularity || 0)
       }
 
       return sortOrder === 'desc' ? -comparison : comparison
@@ -100,7 +66,7 @@ export async function GET(request: NextRequest) {
     const total = filteredGames.length
     const paginatedGames = filteredGames.slice(offset, offset + limit)
     
-    const response: APIResponse<Game[]> = {
+    const response = {
       success: true,
       data: paginatedGames,
       pagination: {
@@ -111,11 +77,16 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    return NextResponse.json(response)
+    // Set cache headers for better performance
+    return NextResponse.json(response, {
+      headers: {
+        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=30'
+      }
+    })
   } catch (error) {
     console.error('Error fetching games:', error)
     
-    const response: APIResponse<Game[]> = {
+    const response = {
       success: false,
       error: 'Error interno del servidor'
     }
