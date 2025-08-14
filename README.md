@@ -1,28 +1,31 @@
 # CasinosPesos - Casino Comparison Platform
 
-A modern, SEO-optimized casino comparison website built with Next.js 15, TypeScript, and Tailwind CSS.
+A modern, SEO-optimized casino comparison website built with Next.js 15, TypeScript, Tailwind CSS, and Supabase.
 
 ## Features
 
 - 🎰 **Casino Comparison**: Compare multiple casinos side-by-side
 - 💰 **Bonus Tracking**: Track and display casino bonuses and promotions
-- 🎮 **Game Catalogs**: Comprehensive game listings for each casino
-- 💳 **Payment Methods**: Detailed payment method information
+- 🎮 **Game Catalogs**: Comprehensive game listings for each casino (99+ games)
+- 💳 **Payment Methods**: Detailed payment method information (OXXO, SPEI, PayPal, etc.)
 - 📱 **Responsive Design**: Mobile-first, fully responsive design
 - 🌍 **Multi-language**: Support for Spanish and English
 - 🔍 **SEO Optimized**: Built with SEO best practices
 - ⚡ **Fast Performance**: Optimized with Next.js 15 and WebP images
 - 🛡️ **Admin Panel**: Full-featured admin panel for content management
+- 🗄️ **Database Integration**: PostgreSQL via Supabase with real-time capabilities
+- 🤖 **MCP Servers**: 6 integrated MCP servers for enhanced development
 
 ## Tech Stack
 
 - **Framework**: Next.js 15 (App Router)
 - **Language**: TypeScript
+- **Database**: Supabase (PostgreSQL)
 - **Styling**: Tailwind CSS
 - **UI Components**: Custom components with Framer Motion
-- **Database**: JSON file-based (easily replaceable with any database)
 - **Image Optimization**: Sharp for WebP conversion
 - **Icons**: Lucide React
+- **Backend**: Supabase with Row Level Security
 
 ## Getting Started
 
@@ -34,20 +37,32 @@ A modern, SEO-optimized casino comparison website built with Next.js 15, TypeScr
 ### Installation
 
 1. Clone the repository:
-\`\`\`bash
-git clone https://github.com/yourusername/casinospesos.git
+```bash
+git clone https://github.com/sobakavbarake/casinospesos.git -b vm
 cd casinospesos
-\`\`\`
+```
 
 2. Install dependencies:
-\`\`\`bash
+```bash
 npm install
-\`\`\`
+```
 
-3. Run the development server:
-\`\`\`bash
+3. Set up environment variables:
+Create `.env.local` file with:
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+4. Run database migration (optional - data already migrated):
+```bash
+npm run migrate
+```
+
+5. Run the development server:
+```bash
 npm run dev
-\`\`\`
+```
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
@@ -72,17 +87,34 @@ casinospesos/
 │   └── styles/             # Global styles
 ├── public/                  # Static assets
 │   └── uploads/            # Uploaded images
-├── data/                   # JSON database
+├── data/                   # Legacy JSON files (migrated to Supabase)
 └── scripts/                # Utility scripts
 \`\`\`
 
+## Database
+
+The project uses **Supabase** (PostgreSQL) for data storage:
+
+- **Casinos**: 13 casinos with full information
+- **Games**: 99+ casino games
+- **Blog Posts**: 6 SEO-optimized articles
+- **Real-time updates**: Instant data synchronization
+- **Row Level Security**: Secure data access
+
+### Database Schema
+
+- `casinos` - Casino information, bonuses, features
+- `games` - Game catalog with providers and details
+- `blog_posts` - Blog articles and SEO content
+
 ## Features Overview
 
-### Admin Panel
+### Admin Panel (`/admin`)
 - Casino management (CRUD operations)
 - Media library for image uploads
 - Content management
 - Blog system
+- Real-time database updates
 
 ### Public Website
 - Homepage with featured casinos
@@ -90,8 +122,8 @@ casinospesos/
 - Individual casino pages
 - Casino comparison tool
 - Bonus categories
-- Payment methods guide
-- Blog section
+- Payment methods guide (OXXO, SPEI, PayPal)
+- Blog section with SEO-optimized content
 
 ### Image Optimization
 - Automatic WebP conversion
