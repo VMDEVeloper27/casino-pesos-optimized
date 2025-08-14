@@ -1,30 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import type { APIResponse, Casino, FilterOptions } from '@/types'
-
-// Mock data - replace with actual database queries
-const mockCasinos: Casino[] = [
-  {
-    id: '1',
-    name: 'Spin Casino',
-    slug: 'spin-casino',
-    logo: '/images/casinos/spin-casino.png',
-    rating: 4.8,
-    reviewCount: 1250,
-    bonusAmount: 10000,
-    bonusType: 'deposit',
-    features: ['Bono de Bienvenida', '600+ Juegos', 'Soporte 24/7'],
-    paymentMethods: ['Visa', 'Mastercard', 'Oxxo', 'Spei'],
-    licenses: ['Malta Gaming Authority'],
-    pros: ['Excelente selección de juegos', 'Bonos generosos', 'Pagos rápidos'],
-    cons: ['Límites de retiro semanales', 'Sin versión móvil nativa'],
-    description: 'Spin Casino es uno de los casinos online más populares de México...',
-    url: 'https://spincasino.com',
-    termsUrl: 'https://spincasino.com/terms',
-    isRecommended: true,
-    country: ['MX', 'AR', 'CL'],
-    currency: ['MXN', 'USD']
-  }
-]
+import { supabase } from '@/lib/supabase'
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
@@ -46,62 +22,74 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '12')
     const offset = (page - 1) * limit
 
-    // Apply filters (mock implementation)
-    let filteredCasinos = mockCasinos
+    // Build Supabase query
+    let query = supabase
+      .from('casinos')
+      .select('*', { count: 'exact' })
+      .eq('status', 'active')
 
+    // Apply filters
     if (filters.rating) {
-      filteredCasinos = filteredCasinos.filter(casino => casino.rating >= filters.rating!)
-    }
-
-    if (filters.country) {
-      filteredCasinos = filteredCasinos.filter(casino => 
-        casino.country.includes(filters.country!)
-      )
+      query = query.gte('rating', filters.rating)
     }
 
     if (filters.bonusType && filters.bonusType.length > 0) {
-      filteredCasinos = filteredCasinos.filter(casino => 
-        filters.bonusType!.includes(casino.bonusType)
-      )
+      query = query.in('bonus_type', filters.bonusType)
+    }
+
+    if (filters.paymentMethods && filters.paymentMethods.length > 0) {
+      query = query.contains('payment_methods', filters.paymentMethods)
+    }
+
+    if (filters.country) {
+      query = query.contains('currencies', [filters.country === 'MX' ? 'MXN' : 'USD'])
     }
 
     // Apply sorting
-    filteredCasinos.sort((a, b) => {
-      let comparison = 0
-      
-      switch (filters.sortBy) {
-        case 'rating':
-          comparison = a.rating - b.rating
-          break
-        case 'bonus':
-          comparison = a.bonusAmount - b.bonusAmount
-          break
-        case 'alphabetical':
-          comparison = a.name.localeCompare(b.name)
-          break
-        case 'newest':
-          // For now, just use rating as fallback
-          comparison = a.rating - b.rating
-          break
-        default:
-          comparison = a.rating - b.rating
-      }
-
-      return filters.sortOrder === 'desc' ? -comparison : comparison
-    })
+    const orderColumn = filters.sortBy === 'bonus' ? 'bonus_amount' : 
+                        filters.sortBy === 'alphabetical' ? 'name' : 'rating'
+    query = query.order(orderColumn, { ascending: filters.sortOrder === 'asc' })
 
     // Apply pagination
-    const total = filteredCasinos.length
-    const paginatedCasinos = filteredCasinos.slice(offset, offset + limit)
+    query = query.range(offset, offset + limit - 1)
+
+    const { data, error, count } = await query
+
+    if (error) {
+      throw new Error(error.message)
+    }
+
+    // Transform data to match Casino interface
+    const casinos: Casino[] = (data || []).map(casino => ({
+      id: casino.id,
+      name: casino.name,
+      slug: casino.slug,
+      logo: casino.logo || '/images/casino-placeholder.png',
+      rating: casino.rating || 0,
+      reviewCount: Math.floor(Math.random() * 1000 + 100), // Mock review count
+      bonusAmount: casino.bonus_amount || 0,
+      bonusType: casino.bonus_type || 'deposit',
+      features: casino.features || [],
+      paymentMethods: casino.payment_methods || [],
+      licenses: casino.licenses || [],
+      pros: casino.pros || [],
+      cons: casino.cons || [],
+      description: `${casino.name} es uno de los mejores casinos online disponibles en México.`,
+      url: casino.affiliate_link || '#',
+      termsUrl: '#',
+      isRecommended: casino.is_featured || false,
+      country: ['MX', 'AR', 'CL'],
+      currency: casino.currencies || ['MXN', 'USD']
+    }))
     
     const response: APIResponse<Casino[]> = {
       success: true,
-      data: paginatedCasinos,
+      data: casinos,
       pagination: {
         page,
         limit,
-        total,
-        pages: Math.ceil(total / limit)
+        total: count || 0,
+        pages: Math.ceil((count || 0) / limit)
       }
     }
 

@@ -12,10 +12,12 @@
     "format:check": "prettier --check .",
     "type-check": "tsc --noEmit",
     "clean": "rm -rf .next out dist",
-    "prepare": "npm run lint && npm run type-check"
+    "prepare": "npm run lint && npm run type-check",
+    "migrate:data": "tsx scripts/migrate-to-supabase.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
+    "@prisma/client": "^6.14.0",
     "@radix-ui/react-accordion": "^1.2.11",
     "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-dialog": "^1.1.14",
@@ -27,17 +29,20 @@
     "@radix-ui/react-tabs": "^1.1.12",
     "@radix-ui/react-toast": "^1.2.14",
     "@radix-ui/react-tooltip": "^1.2.7",
+    "@supabase/supabase-js": "^2.55.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.537.0",
     "next": "15.4.6",
     "next-intl": "^4.3.4",
+    "prisma": "^6.14.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hook-form": "^7.62.0",
     "sharp": "^0.34.3",
     "tailwind-merge": "^3.3.1",
+    "tsx": "^4.20.4",
     "zod": "^4.0.15"
   },
   "devDependencies": {

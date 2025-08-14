@@ -1,14 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllCasinos, updateCasino, addCasino } from '@/lib/casino-database';
-
+import { supabase } from '@/lib/supabase';
 
 // Get all casinos
 export async function GET() {
   try {
-    // Get all casinos from the unified database
-    const casinos = await getAllCasinos();
+    const { data, error } = await supabase
+      .from('casinos')
+      .select('*')
+      .order('created_at', { ascending: false });
     
-    return NextResponse.json(casinos);
+    if (error) throw error;
+    
+    return NextResponse.json(data || []);
   } catch (error) {
     console.error('Error reading casinos:', error);
     return NextResponse.json({ error: 'Failed to fetch casinos' }, { status: 500 });
@@ -20,21 +23,56 @@ export async function POST(request: NextRequest) {
   try {
     const newCasino = await request.json();
     
-    // Check if casino with same ID already exists
-    const existing = await getAllCasinos();
-    if (existing.find((c: any) => c.id === newCasino.id)) {
-      return NextResponse.json(
-        { error: 'Casino with this ID already exists' },
-        { status: 400 }
-      );
+    // Generate ID if not provided
+    if (!newCasino.id) {
+      newCasino.id = newCasino.slug || newCasino.name.toLowerCase().replace(/\s+/g, '-');
     }
     
-    // Add new casino using the unified database
-    const casino = await addCasino(newCasino);
+    // Map fields to database columns
+    const casinoData = {
+      id: newCasino.id,
+      name: newCasino.name,
+      slug: newCasino.slug || newCasino.id,
+      logo: newCasino.logo,
+      rating: newCasino.rating || 0,
+      established: newCasino.established,
+      affiliate_link: newCasino.affiliateLink || '',
+      features: newCasino.features || [],
+      bonus_type: newCasino.bonus?.type,
+      bonus_amount: newCasino.bonus?.amount || 0,
+      bonus_percentage: newCasino.bonus?.percentage || 0,
+      bonus_free_spins: newCasino.bonus?.freeSpins || 0,
+      bonus_min_deposit: newCasino.bonus?.minDeposit || 0,
+      bonus_wagering: newCasino.bonus?.wageringRequirement || 0,
+      bonus_code: newCasino.bonus?.code,
+      games_total: newCasino.games?.total || 0,
+      games_slots: newCasino.games?.slots || 0,
+      games_live: newCasino.games?.live || 0,
+      games_table: newCasino.games?.table || 0,
+      payment_methods: newCasino.paymentMethods || [],
+      withdrawal_time: newCasino.withdrawalTime,
+      licenses: newCasino.licenses || [],
+      currencies: newCasino.currencies || [],
+      pros: newCasino.pros || [],
+      cons: newCasino.cons || [],
+      status: newCasino.status || 'active',
+      is_featured: newCasino.isFeatured || false
+    };
     
-    return NextResponse.json(casino, { status: 201 });
-  } catch (error) {
+    const { data, error } = await supabase
+      .from('casinos')
+      .insert(casinoData)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    
+    return NextResponse.json(data, { status: 201 });
+  } catch (error: any) {
     console.error('Error creating casino:', error);
+    if (error.code === '23505') { // Unique violation
+      return NextResponse.json({ error: 'Casino with this ID or slug already exists' }, { status: 400 });
+    }
     return NextResponse.json({ error: 'Failed to create casino' }, { status: 500 });
   }
 }

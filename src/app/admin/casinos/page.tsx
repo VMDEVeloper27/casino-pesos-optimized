@@ -23,7 +23,21 @@ interface Casino {
   established: number;
   licenses?: string[];
   license?: string;
-  bonus: {
+  // Bonus fields from database
+  bonus_type?: string;
+  bonus_amount?: number;
+  bonus_percentage?: number;
+  bonus_free_spins?: number;
+  bonus_min_deposit?: number;
+  bonus_wagering?: number;
+  bonus_code?: string;
+  // Games fields from database
+  games_total?: number;
+  games_slots?: number;
+  games_live?: number;
+  games_table?: number;
+  // Legacy format support
+  bonus?: {
     type: string;
     amount: number;
     percentage: number;
@@ -32,16 +46,19 @@ interface Casino {
     wageringRequirement: number;
     code?: string;
   } | string;
-  games: {
+  games?: {
     total: number;
     slots: number;
     live: number;
     table: number;
   } | number;
   status: 'active' | 'inactive' | 'pending';
-  lastModified: string;
+  lastModified?: string;
+  updated_at?: string;
+  created_at?: string;
   features?: string[];
   paymentMethods?: string[];
+  payment_methods?: string[];
   currencies?: string[];
 }
 
@@ -332,16 +349,24 @@ export default function AdminCasinosList() {
                   </td>
                   <td className="p-4">
                     <div className="text-white text-sm">
-                      {typeof casino.bonus === 'string' 
-                        ? casino.bonus 
-                        : `${casino.bonus.percentage}% up to $${casino.bonus.amount.toLocaleString()} MXN`}
+                      {casino.bonus_percentage && casino.bonus_amount 
+                        ? `${casino.bonus_percentage}% up to $${casino.bonus_amount.toLocaleString()} MXN` 
+                        : typeof casino.bonus === 'string' 
+                          ? casino.bonus 
+                          : casino.bonus?.percentage 
+                            ? `${casino.bonus.percentage}% up to $${casino.bonus.amount?.toLocaleString()} MXN`
+                            : 'N/A'}
                     </div>
                   </td>
                   <td className="p-4">
                     <div className="text-white">
-                      {typeof casino.games === 'number' 
-                        ? `${casino.games}+` 
-                        : `${casino.games.total}+`}
+                      {casino.games_total 
+                        ? `${casino.games_total}+`
+                        : typeof casino.games === 'number' 
+                          ? `${casino.games}+` 
+                          : casino.games?.total 
+                            ? `${casino.games.total}+`
+                            : 'N/A'}
                     </div>
                   </td>
                   <td className="p-4">

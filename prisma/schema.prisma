@@ -12,58 +12,58 @@ datasource db {
 
 // Casino main entity
 model Casino {
-  id                String    @id @default(cuid())
-  name              String
-  slug              String    @unique
-  logo              String?
-  websiteUrl        String
-  affiliateLink     String
-  rating            Float     @default(0)
-  established       Int?
-  description       String?   @db.Text
-  descriptionEs     String?   @db.Text
-  descriptionEn     String?   @db.Text
-  
+  id            String  @id @default(cuid())
+  name          String
+  slug          String  @unique
+  logo          String?
+  websiteUrl    String
+  affiliateLink String
+  rating        Float   @default(0)
+  established   Int?
+  description   String?
+  descriptionEs String?
+  descriptionEn String?
+
   // Features
-  features          String[]
-  languages         String[]
-  currencies        String[]
-  licenses          String[]
-  supportedCountries String[]
+  features            String[]
+  languages           String[]
+  currencies          String[]
+  licenses            String[]
+  supportedCountries  String[]
   restrictedCountries String[]
-  
+
   // Support
   supportEmail      String?
   supportPhone      String?
-  liveChatAvailable Boolean   @default(false)
+  liveChatAvailable Boolean @default(false)
   supportHours      String?
-  
+
   // Status
-  isActive          Boolean   @default(true)
-  isFeatured        Boolean   @default(false)
-  priority          Int       @default(0)
-  status            ContentStatus @default(DRAFT)
-  verifiedDate      DateTime?
-  publishedAt       DateTime?
-  
+  isActive     Boolean       @default(true)
+  isFeatured   Boolean       @default(false)
+  priority     Int           @default(0)
+  status       ContentStatus @default(DRAFT)
+  verifiedDate DateTime?
+  publishedAt  DateTime?
+
   // SEO
-  metaTitle         String?
-  metaDescription   String?
-  metaKeywords      String[]
-  
+  metaTitle       String?
+  metaDescription String?
+  metaKeywords    String[]
+
   // Relations
-  bonuses           Bonus[]
-  games             Game[]
-  paymentMethods    CasinoPaymentMethod[]
-  reviews           Review[]
-  pros              CasinoPro[]
-  cons              CasinoCon[]
-  versions          ContentVersion[]
-  
+  bonuses        Bonus[]
+  games          Game[]
+  paymentMethods CasinoPaymentMethod[]
+  reviews        Review[]
+  pros           CasinoPro[]
+  cons           CasinoCon[]
+  versions       ContentVersion[]
+
   // Timestamps
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
-  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@index([slug])
   @@index([isActive, isFeatured])
   @@index([status])
@@ -71,36 +71,36 @@ model Casino {
 
 // Bonus types and offers
 model Bonus {
-  id                String    @id @default(cuid())
-  casinoId          String
-  casino            Casino    @relation(fields: [casinoId], references: [id], onDelete: Cascade)
-  
-  type              BonusType
-  name              String
-  nameEs            String?
-  nameEn            String?
-  
+  id       String @id @default(cuid())
+  casinoId String
+  casino   Casino @relation(fields: [casinoId], references: [id], onDelete: Cascade)
+
+  type   BonusType
+  name   String
+  nameEs String?
+  nameEn String?
+
   // Bonus details
-  amount            Float?
-  percentage        Int?
-  maxBonus          Float?
-  minDeposit        Float?
-  freeSpins         Int?
+  amount              Float?
+  percentage          Int?
+  maxBonus            Float?
+  minDeposit          Float?
+  freeSpins           Int?
   wageringRequirement Int?
-  bonusCode         String?
-  
+  bonusCode           String?
+
   // Terms
-  termsAndConditions String?  @db.Text
-  validUntil        DateTime?
-  
+  termsAndConditions String?
+  validUntil         DateTime?
+
   // Status
-  isExclusive       Boolean   @default(false)
-  isActive          Boolean   @default(true)
-  
+  isExclusive Boolean @default(false)
+  isActive    Boolean @default(true)
+
   // Timestamps
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
-  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@index([casinoId])
   @@index([type, isActive])
 }
@@ -118,18 +118,18 @@ enum BonusType {
 
 // Games and categories
 model Game {
-  id                String    @id @default(cuid())
-  casinoId          String
-  casino            Casino    @relation(fields: [casinoId], references: [id], onDelete: Cascade)
-  
-  category          GameCategory
-  provider          String
-  count             Int       @default(0)
-  popularTitles     String[]
-  
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
-  
+  id       String @id @default(cuid())
+  casinoId String
+  casino   Casino @relation(fields: [casinoId], references: [id], onDelete: Cascade)
+
+  category      GameCategory
+  provider      String
+  count         Int          @default(0)
+  popularTitles String[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@index([casinoId, category])
 }
 
@@ -146,24 +146,24 @@ enum GameCategory {
 
 // Payment methods
 model PaymentMethod {
-  id                String    @id @default(cuid())
-  name              String    @unique
-  type              PaymentType
-  logo              String?
-  
+  id   String      @id @default(cuid())
+  name String      @unique
+  type PaymentType
+  logo String?
+
   // Processing details
-  processingTime    String?
-  minDeposit        Float?
-  maxDeposit        Float?
-  minWithdrawal     Float?
-  maxWithdrawal     Float?
-  fees              String?
-  
+  processingTime String?
+  minDeposit     Float?
+  maxDeposit     Float?
+  minWithdrawal  Float?
+  maxWithdrawal  Float?
+  fees           String?
+
   // Relations
-  casinos           CasinoPaymentMethod[]
-  
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
+  casinos CasinoPaymentMethod[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum PaymentType {
@@ -179,16 +179,16 @@ enum PaymentType {
 
 // Junction table for casino payment methods
 model CasinoPaymentMethod {
-  id                String    @id @default(cuid())
-  casinoId          String
-  paymentMethodId   String
-  
-  casino            Casino    @relation(fields: [casinoId], references: [id], onDelete: Cascade)
-  paymentMethod     PaymentMethod @relation(fields: [paymentMethodId], references: [id])
-  
-  depositAvailable  Boolean   @default(true)
+  id              String @id @default(cuid())
+  casinoId        String
+  paymentMethodId String
+
+  casino        Casino        @relation(fields: [casinoId], references: [id], onDelete: Cascade)
+  paymentMethod PaymentMethod @relation(fields: [paymentMethodId], references: [id])
+
+  depositAvailable    Boolean @default(true)
   withdrawalAvailable Boolean @default(true)
-  
+
   @@unique([casinoId, paymentMethodId])
   @@index([casinoId])
   @@index([paymentMethodId])
@@ -196,127 +196,127 @@ model CasinoPaymentMethod {
 
 // Reviews
 model Review {
-  id                String    @id @default(cuid())
-  casinoId          String
-  casino            Casino    @relation(fields: [casinoId], references: [id], onDelete: Cascade)
-  
-  locale            String    @default("es")
-  title             String
-  content           String    @db.Text
-  
+  id       String @id @default(cuid())
+  casinoId String
+  casino   Casino @relation(fields: [casinoId], references: [id], onDelete: Cascade)
+
+  locale  String @default("es")
+  title   String
+  content String
+
   // Ratings
-  overallRating     Float
-  gamesRating       Float?
-  bonusesRating     Float?
-  paymentRating     Float?
-  supportRating     Float?
-  mobileRating      Float?
-  
+  overallRating Float
+  gamesRating   Float?
+  bonusesRating Float?
+  paymentRating Float?
+  supportRating Float?
+  mobileRating  Float?
+
   // SEO
-  metaTitle         String?
-  metaDescription   String?
-  keywords          String[]
-  
+  metaTitle       String?
+  metaDescription String?
+  keywords        String[]
+
   // Author
-  authorName        String
-  authorEmail       String?
-  authorAvatar      String?
-  
+  authorName   String
+  authorEmail  String?
+  authorAvatar String?
+
   // Status
-  isPublished       Boolean   @default(false)
-  
+  isPublished Boolean @default(false)
+
   // Timestamps
-  publishedAt       DateTime?
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
-  
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
   @@index([casinoId, locale])
   @@index([isPublished])
 }
 
 // Casino pros
 model CasinoPro {
-  id                String    @id @default(cuid())
-  casinoId          String
-  casino            Casino    @relation(fields: [casinoId], references: [id], onDelete: Cascade)
-  
-  text              String
-  textEs            String?
-  textEn            String?
-  order             Int       @default(0)
-  
+  id       String @id @default(cuid())
+  casinoId String
+  casino   Casino @relation(fields: [casinoId], references: [id], onDelete: Cascade)
+
+  text   String
+  textEs String?
+  textEn String?
+  order  Int     @default(0)
+
   @@index([casinoId])
 }
 
 // Casino cons
 model CasinoCon {
-  id                String    @id @default(cuid())
-  casinoId          String
-  casino            Casino    @relation(fields: [casinoId], references: [id], onDelete: Cascade)
-  
-  text              String
-  textEs            String?
-  textEn            String?
-  order             Int       @default(0)
-  
+  id       String @id @default(cuid())
+  casinoId String
+  casino   Casino @relation(fields: [casinoId], references: [id], onDelete: Cascade)
+
+  text   String
+  textEs String?
+  textEn String?
+  order  Int     @default(0)
+
   @@index([casinoId])
 }
 
 // Newsletter subscribers
 model Subscriber {
-  id                String    @id @default(cuid())
-  email             String    @unique
-  name              String?
-  
+  id    String  @id @default(cuid())
+  email String  @unique
+  name  String?
+
   // Preferences
-  locale            String    @default("es")
-  country           String?
-  interests         String[]
-  
+  locale    String   @default("es")
+  country   String?
+  interests String[]
+
   // Status
-  isActive          Boolean   @default(true)
-  isVerified        Boolean   @default(false)
+  isActive          Boolean @default(true)
+  isVerified        Boolean @default(false)
   verificationToken String?
-  
+
   // Timestamps
-  subscribedAt      DateTime  @default(now())
-  unsubscribedAt    DateTime?
-  
+  subscribedAt   DateTime  @default(now())
+  unsubscribedAt DateTime?
+
   @@index([email])
   @@index([isActive, isVerified])
 }
 
 // Contact form submissions
 model ContactSubmission {
-  id                String    @id @default(cuid())
-  
-  name              String
-  email             String
-  subject           String
-  message           String    @db.Text
-  
+  id String @id @default(cuid())
+
+  name    String
+  email   String
+  subject String
+  message String
+
   // Status
-  isRead            Boolean   @default(false)
-  isReplied         Boolean   @default(false)
-  
+  isRead    Boolean @default(false)
+  isReplied Boolean @default(false)
+
   // Timestamps
-  createdAt         DateTime  @default(now())
-  repliedAt         DateTime?
-  
+  createdAt DateTime  @default(now())
+  repliedAt DateTime?
+
   @@index([isRead, isReplied])
 }
 
 // User management for admin panel
 model User {
-  id              String          @id @default(cuid())
-  email           String          @unique
-  password        String
-  name            String?
-  role            Role            @default(EDITOR)
-  isActive        Boolean         @default(true)
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
-  
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      Role     @default(EDITOR)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   // Relations
   contentVersions ContentVersion[]
   auditLogs       AuditLog[]
@@ -333,51 +333,53 @@ enum Role {
 
 // Media library for images and files
 model Media {
-  id              String          @id @default(cuid())
-  filename        String
-  originalName    String
-  mimeType        String
-  size            Int
-  url             String
-  alt             String?
-  caption         String?
-  width           Int?
-  height          Int?
-  
+  id           String  @id @default(cuid())
+  filename     String
+  originalName String
+  mimeType     String
+  size         Int
+  url          String
+  alt          String?
+  caption      String?
+  width        Int?
+  height       Int?
+
   // Optimized versions
-  thumbnailUrl    String?
-  mediumUrl       String?
-  largeUrl        String?
-  
+  thumbnailUrl String?
+  mediumUrl    String?
+  largeUrl     String?
+
   // Organization
-  folder          String          @default("/")
-  tags            String[]
-  
+  folder String   @default("/")
+  tags   String[]
+
   // Relations
-  uploadedBy      User            @relation(fields: [uploadedById], references: [id])
-  uploadedById    String
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
-  
+  uploadedBy   User     @relation(fields: [uploadedById], references: [id])
+  uploadedById String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
   @@index([folder])
   @@index([uploadedById])
 }
 
 // Content versioning system
 model ContentVersion {
-  id              String          @id @default(cuid())
-  entityType      String          // "casino", "bonus", "review", etc.
-  entityId        String
-  version         Int             @default(1)
-  data            Json            // Complete snapshot of the entity
-  changes         Json?           // Diff from previous version
-  comment         String?
-  
+  id         String  @id @default(cuid())
+  entityType String // "casino", "bonus", "review", etc.
+  entityId   String
+  version    Int     @default(1)
+  data       Json // Complete snapshot of the entity
+  changes    Json? // Diff from previous version
+  comment    String?
+
   // Relations
-  createdBy       User            @relation(fields: [createdById], references: [id])
-  createdById     String
-  createdAt       DateTime        @default(now())
-  
+  createdBy   User     @relation(fields: [createdById], references: [id])
+  createdById String
+  createdAt   DateTime @default(now())
+  Casino      Casino?  @relation(fields: [casinoId], references: [id])
+  casinoId    String?
+
   @@unique([entityType, entityId, version])
   @@index([entityType, entityId])
   @@index([createdById])
@@ -385,19 +387,19 @@ model ContentVersion {
 
 // Audit logging for all admin actions
 model AuditLog {
-  id              String          @id @default(cuid())
-  action          String          // "CREATE", "UPDATE", "DELETE", "LOGIN", etc.
-  entityType      String?         // "casino", "bonus", "user", etc.
-  entityId        String?
-  details         Json?           // Additional context about the action
-  ipAddress       String?
-  userAgent       String?
-  
+  id         String  @id @default(cuid())
+  action     String // "CREATE", "UPDATE", "DELETE", "LOGIN", etc.
+  entityType String? // "casino", "bonus", "user", etc.
+  entityId   String?
+  details    Json? // Additional context about the action
+  ipAddress  String?
+  userAgent  String?
+
   // Relations
-  user            User            @relation(fields: [userId], references: [id])
-  userId          String
-  createdAt       DateTime        @default(now())
-  
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now())
+
   @@index([userId])
   @@index([entityType, entityId])
   @@index([action])
@@ -406,26 +408,26 @@ model AuditLog {
 
 // SEO metadata management
 model SeoMetadata {
-  id              String          @id @default(cuid())
-  path            String          @unique
-  title           String?
-  titleEs         String?
-  titleEn         String?
-  description     String?
-  descriptionEs   String?
-  descriptionEn   String?
-  keywords        String[]
-  ogImage         String?
-  ogTitle         String?
-  ogDescription   String?
-  twitterCard     String          @default("summary_large_image")
-  canonicalUrl    String?
-  robots          String          @default("index,follow")
-  structuredData  Json?
-  
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
-  
+  id             String   @id @default(cuid())
+  path           String   @unique
+  title          String?
+  titleEs        String?
+  titleEn        String?
+  description    String?
+  descriptionEs  String?
+  descriptionEn  String?
+  keywords       String[]
+  ogImage        String?
+  ogTitle        String?
+  ogDescription  String?
+  twitterCard    String   @default("summary_large_image")
+  canonicalUrl   String?
+  robots         String   @default("index,follow")
+  structuredData Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@index([path])
 }
 

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getAllGames } from '@/lib/game-database';
+import { supabase } from '@/lib/supabase'
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
@@ -13,67 +13,70 @@ export async function GET(request: NextRequest) {
     const sortBy = searchParams.get('sortBy') || 'popularity'
     const sortOrder = searchParams.get('sortOrder') || 'desc'
     
-    // Get all games from the database
-    let allGames = await getAllGames();
-    let filteredGames = [...allGames];
+    // Build Supabase query
+    let query = supabase
+      .from('games')
+      .select('*', { count: 'exact' })
 
     // Apply filters
     if (type) {
-      filteredGames = filteredGames.filter(game => game.type === type)
+      query = query.eq('type', type)
     }
 
     if (provider) {
-      filteredGames = filteredGames.filter(game => 
-        game.provider.toLowerCase() === provider.toLowerCase()
-      )
+      query = query.ilike('provider', provider)
     }
 
     if (search) {
-      const searchLower = search.toLowerCase();
-      filteredGames = filteredGames.filter(game =>
-        game.name.toLowerCase().includes(searchLower) ||
-        game.provider.toLowerCase().includes(searchLower) ||
-        game.theme?.toLowerCase().includes(searchLower)
-      )
+      query = query.or(`name.ilike.%${search}%,provider.ilike.%${search}%,theme.ilike.%${search}%`)
     }
 
     // Apply sorting
-    filteredGames.sort((a, b) => {
-      let comparison = 0
-      
-      switch (sortBy) {
-        case 'popularity':
-          comparison = (a.popularity || 0) - (b.popularity || 0)
-          break
-        case 'name':
-          comparison = a.name.localeCompare(b.name)
-          break
-        case 'rtp':
-          comparison = (a.rtp || 0) - (b.rtp || 0)
-          break
-        case 'maxWin':
-          comparison = (a.maxWin || 0) - (b.maxWin || 0)
-          break
-        default:
-          comparison = (a.popularity || 0) - (b.popularity || 0)
-      }
-
-      return sortOrder === 'desc' ? -comparison : comparison
-    })
+    const orderColumn = sortBy === 'name' ? 'name' : 
+                       sortBy === 'rtp' ? 'rtp' :
+                       sortBy === 'maxWin' ? 'max_win' : 'created_at'
+    query = query.order(orderColumn, { ascending: sortOrder === 'asc' })
 
     // Apply pagination
     const offset = (page - 1) * limit
-    const total = filteredGames.length
-    const paginatedGames = filteredGames.slice(offset, offset + limit)
+    query = query.range(offset, offset + limit - 1)
+
+    const { data, error, count } = await query
+
+    if (error) {
+      throw new Error(error.message)
+    }
+
+    // Transform data to match existing interface
+    const games = (data || []).map(game => ({
+      id: game.id,
+      name: game.name,
+      slug: game.slug,
+      provider: game.provider || 'Unknown',
+      type: game.type || 'slot',
+      image: game.image || '/images/game-placeholder.png',
+      thumbnail: game.image || '/images/game-placeholder.png',
+      rtp: game.rtp || 96,
+      volatility: game.volatility || 'medium',
+      maxWin: game.max_win || 10000,
+      minBet: game.min_bet || 0.1,
+      maxBet: game.max_bet || 100,
+      features: game.features || [],
+      theme: game.theme || 'classic',
+      popularity: Math.floor(Math.random() * 100),
+      isNew: game.is_new || false,
+      isFeatured: game.is_featured || false,
+      demoUrl: '#'
+    }))
     
     const response = {
       success: true,
-      data: paginatedGames,
+      data: games,
       pagination: {
         page,
         limit,
-        total,
-        pages: Math.ceil(total / limit)
+        total: count || 0,
+        pages: Math.ceil((count || 0) / limit)
       }
     }
 
