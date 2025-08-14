@@ -16,10 +16,15 @@ import {
   Gift,
   BookOpen,
   Scale,
-  Gamepad2
+  Gamepad2,
+  User,
+  LogOut,
+  Settings,
+  LayoutDashboard
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useCountry, countries } from '@/contexts/CountryContext';
+import { useSession, signOut } from 'next-auth/react';
 
 interface ProfessionalHeaderProps {
   locale: string;
@@ -27,8 +32,10 @@ interface ProfessionalHeaderProps {
 
 export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const pathname = usePathname();
   const { selectedCountry } = useCountry();
+  const { data: session, status } = useSession();
 
   // Simplified navigation items without dropdowns
   const navItems = [
@@ -143,13 +150,126 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
                   </span>
                 </div>
 
-                {/* Orange CTA Button matching reference */}
-                <Link
-                  href={`/${locale}/casinos`}
-                  className="px-6 py-2.5 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold rounded-xl transition-all shadow-medium hover:shadow-large transform hover:scale-105"
-                >
-                  {locale === 'es' ? 'Jugar Ahora' : 'Play Now'}
-                </Link>
+                {/* Auth Buttons or User Menu */}
+                {status === 'loading' ? (
+                  <div className="animate-pulse bg-gray-200 h-10 w-24 rounded-lg"></div>
+                ) : session ? (
+                  // User dropdown menu when logged in
+                  <div className="relative">
+                    <button
+                      onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
+                      className="flex items-center gap-2 px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                    >
+                      <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white font-medium">
+                        {session.user?.name?.[0]?.toUpperCase() || session.user?.email?.[0]?.toUpperCase() || 'U'}
+                      </div>
+                      <span className="text-sm font-medium text-gray-700 max-w-[120px] truncate">
+                        {session.user?.name || session.user?.email?.split('@')[0]}
+                      </span>
+                      <ChevronDown className={cn(
+                        "w-4 h-4 text-gray-500 transition-transform",
+                        isUserDropdownOpen && "rotate-180"
+                      )} />
+                    </button>
+
+                    {/* Dropdown Menu */}
+                    <AnimatePresence>
+                      {isUserDropdownOpen && (
+                        <>
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed inset-0 z-40"
+                            onClick={() => setIsUserDropdownOpen(false)}
+                          />
+                          <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 z-50"
+                          >
+                            <div className="p-3 border-b border-gray-100">
+                              <p className="text-sm font-medium text-gray-900">{session.user?.name || session.user?.email?.split('@')[0]}</p>
+                              <p className="text-xs text-gray-500 mt-0.5">{session.user?.email}</p>
+                              {session.user?.role && (
+                                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 mt-2">
+                                  {session.user.role === 'admin' ? 'Administrador' : session.user.role === 'editor' ? 'Editor' : 'Usuario'}
+                                </span>
+                              )}
+                            </div>
+                            <div className="py-2">
+                              <Link
+                                href={`/${locale}/dashboard`}
+                                className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                                onClick={() => setIsUserDropdownOpen(false)}
+                              >
+                                <LayoutDashboard className="w-4 h-4" />
+                                {locale === 'es' ? 'Mi Panel' : 'My Dashboard'}
+                              </Link>
+                              <Link
+                                href={`/${locale}/dashboard/profile`}
+                                className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                                onClick={() => setIsUserDropdownOpen(false)}
+                              >
+                                <User className="w-4 h-4" />
+                                {locale === 'es' ? 'Mi Perfil' : 'My Profile'}
+                              </Link>
+                              <Link
+                                href={`/${locale}/dashboard/settings`}
+                                className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                                onClick={() => setIsUserDropdownOpen(false)}
+                              >
+                                <Settings className="w-4 h-4" />
+                                {locale === 'es' ? 'Configuración' : 'Settings'}
+                              </Link>
+                              {(session.user?.role === 'admin' || session.user?.role === 'editor') && (
+                                <>
+                                  <div className="border-t border-gray-100 my-2"></div>
+                                  <Link
+                                    href="/admin"
+                                    className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                                    onClick={() => setIsUserDropdownOpen(false)}
+                                  >
+                                    <Settings className="w-4 h-4" />
+                                    {locale === 'es' ? 'Panel Admin' : 'Admin Panel'}
+                                  </Link>
+                                </>
+                              )}
+                              <div className="border-t border-gray-100 my-2"></div>
+                              <button
+                                onClick={() => {
+                                  setIsUserDropdownOpen(false);
+                                  signOut({ callbackUrl: `/${locale}` });
+                                }}
+                                className="flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors w-full text-left"
+                              >
+                                <LogOut className="w-4 h-4" />
+                                {locale === 'es' ? 'Cerrar Sesión' : 'Sign Out'}
+                              </button>
+                            </div>
+                          </motion.div>
+                        </>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ) : (
+                  // Login and Register buttons when not logged in
+                  <div className="flex items-center gap-3">
+                    <Link
+                      href={`/${locale}/auth/signin`}
+                      className="px-4 py-2 text-gray-700 font-medium hover:text-green-700 transition-colors"
+                    >
+                      {locale === 'es' ? 'Iniciar Sesión' : 'Sign In'}
+                    </Link>
+                    <Link
+                      href={`/${locale}/auth/signup`}
+                      className="px-5 py-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold rounded-xl transition-all shadow-medium hover:shadow-large transform hover:scale-105"
+                    >
+                      {locale === 'es' ? 'Registrarse' : 'Sign Up'}
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -278,14 +398,52 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
                   </div>
                 </div>
 
-                {/* CTA Button */}
+                {/* Auth Section */}
                 <div className="mt-6">
-                  <Link
-                    href={`/${locale}/casinos`}
-                    className="block w-full p-4 bg-gradient-to-r from-green-500 to-green-600 text-white text-center font-semibold rounded-xl hover:from-green-600 hover:to-green-700 transition-all shadow-medium hover:shadow-large"
-                  >
-                    {locale === 'es' ? 'Ver Mejores Casinos' : 'View Best Casinos'}
-                  </Link>
+                  {session ? (
+                    // User info and actions when logged in
+                    <div className="space-y-3">
+                      <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white font-medium">
+                            {session.user?.name?.[0]?.toUpperCase() || session.user?.email?.[0]?.toUpperCase() || 'U'}
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-900">{session.user?.name || session.user?.email?.split('@')[0]}</p>
+                            <p className="text-xs text-gray-500">{session.user?.email}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <Link
+                        href={`/${locale}/dashboard`}
+                        className="block w-full p-3 bg-white border border-gray-200 text-center font-medium rounded-lg hover:bg-gray-50 transition-colors"
+                      >
+                        {locale === 'es' ? 'Mi Panel' : 'My Dashboard'}
+                      </Link>
+                      <button
+                        onClick={() => signOut({ callbackUrl: `/${locale}` })}
+                        className="block w-full p-3 bg-red-50 text-red-600 text-center font-medium rounded-lg hover:bg-red-100 transition-colors"
+                      >
+                        {locale === 'es' ? 'Cerrar Sesión' : 'Sign Out'}
+                      </button>
+                    </div>
+                  ) : (
+                    // Login and Register buttons when not logged in
+                    <div className="space-y-3">
+                      <Link
+                        href={`/${locale}/auth/signin`}
+                        className="block w-full p-3 bg-white border border-green-200 text-center font-medium rounded-lg hover:bg-gray-50 transition-colors"
+                      >
+                        {locale === 'es' ? 'Iniciar Sesión' : 'Sign In'}
+                      </Link>
+                      <Link
+                        href={`/${locale}/auth/signup`}
+                        className="block w-full p-4 bg-gradient-to-r from-green-500 to-green-600 text-white text-center font-semibold rounded-xl hover:from-green-600 hover:to-green-700 transition-all shadow-medium hover:shadow-large"
+                      >
+                        {locale === 'es' ? 'Registrarse' : 'Sign Up'}
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>

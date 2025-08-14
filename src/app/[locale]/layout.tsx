@@ -8,6 +8,7 @@ import Footer from '@/components/layout/Footer';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { CountryProvider } from '@/contexts/CountryContext';
 import { FacebookPixel, GoogleAnalytics, Hotjar } from '@/components/Analytics';
+import AuthSessionProvider from '@/components/providers/SessionProvider';
 import '@/styles/globals.css';
 
 const inter = Inter({ 
@@ -101,23 +102,25 @@ export default async function LocaleLayout({
           />
         )}
         
-        <CountryProvider initialLocale={locale}>
-          <NextIntlClientProvider locale={locale} messages={messages}>
-            {/* Professional Header - Matching Your Reference Design */}
-            <ProfessionalHeader locale={locale} />
-            
-            {/* Breadcrumbs */}
-            <Breadcrumbs />
+        <AuthSessionProvider>
+          <CountryProvider initialLocale={locale}>
+            <NextIntlClientProvider locale={locale} messages={messages}>
+              {/* Professional Header - Matching Your Reference Design */}
+              <ProfessionalHeader locale={locale} />
+              
+              {/* Breadcrumbs */}
+              <Breadcrumbs />
 
-            {/* Main Content */}
-            <div className="min-h-screen">
-              {children}
-            </div>
+              {/* Main Content */}
+              <div className="min-h-screen">
+                {children}
+              </div>
 
-            {/* Footer */}
-            <Footer />
-          </NextIntlClientProvider>
-        </CountryProvider>
+              {/* Footer */}
+              <Footer />
+            </NextIntlClientProvider>
+          </CountryProvider>
+        </AuthSessionProvider>
       </body>
     </html>
   );
