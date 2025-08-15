@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 import createIntlMiddleware from 'next-intl/middleware';
+import { authRateLimit, apiRateLimit, registrationRateLimit } from '@/lib/rate-limit';
 
 // Create the internationalization middleware
 const intlMiddleware = createIntlMiddleware({
@@ -12,6 +13,30 @@ const intlMiddleware = createIntlMiddleware({
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  
+  // Apply rate limiting to auth endpoints
+  if (pathname.includes('/api/auth/signin') || pathname.includes('/api/auth/callback')) {
+    const rateLimitResponse = await authRateLimit(request);
+    if (rateLimitResponse.status === 429) {
+      return rateLimitResponse;
+    }
+  }
+  
+  // Apply rate limiting to registration endpoint
+  if (pathname.includes('/api/auth/register')) {
+    const rateLimitResponse = await registrationRateLimit(request);
+    if (rateLimitResponse.status === 429) {
+      return rateLimitResponse;
+    }
+  }
+  
+  // Apply general rate limiting to all API routes
+  if (pathname.startsWith('/api/')) {
+    const rateLimitResponse = await apiRateLimit(request);
+    if (rateLimitResponse.status === 429) {
+      return rateLimitResponse;
+    }
+  }
   
   // Extract locale from pathname
   const localeMatch = pathname.match(/^\/(es|en)/);
