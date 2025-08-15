@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { getToken } from 'next-auth/jwt';
+import { notifyNewReview } from '@/lib/admin-notifications';
 
 export async function GET(request: NextRequest) {
   try {
@@ -119,6 +120,15 @@ export async function POST(request: NextRequest) {
       console.error('Error creating review:', error);
       return NextResponse.json({ error: 'Failed to create review' }, { status: 500 });
     }
+
+    // Send admin notification
+    notifyNewReview({
+      casinoName,
+      userName: token.name || 'Anonymous',
+      rating,
+      title,
+      comment
+    });
 
     return NextResponse.json({
       message: 'Review submitted successfully.',

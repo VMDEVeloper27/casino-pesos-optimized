@@ -14,28 +14,14 @@ const intlMiddleware = createIntlMiddleware({
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   
-  // Apply rate limiting to auth endpoints
-  if (pathname.includes('/api/auth/signin') || pathname.includes('/api/auth/callback')) {
-    const rateLimitResponse = await authRateLimit(request);
-    if (rateLimitResponse.status === 429) {
-      return rateLimitResponse;
-    }
-  }
-  
-  // Apply rate limiting to registration endpoint
-  if (pathname.includes('/api/auth/register')) {
-    const rateLimitResponse = await registrationRateLimit(request);
-    if (rateLimitResponse.status === 429) {
-      return rateLimitResponse;
-    }
-  }
-  
-  // Apply general rate limiting to all API routes
-  if (pathname.startsWith('/api/')) {
-    const rateLimitResponse = await apiRateLimit(request);
-    if (rateLimitResponse.status === 429) {
-      return rateLimitResponse;
-    }
+  // Skip ALL middleware for API routes and static files
+  if (
+    pathname.startsWith('/api/') ||
+    pathname.startsWith('/_next/') ||
+    pathname.includes('/favicon') ||
+    pathname.match(/\.(png|jpg|jpeg|gif|svg|ico|webp|css|js)$/i)
+  ) {
+    return NextResponse.next();
   }
   
   // Extract locale from pathname
@@ -108,5 +94,15 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
+  matcher: [
+    /*
+     * Match all request paths except:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)  
+     * - favicon.ico (favicon file)
+     * - public files
+     */
+    '/((?!api|_next/static|_next/image|favicon.ico).*)'
+  ]
 };

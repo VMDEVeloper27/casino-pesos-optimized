@@ -70,6 +70,10 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
       label: 'Blog', 
       href: `/${locale}/blog`
     },
+    { 
+      label: locale === 'es' ? 'Contacto' : 'Contact', 
+      href: `/${locale}/contacto`
+    },
   ];
 
   // Close mobile menu on route change

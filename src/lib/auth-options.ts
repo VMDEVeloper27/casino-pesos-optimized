@@ -4,6 +4,8 @@ import bcrypt from 'bcryptjs';
 import { supabase } from './supabase';
 
 export const authOptions: NextAuthOptions = {
+  // Ensure proper URL handling
+  url: process.env.NEXTAUTH_URL || 'http://localhost:3000',
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -81,5 +83,5 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   secret: process.env.NEXTAUTH_SECRET,
-  debug: process.env.NODE_ENV === 'development',
+  debug: process.env.NODE_ENV === 'development', // Enable debug in development
 };

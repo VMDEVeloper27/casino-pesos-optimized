@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { supabase } from '@/lib/supabase';
+import { notifyNewUser } from '@/lib/admin-notifications';
 
 export async function POST(request: NextRequest) {
   try {
@@ -51,6 +52,13 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
+
+    // Send admin notification
+    notifyNewUser({
+      name: newUser.name,
+      email: newUser.email,
+      role: newUser.role
+    });
 
     // Return user without password
     const { password: _, ...userWithoutPassword } = newUser;

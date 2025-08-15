@@ -94,9 +94,18 @@ export async function getAllCasinos(): Promise<Casino[]> {
       .eq('status', 'active')
       .order('rating', { ascending: false });
 
-    if (error) throw error;
+    if (error) {
+      console.error('Supabase error:', error);
+      throw error;
+    }
 
-    const casinos = (data || []).map(transformSupabaseToCasino);
+    // Если данных нет, возвращаем пустой массив
+    if (!data || data.length === 0) {
+      console.log('No casinos found in database');
+      return [];
+    }
+
+    const casinos = data.map(transformSupabaseToCasino);
     
     // Update cache
     if (typeof window !== 'undefined') {

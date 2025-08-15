@@ -8,7 +8,7 @@ import Footer from '@/components/layout/Footer';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { CountryProvider } from '@/contexts/CountryContext';
 import { FacebookPixel, GoogleAnalytics, Hotjar } from '@/components/Analytics';
-import AuthSessionProvider from '@/components/providers/SessionProvider';
+import ClientSessionProvider from '@/components/providers/ClientSessionProvider';
 import '@/styles/globals.css';
 
 const inter = Inter({ 
@@ -102,7 +102,7 @@ export default async function LocaleLayout({
           />
         )}
         
-        <AuthSessionProvider>
+        <ClientSessionProvider>
           <CountryProvider initialLocale={locale}>
             <NextIntlClientProvider locale={locale} messages={messages}>
               {/* Professional Header - Matching Your Reference Design */}
@@ -120,7 +120,7 @@ export default async function LocaleLayout({
               <Footer />
             </NextIntlClientProvider>
           </CountryProvider>
-        </AuthSessionProvider>
+        </ClientSessionProvider>
       </body>
     </html>
   );
