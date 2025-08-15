@@ -1,4 +1,3 @@
-import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { 
   LayoutDashboard, 
@@ -30,15 +29,10 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Simple auth check (in production, use proper authentication)
-  const isAuthenticated = true; // You can check cookies or session here
+  // Auth check is done in middleware
   
-  if (!isAuthenticated) {
-    redirect('/admin/login');
-  }
-
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="es" className={inter.variable}>
       <body className="bg-neutral-900">
         <div className="min-h-screen flex">
       {/* Sidebar */}
@@ -141,12 +135,13 @@ export default function AdminLayout({
               <span>Audit Log</span>
             </Link>
             
-            <button
-              className="flex items-center gap-3 px-4 py-3 rounded-lg text-neutral-300 hover:bg-neutral-700 hover:text-white transition-colors w-full"
+            <a
+              href="/api/auth/signout?callbackUrl=/"
+              className="flex items-center gap-3 px-4 py-3 rounded-lg text-neutral-300 hover:bg-neutral-700 hover:text-white transition-colors w-full cursor-pointer"
             >
               <LogOut className="w-5 h-5" />
               <span>Logout</span>
-            </button>
+            </a>
           </nav>
         </div>
       </aside>

@@ -54,10 +54,16 @@ export async function middleware(request: NextRequest) {
     
     // Check if user has admin or editor role
     const userRole = token.role as string;
+    console.log('Admin route access - User role:', userRole, 'Token:', token);
+    
     if (userRole !== 'admin' && userRole !== 'editor') {
       // Redirect to home if user doesn't have permission
+      console.log('Access denied - user role is:', userRole);
       return NextResponse.redirect(new URL(`/${locale}`, request.url));
     }
+    
+    // Admin routes should not go through intl middleware
+    return NextResponse.next();
   }
   
   // Redirect authenticated users away from auth pages
@@ -72,7 +78,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
   }
   
-  // Apply internationalization middleware for non-protected routes
+  // Apply internationalization middleware for non-admin routes
   return intlMiddleware(request);
 }
 

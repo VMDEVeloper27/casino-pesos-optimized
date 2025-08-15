@@ -15,7 +15,7 @@ export default function SignInPage({ params }: { params: Promise<{ locale: strin
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl') || '/';
+  const callbackUrl = searchParams.get('callbackUrl') || '/es/dashboard';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
