@@ -58,20 +58,16 @@ export function PremiumHeader({ locale }: PremiumHeaderProps) {
         { label: locale === 'es' ? 'Cashback' : 'Cashback', href: `/${locale}/bonos/cashback` },
       ]
     },
-    { 
-      label: locale === 'es' ? 'Guías' : 'Guides', 
-      href: `/${locale}/guias`, 
-      icon: '📚' 
-    },
-    { 
-      label: locale === 'es' ? 'Comparar' : 'Compare', 
-      href: `/${locale}/comparar`, 
-      icon: '⚖️' 
-    },
-    { 
-      label: 'Blog', 
-      href: `/${locale}/blog`, 
-      icon: '✍️' 
+    {
+      label: locale === 'es' ? 'Más' : 'More',
+      href: '#',
+      icon: '📋',
+      hasDropdown: true,
+      dropdownItems: [
+        { label: locale === 'es' ? 'Guías' : 'Guides', href: `/${locale}/guias`, icon: '📚' },
+        { label: locale === 'es' ? 'Comparar Casinos' : 'Compare Casinos', href: `/${locale}/comparar`, icon: '⚖️' },
+        { label: 'Blog', href: `/${locale}/blog`, icon: '✍️' },
+      ]
     },
   ];
 
@@ -190,13 +186,18 @@ export function PremiumHeader({ locale }: PremiumHeaderProps) {
                                   href={dropdownItem.href}
                                   className="flex items-center justify-between p-3 rounded-lg text-white/90 hover:text-yellow-300 hover:bg-gradient-to-r hover:from-yellow-400/10 hover:to-orange-500/10 transition-all group"
                                 >
-                                  <span>{dropdownItem.label}</span>
+                                  <div className="flex items-center gap-2">
+                                    {dropdownItem.icon && <span className="text-lg">{dropdownItem.icon}</span>}
+                                    <span>{dropdownItem.label}</span>
+                                  </div>
                                   {dropdownItem.badge && (
                                     <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black text-xs px-2 py-0.5 rounded-full font-bold">
                                       {dropdownItem.badge}
                                     </span>
                                   )}
-                                  <Zap className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity" />
+                                  {!dropdownItem.badge && (
+                                    <Zap className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity" />
+                                  )}
                                 </Link>
                               ))}
                             </motion.div>
@@ -380,24 +381,61 @@ export function PremiumHeader({ locale }: PremiumHeaderProps) {
                 {/* Navigation items */}
                 <nav className="space-y-2">
                   {navItems.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className={cn(
-                        "flex items-center gap-3 p-4 rounded-lg transition-all",
-                        pathname.startsWith(item.href)
-                          ? "bg-gradient-to-r from-yellow-400/20 to-orange-500/20 text-yellow-300"
-                          : "text-white/90 hover:text-yellow-300 hover:bg-gradient-to-r hover:from-purple-800/50 hover:to-pink-800/50"
+                    <div key={item.label}>
+                      {item.hasDropdown ? (
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-3 p-4 text-white/90 font-medium">
+                            <span className="text-xl">{item.icon}</span>
+                            <span>{item.label}</span>
+                            {item.badge && (
+                              <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black text-xs px-2 py-0.5 rounded-full font-bold ml-auto">
+                                {item.badge}
+                              </span>
+                            )}
+                          </div>
+                          <div className="pl-8 space-y-1">
+                            {item.dropdownItems?.map((dropdownItem) => (
+                              <Link
+                                key={dropdownItem.href}
+                                href={dropdownItem.href}
+                                className={cn(
+                                  "flex items-center gap-3 p-3 rounded-lg transition-all",
+                                  pathname === dropdownItem.href
+                                    ? "bg-gradient-to-r from-yellow-400/20 to-orange-500/20 text-yellow-300"
+                                    : "text-white/80 hover:text-yellow-300 hover:bg-gradient-to-r hover:from-purple-800/30 hover:to-pink-800/30"
+                                )}
+                              >
+                                {dropdownItem.icon && <span className="text-lg">{dropdownItem.icon}</span>}
+                                <span className="text-sm">{dropdownItem.label}</span>
+                                {dropdownItem.badge && (
+                                  <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black text-xs px-2 py-0.5 rounded-full font-bold ml-auto">
+                                    {dropdownItem.badge}
+                                  </span>
+                                )}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      ) : (
+                        <Link
+                          href={item.href}
+                          className={cn(
+                            "flex items-center gap-3 p-4 rounded-lg transition-all",
+                            pathname.startsWith(item.href)
+                              ? "bg-gradient-to-r from-yellow-400/20 to-orange-500/20 text-yellow-300"
+                              : "text-white/90 hover:text-yellow-300 hover:bg-gradient-to-r hover:from-purple-800/50 hover:to-pink-800/50"
+                          )}
+                        >
+                          <span className="text-xl">{item.icon}</span>
+                          <span className="font-medium">{item.label}</span>
+                          {item.badge && (
+                            <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black text-xs px-2 py-0.5 rounded-full font-bold ml-auto">
+                              {item.badge}
+                            </span>
+                          )}
+                        </Link>
                       )}
-                    >
-                      <span className="text-xl">{item.icon}</span>
-                      <span className="font-medium">{item.label}</span>
-                      {item.badge && (
-                        <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black text-xs px-2 py-0.5 rounded-full font-bold ml-auto">
-                          {item.badge}
-                        </span>
-                      )}
-                    </Link>
+                    </div>
                   ))}
                 </nav>
 

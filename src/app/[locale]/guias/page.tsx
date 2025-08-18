@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Award, BookOpen, Bookmark, ChevronRight, Clock, HelpCircle, TrendingUp, User } from 'lucide-react';
 
 const guides = [
@@ -170,8 +172,12 @@ const popularTopics = [
 ];
 
 export default function GuiasPage() {
+  const router = useRouter();
   const [visibleGuides, setVisibleGuides] = useState(6); // Show first 6 guides initially
   const [isLoading, setIsLoading] = useState(false);
+  const [bookmarkedGuides, setBookmarkedGuides] = useState<number[]>([]);
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
 
   const handleLoadMore = async () => {
     setIsLoading(true);
@@ -179,6 +185,24 @@ export default function GuiasPage() {
     await new Promise(resolve => setTimeout(resolve, 500));
     setVisibleGuides(prev => Math.min(prev + 6, guides.length));
     setIsLoading(false);
+  };
+
+  const toggleBookmark = (guideId: number) => {
+    setBookmarkedGuides(prev => 
+      prev.includes(guideId) 
+        ? prev.filter(id => id !== guideId)
+        : [...prev, guideId]
+    );
+  };
+
+  const handleSubscribe = async () => {
+    if (email && email.includes('@')) {
+      setSubscribed(true);
+      setTimeout(() => {
+        setSubscribed(false);
+        setEmail('');
+      }, 3000);
+    }
   };
 
   const displayedGuides = guides.slice(0, visibleGuides);
@@ -227,10 +251,10 @@ export default function GuiasPage() {
               desde elegir el casino correcto hasta entender los bonos y jugar responsablemente.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl flex items-center gap-2">
+              <Link href="/guias/guia-principiantes-2024" className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl flex items-center gap-2 inline-flex">
                 <BookOpen className="w-5 h-5" />
                 Leer Guía Completa
-              </button>
+              </Link>
               <div className="flex items-center gap-4 text-gray-600">
                 <span className="flex items-center gap-1">
                   <Clock className="w-4 h-4" />
@@ -255,17 +279,21 @@ export default function GuiasPage() {
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Categorías</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {categories.map((category, index) => (
-              <motion.button
+              <motion.div
                 key={category.name}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.05 * index }}
-                className="bg-white hover:bg-gray-100 rounded-xl p-4 text-center transition-all duration-300 hover:scale-105"
               >
-                <div className="text-3xl mb-2">{category.icon}</div>
-                <div className="text-sm font-semibold text-gray-900">{category.name}</div>
-                <div className="text-xs text-gray-500">{category.count} guías</div>
-              </motion.button>
+                <Link 
+                  href={`/guias?categoria=${category.name.toLowerCase()}`}
+                  className="bg-white hover:bg-gray-100 rounded-xl p-4 text-center transition-all duration-300 hover:scale-105 block"
+                >
+                  <div className="text-3xl mb-2">{category.icon}</div>
+                  <div className="text-sm font-semibold text-gray-900">{category.name}</div>
+                  <div className="text-xs text-gray-500">{category.count} guías</div>
+                </Link>
+              </motion.div>
             ))}
           </div>
         </motion.div>
@@ -308,7 +336,7 @@ export default function GuiasPage() {
                       </div>
                       
                       <h3 className="text-xl font-bold text-gray-900 mb-2 hover:text-green-600 transition-colors">
-                        <a href={`/es/guias/${guide.id}`}>{guide.title}</a>
+                        <Link href={`/guias/${guide.id}`}>{guide.title}</Link>
                       </h3>
                       
                       <p className="text-gray-600 mb-4">{guide.excerpt}</p>
@@ -327,16 +355,19 @@ export default function GuiasPage() {
                         </div>
                         
                         <div className="flex items-center gap-2">
-                          <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                            <Bookmark className="w-5 h-5 text-gray-500 hover:text-gray-900" />
+                          <button 
+                            onClick={() => toggleBookmark(guide.id)}
+                            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                          >
+                            <Bookmark className={`w-5 h-5 ${bookmarkedGuides.includes(guide.id) ? 'text-green-600 fill-current' : 'text-gray-500 hover:text-gray-900'}`} />
                           </button>
-                          <a 
-                            href={`/es/guias/${guide.id}`}
+                          <Link 
+                            href={`/guias/${guide.id}`}
                             className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-1"
                           >
                             Leer
                             <ChevronRight className="w-4 h-4" />
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -377,13 +408,13 @@ export default function GuiasPage() {
               </h3>
               <div className="space-y-3">
                 {popularTopics.map((topic, index) => (
-                  <a
+                  <Link
                     key={index}
-                    href="#"
+                    href={`/guias/tema/${topic.toLowerCase().replace(/ /g, '-')}`}
                     className="block text-gray-600 hover:text-gray-900 hover:translate-x-1 transition-all duration-200"
                   >
                     → {topic}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </motion.div>
@@ -400,9 +431,9 @@ export default function GuiasPage() {
               <p className="text-gray-600 mb-4 text-sm">
                 Nuestro equipo de expertos está disponible 24/7 para resolver tus dudas
               </p>
-              <button className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors">
+              <Link href="/contacto" className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors block text-center">
                 Contactar Soporte
-              </button>
+              </Link>
             </motion.div>
 
             {/* Newsletter */}
@@ -419,10 +450,15 @@ export default function GuiasPage() {
               <input
                 type="email"
                 placeholder="tu@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-gray-100 text-gray-900 px-4 py-2 rounded-lg mb-3 focus:outline-none focus:ring-2 focus:ring-green-500"
               />
-              <button className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-lg font-semibold transition-all">
-                Suscribirse
+              <button 
+                onClick={handleSubscribe}
+                className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-lg font-semibold transition-all"
+              >
+                {subscribed ? '✓ Suscrito' : 'Suscribirse'}
               </button>
             </motion.div>
           </div>

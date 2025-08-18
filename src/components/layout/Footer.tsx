@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Shield, AlertCircle, FileText, Lock, Mail, Phone } from 'lucide-react';
+import { Shield, AlertCircle, FileText, Lock, Mail, Phone, Rss } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
 const NewsletterForm = dynamic(() => import('@/components/NewsletterForm'), {
@@ -45,19 +45,19 @@ export default function Footer() {
             <h3 className="font-bold text-gray-900 mb-4">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/es/privacidad" className="text-gray-600 hover:text-green-600 text-sm flex items-center gap-2">
+                <Link href="/privacy" className="text-gray-600 hover:text-green-600 text-sm flex items-center gap-2">
                   <Lock className="w-4 h-4" />
                   Política de Privacidad
                 </Link>
               </li>
               <li>
-                <Link href="/es/terminos" className="text-gray-600 hover:text-green-600 text-sm flex items-center gap-2">
+                <Link href="/terms" className="text-gray-600 hover:text-green-600 text-sm flex items-center gap-2">
                   <FileText className="w-4 h-4" />
                   Términos y Condiciones
                 </Link>
               </li>
               <li>
-                <Link href="/es/cookies" className="text-gray-600 hover:text-green-600 text-sm">
+                <Link href="/cookies" className="text-gray-600 hover:text-green-600 text-sm">
                   Política de Cookies
                 </Link>
               </li>
@@ -92,6 +92,12 @@ export default function Footer() {
                 <Link href="/es/juego-responsable" className="text-gray-600 hover:text-green-600 text-sm flex items-center gap-2">
                   <AlertCircle className="w-4 h-4" />
                   Juego Responsable
+                </Link>
+              </li>
+              <li>
+                <Link href="/rss" className="text-gray-600 hover:text-orange-600 text-sm flex items-center gap-2">
+                  <Rss className="w-4 h-4" />
+                  RSS Feed
                 </Link>
               </li>
             </ul>

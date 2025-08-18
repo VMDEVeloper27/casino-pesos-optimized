@@ -3,10 +3,20 @@
 import { ChevronRight, Gift, Shield, Trophy, Zap, Search, Star } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 
 export function Hero() {
   const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
+
+  const handleSearch = (e?: React.FormEvent) => {
+    e?.preventDefault();
+    if (searchQuery.trim()) {
+      // Redirigir a la página de casinos con el query de búsqueda
+      router.push(`/es/casinos?search=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-primary-50 via-white to-gray-50">
@@ -73,19 +83,24 @@ export function Hero() {
             transition={{ delay: 0.3 }}
             className="max-w-2xl mx-auto mb-10"
           >
-            <div className="relative">
+            <form onSubmit={handleSearch} className="relative">
               <input
                 type="text"
                 placeholder="Buscar casinos, bonos, juegos..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                 className="w-full px-6 py-4 pl-14 bg-white border border-gray-200 rounded-2xl text-gray-900 placeholder-gray-500 shadow-lg focus:outline-none focus:ring-4 focus:ring-primary-100 focus:border-primary-400 transition-all"
               />
               <Search className="absolute left-5 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white px-6 py-2.5 rounded-xl font-semibold transition-all shadow-md hover:shadow-lg">
+              <button 
+                type="submit"
+                onClick={handleSearch}
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white px-6 py-2.5 rounded-xl font-semibold transition-all shadow-md hover:shadow-lg"
+              >
                 Buscar
               </button>
-            </div>
+            </form>
             
             {/* Quick search tags */}
             <div className="flex flex-wrap gap-2 justify-center mt-4">
@@ -93,7 +108,10 @@ export function Hero() {
               {['Bet365', 'Bonos sin depósito', 'PayPal', 'Tragamonedas', 'Blackjack'].map(tag => (
                 <button
                   key={tag}
-                  onClick={() => setSearchQuery(tag)}
+                  onClick={() => {
+                    setSearchQuery(tag);
+                    router.push(`/es/casinos?search=${encodeURIComponent(tag)}`);
+                  }}
                   className="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs text-gray-600 hover:border-primary-300 hover:text-primary-600 transition-all"
                 >
                   {tag}

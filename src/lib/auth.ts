@@ -113,3 +113,20 @@ export async function ensureAdminUser() {
   // Admin user is already in the users array
   console.log('Admin user available:', process.env.ADMIN_EMAIL || 'admin@casinosite.com');
 }
+
+// NextAuth compatibility export
+export const authOptions = {
+  providers: [],
+  session: {
+    strategy: 'jwt' as const,
+  },
+  callbacks: {
+    async session({ session }: any) {
+      const userSession = await getSession();
+      if (userSession) {
+        session.user = userSession;
+      }
+      return session;
+    }
+  }
+};

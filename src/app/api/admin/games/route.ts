@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllGames, createGame, type Game } from '@/lib/game-database';
+import { notifyNewGame } from '@/lib/email-notifications';
 import { z } from 'zod';
 
 const gameSchema = z.object({
@@ -93,6 +94,14 @@ export async function POST(req: NextRequest) {
     
     // Create new game
     const newGame = await createGame(validatedData);
+    
+    // Send email notifications to subscribed users
+    await notifyNewGame({
+      id: newGame.id,
+      name: newGame.name,
+      provider: newGame.provider,
+      rtp: newGame.rtp?.toString()
+    });
     
     return NextResponse.json(newGame, { status: 201 });
   } catch (error) {

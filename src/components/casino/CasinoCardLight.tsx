@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Check, ChevronRight, Star, X, Shield, Clock, CreditCard, Gift } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { CasinoLogo } from '@/components/ui/CasinoLogo';
+import FavoriteButtonAuth from '@/components/FavoriteButtonAuth';
 
 interface CasinoCardProps {
   casino: {
@@ -80,10 +81,17 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
             logo={casino.logo || casino.name.split(' ')[0].substring(0, 3)} 
             size="lg"
           />
-          <div className="flex items-center gap-1 bg-gradient-to-r from-yellow-50 to-yellow-100 px-3 py-1.5 rounded-full border border-yellow-300">
-            <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-            <span className="text-lg font-bold text-gray-900">{casino.rating}</span>
-            <span className="text-sm text-gray-500">/5</span>
+          <div className="flex items-center gap-2">
+            <FavoriteButtonAuth 
+              entityId={casino.id}
+              entityType="casino"
+              className="bg-gray-50 hover:bg-gray-100"
+            />
+            <div className="flex items-center gap-1 bg-gradient-to-r from-yellow-50 to-yellow-100 px-3 py-1.5 rounded-full border border-yellow-300">
+              <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+              <span className="text-lg font-bold text-gray-900">{casino.rating}</span>
+              <span className="text-sm text-gray-500">/5</span>
+            </div>
           </div>
         </div>
 

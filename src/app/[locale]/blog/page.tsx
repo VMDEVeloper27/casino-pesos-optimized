@@ -11,12 +11,16 @@ interface BlogPost {
   title: string;
   excerpt: string;
   author: string;
-  authorRole: string;
+  authorRole?: string;
+  author_role?: string;
   category: string;
   tags: string[];
-  featuredImage: string;
-  publishedAt: string;
-  readTime: number;
+  featuredImage?: string;
+  featured_image?: string;
+  publishedAt?: string;
+  published_at?: string;
+  readTime?: number;
+  read_time?: number;
   views: number;
   likes: number;
 }
@@ -360,16 +364,18 @@ export default function BlogPage({ params }: PageProps) {
                       </div>
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
-                        <span>{featuredPost.publishedAt.split('T')[0]}</span>
+                        <span>{(featuredPost.publishedAt || featuredPost.published_at || featuredPost.publishDate || '').split('T')[0]}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Clock className="w-4 h-4" />
-                        <span>{featuredPost.readTime} min de lectura</span>
+                        <span>{featuredPost.readTime || featuredPost.read_time || 5} min de lectura</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Eye className="w-4 h-4" />
-                        <span>{featuredPost.views.toLocaleString()} vistas</span>
-                      </div>
+                      {featuredPost && featuredPost.views !== undefined && (
+                        <div className="flex items-center gap-2">
+                          <Eye className="w-4 h-4" />
+                          <span>{(featuredPost.views || 0).toLocaleString()} vistas</span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </Link>
@@ -406,21 +412,21 @@ export default function BlogPage({ params }: PageProps) {
                         <div className="flex items-center gap-3">
                           <div className="flex items-center gap-1">
                             <Calendar className="w-3 h-3" />
-                            <span>{post.publishedAt.split('T')[0]}</span>
+                            <span>{(post.publishedAt || post.published_at || '').split('T')[0]}</span>
                           </div>
                           <div className="flex items-center gap-1">
                             <Clock className="w-3 h-3" />
-                            <span>{post.readTime} min</span>
+                            <span>{post.readTime || post.read_time || 5} min</span>
                           </div>
                         </div>
                         <div className="flex items-center gap-3">
                           <div className="flex items-center gap-1">
                             <Eye className="w-3 h-3" />
-                            <span>{post.views}</span>
+                            <span>{post.views || 0}</span>
                           </div>
                           <div className="flex items-center gap-1">
                             <Heart className="w-3 h-3" />
-                            <span>{post.likes}</span>
+                            <span>{post.likes || 0}</span>
                           </div>
                         </div>
                       </div>
@@ -486,28 +492,6 @@ export default function BlogPage({ params }: PageProps) {
           </div>
         )}
 
-        {/* Newsletter CTA */}
-        <section className="bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl p-8 mt-16 border border-primary/30">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              📧 ¡No te pierdas nuestras actualizaciones!
-            </h2>
-            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              Suscríbete a nuestro newsletter y recibe las últimas noticias de casinos, 
-              bonos exclusivos y guías estratégicas directamente en tu email.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-              <input 
-                type="email" 
-                placeholder="tu@email.com"
-                className="flex-1 px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-neutral-400 focus:outline-none focus:border-primary"
-              />
-              <button className="bg-gradient-to-r from-primary to-accent text-black px-6 py-3 rounded-lg font-bold hover:from-primary/90 hover:to-accent/90 transition-colors">
-                Suscribirse
-              </button>
-            </div>
-          </div>
-        </section>
       </div>
       
       {/* Structured Data */}

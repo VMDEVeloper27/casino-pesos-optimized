@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
+import { notifyNewCasino } from '@/lib/email-notifications';
 
 // Get all casinos
 export async function GET() {
@@ -66,6 +67,16 @@ export async function POST(request: NextRequest) {
       .single();
     
     if (error) throw error;
+    
+    // Send email notifications to subscribed users
+    await notifyNewCasino({
+      id: data.id,
+      name: data.name,
+      bonus: {
+        percentage: data.bonus_percentage || 0,
+        amount: data.bonus_amount || 0
+      }
+    });
     
     return NextResponse.json(data, { status: 201 });
   } catch (error: any) {

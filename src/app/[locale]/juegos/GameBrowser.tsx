@@ -9,6 +9,7 @@ import Image from 'next/image';
 import type { Game } from '@/lib/game-database';
 import { getGameTypes, getUniqueProviders } from '@/lib/game-database';
 import { getAllCasinos } from '@/lib/casino-database';
+import FavoriteButtonAuth from '@/components/FavoriteButtonAuth';
 
 interface GameBrowserProps {
   locale: string;
@@ -312,6 +313,14 @@ export default function GameBrowser({
                     <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded-lg flex items-center gap-1">
                       <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
                       <span className="text-xs font-semibold">{game.popularity}</span>
+                    </div>
+                    {/* Favorite Button */}
+                    <div className="absolute top-2 left-2">
+                      <FavoriteButtonAuth 
+                        entityId={game.id}
+                        entityType="game"
+                        className="bg-white/90 backdrop-blur-sm shadow-md hover:shadow-lg"
+                      />
                     </div>
                   </div>
                   

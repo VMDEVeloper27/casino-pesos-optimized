@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getPublishedBlogPosts } from '@/lib/blog-database';
+import { 
+  getPublishedBlogPosts, 
+  getBlogPostsByCategory, 
+  getBlogPostsByTag 
+} from '@/lib/blog-supabase';
 
 export async function GET(request: NextRequest) {
   try {
@@ -9,18 +13,15 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '10');
     const page = parseInt(searchParams.get('page') || '1');
     
-    let posts = await getPublishedBlogPosts();
+    let posts;
     
-    // Filter by category if provided
+    // Get posts based on filters
     if (category) {
-      posts = posts.filter(p => p.category.toLowerCase() === category.toLowerCase());
-    }
-    
-    // Filter by tag if provided
-    if (tag) {
-      posts = posts.filter(p => 
-        p.tags.some(t => t.toLowerCase() === tag.toLowerCase())
-      );
+      posts = await getBlogPostsByCategory(category);
+    } else if (tag) {
+      posts = await getBlogPostsByTag(tag);
+    } else {
+      posts = await getPublishedBlogPosts();
     }
     
     // Pagination

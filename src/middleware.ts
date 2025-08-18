@@ -19,7 +19,9 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith('/api/') ||
     pathname.startsWith('/_next/') ||
     pathname.includes('/favicon') ||
-    pathname.match(/\.(png|jpg|jpeg|gif|svg|ico|webp|css|js)$/i)
+    pathname.includes('/site.webmanifest') ||
+    pathname.includes('/robots.txt') ||
+    pathname.match(/\.(png|jpg|jpeg|gif|svg|ico|webp|css|js|woff|woff2|ttf|otf)$/i)
   ) {
     return NextResponse.next();
   }
@@ -101,8 +103,10 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)  
      * - favicon.ico (favicon file)
+     * - site.webmanifest (PWA manifest)
+     * - robots.txt (SEO file)
      * - public files
      */
-    '/((?!api|_next/static|_next/image|favicon.ico).*)'
+    '/((?!api|_next/static|_next/image|favicon.ico|site.webmanifest|robots.txt).*)'
   ]
 };

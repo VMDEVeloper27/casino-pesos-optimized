@@ -5,6 +5,7 @@ import { BreadcrumbStructuredData, CasinoStructuredData } from '@/components/Str
 import ReviewSystem from '@/components/ReviewSystem';
 import CopyButton from '@/components/CopyButton';
 import BonusCalculator from '@/components/BonusCalculator';
+import FavoriteButtonAuth from '@/components/FavoriteButtonAuth';
 import { getCasinoBySlug } from '@/lib/casino-database';
 import type { Metadata } from 'next';
 
@@ -183,7 +184,14 @@ export default async function CasinoDetailPage({ params }: PageProps) {
 
             {/* Main Info */}
             <div>
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">{casino.name}</h1>
+              <div className="flex items-start justify-between mb-4">
+                <h1 className="text-4xl font-bold text-gray-900">{casino.name}</h1>
+                <FavoriteButtonAuth 
+                  entityId={casino.id}
+                  entityType="casino"
+                  className="scale-125"
+                />
+              </div>
               <p className="text-gray-600 mb-6">
                 Establecido en {casino.established}, {casino.name} es uno de los casinos online más confiables para jugadores mexicanos.
               </p>

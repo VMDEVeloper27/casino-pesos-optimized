@@ -33,11 +33,12 @@ interface ProfessionalHeaderProps {
 export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const pathname = usePathname();
   const { selectedCountry } = useCountry();
   const { data: session, status } = useSession();
 
-  // Simplified navigation items without dropdowns
+  // Navigation items with dropdowns
   const navItems = [
     { 
       label: locale === 'es' ? 'Casinos' : 'Casinos', 
@@ -56,29 +57,41 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
       icon: Gift,
       badge: 'HOT'
     },
-    { 
-      label: locale === 'es' ? 'Guías' : 'Guides', 
-      href: `/${locale}/guias`,
-      icon: BookOpen
-    },
-    { 
-      label: locale === 'es' ? 'Comparar' : 'Compare', 
-      href: `/${locale}/comparar`,
-      icon: Scale
-    },
-    { 
-      label: 'Blog', 
-      href: `/${locale}/blog`
-    },
-    { 
-      label: locale === 'es' ? 'Contacto' : 'Contact', 
-      href: `/${locale}/contacto`
+    {
+      label: locale === 'es' ? 'Más' : 'More',
+      href: '#',
+      icon: ChevronDown,
+      hasDropdown: true,
+      dropdownItems: [
+        { 
+          label: locale === 'es' ? 'Guías' : 'Guides', 
+          href: `/${locale}/guias`,
+          icon: BookOpen
+        },
+        { 
+          label: locale === 'es' ? 'Comparar' : 'Compare', 
+          href: `/${locale}/comparar`,
+          icon: Scale
+        },
+        { 
+          label: 'Blog', 
+          href: `/${locale}/blog`,
+          icon: BookOpen
+        },
+        { 
+          label: locale === 'es' ? 'Contacto' : 'Contact', 
+          href: `/${locale}/contacto`,
+          icon: User
+        },
+      ]
     },
   ];
 
-  // Close mobile menu on route change
+  // Close all menus on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setIsUserDropdownOpen(false);
+    setActiveDropdown(null);
   }, [pathname]);
 
   // Prevent body scroll when mobile menu is open
@@ -121,25 +134,71 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
                 </div>
               </Link>
 
-              {/* Clean Navigation without Dropdowns */}
+              {/* Navigation with Dropdowns */}
               <nav className="flex items-center gap-6">
                 {navItems.map((item) => (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    className={cn(
-                      "flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-gray-700 hover:text-green-700 hover:bg-green-50",
-                      pathname.startsWith(item.href) && "text-green-700 bg-green-50"
+                  <div key={item.label} className="relative">
+                    {item.hasDropdown ? (
+                      <>
+                        <button
+                          onMouseEnter={() => setActiveDropdown(item.label)}
+                          onMouseLeave={() => setActiveDropdown(null)}
+                          className={cn(
+                            "flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-gray-700 hover:text-green-700 hover:bg-green-50",
+                            activeDropdown === item.label && "text-green-700 bg-green-50"
+                          )}
+                        >
+                          <span>{item.label}</span>
+                          <ChevronDown className="w-4 h-4" />
+                        </button>
+                        
+                        {/* Dropdown Menu */}
+                        <AnimatePresence>
+                          {activeDropdown === item.label && (
+                            <motion.div
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: 10 }}
+                              transition={{ duration: 0.2 }}
+                              onMouseEnter={() => setActiveDropdown(item.label)}
+                              onMouseLeave={() => setActiveDropdown(null)}
+                              className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50"
+                            >
+                              {item.dropdownItems?.map((dropdownItem) => (
+                                <Link
+                                  key={dropdownItem.href}
+                                  href={dropdownItem.href}
+                                  className={cn(
+                                    "flex items-center gap-3 px-4 py-2 text-gray-700 hover:text-green-700 hover:bg-green-50 transition-colors",
+                                    pathname === dropdownItem.href && "text-green-700 bg-green-50"
+                                  )}
+                                >
+                                  {dropdownItem.icon && <dropdownItem.icon className="w-4 h-4" />}
+                                  <span>{dropdownItem.label}</span>
+                                </Link>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        className={cn(
+                          "flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-gray-700 hover:text-green-700 hover:bg-green-50",
+                          pathname.startsWith(item.href) && "text-green-700 bg-green-50"
+                        )}
+                      >
+                        {item.icon && <item.icon className="w-4 h-4" />}
+                        <span>{item.label}</span>
+                        {item.badge && (
+                          <span className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs px-2 py-0.5 rounded-full font-bold ml-1 animate-pulse-slow">
+                            {item.badge}
+                          </span>
+                        )}
+                      </Link>
                     )}
-                  >
-                    {item.icon && <item.icon className="w-4 h-4" />}
-                    <span>{item.label}</span>
-                    {item.badge && (
-                      <span className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs px-2 py-0.5 rounded-full font-bold ml-1 animate-pulse-slow">
-                        {item.badge}
-                      </span>
-                    )}
-                  </Link>
+                  </div>
                 ))}
               </nav>
 

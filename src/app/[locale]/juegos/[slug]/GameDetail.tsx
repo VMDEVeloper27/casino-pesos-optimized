@@ -9,6 +9,7 @@ import {
   Users, Clock, Award, AlertCircle, ExternalLink
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import FavoriteButton from '@/components/FavoriteButton';
 import type { Game } from '@/lib/game-database';
 import { getGamesByProvider, getGamesByType } from '@/lib/game-database';
 import { getAllCasinosSync } from '@/lib/casino-database';
@@ -188,10 +189,15 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
             {/* Game Title and Actions */}
             <div className="bg-white rounded-xl p-6 mt-6">
               <div className="flex items-start justify-between mb-4">
-                <div>
+                <div className="flex-1">
                   <h1 className="text-3xl font-bold text-gray-900 mb-2">{game.name}</h1>
                   <p className="text-gray-600">{game.description}</p>
                 </div>
+                <FavoriteButton 
+                  entityId={game.id}
+                  entityType="game"
+                  size="md"
+                />
               </div>
 
               {/* Quick Stats */}

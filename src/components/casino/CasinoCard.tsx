@@ -5,6 +5,7 @@ import { Check, ChevronRight, Star, X } from 'lucide-react';
 // import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { CasinoLogo } from '@/components/ui/CasinoLogo';
+import FavoriteButtonAuth from '@/components/FavoriteButtonAuth';
 
 interface CasinoCardProps {
   casino: {
@@ -81,10 +82,17 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
             logo={casino.logo || casino.name.split(' ')[0].substring(0, 3)} 
             size="lg"
           />
-          <div className="flex items-center gap-1 bg-slate-800 px-3 py-1 rounded-full">
-            <Star className="w-5 h-5 fill-primary text-primary" />
-            <span className="text-lg font-bold text-white">{casino.rating}</span>
-            <span className="text-sm text-slate-400">/5</span>
+          <div className="flex items-center gap-2">
+            <FavoriteButtonAuth 
+              entityId={casino.id}
+              entityType="casino"
+              className="bg-slate-800"
+            />
+            <div className="flex items-center gap-1 bg-slate-800 px-3 py-1 rounded-full">
+              <Star className="w-5 h-5 fill-primary text-primary" />
+              <span className="text-lg font-bold text-white">{casino.rating}</span>
+              <span className="text-sm text-slate-400">/5</span>
+            </div>
           </div>
         </div>
 

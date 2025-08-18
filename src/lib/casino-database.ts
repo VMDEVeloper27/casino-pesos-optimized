@@ -75,7 +75,7 @@ function transformSupabaseToCasino(data: any): Casino {
 // Cache for client-side usage
 let cachedCasinos: Casino[] | null = null;
 let cacheTimestamp: number = 0;
-const CACHE_DURATION = 60000; // 1 minute cache
+const CACHE_DURATION = 300000; // 5 minutes cache
 
 // Get all casinos from Supabase
 export async function getAllCasinos(): Promise<Casino[]> {

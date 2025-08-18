@@ -1896,14 +1896,13 @@ export const games: Game[] = [
 // Server-side only modules
 let fs: any;
 let path: any;
+let GAMES_DATA_FILE: string = '';
 
 if (typeof window === 'undefined') {
   fs = require('fs').promises;
   path = require('path');
+  GAMES_DATA_FILE = path.join(process.cwd(), 'data', 'games.json');
 }
-
-// Data persistence functions (server-side only)
-const GAMES_DATA_FILE = path?.join(process.cwd(), 'data', 'games.json');
 
 async function loadGamesFromFile(): Promise<Game[]> {
   if (typeof window !== 'undefined') return games;
@@ -2033,7 +2032,6 @@ function getGamesSync(): Game[] {
         return cachedGames;
       }
       
-      const GAMES_DATA_FILE = path.join(process.cwd(), 'data', 'games.json');
       const data = require('fs').readFileSync(GAMES_DATA_FILE, 'utf-8');
       cachedGames = JSON.parse(data);
       return cachedGames;

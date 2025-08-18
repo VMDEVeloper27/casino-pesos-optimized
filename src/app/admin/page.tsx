@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { 
   Gamepad2, 
@@ -8,29 +11,125 @@ import {
   Eye,
   Edit,
   BarChart,
-  Settings
+  Settings,
+  RefreshCw
 } from 'lucide-react';
 
+interface DashboardStats {
+  stats: {
+    totalCasinos: number;
+    activeBonuses: number;
+    totalVisits: string;
+    visitsGrowth: string;
+    conversionRate: string;
+    conversionGrowth: string;
+    casinosGrowth: string;
+  };
+  recentCasinos: Array<{
+    id: string;
+    name: string;
+    slug: string;
+    status: string;
+    rating: number;
+  }>;
+  topCasinos: Array<{
+    id: string;
+    name: string;
+    rating: number;
+  }>;
+  gamesStats: {
+    total: number;
+    slots: number;
+    live: number;
+    table: number;
+  };
+  lastUpdated: string;
+}
+
 export default function AdminDashboard() {
-  // In production, fetch these from your database
-  const stats = {
-    totalCasinos: 38,
-    activeBonuses: 38,
-    totalVisits: '12,543',
-    conversionRate: '3.2%'
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<DashboardStats | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchDashboardData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      const response = await fetch('/api/admin/dashboard');
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch dashboard data');
+      }
+      
+      const dashboardData = await response.json();
+      setData(dashboardData);
+    } catch (err) {
+      console.error('Error fetching dashboard:', err);
+      setError('Ошибка загрузки данных');
+      // Установим данные по умолчанию при ошибке
+      setData({
+        stats: {
+          totalCasinos: 0,
+          activeBonuses: 0,
+          totalVisits: '0',
+          visitsGrowth: '+0%',
+          conversionRate: '0%',
+          conversionGrowth: '+0%',
+          casinosGrowth: '+0%',
+        },
+        recentCasinos: [],
+        topCasinos: [],
+        gamesStats: { total: 0, slots: 0, live: 0, table: 0 },
+        lastUpdated: new Date().toISOString(),
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const recentCasinos = [
-    { id: 'bet365', name: 'Bet365 Casino', status: 'active', rating: 4.9 },
-    { id: 'codere', name: 'Codere Casino', status: 'active', rating: 4.8 },
-    { id: 'caliente', name: 'Caliente Casino', status: 'active', rating: 4.7 },
-  ];
+  useEffect(() => {
+    fetchDashboardData();
+    // Обновлять каждые 5 минут
+    const interval = setInterval(fetchDashboardData, 5 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-white">
+          <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-4" />
+          <p>Загрузка статистики...</p>
+        </div>
+      </div>
+    );
+  }
+
+  const stats = data?.stats || {
+    totalCasinos: 0,
+    activeBonuses: 0,
+    totalVisits: '0',
+    conversionRate: '0%',
+  };
+
+  const recentCasinos = data?.recentCasinos || [];
 
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white mb-2">Dashboard</h1>
-        <p className="text-neutral-400">Welcome to CasinosPesos Admin Panel</p>
+      <div className="mb-8 flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-white mb-2">Dashboard</h1>
+          <p className="text-neutral-400">Welcome to CasinosPesos Admin Panel</p>
+        </div>
+        <button
+          onClick={fetchDashboardData}
+          disabled={loading}
+          className="flex items-center gap-2 px-4 py-2 bg-primary/20 hover:bg-primary/30 text-primary rounded-lg transition-colors disabled:opacity-50"
+        >
+          <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+          Обновить
+        </button>
       </div>
 
       {/* Stats Grid */}
@@ -39,7 +138,7 @@ export default function AdminDashboard() {
           <div className="flex items-center justify-between mb-4">
             <Gamepad2 className="w-8 h-8 text-primary" />
             <span className="text-xs text-green-400 bg-green-400/20 px-2 py-1 rounded">
-              +12%
+              {stats.casinosGrowth || '+0%'}
             </span>
           </div>
           <div className="text-2xl font-bold text-white">{stats.totalCasinos}</div>
@@ -61,7 +160,7 @@ export default function AdminDashboard() {
           <div className="flex items-center justify-between mb-4">
             <Users className="w-8 h-8 text-primary" />
             <span className="text-xs text-blue-400 bg-blue-400/20 px-2 py-1 rounded">
-              +23%
+              {stats.visitsGrowth || '+0%'}
             </span>
           </div>
           <div className="text-2xl font-bold text-white">{stats.totalVisits}</div>
@@ -72,7 +171,7 @@ export default function AdminDashboard() {
           <div className="flex items-center justify-between mb-4">
             <TrendingUp className="w-8 h-8 text-accent" />
             <span className="text-xs text-yellow-400 bg-yellow-400/20 px-2 py-1 rounded">
-              +0.5%
+              {stats.conversionGrowth || '+0%'}
             </span>
           </div>
           <div className="text-2xl font-bold text-white">{stats.conversionRate}</div>

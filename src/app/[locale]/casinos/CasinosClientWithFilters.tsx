@@ -10,6 +10,7 @@ import type { Casino } from '@/lib/casino-database';
 import CopyButton from '@/components/CopyButton';
 import CasinoFilters, { FilterState } from '@/components/CasinoFilters';
 import ActiveFilterChips from '@/components/ActiveFilterChips';
+import FavoriteButtonAuth from '@/components/FavoriteButtonAuth';
 
 interface CasinosClientWithFiltersProps {
   casinos: Casino[];
@@ -19,7 +20,10 @@ export default function CasinosClientWithFilters({ casinos }: CasinosClientWithF
   const router = useRouter();
   const searchParams = useSearchParams();
   
-  const [searchQuery, setSearchQuery] = useState('');
+  // Initialize search from URL
+  const [searchQuery, setSearchQuery] = useState(() => {
+    return searchParams.get('search') || '';
+  });
   const [sortBy, setSortBy] = useState('rating');
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   
@@ -34,6 +38,14 @@ export default function CasinosClientWithFilters({ casinos }: CasinosClientWithF
       licenseType: params.get('license') || 'all',
     };
   });
+  
+  // Update search query when URL changes
+  useEffect(() => {
+    const search = searchParams.get('search');
+    if (search) {
+      setSearchQuery(search);
+    }
+  }, [searchParams]);
   
   // Update URL when filters change
   useEffect(() => {
@@ -76,9 +88,22 @@ export default function CasinosClientWithFilters({ casinos }: CasinosClientWithF
   const filteredCasinos = useMemo(() => {
     return casinos
       .filter(casino => {
-        // Search filter
-        if (searchQuery && !casino.name.toLowerCase().includes(searchQuery.toLowerCase())) {
-          return false;
+        // Search filter - buscar en nombre, descripción y métodos de pago
+        if (searchQuery) {
+          const query = searchQuery.toLowerCase();
+          const nameMatch = casino.name.toLowerCase().includes(query);
+          const paymentMatch = casino.paymentMethods.some(method => method.toLowerCase().includes(query));
+          const featureMatch = casino.features?.some(feature => feature.toLowerCase().includes(query));
+          
+          // Buscar en términos de juegos específicos
+          const gameKeywords = ['slots', 'tragamonedas', 'live', 'vivo', 'blackjack', 'ruleta', 'roulette', 'poker'];
+          const gameMatch = gameKeywords.some(keyword => 
+            keyword.includes(query) && casino.games && casino.games.total > 0
+          );
+          
+          if (!nameMatch && !paymentMatch && !featureMatch && !gameMatch) {
+            return false;
+          }
         }
         
         // Payment methods filter
@@ -318,23 +343,32 @@ export default function CasinosClientWithFilters({ casinos }: CasinosClientWithF
                     <div className="grid lg:grid-cols-[200px,1fr,300px] gap-6">
                       {/* Casino Info */}
                       <div className="text-center lg:text-left">
-                        <div className="w-24 h-16 bg-gray-100 border border-gray-200 rounded-lg flex items-center justify-center mx-auto lg:mx-0 mb-3 relative overflow-hidden">
-                          {casino.logo && casino.logo.startsWith('/') ? (
-                            <Image
-                              src={casino.logo}
-                              alt={`${casino.name} logo`}
-                              width={96}
-                              height={64}
-                              className="object-contain"
-                              loading={index < 3 ? "eager" : "lazy"}
-                              placeholder="blur"
-                              blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='64'%3E%3Crect width='96' height='64' fill='%23f3f4f6'/%3E%3C/svg%3E"
+                        <div className="relative">
+                          <div className="w-24 h-16 bg-gray-100 border border-gray-200 rounded-lg flex items-center justify-center mx-auto lg:mx-0 mb-3 relative overflow-hidden">
+                            {casino.logo && casino.logo.startsWith('/') ? (
+                              <Image
+                                src={casino.logo}
+                                alt={`${casino.name} logo`}
+                                width={96}
+                                height={64}
+                                className="object-contain"
+                                loading={index < 3 ? "eager" : "lazy"}
+                                placeholder="blur"
+                                blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='64'%3E%3Crect width='96' height='64' fill='%23f3f4f6'/%3E%3C/svg%3E"
+                              />
+                            ) : (
+                              <span className="text-2xl font-bold text-gray-900">
+                                {casino.logo || casino.name.substring(0, 3).toUpperCase()}
+                              </span>
+                            )}
+                          </div>
+                          <div className="absolute -top-2 -right-2">
+                            <FavoriteButtonAuth 
+                              entityId={casino.id}
+                              entityType="casino"
+                              className="bg-white shadow-md hover:shadow-lg"
                             />
-                          ) : (
-                            <span className="text-2xl font-bold text-gray-900">
-                              {casino.logo || casino.name.substring(0, 3).toUpperCase()}
-                            </span>
-                          )}
+                          </div>
                         </div>
                         <h2 className="text-xl font-bold text-gray-900 mb-2">{casino.name}</h2>
                         <div className="flex items-center justify-center lg:justify-start gap-1 mb-2">

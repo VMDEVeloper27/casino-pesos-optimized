@@ -9,6 +9,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { CountryProvider } from '@/contexts/CountryContext';
 import { FacebookPixel, GoogleAnalytics, Hotjar } from '@/components/Analytics';
 import ClientSessionProvider from '@/components/providers/ClientSessionProvider';
+import CookieConsent from '@/components/CookieConsent';
 import '@/styles/globals.css';
 
 const inter = Inter({ 
@@ -25,6 +26,11 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: 'CasinosPesos - Mejores Casinos Online en Pesos 2024',
   description: 'Descubre los mejores casinos online que aceptan pesos mexicanos, argentinos y colombianos. Bonos exclusivos, guías expertas y reseñas honestas.',
+  alternates: {
+    types: {
+      'application/rss+xml': '/rss',
+    },
+  },
 };
 
 export const viewport = {
@@ -118,6 +124,9 @@ export default async function LocaleLayout({
 
               {/* Footer */}
               <Footer />
+              
+              {/* Cookie Consent Banner */}
+              <CookieConsent />
             </NextIntlClientProvider>
           </CountryProvider>
         </ClientSessionProvider>

@@ -17,7 +17,10 @@ import {
   CreditCard,
   DollarSign,
   Percent,
-  Award
+  Award,
+  Heart,
+  Settings,
+  Bell
 } from 'lucide-react';
 
 export default function DashboardPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -281,15 +284,15 @@ export default function DashboardPage({ params }: { params: Promise<{ locale: st
           </Link>
 
           <Link 
-            href={`/${locale}/dashboard/profile`}
-            className="bg-white border-2 border-gray-200 text-gray-900 rounded-xl p-6 hover:border-green-500 transition-all transform hover:scale-105"
+            href={`/${locale}/dashboard/favorites`}
+            className="bg-white border-2 border-gray-200 text-gray-900 rounded-xl p-6 hover:border-red-500 transition-all transform hover:scale-105"
           >
-            <User className="w-8 h-8 mb-3 text-green-600" />
+            <Heart className="w-8 h-8 mb-3 text-red-500 fill-red-500" />
             <h3 className="font-semibold text-lg mb-1">
-              {locale === 'es' ? 'Mi Perfil' : 'My Profile'}
+              {locale === 'es' ? 'Mis Favoritos' : 'My Favorites'}
             </h3>
             <p className="text-gray-600 text-sm">
-              {locale === 'es' ? 'Actualizar información personal' : 'Update personal information'}
+              {locale === 'es' ? 'Casinos y juegos guardados' : 'Saved casinos and games'}
             </p>
           </Link>
 
