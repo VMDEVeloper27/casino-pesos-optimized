@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, use } from 'react';
+import { useState, useEffect, useRef, useCallback, use } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -69,15 +69,7 @@ export default function EditBlogPost({ params }: { params: Promise<{ locale: str
   const [tagInput, setTagInput] = useState('');
   const [keywordInput, setKeywordInput] = useState('');
 
-  useEffect(() => {
-    if (resolvedParams.id !== 'new') {
-      fetchPost();
-    } else {
-      setLoading(false);
-    }
-  }, [resolvedParams.id]);
-
-  const fetchPost = async () => {
+  const fetchPost = useCallback(async () => {
     try {
       // Try admin API first
       let response = await fetch(`/api/admin/blog/${resolvedParams.id}`);
@@ -112,7 +104,15 @@ export default function EditBlogPost({ params }: { params: Promise<{ locale: str
     } finally {
       setLoading(false);
     }
-  };
+  }, [resolvedParams.id]);
+
+  useEffect(() => {
+    if (resolvedParams.id !== 'new') {
+      fetchPost();
+    } else {
+      setLoading(false);
+    }
+  }, [resolvedParams.id, fetchPost]);
 
   const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
