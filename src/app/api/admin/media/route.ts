@@ -106,44 +106,70 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
     
-    const { searchParams } = new URL(req.url);
-    const folder = searchParams.get('folder') || 'general';
+    const allImages: string[] = [];
+    const publicDir = path.join(process.cwd(), 'public');
     
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', folder);
+    // Scan multiple directories for images
+    const imageDirs = [
+      'uploads/casino-logos',
+      'uploads/general',
+      'images'
+    ];
     
-    // Check if directory exists
-    if (!existsSync(uploadDir)) {
-      return NextResponse.json({ files: [] });
+    for (const dir of imageDirs) {
+      const fullPath = path.join(publicDir, dir);
+      
+      if (existsSync(fullPath)) {
+        try {
+          const files = await readdir(fullPath);
+          const imageFiles = files.filter(file => 
+            /\.(jpg|jpeg|png|gif|svg|webp)$/i.test(file)
+          );
+          
+          // Add full URL path for each image
+          imageFiles.forEach(file => {
+            allImages.push(`/${dir}/${file}`);
+          });
+        } catch (error) {
+          console.error(`Error reading directory ${dir}:`, error);
+        }
+      }
     }
     
-    // Read directory contents
-    const files = await readdir(uploadDir);
-    const fileDetails = await Promise.all(
-      files.map(async (filename) => {
-        const filepath = path.join(uploadDir, filename);
-        const stats = await stat(filepath);
-        return {
-          filename,
-          url: `/uploads/${folder}/${filename}`,
-          size: stats.size,
-          createdAt: stats.birthtime,
-          modifiedAt: stats.mtime,
-        };
-      })
-    );
+    // Check for known casino logos that actually exist
+    const knownLogos = [
+      '/images/bet365-logo.png',
+      '/images/caliente-logo.png',
+      '/images/codere-logo.png',
+      '/images/betano-logo.png',
+      '/images/novibet-logo.png', 
+      '/images/winpot-logo.png',
+      '/images/1xbet-logo.png',
+      '/images/parimatch-logo.png',
+      '/images/leon-logo.png',
+      '/images/vulkanbet-logo.png',
+      '/images/pin-up-logo.png',
+      '/images/mostbet-logo.png',
+      '/images/betmexico-logo.png'
+    ];
     
-    // Sort by creation date (newest first)
-    fileDetails.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+    // Only add logos that actually exist on the filesystem
+    for (const logo of knownLogos) {
+      const logoPath = path.join(publicDir, logo.substring(1)); // Remove leading slash
+      if (existsSync(logoPath) && !allImages.includes(logo)) {
+        allImages.push(logo);
+      }
+    }
     
+    // Return in the format expected by ImageSelector component
     return NextResponse.json({
-      files: fileDetails,
-      folder,
-      total: fileDetails.length
+      files: allImages,
+      total: allImages.length
     });
   } catch (error) {
     console.error('Error fetching media:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch media' },
+      { files: [], error: 'Failed to fetch media' },
       { status: 500 }
     );
   }
