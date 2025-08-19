@@ -297,15 +297,15 @@ export default function DashboardPage({ params }: { params: Promise<{ locale: st
           </Link>
 
           <Link 
-            href={`/${locale}/dashboard/vip`}
-            className="bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl p-6 hover:from-purple-600 hover:to-purple-700 transition-all transform hover:scale-105"
+            href={`/${locale}/dashboard/profile`}
+            className="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl p-6 hover:from-blue-600 hover:to-blue-700 transition-all transform hover:scale-105"
           >
-            <Award className="w-8 h-8 mb-3" />
+            <User className="w-8 h-8 mb-3" />
             <h3 className="font-semibold text-lg mb-1">
-              {locale === 'es' ? 'Programa VIP' : 'VIP Program'}
+              {locale === 'es' ? 'Mi Perfil' : 'My Profile'}
             </h3>
-            <p className="text-purple-100 text-sm">
-              {locale === 'es' ? 'Beneficios exclusivos y recompensas' : 'Exclusive benefits and rewards'}
+            <p className="text-blue-100 text-sm">
+              {locale === 'es' ? 'Configurar tu cuenta y preferencias' : 'Configure your account and preferences'}
             </p>
           </Link>
         </motion.div>

@@ -31,7 +31,14 @@ const DB_FILE = path.join(process.cwd(), 'data', 'blog-posts.json');
 export async function getAllBlogPosts(): Promise<BlogPost[]> {
   try {
     const data = await fs.readFile(DB_FILE, 'utf-8');
-    return JSON.parse(data);
+    const parsed = JSON.parse(data);
+    // Handle both array and object with posts property
+    if (Array.isArray(parsed)) {
+      return parsed;
+    } else if (parsed && parsed.posts && Array.isArray(parsed.posts)) {
+      return parsed.posts;
+    }
+    return [];
   } catch (error) {
     console.error('Error reading blog posts:', error);
     return [];
@@ -107,7 +114,9 @@ export async function getRelatedPosts(postId: string, limit: number = 3): Promis
 // Save blog posts
 export async function saveBlogPosts(posts: BlogPost[]): Promise<void> {
   try {
-    await fs.writeFile(DB_FILE, JSON.stringify(posts, null, 2));
+    // Save in the same format as the original file (object with posts property)
+    const data = { posts };
+    await fs.writeFile(DB_FILE, JSON.stringify(data, null, 2));
   } catch (error) {
     console.error('Error saving blog posts:', error);
     throw error;
@@ -139,11 +148,25 @@ export async function updateBlogPost(id: string, updates: Partial<BlogPost>): Pr
   const posts = await getAllBlogPosts();
   const index = posts.findIndex(p => p.id === id);
   
-  if (index === -1) return null;
+  if (index === -1) {
+    console.error(`Post with id ${id} not found`);
+    return null;
+  }
+  
+  // Handle field name inconsistencies
+  const normalizedUpdates = { ...updates };
+  if ('updated_at' in normalizedUpdates) {
+    normalizedUpdates.updatedAt = normalizedUpdates.updated_at as string;
+    delete (normalizedUpdates as any).updated_at;
+  }
+  if ('published_at' in normalizedUpdates) {
+    normalizedUpdates.publishedAt = normalizedUpdates.published_at as string;
+    delete (normalizedUpdates as any).published_at;
+  }
   
   posts[index] = {
     ...posts[index],
-    ...updates,
+    ...normalizedUpdates,
     updatedAt: new Date().toISOString(),
   };
   
@@ -209,14 +232,17 @@ function generateSlug(title: string): string {
 export async function getBlogStats() {
   const posts = await getAllBlogPosts();
   
+  // Ensure posts is an array
+  const postsArray = Array.isArray(posts) ? posts : [];
+  
   return {
-    total: posts.length,
-    published: posts.filter(p => p.status === 'published').length,
-    draft: posts.filter(p => p.status === 'draft').length,
-    archived: posts.filter(p => p.status === 'archived').length,
-    totalViews: posts.reduce((sum, p) => sum + (p.views || 0), 0),
-    totalLikes: posts.reduce((sum, p) => sum + (p.likes || 0), 0),
-    categories: [...new Set(posts.map(p => p.category))],
-    tags: [...new Set(posts.flatMap(p => p.tags))],
+    total: postsArray.length,
+    published: postsArray.filter(p => p.status === 'published').length,
+    draft: postsArray.filter(p => p.status === 'draft').length,
+    archived: postsArray.filter(p => p.status === 'archived').length,
+    totalViews: postsArray.reduce((sum, p) => sum + (p.views || 0), 0),
+    totalLikes: postsArray.reduce((sum, p) => sum + (p.likes || 0), 0),
+    categories: [...new Set(postsArray.map(p => p.category).filter(Boolean))],
+    tags: [...new Set(postsArray.flatMap(p => p.tags || []))],
   };
 }

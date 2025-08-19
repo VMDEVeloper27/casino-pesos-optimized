@@ -150,8 +150,8 @@ export default function EditBlogPost({ params }: PageProps) {
     try {
       const updatedPost = {
         ...formData,
-        updatedAt: new Date().toISOString(),
-        publishedAt: formData.status === 'published' && !formData.publishedAt 
+        updated_at: new Date().toISOString(),
+        published_at: formData.status === 'published' && !formData.publishedAt 
           ? new Date().toISOString() 
           : formData.publishedAt
       };

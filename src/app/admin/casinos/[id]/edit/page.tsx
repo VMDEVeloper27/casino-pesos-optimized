@@ -4,6 +4,7 @@ import { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Save, Plus, X } from 'lucide-react';
+import ImageSelector from '@/components/admin/ImageSelector';
 
 interface CasinoFormData {
   id: string;
@@ -203,18 +204,12 @@ export default function EditCasinoPage({ params }: PageProps) {
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-neutral-300 mb-2">
-                Logo (3 letters)
-              </label>
-              <input
-                type="text"
+            <div className="col-span-2">
+              <ImageSelector
                 value={formData.logo}
-                onChange={(e) => setFormData({ ...formData, logo: e.target.value.toUpperCase().slice(0, 3) })}
-                className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="BET"
-                maxLength={3}
-                required
+                onChange={(value) => setFormData({ ...formData, logo: value })}
+                label="Casino Logo"
+                placeholder="Select or upload casino logo"
               />
             </div>
 

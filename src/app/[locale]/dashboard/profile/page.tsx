@@ -2,8 +2,9 @@
 
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { 
   User, 
   Mail, 
@@ -12,7 +13,9 @@ import {
   Camera,
   Save,
   AlertCircle,
-  Check
+  Check,
+  Upload,
+  X
 } from 'lucide-react';
 
 export default function ProfilePage({ params }: { params: Promise<{ locale: string }> }) {
@@ -21,6 +24,9 @@ export default function ProfilePage({ params }: { params: Promise<{ locale: stri
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+  const [avatar, setAvatar] = useState<string | null>(null);
+  const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   
   const [formData, setFormData] = useState({
     name: '',
@@ -48,6 +54,16 @@ export default function ProfilePage({ params }: { params: Promise<{ locale: stri
     }
   }, [session, locale]);
 
+  // Load avatar from localStorage on mount
+  useEffect(() => {
+    if (session?.user?.email) {
+      const savedAvatar = localStorage.getItem(`avatar_${session.user.email}`);
+      if (savedAvatar) {
+        setAvatar(savedAvatar);
+      }
+    }
+  }, [session]);
+
   // Redirect if not authenticated
   if (status === 'loading') {
     return (
@@ -69,7 +85,7 @@ export default function ProfilePage({ params }: { params: Promise<{ locale: stri
       const response = await fetch('/api/user/profile', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, avatar })
       });
 
       if (response.ok) {
@@ -90,6 +106,63 @@ export default function ProfilePage({ params }: { params: Promise<{ locale: stri
     } finally {
       setIsSaving(false);
     }
+  };
+
+  const handleAvatarUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      setMessage({
+        type: 'error',
+        text: locale === 'es' ? 'Por favor selecciona una imagen' : 'Please select an image file'
+      });
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      setMessage({
+        type: 'error',
+        text: locale === 'es' ? 'La imagen debe ser menor a 5MB' : 'Image must be less than 5MB'
+      });
+      return;
+    }
+
+    setIsUploadingAvatar(true);
+    setMessage(null);
+
+    try {
+      // Convert to base64 for simplicity (in production, you'd upload to a storage service)
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        setAvatar(base64String);
+        localStorage.setItem(`avatar_${session?.user?.email}`, base64String);
+        setMessage({
+          type: 'success',
+          text: locale === 'es' ? 'Avatar actualizado' : 'Avatar updated'
+        });
+      };
+      reader.readAsDataURL(file);
+    } catch (error) {
+      setMessage({
+        type: 'error',
+        text: locale === 'es' ? 'Error al cargar la imagen' : 'Error uploading image'
+      });
+    } finally {
+      setIsUploadingAvatar(false);
+    }
+  };
+
+  const removeAvatar = () => {
+    setAvatar(null);
+    localStorage.removeItem(`avatar_${session?.user?.email}`);
+    setMessage({
+      type: 'success',
+      text: locale === 'es' ? 'Avatar eliminado' : 'Avatar removed'
+    });
   };
 
   const getRoleBadgeColor = (role: string) => {
@@ -162,11 +235,45 @@ export default function ProfilePage({ params }: { params: Promise<{ locale: stri
               {/* Avatar */}
               <div className="text-center mb-6">
                 <div className="relative inline-block">
-                  <div className="w-32 h-32 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white text-4xl font-bold mx-auto">
-                    {session?.user?.name?.[0]?.toUpperCase() || session?.user?.email?.[0]?.toUpperCase() || 'U'}
-                  </div>
-                  <button className="absolute bottom-0 right-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors">
-                    <Camera className="w-5 h-5 text-gray-600" />
+                  {avatar ? (
+                    <div className="relative">
+                      <Image
+                        src={avatar}
+                        alt="Avatar"
+                        width={128}
+                        height={128}
+                        className="w-32 h-32 rounded-full object-cover mx-auto"
+                      />
+                      <button
+                        onClick={removeAvatar}
+                        className="absolute -top-2 -right-2 w-8 h-8 bg-red-500 rounded-full shadow-lg flex items-center justify-center hover:bg-red-600 transition-colors"
+                        title={locale === 'es' ? 'Eliminar avatar' : 'Remove avatar'}
+                      >
+                        <X className="w-4 h-4 text-white" />
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="w-32 h-32 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white text-4xl font-bold mx-auto">
+                      {session?.user?.name?.[0]?.toUpperCase() || session?.user?.email?.[0]?.toUpperCase() || 'U'}
+                    </div>
+                  )}
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleAvatarUpload}
+                    className="hidden"
+                  />
+                  <button 
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={isUploadingAvatar}
+                    className="absolute bottom-0 right-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isUploadingAvatar ? (
+                      <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-green-600"></div>
+                    ) : (
+                      <Camera className="w-5 h-5 text-gray-600" />
+                    )}
                   </button>
                 </div>
                 <h2 className="mt-4 text-xl font-bold text-gray-900">

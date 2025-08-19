@@ -29,35 +29,35 @@ export async function POST(request: NextRequest) {
       newCasino.id = newCasino.slug || newCasino.name.toLowerCase().replace(/\s+/g, '-');
     }
     
-    // Map fields to database columns
+    // Map fields directly from form (they already have correct names)
     const casinoData = {
-      id: newCasino.id,
+      id: newCasino.id || newCasino.slug || newCasino.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
       name: newCasino.name,
-      slug: newCasino.slug || newCasino.id,
-      logo: newCasino.logo,
-      rating: newCasino.rating || 0,
-      established: newCasino.established,
-      affiliate_link: newCasino.affiliateLink || '',
+      slug: newCasino.slug || newCasino.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+      logo: newCasino.logo || `/images/${newCasino.slug || newCasino.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-logo.png`,
+      rating: newCasino.rating || 4.0,
+      established: newCasino.established || new Date().getFullYear(),
+      affiliate_link: newCasino.affiliate_link || '',
       features: newCasino.features || [],
-      bonus_type: newCasino.bonus?.type,
-      bonus_amount: newCasino.bonus?.amount || 0,
-      bonus_percentage: newCasino.bonus?.percentage || 0,
-      bonus_free_spins: newCasino.bonus?.freeSpins || 0,
-      bonus_min_deposit: newCasino.bonus?.minDeposit || 0,
-      bonus_wagering: newCasino.bonus?.wageringRequirement || 0,
-      bonus_code: newCasino.bonus?.code,
-      games_total: newCasino.games?.total || 0,
-      games_slots: newCasino.games?.slots || 0,
-      games_live: newCasino.games?.live || 0,
-      games_table: newCasino.games?.table || 0,
-      payment_methods: newCasino.paymentMethods || [],
-      withdrawal_time: newCasino.withdrawalTime,
+      bonus_type: newCasino.bonus_type || 'welcome',
+      bonus_amount: newCasino.bonus_amount || 0,
+      bonus_percentage: newCasino.bonus_percentage || 100,
+      bonus_free_spins: newCasino.bonus_free_spins || 0,
+      bonus_min_deposit: newCasino.bonus_min_deposit || 100,
+      bonus_wagering: newCasino.bonus_wagering || '30x',
+      bonus_code: newCasino.bonus_code || '',
+      games_total: newCasino.games_total || 1000,
+      games_slots: newCasino.games_slots || 800,
+      games_live: newCasino.games_live || 150,
+      games_table: newCasino.games_table || 50,
+      payment_methods: newCasino.payment_methods || [],
+      withdrawal_time: newCasino.withdrawal_time || '24-48 horas',
       licenses: newCasino.licenses || [],
-      currencies: newCasino.currencies || [],
+      currencies: newCasino.currencies || ['MXN', 'USD'],
       pros: newCasino.pros || [],
       cons: newCasino.cons || [],
       status: newCasino.status || 'active',
-      is_featured: newCasino.isFeatured || false
+      is_featured: newCasino.is_featured || false
     };
     
     const { data, error } = await supabase

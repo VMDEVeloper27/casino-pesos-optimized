@@ -72,13 +72,13 @@ export default function NewsletterForm({ locale = 'es' }: NewsletterFormProps) {
   }
 
   return (
-    <div className="bg-gradient-to-r from-green-600 to-green-700 rounded-xl p-6 shadow-lg">
+    <div className="bg-gradient-to-r from-green-600 to-green-700 rounded-xl p-4 md:p-6 shadow-lg max-w-full overflow-hidden">
       <div className="mb-4">
-        <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-          <Mail className="w-5 h-5" />
-          {isSpanish ? 'Suscríbete a nuestro Newsletter' : 'Subscribe to our Newsletter'}
+        <h3 className="text-lg md:text-xl font-bold text-white mb-2 flex items-center gap-2">
+          <Mail className="w-5 h-5 flex-shrink-0" />
+          <span className="break-words">{isSpanish ? 'Suscríbete a nuestro Newsletter' : 'Subscribe to our Newsletter'}</span>
         </h3>
-        <p className="text-green-100 text-sm">
+        <p className="text-green-100 text-xs md:text-sm">
           {isSpanish 
             ? 'Recibe los mejores bonos y promociones exclusivas directamente en tu correo'
             : 'Get the best bonuses and exclusive promotions delivered to your inbox'}
@@ -86,13 +86,13 @@ export default function NewsletterForm({ locale = 'es' }: NewsletterFormProps) {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-3">
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex flex-col lg:flex-row gap-3">
           <input
             type="text"
-            placeholder={isSpanish ? 'Tu nombre (opcional)' : 'Your name (optional)'}
+            placeholder={isSpanish ? 'Nombre (opcional)' : 'Name (optional)'}
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            className="flex-1 px-4 py-2 rounded-lg bg-white/10 backdrop-blur-sm text-white placeholder-green-200 border border-green-500/30 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent"
+            className="w-full lg:w-auto lg:flex-1 px-3 md:px-4 py-2.5 md:py-3 rounded-lg bg-white/10 backdrop-blur-sm text-white placeholder-green-200 border border-green-500/30 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent text-sm md:text-base"
           />
           <input
             type="email"
@@ -100,38 +100,38 @@ export default function NewsletterForm({ locale = 'es' }: NewsletterFormProps) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="flex-1 px-4 py-2 rounded-lg bg-white/10 backdrop-blur-sm text-white placeholder-green-200 border border-green-500/30 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent"
+            className="w-full lg:w-auto lg:flex-1 px-3 md:px-4 py-2.5 md:py-3 rounded-lg bg-white/10 backdrop-blur-sm text-white placeholder-green-200 border border-green-500/30 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent text-sm md:text-base"
           />
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="px-6 py-2 bg-white text-green-600 font-semibold rounded-lg hover:bg-green-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            className="w-full lg:w-auto px-4 md:px-6 py-2.5 md:py-3 bg-white text-green-600 font-semibold rounded-lg hover:bg-green-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm md:text-base whitespace-nowrap"
           >
             {status === 'loading' ? (
-              <Loader2 className="w-4 h-4 animate-spin" />
+              <Loader2 className="w-4 h-4 md:w-5 md:h-5 animate-spin" />
             ) : (
-              <Mail className="w-4 h-4" />
+              <Mail className="w-4 h-4 md:w-5 md:h-5" />
             )}
-            {isSpanish ? 'Suscribir' : 'Subscribe'}
+            <span>{isSpanish ? 'Suscribir' : 'Subscribe'}</span>
           </button>
         </div>
 
         {/* Status messages */}
         {status === 'success' && (
-          <div className="flex items-center gap-2 text-white bg-green-500/20 backdrop-blur-sm px-4 py-2 rounded-lg">
-            <CheckCircle className="w-4 h-4" />
-            <span className="text-sm">{message}</span>
+          <div className="flex items-center gap-2 text-white bg-green-500/20 backdrop-blur-sm px-3 md:px-4 py-2 rounded-lg">
+            <CheckCircle className="w-4 h-4 flex-shrink-0" />
+            <span className="text-xs md:text-sm break-words">{message}</span>
           </div>
         )}
 
         {status === 'error' && (
-          <div className="flex items-center gap-2 text-white bg-red-500/20 backdrop-blur-sm px-4 py-2 rounded-lg">
-            <AlertCircle className="w-4 h-4" />
-            <span className="text-sm">{message}</span>
+          <div className="flex items-center gap-2 text-white bg-red-500/20 backdrop-blur-sm px-3 md:px-4 py-2 rounded-lg">
+            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+            <span className="text-xs md:text-sm break-words">{message}</span>
           </div>
         )}
 
-        <p className="text-xs text-green-100">
+        <p className="text-[10px] md:text-xs text-green-100 px-1">
           {isSpanish 
             ? 'Al suscribirte aceptas recibir emails promocionales. Puedes cancelar en cualquier momento.'
             : 'By subscribing you agree to receive promotional emails. You can unsubscribe anytime.'}

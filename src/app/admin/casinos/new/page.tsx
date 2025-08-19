@@ -3,173 +3,146 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, Save, Plus, X } from 'lucide-react';
+import { ArrowLeft, Save, Plus, X, Upload, Image } from 'lucide-react';
+import ImageSelector from '@/components/admin/ImageSelector';
 
 interface CasinoFormData {
-  id: string;
   name: string;
+  slug: string;
   logo: string;
   rating: number;
-  reviewCount: number;
   established: number;
-  license: string;
-  bonus: string;
-  bonusExtra: string;
-  promoCode: string;
-  rollover: string;
-  minDeposit: number;
-  games: number;
-  providers: string[];
-  withdrawal: string;
-  paymentMethods: string[];
-  support: string[];
-  languages: string[];
+  affiliate_link: string;
+  features: string[];
+  bonus_type: string;
+  bonus_amount: number;
+  bonus_percentage: number;
+  bonus_free_spins: number;
+  bonus_min_deposit: number;
+  bonus_wagering: string;
+  bonus_code: string;
+  games_total: number;
+  games_slots: number;
+  games_live: number;
+  games_table: number;
+  payment_methods: string[];
+  withdrawal_time: string;
+  licenses: string[];
+  currencies: string[];
   pros: string[];
   cons: string[];
-  description: string;
-  features: {
-    liveCasino: boolean;
-    mobileApp: boolean;
-    crypto: boolean;
-    sportsbook: boolean;
-    vipProgram: boolean;
-  };
   status: 'active' | 'inactive' | 'pending';
+  is_featured: boolean;
 }
 
 export default function AddCasinoPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<CasinoFormData>({
-    id: '',
     name: '',
+    slug: '',
     logo: '',
     rating: 4.0,
-    reviewCount: 0,
     established: new Date().getFullYear(),
-    license: '',
-    bonus: '',
-    bonusExtra: '',
-    promoCode: '',
-    rollover: '30x',
-    minDeposit: 100,
-    games: 1000,
-    providers: [],
-    withdrawal: '24-48 horas',
-    paymentMethods: [],
-    support: [],
-    languages: ['Español'],
+    affiliate_link: '',
+    features: [],
+    bonus_type: 'welcome',
+    bonus_amount: 10000,
+    bonus_percentage: 100,
+    bonus_free_spins: 0,
+    bonus_min_deposit: 100,
+    bonus_wagering: '30x',
+    bonus_code: '',
+    games_total: 1000,
+    games_slots: 800,
+    games_live: 150,
+    games_table: 50,
+    payment_methods: [],
+    withdrawal_time: '24-48 horas',
+    licenses: [],
+    currencies: ['MXN', 'USD'],
     pros: [],
     cons: [],
-    description: '',
-    features: {
-      liveCasino: false,
-      mobileApp: false,
-      crypto: false,
-      sportsbook: false,
-      vipProgram: false,
-    },
-    status: 'pending'
+    status: 'active',
+    is_featured: false
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Validate required fields
-    if (!formData.id || !formData.name) {
-      alert('Please fill in all required fields (ID and Name)');
-      return;
-    }
-    
-    setLoading(true);
+  // Input arrays management
+  const [newFeature, setNewFeature] = useState('');
+  const [newPayment, setNewPayment] = useState('');
+  const [newLicense, setNewLicense] = useState('');
+  const [newCurrency, setNewCurrency] = useState('');
+  const [newPro, setNewPro] = useState('');
+  const [newCon, setNewCon] = useState('');
 
-    try {
-      // Transform form data to match database structure
-      const casinoData = {
-        id: formData.id,
-        name: formData.name,
-        slug: formData.id, // Use ID as slug
-        logo: formData.logo || `/images/${formData.id}-logo.png`,
-        rating: formData.rating,
-        established: formData.established,
-        affiliateLink: `https://${formData.id}.com`,
-        features: formData.pros.slice(0, 4), // Use first 4 pros as features
-        bonus: {
-          type: 'welcome',
-          amount: parseInt(formData.bonus.replace(/\D/g, '')) || 10000,
-          percentage: 100,
-          freeSpins: 100,
-          minDeposit: formData.minDeposit,
-          wageringRequirement: parseInt(formData.rollover) || 30,
-          code: formData.promoCode
-        },
-        games: {
-          total: formData.games,
-          slots: Math.floor(formData.games * 0.8),
-          live: Math.floor(formData.games * 0.1),
-          table: Math.floor(formData.games * 0.1)
-        },
-        paymentMethods: formData.paymentMethods.length > 0 ? formData.paymentMethods : ['OXXO', 'SPEI', 'Visa'],
-        withdrawalTime: formData.withdrawal,
-        licenses: [formData.license].filter(Boolean),
-        currencies: ['MXN', 'USD'],
-        pros: formData.pros.length > 0 ? formData.pros : ['Casino nuevo', 'Buenos bonos'],
-        cons: formData.cons.length > 0 ? formData.cons : ['Sin información'],
-        status: formData.status,
-        lastModified: new Date().toISOString()
-      };
-      
-      const response = await fetch('/api/admin/casinos', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(casinoData),
-      });
-
-      const data = await response.json();
-      
-      if (response.ok) {
-        alert(`Casino "${formData.name}" created successfully!`);
-        router.push('/admin/casinos');
-        router.refresh(); // Force refresh to show new data
-      } else {
-        console.error('Error response:', data);
-        alert(data.error || 'Error creating casino');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Error creating casino: ' + error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleArrayInput = (field: keyof CasinoFormData, value: string) => {
-    const items = value.split(',').map(item => item.trim()).filter(item => item);
-    setFormData({ ...formData, [field]: items });
-  };
-
-  const addArrayItem = (field: 'pros' | 'cons' | 'providers' | 'paymentMethods' | 'support' | 'languages') => {
-    const newItem = prompt(`Add new ${field.slice(0, -1)}:`);
-    if (newItem) {
+  const handleAddItem = (field: keyof CasinoFormData, value: string, setter: (val: string) => void) => {
+    if (value.trim()) {
       setFormData({
         ...formData,
-        [field]: [...(formData[field] as string[]), newItem]
+        [field]: [...(formData[field] as string[]), value.trim()]
       });
+      setter('');
     }
   };
 
-  const removeArrayItem = (field: 'pros' | 'cons' | 'providers' | 'paymentMethods' | 'support' | 'languages', index: number) => {
+  const handleRemoveItem = (field: keyof CasinoFormData, index: number) => {
     setFormData({
       ...formData,
       [field]: (formData[field] as string[]).filter((_, i) => i !== index)
     });
   };
 
+  const generateSlug = (name: string) => {
+    return name.toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
+  };
+
+  const handleNameChange = (name: string) => {
+    setFormData({
+      ...formData,
+      name,
+      slug: generateSlug(name)
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Solo el nombre es obligatorio
+    if (!formData.name) {
+      alert('Por favor ingrese el nombre del casino');
+      return;
+    }
+    
+    setLoading(true);
+
+    try {
+      const response = await fetch('/api/admin/casinos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create casino');
+      }
+
+      alert('Casino creado exitosamente!');
+      router.push('/admin/casinos');
+    } catch (error) {
+      console.error('Error creating casino:', error);
+      alert('Error al crear el casino');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div>
-      <div className="flex items-center justify-between mb-8">
+    <div className="p-6">
+      <div className="mb-6">
         <div className="flex items-center gap-4">
           <Link
             href="/admin/casinos"
@@ -178,43 +151,40 @@ export default function AddCasinoPage() {
             <ArrowLeft className="w-5 h-5 text-white" />
           </Link>
           <div>
-            <h1 className="text-3xl font-bold text-white">Add New Casino</h1>
-            <p className="text-neutral-400">Create a new casino entry</p>
+            <h1 className="text-2xl font-bold text-white">Agregar Nuevo Casino</h1>
+            <p className="text-neutral-400">Complete la información del casino</p>
           </div>
         </div>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Basic Information */}
+        {/* Información Básica */}
         <div className="bg-neutral-800 rounded-xl p-6 border border-neutral-700">
-          <h2 className="text-xl font-bold text-white mb-6">Basic Information</h2>
+          <h2 className="text-lg font-semibold text-white mb-4">Información Básica</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
-                Casino ID (URL slug)
+                Nombre del Casino *
               </label>
               <input
                 type="text"
-                value={formData.id}
-                onChange={(e) => setFormData({ ...formData, id: e.target.value.toLowerCase().replace(/\s+/g, '-') })}
-                className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="bet365"
+                value={formData.name}
+                onChange={(e) => handleNameChange(e.target.value)}
+                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
                 required
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
-                Casino Name
+                Slug (URL)
               </label>
               <input
                 type="text"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="Bet365 Casino"
-                required
+                value={formData.slug}
+                onChange={(e) => setFormData({...formData, slug: e.target.value})}
+                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
               />
             </div>
 
@@ -222,384 +192,527 @@ export default function AddCasinoPage() {
               <label className="block text-sm font-medium text-neutral-300 mb-2">
                 Logo URL
               </label>
-              <input
-                type="text"
-                value={formData.logo}
-                onChange={(e) => setFormData({ ...formData, logo: e.target.value })}
-                className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="/images/casino-logo.png"
-                required
-              />
+              <div className="space-y-2">
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={formData.logo}
+                    onChange={(e) => setFormData({...formData, logo: e.target.value})}
+                    placeholder="/images/casino-logo.png"
+                    className="flex-1 px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
+                  />
+                  <Link
+                    href="/admin/media"
+                    target="_blank"
+                    className="px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors flex items-center gap-2"
+                  >
+                    <Image className="w-4 h-4" />
+                    Galería
+                  </Link>
+                </div>
+                {formData.logo && (
+                  <div className="flex items-center gap-4 p-3 bg-neutral-700/50 rounded-lg">
+                    <div className="w-16 h-16 bg-neutral-800 rounded-lg flex items-center justify-center overflow-hidden">
+                      <img
+                        src={formData.logo}
+                        alt="Logo preview"
+                        className="w-full h-full object-contain"
+                        onError={(e) => {
+                          const img = e.target as HTMLImageElement;
+                          img.style.display = 'none';
+                          img.parentElement?.insertAdjacentHTML('afterbegin', 
+                            '<div class="text-neutral-500 text-xs text-center">Error al cargar imagen</div>'
+                          );
+                        }}
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-xs text-neutral-400">Vista previa del logo</p>
+                      <p className="text-xs text-neutral-500 truncate">{formData.logo}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
-                Rating (1-5)
+                Rating (0-5)
               </label>
               <input
                 type="number"
-                value={formData.rating}
-                onChange={(e) => setFormData({ ...formData, rating: parseFloat(e.target.value) })}
-                className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                min="1"
-                max="5"
                 step="0.1"
-                required
+                min="0"
+                max="5"
+                value={formData.rating}
+                onChange={(e) => setFormData({...formData, rating: parseFloat(e.target.value)})}
+                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
-                Established Year
+                Año de Establecimiento
               </label>
               <input
                 type="number"
                 value={formData.established}
-                onChange={(e) => setFormData({ ...formData, established: parseInt(e.target.value) })}
-                className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                min="1900"
-                max={new Date().getFullYear()}
-                required
+                onChange={(e) => setFormData({...formData, established: parseInt(e.target.value)})}
+                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
-                License
+                Link de Afiliado
               </label>
               <input
                 type="text"
-                value={formData.license}
-                onChange={(e) => setFormData({ ...formData, license: e.target.value })}
-                className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="Malta, Gibraltar, UK"
-                required
+                value={formData.affiliate_link}
+                onChange={(e) => setFormData({...formData, affiliate_link: e.target.value})}
+                placeholder="https://..."
+                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
-                Status
+                Estado
               </label>
               <select
                 value={formData.status}
-                onChange={(e) => setFormData({ ...formData, status: e.target.value as 'active' | 'inactive' | 'pending' })}
-                className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                onChange={(e) => setFormData({...formData, status: e.target.value as any})}
+                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
               >
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-                <option value="pending">Pending</option>
+                <option value="active">Activo</option>
+                <option value="inactive">Inactivo</option>
+                <option value="pending">Pendiente</option>
               </select>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-neutral-300 mb-2">
-                Total Games
-              </label>
+            <div className="flex items-center gap-2">
               <input
-                type="number"
-                value={formData.games}
-                onChange={(e) => setFormData({ ...formData, games: parseInt(e.target.value) })}
-                className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                min="0"
-                required
+                type="checkbox"
+                id="featured"
+                checked={formData.is_featured}
+                onChange={(e) => setFormData({...formData, is_featured: e.target.checked})}
+                className="w-4 h-4"
               />
+              <label htmlFor="featured" className="text-neutral-300">
+                Casino Destacado
+              </label>
             </div>
           </div>
         </div>
 
-        {/* Bonus Information */}
+        {/* Información del Bono */}
         <div className="bg-neutral-800 rounded-xl p-6 border border-neutral-700">
-          <h2 className="text-xl font-bold text-white mb-6">Bonus Information</h2>
+          <h2 className="text-lg font-semibold text-white mb-4">Información del Bono</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
-                Main Bonus
+                Tipo de Bono
               </label>
               <input
                 type="text"
-                value={formData.bonus}
-                onChange={(e) => setFormData({ ...formData, bonus: e.target.value })}
-                className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="100% hasta $30,000 MXN"
-                required
+                value={formData.bonus_type}
+                onChange={(e) => setFormData({...formData, bonus_type: e.target.value})}
+                placeholder="welcome, no-deposit, reload..."
+                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
-                Bonus Extra
+                Monto del Bono (MXN)
               </label>
               <input
-                type="text"
-                value={formData.bonusExtra}
-                onChange={(e) => setFormData({ ...formData, bonusExtra: e.target.value })}
-                className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="+ 200 Giros Gratis"
+                type="number"
+                value={formData.bonus_amount}
+                onChange={(e) => setFormData({...formData, bonus_amount: parseInt(e.target.value)})}
+                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
-                Promo Code
+                Porcentaje del Bono (%)
+              </label>
+              <input
+                type="number"
+                value={formData.bonus_percentage}
+                onChange={(e) => setFormData({...formData, bonus_percentage: parseInt(e.target.value)})}
+                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-neutral-300 mb-2">
+                Giros Gratis
+              </label>
+              <input
+                type="number"
+                value={formData.bonus_free_spins}
+                onChange={(e) => setFormData({...formData, bonus_free_spins: parseInt(e.target.value)})}
+                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-neutral-300 mb-2">
+                Depósito Mínimo (MXN)
+              </label>
+              <input
+                type="number"
+                value={formData.bonus_min_deposit}
+                onChange={(e) => setFormData({...formData, bonus_min_deposit: parseInt(e.target.value)})}
+                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-neutral-300 mb-2">
+                Requisitos de Apuesta
               </label>
               <input
                 type="text"
-                value={formData.promoCode}
-                onChange={(e) => setFormData({ ...formData, promoCode: e.target.value })}
-                className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                value={formData.bonus_wagering}
+                onChange={(e) => setFormData({...formData, bonus_wagering: e.target.value})}
+                placeholder="30x, 40x..."
+                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-neutral-300 mb-2">
+                Código de Bono
+              </label>
+              <input
+                type="text"
+                value={formData.bonus_code}
+                onChange={(e) => setFormData({...formData, bonus_code: e.target.value})}
                 placeholder="WELCOME100"
+                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
-                Rollover
+                Tiempo de Retiro
               </label>
               <input
                 type="text"
-                value={formData.rollover}
-                onChange={(e) => setFormData({ ...formData, rollover: e.target.value })}
-                className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="30x"
-                required
+                value={formData.withdrawal_time}
+                onChange={(e) => setFormData({...formData, withdrawal_time: e.target.value})}
+                placeholder="24-48 horas"
+                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
               />
             </div>
+          </div>
+        </div>
 
+        {/* Información de Juegos */}
+        <div className="bg-neutral-800 rounded-xl p-6 border border-neutral-700">
+          <h2 className="text-lg font-semibold text-white mb-4">Información de Juegos</h2>
+          
+          <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
-                Minimum Deposit (MXN)
+                Total de Juegos
               </label>
               <input
                 type="number"
-                value={formData.minDeposit}
-                onChange={(e) => setFormData({ ...formData, minDeposit: parseInt(e.target.value) })}
-                className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                min="0"
-                required
+                value={formData.games_total}
+                onChange={(e) => setFormData({...formData, games_total: parseInt(e.target.value)})}
+                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
-                Withdrawal Time
+                Slots
               </label>
               <input
-                type="text"
-                value={formData.withdrawal}
-                onChange={(e) => setFormData({ ...formData, withdrawal: e.target.value })}
-                className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="24-48 horas"
-                required
+                type="number"
+                value={formData.games_slots}
+                onChange={(e) => setFormData({...formData, games_slots: parseInt(e.target.value)})}
+                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-neutral-300 mb-2">
+                Juegos en Vivo
+              </label>
+              <input
+                type="number"
+                value={formData.games_live}
+                onChange={(e) => setFormData({...formData, games_live: parseInt(e.target.value)})}
+                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-neutral-300 mb-2">
+                Juegos de Mesa
+              </label>
+              <input
+                type="number"
+                value={formData.games_table}
+                onChange={(e) => setFormData({...formData, games_table: parseInt(e.target.value)})}
+                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
               />
             </div>
           </div>
         </div>
 
-        {/* Arrays Section */}
+        {/* Características */}
         <div className="bg-neutral-800 rounded-xl p-6 border border-neutral-700">
-          <h2 className="text-xl font-bold text-white mb-6">Additional Information</h2>
+          <h2 className="text-lg font-semibold text-white mb-4">Características</h2>
           
-          {/* Payment Methods */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-neutral-300 mb-2">
-              Payment Methods
-            </label>
-            <div className="flex flex-wrap gap-2 mb-2">
-              {formData.paymentMethods.map((method, index) => (
-                <span
-                  key={index}
-                  className="bg-neutral-700 text-white px-3 py-1 rounded-lg flex items-center gap-2"
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-neutral-300 mb-2">
+                Agregar Característica
+              </label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={newFeature}
+                  onChange={(e) => setNewFeature(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddItem('features', newFeature, setNewFeature))}
+                  className="flex-1 px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
+                  placeholder="Ej: Depósitos instantáneos"
+                />
+                <button
+                  type="button"
+                  onClick={() => handleAddItem('features', newFeature, setNewFeature)}
+                  className="px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg"
                 >
-                  {method}
-                  <button
-                    type="button"
-                    onClick={() => removeArrayItem('paymentMethods', index)}
-                    className="text-red-400 hover:text-red-300"
-                  >
-                    <X className="w-3 h-3" />
-                  </button>
-                </span>
-              ))}
-              <button
-                type="button"
-                onClick={() => addArrayItem('paymentMethods')}
-                className="bg-neutral-700 hover:bg-neutral-600 text-white px-3 py-1 rounded-lg flex items-center gap-1 transition-colors"
-              >
-                <Plus className="w-3 h-3" />
-                Add
-              </button>
-            </div>
-          </div>
-
-          {/* Pros */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-neutral-300 mb-2">
-              Pros
-            </label>
-            <div className="space-y-2">
-              {formData.pros.map((pro, index) => (
-                <div key={index} className="flex items-center gap-2">
-                  <span className="flex-1 bg-neutral-700 text-white px-3 py-1 rounded-lg">
-                    {pro}
+                  <Plus className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {formData.features.map((item, index) => (
+                  <span key={index} className="inline-flex items-center gap-1 px-3 py-1 bg-neutral-700 rounded-full text-sm text-white">
+                    {item}
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveItem('features', index)}
+                      className="ml-1 hover:text-red-400"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
                   </span>
-                  <button
-                    type="button"
-                    onClick={() => removeArrayItem('pros', index)}
-                    className="text-red-400 hover:text-red-300"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
-                </div>
-              ))}
-              <button
-                type="button"
-                onClick={() => addArrayItem('pros')}
-                className="bg-neutral-700 hover:bg-neutral-600 text-white px-3 py-1 rounded-lg flex items-center gap-1 transition-colors"
-              >
-                <Plus className="w-3 h-3" />
-                Add Pro
-              </button>
+                ))}
+              </div>
             </div>
-          </div>
-
-          {/* Cons */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-neutral-300 mb-2">
-              Cons
-            </label>
-            <div className="space-y-2">
-              {formData.cons.map((con, index) => (
-                <div key={index} className="flex items-center gap-2">
-                  <span className="flex-1 bg-neutral-700 text-white px-3 py-1 rounded-lg">
-                    {con}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => removeArrayItem('cons', index)}
-                    className="text-red-400 hover:text-red-300"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
-                </div>
-              ))}
-              <button
-                type="button"
-                onClick={() => addArrayItem('cons')}
-                className="bg-neutral-700 hover:bg-neutral-600 text-white px-3 py-1 rounded-lg flex items-center gap-1 transition-colors"
-              >
-                <Plus className="w-3 h-3" />
-                Add Con
-              </button>
-            </div>
-          </div>
-
-          {/* Description */}
-          <div>
-            <label className="block text-sm font-medium text-neutral-300 mb-2">
-              Description
-            </label>
-            <textarea
-              value={formData.description}
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-              rows={4}
-              placeholder="Detailed description of the casino..."
-              required
-            />
           </div>
         </div>
 
-        {/* Features */}
+        {/* Métodos de Pago */}
         <div className="bg-neutral-800 rounded-xl p-6 border border-neutral-700">
-          <h2 className="text-xl font-bold text-white mb-6">Features</h2>
+          <h2 className="text-lg font-semibold text-white mb-4">Métodos de Pago</h2>
           
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={formData.features.liveCasino}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  features: { ...formData.features, liveCasino: e.target.checked }
-                })}
-                className="w-4 h-4 rounded accent-primary"
-              />
-              <span className="text-white">Live Casino</span>
-            </label>
-
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={formData.features.mobileApp}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  features: { ...formData.features, mobileApp: e.target.checked }
-                })}
-                className="w-4 h-4 rounded accent-primary"
-              />
-              <span className="text-white">Mobile App</span>
-            </label>
-
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={formData.features.crypto}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  features: { ...formData.features, crypto: e.target.checked }
-                })}
-                className="w-4 h-4 rounded accent-primary"
-              />
-              <span className="text-white">Crypto</span>
-            </label>
-
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={formData.features.sportsbook}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  features: { ...formData.features, sportsbook: e.target.checked }
-                })}
-                className="w-4 h-4 rounded accent-primary"
-              />
-              <span className="text-white">Sportsbook</span>
-            </label>
-
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={formData.features.vipProgram}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  features: { ...formData.features, vipProgram: e.target.checked }
-                })}
-                className="w-4 h-4 rounded accent-primary"
-              />
-              <span className="text-white">VIP Program</span>
-            </label>
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={newPayment}
+              onChange={(e) => setNewPayment(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddItem('payment_methods', newPayment, setNewPayment))}
+              className="flex-1 px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
+              placeholder="Ej: SPEI, OXXO, Visa..."
+            />
+            <button
+              type="button"
+              onClick={() => handleAddItem('payment_methods', newPayment, setNewPayment)}
+              className="px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg"
+            >
+              <Plus className="w-5 h-5" />
+            </button>
+          </div>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {formData.payment_methods.map((item, index) => (
+              <span key={index} className="inline-flex items-center gap-1 px-3 py-1 bg-neutral-700 rounded-full text-sm text-white">
+                {item}
+                <button
+                  type="button"
+                  onClick={() => handleRemoveItem('payment_methods', index)}
+                  className="ml-1 hover:text-red-400"
+                >
+                  <X className="w-3 h-3" />
+                </button>
+              </span>
+            ))}
           </div>
         </div>
 
-        {/* Submit Buttons */}
-        <div className="flex gap-4">
+        {/* Licencias */}
+        <div className="bg-neutral-800 rounded-xl p-6 border border-neutral-700">
+          <h2 className="text-lg font-semibold text-white mb-4">Licencias</h2>
+          
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={newLicense}
+              onChange={(e) => setNewLicense(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddItem('licenses', newLicense, setNewLicense))}
+              className="flex-1 px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
+              placeholder="Ej: SEGOB, Curacao..."
+            />
+            <button
+              type="button"
+              onClick={() => handleAddItem('licenses', newLicense, setNewLicense)}
+              className="px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg"
+            >
+              <Plus className="w-5 h-5" />
+            </button>
+          </div>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {formData.licenses.map((item, index) => (
+              <span key={index} className="inline-flex items-center gap-1 px-3 py-1 bg-neutral-700 rounded-full text-sm text-white">
+                {item}
+                <button
+                  type="button"
+                  onClick={() => handleRemoveItem('licenses', index)}
+                  className="ml-1 hover:text-red-400"
+                >
+                  <X className="w-3 h-3" />
+                </button>
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Monedas */}
+        <div className="bg-neutral-800 rounded-xl p-6 border border-neutral-700">
+          <h2 className="text-lg font-semibold text-white mb-4">Monedas Aceptadas</h2>
+          
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={newCurrency}
+              onChange={(e) => setNewCurrency(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddItem('currencies', newCurrency, setNewCurrency))}
+              className="flex-1 px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
+              placeholder="Ej: MXN, USD, EUR..."
+            />
+            <button
+              type="button"
+              onClick={() => handleAddItem('currencies', newCurrency, setNewCurrency)}
+              className="px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg"
+            >
+              <Plus className="w-5 h-5" />
+            </button>
+          </div>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {formData.currencies.map((item, index) => (
+              <span key={index} className="inline-flex items-center gap-1 px-3 py-1 bg-neutral-700 rounded-full text-sm text-white">
+                {item}
+                <button
+                  type="button"
+                  onClick={() => handleRemoveItem('currencies', index)}
+                  className="ml-1 hover:text-red-400"
+                >
+                  <X className="w-3 h-3" />
+                </button>
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Pros y Contras */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="bg-neutral-800 rounded-xl p-6 border border-neutral-700">
+            <h2 className="text-lg font-semibold text-white mb-4">Ventajas</h2>
+            
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={newPro}
+                onChange={(e) => setNewPro(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddItem('pros', newPro, setNewPro))}
+                className="flex-1 px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
+                placeholder="Agregar ventaja..."
+              />
+              <button
+                type="button"
+                onClick={() => handleAddItem('pros', newPro, setNewPro)}
+                className="px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg"
+              >
+                <Plus className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="mt-2 space-y-1">
+              {formData.pros.map((item, index) => (
+                <div key={index} className="flex items-center justify-between px-3 py-2 bg-neutral-700 rounded-lg">
+                  <span className="text-sm text-white">{item}</span>
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveItem('pros', index)}
+                    className="hover:text-red-400"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-neutral-800 rounded-xl p-6 border border-neutral-700">
+            <h2 className="text-lg font-semibold text-white mb-4">Desventajas</h2>
+            
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={newCon}
+                onChange={(e) => setNewCon(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddItem('cons', newCon, setNewCon))}
+                className="flex-1 px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
+                placeholder="Agregar desventaja..."
+              />
+              <button
+                type="button"
+                onClick={() => handleAddItem('cons', newCon, setNewCon)}
+                className="px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg"
+              >
+                <Plus className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="mt-2 space-y-1">
+              {formData.cons.map((item, index) => (
+                <div key={index} className="flex items-center justify-between px-3 py-2 bg-neutral-700 rounded-lg">
+                  <span className="text-sm text-white">{item}</span>
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveItem('cons', index)}
+                    className="hover:text-red-400"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Botones de Acción */}
+        <div className="flex justify-end gap-4">
+          <Link
+            href="/admin/casinos"
+            className="px-6 py-3 bg-neutral-700 hover:bg-neutral-600 text-white rounded-lg transition-colors"
+          >
+            Cancelar
+          </Link>
           <button
             type="submit"
             disabled={loading}
-            className="flex items-center gap-2 bg-gradient-to-r from-primary to-accent text-black px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
+            className="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors flex items-center gap-2 disabled:opacity-50"
           >
             <Save className="w-5 h-5" />
-            {loading ? 'Saving...' : 'Save Casino'}
+            {loading ? 'Guardando...' : 'Guardar Casino'}
           </button>
-          
-          <Link
-            href="/admin/casinos"
-            className="bg-neutral-700 hover:bg-neutral-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
-          >
-            Cancel
-          </Link>
         </div>
       </form>
     </div>

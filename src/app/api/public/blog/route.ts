@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { 
-  getPublishedBlogPosts, 
-  getBlogPostsByCategory, 
-  getBlogPostsByTag 
-} from '@/lib/blog-supabase';
+import fs from 'fs/promises';
+import path from 'path';
 
 export async function GET(request: NextRequest) {
   try {
@@ -13,15 +10,57 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '10');
     const page = parseInt(searchParams.get('page') || '1');
     
-    let posts;
+    // Try to fetch from database first
+    let posts = [];
+    let useDatabase = false;
     
-    // Get posts based on filters
-    if (category) {
-      posts = await getBlogPostsByCategory(category);
-    } else if (tag) {
-      posts = await getBlogPostsByTag(tag);
-    } else {
-      posts = await getPublishedBlogPosts();
+    try {
+      const { 
+        getPublishedBlogPosts, 
+        getBlogPostsByCategory, 
+        getBlogPostsByTag 
+      } = await import('@/lib/blog-supabase');
+      
+      // Get posts based on filters
+      if (category) {
+        posts = await getBlogPostsByCategory(category);
+      } else if (tag) {
+        posts = await getBlogPostsByTag(tag);
+      } else {
+        posts = await getPublishedBlogPosts();
+      }
+      
+      if (posts && posts.length > 0) {
+        useDatabase = true;
+      }
+    } catch (dbError) {
+      console.log('Database not available, using JSON fallback');
+    }
+    
+    // If database failed or returned no data, use JSON file
+    if (!useDatabase || posts.length === 0) {
+      const jsonPath = path.join(process.cwd(), 'data', 'blog-posts.json');
+      try {
+        const jsonData = await fs.readFile(jsonPath, 'utf-8');
+        const blogData = JSON.parse(jsonData);
+        posts = blogData.posts || [];
+        
+        // Filter by category if specified
+        if (category) {
+          posts = posts.filter((p: any) => p.category === category);
+        }
+        
+        // Filter by tag if specified
+        if (tag) {
+          posts = posts.filter((p: any) => p.tags && p.tags.includes(tag));
+        }
+        
+        // Only show published posts
+        posts = posts.filter((p: any) => p.status === 'published');
+      } catch (fileError) {
+        console.error('Error reading JSON file:', fileError);
+        posts = [];
+      }
     }
     
     // Pagination

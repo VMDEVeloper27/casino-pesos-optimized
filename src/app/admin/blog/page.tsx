@@ -54,7 +54,9 @@ export default function AdminBlogPage() {
   }, []);
 
   useEffect(() => {
-    filterPosts();
+    if (posts) {
+      filterPosts();
+    }
   }, [posts, searchQuery, filterStatus, filterCategory]);
 
   const fetchPosts = async () => {
@@ -62,10 +64,29 @@ export default function AdminBlogPage() {
       const response = await fetch('/api/admin/blog');
       if (response.ok) {
         const data = await response.json();
-        setPosts(data);
+        // Ensure posts is always an array
+        const postsArray = Array.isArray(data.posts) 
+          ? data.posts 
+          : Array.isArray(data)
+            ? data
+            : [];
+        setPosts(postsArray);
+      } else {
+        // Fallback to public API
+        const fallbackResponse = await fetch('/api/public/blog?limit=100');
+        if (fallbackResponse.ok) {
+          const fallbackData = await fallbackResponse.json();
+          const postsArray = Array.isArray(fallbackData.posts) 
+            ? fallbackData.posts 
+            : [];
+          setPosts(postsArray);
+        } else {
+          setPosts([]);
+        }
       }
     } catch (error) {
       console.error('Error fetching posts:', error);
+      setPosts([]);
     } finally {
       setLoading(false);
     }
@@ -84,15 +105,20 @@ export default function AdminBlogPage() {
   };
 
   const filterPosts = () => {
+    if (!posts || !Array.isArray(posts)) {
+      setFilteredPosts([]);
+      return;
+    }
+    
     let filtered = [...posts];
 
     // Search filter
     if (searchQuery) {
       filtered = filtered.filter(post =>
-        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+        post.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.excerpt?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.author?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (Array.isArray(post.tags) && post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())))
       );
     }
 
@@ -118,7 +144,7 @@ export default function AdminBlogPage() {
       });
 
       if (response.ok) {
-        setPosts(posts.filter(p => p.id !== id));
+        setPosts(prevPosts => Array.isArray(prevPosts) ? prevPosts.filter(p => p.id !== id) : []);
       }
     } catch (error) {
       console.error('Error deleting post:', error);
@@ -274,11 +300,11 @@ export default function AdminBlogPage() {
                       </div>
                       <div className="min-w-0">
                         <div className="font-semibold text-white truncate">{post.title}</div>
-                        <div className="text-sm text-neutral-400 line-clamp-2">{post.excerpt}</div>
+                        <div className="text-sm text-neutral-400 line-clamp-2">{post.excerpt || ''}</div>
                         <div className="flex items-center gap-2 mt-1">
                           <Calendar className="w-3 h-3 text-neutral-500" />
                           <span className="text-xs text-neutral-500">
-                            {new Date(post.publishedAt).toLocaleDateString()}
+                            {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : 'No date'}
                           </span>
                         </div>
                       </div>
@@ -288,22 +314,22 @@ export default function AdminBlogPage() {
                     <div className="flex items-center gap-2">
                       <User className="w-4 h-4 text-neutral-400" />
                       <div>
-                        <div className="text-white">{post.author}</div>
-                        <div className="text-xs text-neutral-400">{post.authorRole}</div>
+                        <div className="text-white">{post.author || 'Unknown'}</div>
+                        <div className="text-xs text-neutral-400">{post.authorRole || 'Editor'}</div>
                       </div>
                     </div>
                   </td>
                   <td className="p-4">
                     <div>
-                      <div className="text-white">{post.category}</div>
+                      <div className="text-white">{post.category || 'Uncategorized'}</div>
                       <div className="flex flex-wrap gap-1 mt-1">
-                        {post.tags.slice(0, 2).map(tag => (
+                        {post.tags && Array.isArray(post.tags) && post.tags.slice(0, 2).map(tag => (
                           <span key={tag} className="inline-flex items-center gap-1 px-2 py-0.5 bg-neutral-700 rounded text-xs text-neutral-300">
                             <Tag className="w-2.5 h-2.5" />
                             {tag}
                           </span>
                         ))}
-                        {post.tags.length > 2 && (
+                        {post.tags && Array.isArray(post.tags) && post.tags.length > 2 && (
                           <span className="text-xs text-neutral-500">+{post.tags.length - 2}</span>
                         )}
                       </div>
@@ -313,22 +339,22 @@ export default function AdminBlogPage() {
                     <div className="space-y-1">
                       <div className="flex items-center gap-2 text-sm">
                         <Eye className="w-3 h-3 text-neutral-400" />
-                        <span className="text-white">{post.views.toLocaleString()}</span>
+                        <span className="text-white">{(post.views || 0).toLocaleString()}</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm">
                         <Heart className="w-3 h-3 text-neutral-400" />
-                        <span className="text-white">{post.likes}</span>
+                        <span className="text-white">{post.likes || 0}</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm">
                         <Clock className="w-3 h-3 text-neutral-400" />
-                        <span className="text-white">{post.readTime} min</span>
+                        <span className="text-white">{post.readTime || 5} min</span>
                       </div>
                     </div>
                   </td>
                   <td className="p-4">
-                    <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold border ${getStatusColor(post.status)}`}>
-                      {getStatusIcon(post.status)}
-                      {post.status}
+                    <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold border ${getStatusColor(post.status || 'draft')}`}>
+                      {getStatusIcon(post.status || 'draft')}
+                      {post.status || 'draft'}
                     </span>
                   </td>
                   <td className="p-4">

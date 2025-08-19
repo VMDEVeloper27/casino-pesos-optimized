@@ -117,6 +117,63 @@
     "lastModified": "2025-08-12T09:13:34.708Z"
   },
   {
+    "id": "wild-casino",
+    "name": "Wild Casino",
+    "slug": "wild-casino",
+    "logo": "/images/casinos/wild-casino-logo.png",
+    "rating": 4.8,
+    "established": 2018,
+    "affiliateLink": "http://redditlink.org/WildCasino",
+    "features": [
+      "Live Casino",
+      "Crypto",
+      "Quick Payouts"
+    ],
+    "bonus": {
+      "type": "welcome",
+      "amount": 5000,
+      "percentage": 100,
+      "freeSpins": 0,
+      "minDeposit": 20,
+      "wageringRequirement": 35,
+      "code": "WILD250"
+    },
+    "games": {
+      "total": 400,
+      "slots": 280,
+      "live": 35,
+      "table": 60
+    },
+    "paymentMethods": [
+      "Visa",
+      "MasterCard",
+      "Bitcoin",
+      "Ethereum",
+      "Litecoin"
+    ],
+    "withdrawalTime": "12-24 hours",
+    "licenses": [
+      "Panama"
+    ],
+    "currencies": [
+      "USD",
+      "BTC",
+      "ETH"
+    ],
+    "pros": [
+      "Huge welcome bonus",
+      "Fast crypto withdrawals",
+      "24/7 customer support",
+      "Weekly tournaments"
+    ],
+    "cons": [
+      "US players only",
+      "High wagering requirements"
+    ],
+    "status": "active",
+    "lastModified": "2025-08-19T07:44:37.685Z"
+  },
+  {
     "id": "caliente",
     "name": "Caliente Casino",
     "slug": "caliente",
@@ -176,61 +233,6 @@
     "lastModified": "2025-08-10T07:55:42.411Z"
   },
   {
-    "id": "winpot",
-    "name": "WinPot Casino",
-    "slug": "winpot",
-    "logo": "/images/winpot-logo.png",
-    "rating": 4.6,
-    "established": 2020,
-    "affiliateLink": "https://winpot.mx",
-    "features": [
-      "100% Mexicano",
-      "OXXO",
-      "Jackpots",
-      "Nuevo"
-    ],
-    "bonus": {
-      "type": "welcome",
-      "amount": 5000,
-      "percentage": 150,
-      "freeSpins": 150,
-      "minDeposit": 150,
-      "wageringRequirement": 20
-    },
-    "games": {
-      "total": 1200,
-      "slots": 1000,
-      "live": 80,
-      "table": 120
-    },
-    "paymentMethods": [
-      "OXXO",
-      "SPEI",
-      "CoDi",
-      "Visa",
-      "Mastercard"
-    ],
-    "withdrawalTime": "24-72 horas",
-    "licenses": [
-      "SEGOB México"
-    ],
-    "currencies": [
-      "MXN"
-    ],
-    "pros": [
-      "Empresa mexicana",
-      "Licencia SEGOB",
-      "Buenos jackpots",
-      "Interfaz moderna"
-    ],
-    "cons": [
-      "Poco tiempo en mercado",
-      "Catálogo limitado"
-    ],
-    "status": "active",
-    "lastModified": "2025-08-10T07:55:42.411Z"
-  },
-  {
     "id": "betano",
     "name": "Betano Casino",
     "slug": "betano",
@@ -284,124 +286,6 @@
     ],
     "cons": [
       "Sin licencia mexicana",
-      "Verificación estricta"
-    ],
-    "status": "active",
-    "lastModified": "2025-08-10T07:55:42.411Z"
-  },
-  {
-    "id": "1xbet",
-    "name": "1xBet Casino",
-    "slug": "1xbet",
-    "logo": "/images/1xbet-logo.png",
-    "rating": 4.5,
-    "established": 2007,
-    "affiliateLink": "https://1xbet.mx",
-    "features": [
-      "Criptomonedas",
-      "50+ Deportes",
-      "Casino Live",
-      "eSports"
-    ],
-    "bonus": {
-      "type": "welcome",
-      "amount": 76500,
-      "percentage": 100,
-      "freeSpins": 150,
-      "minDeposit": 200,
-      "wageringRequirement": 40
-    },
-    "games": {
-      "total": 5000,
-      "slots": 4000,
-      "live": 500,
-      "table": 500
-    },
-    "paymentMethods": [
-      "Bitcoin",
-      "OXXO",
-      "SPEI",
-      "PayPal",
-      "Visa",
-      "Mastercard",
-      "Crypto"
-    ],
-    "withdrawalTime": "15 min - 7 días",
-    "licenses": [
-      "Curacao"
-    ],
-    "currencies": [
-      "MXN",
-      "USD",
-      "EUR",
-      "BTC",
-      "ETH"
-    ],
-    "pros": [
-      "Enorme catálogo",
-      "Acepta criptomonedas",
-      "Muchos deportes",
-      "Bonos generosos"
-    ],
-    "cons": [
-      "Interfaz compleja",
-      "Soporte variable"
-    ],
-    "status": "active",
-    "lastModified": "2025-08-10T07:55:42.411Z"
-  },
-  {
-    "id": "parimatch",
-    "name": "Parimatch Casino",
-    "slug": "parimatch",
-    "logo": "/images/parimatch-logo.png",
-    "rating": 4.6,
-    "established": 1994,
-    "affiliateLink": "https://parimatch.mx",
-    "features": [
-      "UFC Partner",
-      "Aviator",
-      "OXXO",
-      "Cash Out"
-    ],
-    "bonus": {
-      "type": "welcome",
-      "amount": 15000,
-      "percentage": 150,
-      "freeSpins": 100,
-      "minDeposit": 200,
-      "wageringRequirement": 30
-    },
-    "games": {
-      "total": 3000,
-      "slots": 2500,
-      "live": 250,
-      "table": 250
-    },
-    "paymentMethods": [
-      "OXXO",
-      "SPEI",
-      "Visa",
-      "Mastercard",
-      "Astropay"
-    ],
-    "withdrawalTime": "1-3 días",
-    "licenses": [
-      "Curacao",
-      "Cyprus"
-    ],
-    "currencies": [
-      "MXN",
-      "USD"
-    ],
-    "pros": [
-      "Partner oficial UFC",
-      "Aviator original",
-      "Buenos bonos",
-      "App móvil excelente"
-    ],
-    "cons": [
-      "Retiros pueden demorar",
       "Verificación estricta"
     ],
     "status": "active",
@@ -468,6 +352,690 @@
     "lastModified": "2025-08-10T07:55:42.411Z"
   },
   {
+    "id": "bovada",
+    "name": "Bovada",
+    "slug": "bovada",
+    "logo": "/images/casinos/bovada-logo.png",
+    "rating": 4.7,
+    "established": 2011,
+    "affiliateLink": "http://upvotesports.com/",
+    "features": [
+      "Live Casino",
+      "24/7 Support",
+      "Crypto",
+      "Quick Payouts"
+    ],
+    "bonus": {
+      "type": "welcome",
+      "amount": 3000,
+      "percentage": 100,
+      "freeSpins": 0,
+      "minDeposit": 20,
+      "wageringRequirement": 25,
+      "code": "CAWELCOME100"
+    },
+    "games": {
+      "total": 300,
+      "slots": 200,
+      "live": 30,
+      "table": 50
+    },
+    "paymentMethods": [
+      "Visa",
+      "MasterCard",
+      "Bitcoin",
+      "Ethereum",
+      "Litecoin"
+    ],
+    "withdrawalTime": "24-48 hours",
+    "licenses": [
+      "Curacao"
+    ],
+    "currencies": [
+      "USD",
+      "BTC",
+      "ETH"
+    ],
+    "pros": [
+      "Accepts US players",
+      "Fast crypto payouts",
+      "Great sports betting section",
+      "Mobile-friendly platform"
+    ],
+    "cons": [
+      "Limited banking options for non-crypto",
+      "No phone support"
+    ],
+    "status": "active",
+    "lastModified": "2025-08-19T07:44:37.684Z"
+  },
+  {
+    "id": "leovegas",
+    "name": "LeoVegas",
+    "slug": "leovegas",
+    "logo": "/images/casinos/leovegas-logo.png",
+    "rating": 4.7,
+    "established": 2012,
+    "affiliateLink": "https://www.leovegas.com/",
+    "features": [
+      "Live Casino",
+      "24/7 Support"
+    ],
+    "bonus": {
+      "type": "welcome",
+      "amount": 1000,
+      "percentage": 100,
+      "freeSpins": 0,
+      "minDeposit": 10,
+      "wageringRequirement": 35,
+      "code": ""
+    },
+    "games": {
+      "total": 2000,
+      "slots": 1500,
+      "live": 200,
+      "table": 200
+    },
+    "paymentMethods": [
+      "Visa",
+      "MasterCard",
+      "Skrill",
+      "Neteller",
+      "PayPal"
+    ],
+    "withdrawalTime": "0-5 hours",
+    "licenses": [
+      "MGA, UKGC, Sweden"
+    ],
+    "currencies": [
+      "EUR",
+      "GBP",
+      "SEK"
+    ],
+    "pros": [
+      "Award-winning mobile casino",
+      "Huge game selection",
+      "Fast withdrawals",
+      "Multiple licenses"
+    ],
+    "cons": [
+      "Not available in US",
+      "Restricted in many countries"
+    ],
+    "status": "active",
+    "lastModified": "2025-08-19T07:44:37.685Z"
+  },
+  {
+    "id": "888casino",
+    "name": "888casino",
+    "slug": "888casino",
+    "logo": "/images/casinos/888casino-logo.png",
+    "rating": 4.7,
+    "established": 1997,
+    "affiliateLink": "https://www.888casino.com/",
+    "features": [
+      "Live Casino",
+      "24/7 Support"
+    ],
+    "bonus": {
+      "type": "welcome",
+      "amount": 2000,
+      "percentage": 100,
+      "freeSpins": 0,
+      "minDeposit": 20,
+      "wageringRequirement": 30,
+      "code": "WELCOME888"
+    },
+    "games": {
+      "total": 1000,
+      "slots": 700,
+      "live": 100,
+      "table": 150
+    },
+    "paymentMethods": [
+      "Visa",
+      "MasterCard",
+      "PayPal",
+      "Skrill",
+      "Neteller"
+    ],
+    "withdrawalTime": "1-3 days",
+    "licenses": [
+      "MGA, UKGC, Gibraltar"
+    ],
+    "currencies": [
+      "EUR",
+      "GBP",
+      "USD"
+    ],
+    "pros": [
+      "Established since 1997",
+      "No deposit bonus",
+      "Own software",
+      "Multiple licenses"
+    ],
+    "cons": [
+      "Limited in some countries",
+      "Slower withdrawals"
+    ],
+    "status": "active",
+    "lastModified": "2025-08-19T07:44:37.686Z"
+  },
+  {
+    "id": "winpot",
+    "name": "WinPot Casino",
+    "slug": "winpot",
+    "logo": "/images/winpot-logo.png",
+    "rating": 4.6,
+    "established": 2020,
+    "affiliateLink": "https://winpot.mx",
+    "features": [
+      "100% Mexicano",
+      "OXXO",
+      "Jackpots",
+      "Nuevo"
+    ],
+    "bonus": {
+      "type": "welcome",
+      "amount": 5000,
+      "percentage": 150,
+      "freeSpins": 150,
+      "minDeposit": 150,
+      "wageringRequirement": 20
+    },
+    "games": {
+      "total": 1200,
+      "slots": 1000,
+      "live": 80,
+      "table": 120
+    },
+    "paymentMethods": [
+      "OXXO",
+      "SPEI",
+      "CoDi",
+      "Visa",
+      "Mastercard"
+    ],
+    "withdrawalTime": "24-72 horas",
+    "licenses": [
+      "SEGOB México"
+    ],
+    "currencies": [
+      "MXN"
+    ],
+    "pros": [
+      "Empresa mexicana",
+      "Licencia SEGOB",
+      "Buenos jackpots",
+      "Interfaz moderna"
+    ],
+    "cons": [
+      "Poco tiempo en mercado",
+      "Catálogo limitado"
+    ],
+    "status": "active",
+    "lastModified": "2025-08-10T07:55:42.411Z"
+  },
+  {
+    "id": "parimatch",
+    "name": "Parimatch Casino",
+    "slug": "parimatch",
+    "logo": "/images/parimatch-logo.png",
+    "rating": 4.6,
+    "established": 1994,
+    "affiliateLink": "https://parimatch.mx",
+    "features": [
+      "UFC Partner",
+      "Aviator",
+      "OXXO",
+      "Cash Out"
+    ],
+    "bonus": {
+      "type": "welcome",
+      "amount": 15000,
+      "percentage": 150,
+      "freeSpins": 100,
+      "minDeposit": 200,
+      "wageringRequirement": 30
+    },
+    "games": {
+      "total": 3000,
+      "slots": 2500,
+      "live": 250,
+      "table": 250
+    },
+    "paymentMethods": [
+      "OXXO",
+      "SPEI",
+      "Visa",
+      "Mastercard",
+      "Astropay"
+    ],
+    "withdrawalTime": "1-3 días",
+    "licenses": [
+      "Curacao",
+      "Cyprus"
+    ],
+    "currencies": [
+      "MXN",
+      "USD"
+    ],
+    "pros": [
+      "Partner oficial UFC",
+      "Aviator original",
+      "Buenos bonos",
+      "App móvil excelente"
+    ],
+    "cons": [
+      "Retiros pueden demorar",
+      "Verificación estricta"
+    ],
+    "status": "active",
+    "lastModified": "2025-08-10T07:55:42.411Z"
+  },
+  {
+    "id": "betonline",
+    "name": "BetOnline",
+    "slug": "betonline",
+    "logo": "/images/casinos/betonline-logo.png",
+    "rating": 4.6,
+    "established": 2004,
+    "affiliateLink": "http://redditlink.org/BetOnline",
+    "features": [
+      "Live Casino",
+      "24/7 Support",
+      "Crypto",
+      "Quick Payouts"
+    ],
+    "bonus": {
+      "type": "welcome",
+      "amount": 3000,
+      "percentage": 100,
+      "freeSpins": 0,
+      "minDeposit": 25,
+      "wageringRequirement": 30,
+      "code": "BOLCASINO"
+    },
+    "games": {
+      "total": 350,
+      "slots": 220,
+      "live": 40,
+      "table": 60
+    },
+    "paymentMethods": [
+      "Visa",
+      "MasterCard",
+      "Bitcoin",
+      "Ethereum",
+      "Litecoin"
+    ],
+    "withdrawalTime": "24-48 hours",
+    "licenses": [
+      "Panama"
+    ],
+    "currencies": [
+      "USD",
+      "BTC",
+      "ETH"
+    ],
+    "pros": [
+      "20+ years of experience",
+      "Excellent mobile app",
+      "Fast payouts",
+      "Great live betting options"
+    ],
+    "cons": [
+      "High wagering requirements",
+      "Limited customer support hours"
+    ],
+    "status": "active",
+    "lastModified": "2025-08-19T07:44:37.685Z"
+  },
+  {
+    "id": "betway",
+    "name": "Betway",
+    "slug": "betway",
+    "logo": "/images/casinos/betway-logo.png",
+    "rating": 4.6,
+    "established": 2006,
+    "affiliateLink": "https://www.betway.com/",
+    "features": [
+      "Live Casino",
+      "24/7 Support",
+      "Quick Payouts"
+    ],
+    "bonus": {
+      "type": "welcome",
+      "amount": 1000,
+      "percentage": 100,
+      "freeSpins": 0,
+      "minDeposit": 10,
+      "wageringRequirement": 50,
+      "code": ""
+    },
+    "games": {
+      "total": 500,
+      "slots": 400,
+      "live": 30,
+      "table": 50
+    },
+    "paymentMethods": [
+      "Visa",
+      "MasterCard",
+      "PayPal",
+      "Skrill",
+      "Neteller"
+    ],
+    "withdrawalTime": "24-48 hours",
+    "licenses": [
+      "MGA, UKGC"
+    ],
+    "currencies": [
+      "EUR",
+      "GBP",
+      "USD"
+    ],
+    "pros": [
+      "Trusted brand",
+      "eCOGRA certified",
+      "Good sports betting",
+      "24/7 support"
+    ],
+    "cons": [
+      "High wagering requirements",
+      "Limited game variety"
+    ],
+    "status": "active",
+    "lastModified": "2025-08-19T07:44:37.685Z"
+  },
+  {
+    "id": "1xbet",
+    "name": "1xBet Casino",
+    "slug": "1xbet",
+    "logo": "/images/1xbet-logo.png",
+    "rating": 4.5,
+    "established": 2007,
+    "affiliateLink": "https://1xbet.mx",
+    "features": [
+      "Criptomonedas",
+      "50+ Deportes",
+      "Casino Live",
+      "eSports"
+    ],
+    "bonus": {
+      "type": "welcome",
+      "amount": 76500,
+      "percentage": 100,
+      "freeSpins": 150,
+      "minDeposit": 200,
+      "wageringRequirement": 40
+    },
+    "games": {
+      "total": 5000,
+      "slots": 4000,
+      "live": 500,
+      "table": 500
+    },
+    "paymentMethods": [
+      "Bitcoin",
+      "OXXO",
+      "SPEI",
+      "PayPal",
+      "Visa",
+      "Mastercard",
+      "Crypto"
+    ],
+    "withdrawalTime": "15 min - 7 días",
+    "licenses": [
+      "Curacao"
+    ],
+    "currencies": [
+      "MXN",
+      "USD",
+      "EUR",
+      "BTC",
+      "ETH"
+    ],
+    "pros": [
+      "Enorme catálogo",
+      "Acepta criptomonedas",
+      "Muchos deportes",
+      "Bonos generosos"
+    ],
+    "cons": [
+      "Interfaz compleja",
+      "Soporte variable"
+    ],
+    "status": "active",
+    "lastModified": "2025-08-10T07:55:42.411Z"
+  },
+  {
+    "id": "leon",
+    "name": "Leon Casino",
+    "slug": "leon",
+    "logo": "/images/leon-logo.png",
+    "rating": 4.5,
+    "established": 2007,
+    "affiliateLink": "https://leon.mx",
+    "features": [
+      "Ruleta Mexicana",
+      "OXXO",
+      "Cashback",
+      "VIP"
+    ],
+    "bonus": {
+      "type": "welcome",
+      "amount": 25000,
+      "percentage": 100,
+      "freeSpins": 100,
+      "minDeposit": 300,
+      "wageringRequirement": 30
+    },
+    "games": {
+      "total": 3500,
+      "slots": 3000,
+      "live": 200,
+      "table": 300
+    },
+    "paymentMethods": [
+      "OXXO",
+      "SPEI",
+      "Visa",
+      "Mastercard",
+      "Muchbetter"
+    ],
+    "withdrawalTime": "24-72 horas",
+    "licenses": [
+      "Curacao"
+    ],
+    "currencies": [
+      "MXN",
+      "USD"
+    ],
+    "pros": [
+      "Ruleta mexicana",
+      "Programa VIP bueno",
+      "Cashback semanal",
+      "Muchas promociones"
+    ],
+    "cons": [
+      "Soporte lento",
+      "Verificación tardada"
+    ],
+    "status": "active",
+    "lastModified": "2025-08-10T07:55:42.411Z"
+  },
+  {
+    "id": "pin-up",
+    "name": "Pin-Up Casino",
+    "slug": "pin-up",
+    "logo": "/images/pinup-logo.png",
+    "rating": 4.5,
+    "established": 2016,
+    "affiliateLink": "https://pin-up.mx",
+    "features": [
+      "Aviator",
+      "Pin Coins",
+      "OXXO",
+      "Móvil"
+    ],
+    "bonus": {
+      "type": "welcome",
+      "amount": 25000,
+      "percentage": 120,
+      "freeSpins": 250,
+      "minDeposit": 200,
+      "wageringRequirement": 50
+    },
+    "games": {
+      "total": 5000,
+      "slots": 4500,
+      "live": 250,
+      "table": 250
+    },
+    "paymentMethods": [
+      "OXXO",
+      "SPEI",
+      "Visa",
+      "Mastercard",
+      "AstroPay"
+    ],
+    "withdrawalTime": "1-5 días",
+    "licenses": [
+      "Curacao"
+    ],
+    "currencies": [
+      "MXN",
+      "USD"
+    ],
+    "pros": [
+      "Aviator original",
+      "Pin Coins rewards",
+      "Muchos giros gratis",
+      "Diseño único"
+    ],
+    "cons": [
+      "Requisitos muy altos",
+      "Retiros lentos"
+    ],
+    "status": "active",
+    "lastModified": "2025-08-10T07:55:42.411Z"
+  },
+  {
+    "id": "super-slots",
+    "name": "Super Slots",
+    "slug": "super-slots",
+    "logo": "/images/casinos/super-slots-logo.png",
+    "rating": 4.5,
+    "established": 2020,
+    "affiliateLink": "http://redditlink.org/superslots",
+    "features": [
+      "Live Casino",
+      "Crypto",
+      "Quick Payouts"
+    ],
+    "bonus": {
+      "type": "welcome",
+      "amount": 6000,
+      "percentage": 100,
+      "freeSpins": 0,
+      "minDeposit": 20,
+      "wageringRequirement": 35,
+      "code": "SS250"
+    },
+    "games": {
+      "total": 350,
+      "slots": 250,
+      "live": 30,
+      "table": 50
+    },
+    "paymentMethods": [
+      "Visa",
+      "MasterCard",
+      "Bitcoin",
+      "Ethereum",
+      "Litecoin"
+    ],
+    "withdrawalTime": "24-48 hours",
+    "licenses": [
+      "Panama"
+    ],
+    "currencies": [
+      "USD",
+      "BTC",
+      "ETH"
+    ],
+    "pros": [
+      "Huge slot selection",
+      "Generous bonuses",
+      "Fast payouts",
+      "Mobile optimized"
+    ],
+    "cons": [
+      "Limited live dealer games",
+      "No sports betting"
+    ],
+    "status": "active",
+    "lastModified": "2025-08-19T07:44:37.685Z"
+  },
+  {
+    "id": "betcris",
+    "name": "BetCris",
+    "slug": "betcris",
+    "logo": "/images/casinos/betcris-logo.png",
+    "rating": 4.5,
+    "established": 1985,
+    "affiliateLink": "https://www.betcris.com/",
+    "features": [
+      "Live Casino",
+      "24/7 Support",
+      "Quick Payouts"
+    ],
+    "bonus": {
+      "type": "welcome",
+      "amount": 200,
+      "percentage": 100,
+      "freeSpins": 0,
+      "minDeposit": 25,
+      "wageringRequirement": 30,
+      "code": "WELCOME"
+    },
+    "games": {
+      "total": 500,
+      "slots": 300,
+      "live": 50,
+      "table": 100
+    },
+    "paymentMethods": [
+      "Visa",
+      "MasterCard",
+      "Bitcoin",
+      "Skrill",
+      "Bank Transfer"
+    ],
+    "withdrawalTime": "24-72 hours",
+    "licenses": [
+      "Costa Rica"
+    ],
+    "currencies": [
+      "USD",
+      "MXN",
+      "CRC"
+    ],
+    "pros": [
+      "Establecido desde 1985",
+      "Popular en América Latina",
+      "Buenos límites de apuestas",
+      "Acepta múltiples monedas"
+    ],
+    "cons": [
+      "Menos juegos que competidores",
+      "Interface anticuada"
+    ],
+    "status": "active",
+    "lastModified": "2025-08-19T07:44:37.686Z"
+  },
+  {
     "id": "megapari",
     "name": "Megapari Casino",
     "slug": "megapari",
@@ -529,30 +1097,30 @@
     "lastModified": "2025-08-10T07:55:42.411Z"
   },
   {
-    "id": "leon",
-    "name": "Leon Casino",
-    "slug": "leon",
-    "logo": "/images/leon-logo.png",
-    "rating": 4.5,
-    "established": 2007,
-    "affiliateLink": "https://leon.mx",
+    "id": "vulkanbet",
+    "name": "Vulkanbet Casino",
+    "slug": "vulkanbet",
+    "logo": "/images/vulkanbet-logo.png",
+    "rating": 4.4,
+    "established": 2016,
+    "affiliateLink": "https://vulkanbet.mx",
     "features": [
-      "Ruleta Mexicana",
+      "Torneos",
+      "Drops & Wins",
       "OXXO",
-      "Cashback",
-      "VIP"
+      "Cashback"
     ],
     "bonus": {
       "type": "welcome",
-      "amount": 25000,
-      "percentage": 100,
-      "freeSpins": 100,
-      "minDeposit": 300,
-      "wageringRequirement": 30
+      "amount": 15000,
+      "percentage": 200,
+      "freeSpins": 125,
+      "minDeposit": 250,
+      "wageringRequirement": 35
     },
     "games": {
-      "total": 3500,
-      "slots": 3000,
+      "total": 4000,
+      "slots": 3500,
       "live": 200,
       "table": 300
     },
@@ -561,28 +1129,199 @@
       "SPEI",
       "Visa",
       "Mastercard",
-      "Muchbetter"
+      "Neosurf"
     ],
-    "withdrawalTime": "24-72 horas",
+    "withdrawalTime": "24-48 horas",
     "licenses": [
       "Curacao"
     ],
     "currencies": [
       "MXN",
-      "USD"
+      "USD",
+      "EUR"
     ],
     "pros": [
-      "Ruleta mexicana",
-      "Programa VIP bueno",
-      "Cashback semanal",
-      "Muchas promociones"
+      "Torneos semanales",
+      "Drops & Wins",
+      "Cashback 12%",
+      "Buena app móvil"
     ],
     "cons": [
-      "Soporte lento",
-      "Verificación tardada"
+      "Sin PayPal",
+      "Catálogo estándar"
     ],
     "status": "active",
     "lastModified": "2025-08-10T07:55:42.411Z"
+  },
+  {
+    "id": "betus",
+    "name": "BetUS",
+    "slug": "betus",
+    "logo": "/images/casinos/betus-logo.png",
+    "rating": 4.4,
+    "established": 1994,
+    "affiliateLink": "https://www.betus.com.pa/",
+    "features": [
+      "Live Casino",
+      "24/7 Support",
+      "Crypto"
+    ],
+    "bonus": {
+      "type": "welcome",
+      "amount": 5000,
+      "percentage": 150,
+      "freeSpins": 0,
+      "minDeposit": 10,
+      "wageringRequirement": 30,
+      "code": "CAS150"
+    },
+    "games": {
+      "total": 300,
+      "slots": 200,
+      "live": 25,
+      "table": 50
+    },
+    "paymentMethods": [
+      "Visa",
+      "MasterCard",
+      "Bitcoin",
+      "Ethereum",
+      "Litecoin"
+    ],
+    "withdrawalTime": "2-5 days",
+    "licenses": [
+      "Curacao"
+    ],
+    "currencies": [
+      "USD",
+      "BTC",
+      "ETH"
+    ],
+    "pros": [
+      "Established since 1994",
+      "Low minimum deposit",
+      "Good mobile experience",
+      "Accepts US players"
+    ],
+    "cons": [
+      "Slower payouts",
+      "Limited game selection"
+    ],
+    "status": "active",
+    "lastModified": "2025-08-19T07:44:37.685Z"
+  },
+  {
+    "id": "brazino777",
+    "name": "Brazino777",
+    "slug": "brazino777",
+    "logo": "/images/casinos/brazino777-logo.png",
+    "rating": 4.4,
+    "established": 2011,
+    "affiliateLink": "https://brazino777.com/",
+    "features": [
+      "Live Casino",
+      "24/7 Support",
+      "Crypto",
+      "Quick Payouts"
+    ],
+    "bonus": {
+      "type": "welcome",
+      "amount": 4000,
+      "percentage": 100,
+      "freeSpins": 0,
+      "minDeposit": 20,
+      "wageringRequirement": 30,
+      "code": "BRAZINO"
+    },
+    "games": {
+      "total": 2000,
+      "slots": 1500,
+      "live": 150,
+      "table": 250
+    },
+    "paymentMethods": [
+      "PIX",
+      "Boleto",
+      "Visa",
+      "MasterCard",
+      "Bitcoin"
+    ],
+    "withdrawalTime": "24-48 hours",
+    "licenses": [
+      "Curacao"
+    ],
+    "currencies": [
+      "BRL",
+      "USD",
+      "EUR"
+    ],
+    "pros": [
+      "Popular no Brasil",
+      "Aceita PIX",
+      "Grande variedade de jogos",
+      "Bingo online"
+    ],
+    "cons": [
+      "Foco principal no Brasil",
+      "Interface pode ser melhorada"
+    ],
+    "status": "active",
+    "lastModified": "2025-08-19T07:44:37.686Z"
+  },
+  {
+    "id": "playcity",
+    "name": "Play City",
+    "slug": "playcity",
+    "logo": "/images/casinos/playcity-logo.png",
+    "rating": 4.4,
+    "established": 1993,
+    "affiliateLink": "https://www.playcity.com/",
+    "features": [
+      "Live Casino",
+      "24/7 Support",
+      "Quick Payouts"
+    ],
+    "bonus": {
+      "type": "welcome",
+      "amount": 3000,
+      "percentage": 100,
+      "freeSpins": 0,
+      "minDeposit": 100,
+      "wageringRequirement": 30,
+      "code": "CIUDAD"
+    },
+    "games": {
+      "total": 800,
+      "slots": 600,
+      "live": 50,
+      "table": 100
+    },
+    "paymentMethods": [
+      "OXXO",
+      "SPEI",
+      "Visa",
+      "MasterCard",
+      "PayPal"
+    ],
+    "withdrawalTime": "24-48 hours",
+    "licenses": [
+      "SEGOB Mexico"
+    ],
+    "currencies": [
+      "MXN"
+    ],
+    "pros": [
+      "Casinos físicos en México",
+      "Marca establecida desde 1993",
+      "Licencia SEGOB",
+      "Programa de lealtad"
+    ],
+    "cons": [
+      "Solo México",
+      "Menos variedad online que físico"
+    ],
+    "status": "active",
+    "lastModified": "2025-08-19T07:44:37.686Z"
   },
   {
     "id": "melbet",
@@ -646,116 +1385,170 @@
     "lastModified": "2025-08-10T07:55:42.411Z"
   },
   {
-    "id": "vulkanbet",
-    "name": "Vulkanbet Casino",
-    "slug": "vulkanbet",
-    "logo": "/images/vulkanbet-logo.png",
-    "rating": 4.4,
-    "established": 2016,
-    "affiliateLink": "https://vulkanbet.mx",
+    "id": "playdoit",
+    "name": "PlayDoit",
+    "slug": "playdoit",
+    "logo": "/images/casinos/playdoit-logo.png",
+    "rating": 4.3,
+    "established": 2018,
+    "affiliateLink": "https://www.playdoit.mx/",
     "features": [
-      "Torneos",
-      "Drops & Wins",
-      "OXXO",
-      "Cashback"
+      "Live Casino",
+      "24/7 Support",
+      "Quick Payouts"
     ],
     "bonus": {
       "type": "welcome",
-      "amount": 15000,
+      "amount": 10000,
       "percentage": 200,
-      "freeSpins": 125,
-      "minDeposit": 250,
-      "wageringRequirement": 35
+      "freeSpins": 100,
+      "minDeposit": 200,
+      "wageringRequirement": 35,
+      "code": "PLAY200"
     },
     "games": {
-      "total": 4000,
-      "slots": 3500,
-      "live": 200,
-      "table": 300
+      "total": 1200,
+      "slots": 900,
+      "live": 100,
+      "table": 150
     },
     "paymentMethods": [
       "OXXO",
       "SPEI",
       "Visa",
-      "Mastercard",
-      "Neosurf"
+      "MasterCard",
+      "Bitcoin"
     ],
-    "withdrawalTime": "24-48 horas",
+    "withdrawalTime": "24-72 hours",
     "licenses": [
-      "Curacao"
+      "SEGOB Mexico"
     ],
     "currencies": [
-      "MXN",
-      "USD",
-      "EUR"
+      "MXN"
     ],
     "pros": [
-      "Torneos semanales",
-      "Drops & Wins",
-      "Cashback 12%",
-      "Buena app móvil"
+      "Gran bono de bienvenida",
+      "Licencia mexicana",
+      "Pagos locales",
+      "Buena selección de juegos"
     ],
     "cons": [
-      "Sin PayPal",
-      "Catálogo estándar"
+      "Marca menos conocida",
+      "Soporte limitado"
     ],
     "status": "active",
-    "lastModified": "2025-08-10T07:55:42.411Z"
+    "lastModified": "2025-08-19T07:44:37.686Z"
   },
   {
-    "id": "pin-up",
-    "name": "Pin-Up Casino",
-    "slug": "pin-up",
-    "logo": "/images/pinup-logo.png",
-    "rating": 4.5,
+    "id": "nitrobetting",
+    "name": "Nitrobetting",
+    "slug": "nitrobetting",
+    "logo": "/images/casinos/nitrobetting-logo.png",
+    "rating": 4.3,
     "established": 2016,
-    "affiliateLink": "https://pin-up.mx",
+    "affiliateLink": "https://nitrobetting.eu/",
     "features": [
-      "Aviator",
-      "Pin Coins",
-      "OXXO",
-      "Móvil"
+      "Crypto",
+      "Quick Payouts"
     ],
     "bonus": {
       "type": "welcome",
-      "amount": 25000,
-      "percentage": 120,
-      "freeSpins": 250,
-      "minDeposit": 200,
-      "wageringRequirement": 50
+      "amount": 0.05,
+      "percentage": 100,
+      "freeSpins": 0,
+      "minDeposit": 0.001,
+      "wageringRequirement": 30,
+      "code": "NITRO100"
     },
     "games": {
-      "total": 5000,
-      "slots": 4500,
-      "live": 250,
-      "table": 250
+      "total": 300,
+      "slots": 200,
+      "table": 50
+    },
+    "paymentMethods": [
+      "Bitcoin",
+      "Ethereum",
+      "Litecoin",
+      "Bitcoin Cash",
+      "Dogecoin"
+    ],
+    "withdrawalTime": "Instant",
+    "licenses": [
+      "Curacao"
+    ],
+    "currencies": [
+      "BTC",
+      "ETH",
+      "LTC"
+    ],
+    "pros": [
+      "Anonymous betting",
+      "Instant withdrawals",
+      "No KYC required",
+      "Provably fair games"
+    ],
+    "cons": [
+      "Crypto only",
+      "Limited game selection"
+    ],
+    "status": "active",
+    "lastModified": "2025-08-19T07:44:37.686Z"
+  },
+  {
+    "id": "afun",
+    "name": "Afun.mx",
+    "slug": "afun",
+    "logo": "/images/casinos/afun-logo.png",
+    "rating": 4.2,
+    "established": 2020,
+    "affiliateLink": "https://www.afun.mx/",
+    "features": [
+      "Live Casino",
+      "24/7 Support",
+      "Quick Payouts"
+    ],
+    "bonus": {
+      "type": "welcome",
+      "amount": 5000,
+      "percentage": 100,
+      "freeSpins": 0,
+      "minDeposit": 100,
+      "wageringRequirement": 35,
+      "code": "AFUN100"
+    },
+    "games": {
+      "total": 2000,
+      "slots": 1500,
+      "live": 200,
+      "table": 200
     },
     "paymentMethods": [
       "OXXO",
       "SPEI",
       "Visa",
-      "Mastercard",
-      "AstroPay"
+      "MasterCard",
+      "Bitcoin"
     ],
-    "withdrawalTime": "1-5 días",
+    "withdrawalTime": "24-72 hours",
     "licenses": [
       "Curacao"
     ],
     "currencies": [
       "MXN",
+      "BRL",
       "USD"
     ],
     "pros": [
-      "Aviator original",
-      "Pin Coins rewards",
-      "Muchos giros gratis",
-      "Diseño único"
+      "Acepta pesos mexicanos",
+      "Métodos de pago locales",
+      "Buen soporte en español",
+      "Casino en vivo"
     ],
     "cons": [
-      "Requisitos muy altos",
-      "Retiros lentos"
+      "Relativamente nuevo",
+      "Tiempos de retiro variables"
     ],
     "status": "active",
-    "lastModified": "2025-08-10T07:55:42.411Z"
+    "lastModified": "2025-08-19T07:44:37.686Z"
   }
 ]

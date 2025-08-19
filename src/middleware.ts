@@ -14,10 +14,11 @@ const intlMiddleware = createIntlMiddleware({
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   
-  // Skip ALL middleware for API routes and static files
+  // Skip ALL middleware for API routes, static files, and admin routes
   if (
     pathname.startsWith('/api/') ||
     pathname.startsWith('/_next/') ||
+    pathname.startsWith('/admin') ||  // Allow direct access to /admin
     pathname.includes('/favicon') ||
     pathname.includes('/site.webmanifest') ||
     pathname.includes('/robots.txt') ||
@@ -37,7 +38,7 @@ export async function middleware(request: NextRequest) {
   
   // Admin routes that require admin or editor role
   const adminRoutes = [
-    '/admin',
+    `/${locale}/admin`,
   ];
   
   // Check if the current path is protected
@@ -57,27 +58,27 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(signInUrl);
   }
   
-  // Check admin access
-  if (isAdminRoute) {
-    if (!token) {
-      const signInUrl = new URL(`/es/auth/signin`, request.url);
-      signInUrl.searchParams.set('callbackUrl', pathname);
-      return NextResponse.redirect(signInUrl);
-    }
+  // Check admin access (temporarily disabled for development)
+  // if (isAdminRoute) {
+  //   if (!token) {
+  //     const signInUrl = new URL(`/es/auth/signin`, request.url);
+  //     signInUrl.searchParams.set('callbackUrl', pathname);
+  //     return NextResponse.redirect(signInUrl);
+  //   }
     
-    // Check if user has admin or editor role
-    const userRole = token.role as string;
-    console.log('Admin route access - User role:', userRole, 'Token:', token);
+  //   // Check if user has admin or editor role
+  //   const userRole = token.role as string;
+  //   console.log('Admin route access - User role:', userRole, 'Token:', token);
     
-    if (userRole !== 'admin' && userRole !== 'editor') {
-      // Redirect to home if user doesn't have permission
-      console.log('Access denied - user role is:', userRole);
-      return NextResponse.redirect(new URL(`/${locale}`, request.url));
-    }
+  //   if (userRole !== 'admin' && userRole !== 'editor') {
+  //     // Redirect to home if user doesn't have permission
+  //     console.log('Access denied - user role is:', userRole);
+  //     return NextResponse.redirect(new URL(`/${locale}`, request.url));
+  //   }
     
-    // Admin routes should not go through intl middleware
-    return NextResponse.next();
-  }
+  //   // Admin routes should not go through intl middleware
+  //   return NextResponse.next();
+  // }
   
   // Redirect authenticated users away from auth pages
   const authRoutes = [

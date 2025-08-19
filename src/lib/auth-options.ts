@@ -4,8 +4,6 @@ import bcrypt from 'bcryptjs';
 import { supabase } from './supabase';
 
 export const authOptions: NextAuthOptions = {
-  // Ensure proper URL handling
-  url: process.env.NEXTAUTH_URL || 'http://localhost:3000',
   providers: [
     CredentialsProvider({
       name: 'credentials',

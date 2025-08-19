@@ -1,150 +1,185 @@
-[
-  {
-    "id": "guia-completa-bonos-casino-2024",
-    "slug": "guia-completa-bonos-casino-2024",
-    "title": "Guía Completa de Bonos de Casino 2024",
-    "excerpt": "Descubre todos los tipos de bonos de casino disponibles en México, cómo funcionan y cómo maximizar tus ganancias con ellos.",
-    "content": "Los bonos de casino son una de las herramientas más poderosas para maximizar tu experiencia de juego en línea. En esta guía completa, exploraremos todos los aspectos importantes de los bonos de casino en México.\n\n## Tipos de Bonos\n\n### Bonos de Bienvenida\nLos bonos de bienvenida son la carta de presentación de cualquier casino en línea. Típicamente ofrecen entre 100% y 400% de tu primer depósito.\n\n### Bonos Sin Depósito\nEstos bonos te permiten jugar sin arriesgar tu propio dinero. Son ideales para probar un nuevo casino.\n\n### Giros Gratis\nLos giros gratis son perfectos para los amantes de las tragamonedas. Pueden venir como parte de un paquete de bienvenida o como promoción independiente.\n\n## Requisitos de Apuesta\n\nLos requisitos de apuesta (rollover) determinan cuántas veces debes apostar el bono antes de poder retirar las ganancias. Un rollover de 30x significa que debes apostar 30 veces el valor del bono.\n\n## Consejos para Maximizar los Bonos\n\n1. **Lee los términos y condiciones**: Siempre revisa los requisitos completos antes de aceptar un bono.\n2. **Verifica la contribución de juegos**: No todos los juegos contribuyen igual al rollover.\n3. **Gestiona tu bankroll**: No apuestes más de lo que puedes permitirte perder.\n4. **Aprovecha las promociones regulares**: Los casinos ofrecen bonos continuamente, no solo al registrarte.",
-    "author": "Carlos Mendoza",
-    "authorRole": "Experto en Casinos",
-    "category": "Guías",
-    "tags": [
-      "bonos",
-      "guías",
-      "principiantes",
-      "estrategia"
-    ],
-    "featuredImage": "/images/blog/bonos-casino-guide.jpg",
-    "publishedAt": "2024-01-15T10:00:00Z",
-    "updatedAt": "2024-01-15T10:00:00Z",
-    "readTime": 8,
-    "views": 1543,
-    "likes": 89,
-    "status": "published",
-    "seo": {
-      "metaTitle": "Guía Completa de Bonos de Casino 2024 | CasinosPesos",
-      "metaDescription": "Aprende todo sobre bonos de casino en México: tipos, requisitos de apuesta, estrategias y los mejores bonos disponibles en 2024.",
-      "keywords": [
-        "bonos casino",
+{
+  "posts": [
+    {
+      "id": "1",
+      "slug": "los-5-nuevos-casinos-online-que-llegan-a-mexico-en-enero-2024-aaaaaa",
+      "title": "Los 5 Nuevos Casinos Online que Llegan a México en Enero 2024 aaaaaa",
+      "excerpt": "Descubre las últimas plataformas de casino que han llegado al mercado mexicano con licencias internacionales, bonos exclusivos y métodos de pago locales como OXXO y SPEI.",
+      "content": "El mercado de casinos online en México continúa expandiéndose... aaaaa",
+      "author": "Carlos Mendoza",
+      "author_role": "Editor Principal",
+      "category": "Noticias",
+      "tags": [
+        "nuevos casinos",
+        "méxico",
+        "2024",
+        "licencias",
+        "bonos"
+      ],
+      "featured_image": "/images/blog/nuevos-casinos-2024.jpg",
+      "published_at": "2024-01-15T00:00:00Z",
+      "read_time": 5,
+      "views": 2547,
+      "likes": 187,
+      "status": "published",
+      "readTime": 1,
+      "updatedAt": "2025-08-19T09:48:57.169Z",
+      "publishedAt": "2025-08-19T09:48:56.919Z"
+    },
+    {
+      "id": "2",
+      "slug": "estrategias-blackjack-mexico",
+      "title": "Estrategias de Blackjack para Jugadores Mexicanos: Guía Completa 2024",
+      "excerpt": "Aprende las mejores estrategias básicas de blackjack adaptadas al mercado mexicano. Incluye tablas de probabilidades y consejos para maximizar tus ganancias.",
+      "content": "El blackjack es uno de los juegos de casino más populares...",
+      "author": "Ana Rodríguez",
+      "author_role": "Experta en Juegos de Mesa",
+      "category": "Guías",
+      "tags": [
+        "blackjack",
+        "estrategias",
+        "guía",
+        "méxico",
+        "casino"
+      ],
+      "featured_image": "/images/blog/blackjack-estrategias.jpg",
+      "published_at": "2024-01-12T00:00:00Z",
+      "read_time": 8,
+      "views": 3892,
+      "likes": 298,
+      "status": "published"
+    },
+    {
+      "id": "3",
+      "slug": "depositar-oxxo-casinos-online",
+      "title": "Cómo Depositar en Casinos Online usando OXXO: Guía Paso a Paso",
+      "excerpt": "Tutorial completo para depositar dinero en casinos online mexicanos usando OXXO. Ventajas, límites, tiempos de procesamiento y casinos recomendados.",
+      "content": "OXXO se ha convertido en el método de pago preferido...",
+      "author": "Miguel Torres",
+      "author_role": "Especialista en Pagos",
+      "category": "Guías",
+      "tags": [
+        "OXXO",
+        "depósitos",
+        "métodos pago",
+        "tutorial",
+        "méxico"
+      ],
+      "featured_image": "/images/blog/depositar-oxxo.jpg",
+      "published_at": "2024-01-10T00:00:00Z",
+      "read_time": 6,
+      "views": 5234,
+      "likes": 412,
+      "status": "published"
+    },
+    {
+      "id": "4",
+      "slug": "bonos-sin-deposito-febrero-2024",
+      "title": "Mejores Bonos Sin Depósito de Febrero 2024 en México",
+      "excerpt": "Recopilación actualizada de los mejores bonos sin depósito disponibles para jugadores mexicanos. Códigos promocionales exclusivos y términos claros.",
+      "content": "Los bonos sin depósito son perfectos para probar casinos...",
+      "author": "Laura García",
+      "author_role": "Analista de Bonos",
+      "category": "Bonos",
+      "tags": [
         "bonos sin depósito",
-        "giros gratis",
-        "requisitos apuesta"
-      ]
+        "febrero 2024",
+        "códigos promocionales"
+      ],
+      "featured_image": "/images/blog/bonos-sin-deposito.jpg",
+      "published_at": "2024-01-08T00:00:00Z",
+      "read_time": 4,
+      "views": 1823,
+      "likes": 95,
+      "status": "published"
+    },
+    {
+      "id": "5",
+      "slug": "slots-mas-populares-mexico-2024",
+      "title": "Top 10: Las Tragamonedas Más Populares en México Durante 2024",
+      "excerpt": "Ranking de las slots online más jugadas por mexicanos. Incluye RTP, volatilidad, temática y dónde encontrarlas con los mejores bonos.",
+      "content": "Las tragamonedas siguen siendo el juego favorito...",
+      "author": "Diego Ramírez",
+      "author_role": "Especialista en Slots",
+      "category": "Juegos",
+      "tags": [
+        "slots",
+        "tragamonedas",
+        "populares",
+        "ranking"
+      ],
+      "featured_image": "/images/blog/slots-populares.jpg",
+      "published_at": "2024-01-05T00:00:00Z",
+      "read_time": 7,
+      "views": 4321,
+      "likes": 234,
+      "status": "published"
+    },
+    {
+      "id": "6",
+      "slug": "regulacion-casinos-online-mexico-2024",
+      "title": "Estado de la Regulación de Casinos Online en México: Actualización 2024",
+      "excerpt": "Análisis completo del marco legal de los casinos online en México. SEGOB, licencias internacionales y qué esperar en 2024.",
+      "content": "La regulación de casinos online en México...",
+      "author": "Carla Vázquez",
+      "author_role": "Experta Legal",
+      "category": "Legal",
+      "tags": [
+        "regulación",
+        "SEGOB",
+        "legal",
+        "licencias"
+      ],
+      "featured_image": "/images/blog/regulacion-mexico.jpg",
+      "published_at": "2024-01-03T00:00:00Z",
+      "read_time": 10,
+      "views": 6543,
+      "likes": 567,
+      "status": "published"
+    },
+    {
+      "id": "7",
+      "slug": "torneo-slots-invierno-2024",
+      "title": "Gran Torneo de Slots de Invierno: $1,000,000 MXN en Premios",
+      "excerpt": "Participa en el torneo de tragamonedas más grande del año con premios millonarios. Fechas, casinos participantes y cómo inscribirse.",
+      "content": "El torneo de slots más esperado del año está aquí...",
+      "author": "Roberto Sánchez",
+      "author_role": "Coordinador de Eventos",
+      "category": "Noticias",
+      "tags": [
+        "torneos",
+        "slots",
+        "premios",
+        "eventos"
+      ],
+      "featured_image": "/images/blog/torneo-slots.jpg",
+      "published_at": "2024-01-20T00:00:00Z",
+      "read_time": 5,
+      "views": 3214,
+      "likes": 289,
+      "status": "published"
+    },
+    {
+      "id": "8",
+      "slug": "ruleta-europea-vs-americana",
+      "title": "Ruleta Europea vs Americana: ¿Cuál Es Mejor para Jugadores Mexicanos?",
+      "excerpt": "Comparación detallada entre la ruleta europea y americana. Probabilidades, ventajas de la casa y estrategias para cada variante.",
+      "content": "La ruleta es uno de los juegos más icónicos del casino...",
+      "author": "Patricia López",
+      "author_role": "Analista de Juegos",
+      "category": "Guías",
+      "tags": [
+        "ruleta",
+        "estrategias",
+        "comparación",
+        "probabilidades"
+      ],
+      "featured_image": "/images/blog/ruleta-comparacion.jpg",
+      "published_at": "2024-01-18T00:00:00Z",
+      "read_time": 7,
+      "views": 2876,
+      "likes": 198,
+      "status": "published"
     }
-  },
-  {
-    "id": "mejores-tragamonedas-mexico-2024",
-    "slug": "mejores-tragamonedas-mexico-2024",
-    "title": "Las Mejores Tragamonedas para Jugadores Mexicanos",
-    "excerpt": "Análisis de las tragamonedas más populares y rentables disponibles en casinos mexicanos, con RTPs y características especiales.",
-    "content": "Las tragamonedas son el juego más popular en los casinos en línea de México. Con miles de opciones disponibles, elegir las mejores puede ser abrumador.\n\n## Top 5 Tragamonedas con Mejor RTP\n\n### 1. Book of Dead (Play'n GO)\n- **RTP**: 96.21%\n- **Volatilidad**: Alta\n- **Ganancia máxima**: 5,000x\n\n### 2. Gonzo's Quest (NetEnt)\n- **RTP**: 95.97%\n- **Volatilidad**: Media-Alta\n- **Característica especial**: Avalanche Reels\n\n### 3. Starburst (NetEnt)\n- **RTP**: 96.09%\n- **Volatilidad**: Baja\n- **Ideal para**: Principiantes\n\n## Tragamonedas con Jackpot Progresivo\n\nLos jackpots progresivos pueden cambiar tu vida con una sola tirada:\n\n- **Mega Moolah**: El rey de los jackpots progresivos\n- **Divine Fortune**: Popular entre jugadores mexicanos\n- **Aztec Millions**: Temática perfecta para México\n\n## Consejos para Ganar\n\n1. Elige tragamonedas con RTP superior al 96%\n2. Gestiona tu bankroll estableciendo límites\n3. Aprovecha los bonos de giros gratis\n4. Prueba en modo demo antes de apostar dinero real",
-    "author": "María González",
-    "authorRole": "Analista de Juegos",
-    "category": "Juegos",
-    "tags": [
-      "tragamonedas",
-      "slots",
-      "RTP",
-      "jackpot"
-    ],
-    "featuredImage": "/images/blog/best-slots-mexico.jpg",
-    "publishedAt": "2024-01-18T14:30:00Z",
-    "updatedAt": "2024-01-18T14:30:00Z",
-    "readTime": 6,
-    "views": 2107,
-    "likes": 124,
-    "status": "published"
-  },
-  {
-    "id": "metodos-pago-casinos-mexico",
-    "slug": "metodos-pago-casinos-mexico",
-    "title": "Métodos de Pago en Casinos: OXXO, SPEI y Más",
-    "excerpt": "Comparativa completa de los métodos de pago disponibles en casinos mexicanos, tiempos de procesamiento y comisiones.",
-    "content": "Elegir el método de pago correcto es crucial para una experiencia de casino sin problemas. En México, tenemos opciones únicas que no están disponibles en otros países.\n\n## OXXO: El Favorito Mexicano\n\n### Ventajas\n- Disponible en más de 19,000 tiendas\n- No requiere tarjeta bancaria\n- Depósitos instantáneos\n\n### Desventajas\n- No permite retiros\n- Límites de depósito moderados\n- Comisión del 3-5%\n\n## SPEI: Transferencias Rápidas\n\n### Características\n- Transferencias en minutos\n- Sin comisiones en la mayoría de bancos\n- Límites altos\n- Disponible 24/7\n\n## Criptomonedas\n\nCada vez más casinos aceptan Bitcoin y otras criptos:\n- Transacciones anónimas\n- Sin límites geográficos\n- Procesamiento rápido\n\n## Comparativa de Tiempos\n\n| Método | Depósito | Retiro |\n|--------|----------|--------|\n| OXXO | Instantáneo | No disponible |\n| SPEI | 5-30 min | 1-24 horas |\n| PayPal | Instantáneo | 24-48 horas |\n| Crypto | 10-30 min | 10-60 min |",
-    "author": "Roberto Jiménez",
-    "authorRole": "Especialista Fintech",
-    "category": "Pagos",
-    "tags": [
-      "pagos",
-      "OXXO",
-      "SPEI",
-      "criptomonedas"
-    ],
-    "featuredImage": "/images/blog/payment-methods.jpg",
-    "publishedAt": "2024-01-20T09:15:00Z",
-    "updatedAt": "2024-01-20T09:15:00Z",
-    "readTime": 5,
-    "views": 1876,
-    "likes": 98,
-    "status": "published"
-  },
-  {
-    "id": "regulacion-juegos-azar-mexico",
-    "slug": "regulacion-juegos-azar-mexico",
-    "title": "Regulación del Juego en México: Lo Que Debes Saber",
-    "excerpt": "Todo sobre la situación legal de los casinos en línea en México, licencias SEGOB y qué buscar en un casino legal.",
-    "content": "La regulación del juego en México es un tema complejo pero importante para todos los jugadores. Entender el marco legal te protege y garantiza una experiencia segura.\n\n## Marco Legal Actual\n\n### Ley Federal de Juegos y Sorteos\nPromulgada en 1947, esta ley sigue siendo la base de la regulación del juego en México, aunque ha sido actualizada para incluir los juegos en línea.\n\n### SEGOB: El Regulador\nLa Secretaría de Gobernación (SEGOB) es la entidad encargada de otorgar licencias y regular los juegos de azar en México.\n\n## Casinos con Licencia SEGOB\n\nAlgunos operadores con licencia mexicana:\n- Codere\n- Caliente\n- WinPot\n- Strendus\n\n## Casinos Internacionales\n\nMuchos casinos operan con licencias internacionales:\n- Malta Gaming Authority\n- Curacao eGaming\n- Gibraltar Gambling Commission\n\n## Cómo Verificar la Legalidad\n\n1. **Busca el número de licencia** en el pie de página\n2. **Verifica en el sitio del regulador**\n3. **Revisa los sellos de seguridad**\n4. **Confirma métodos de pago locales**\n\n## Protección al Jugador\n\n- Juego responsable obligatorio\n- Límites de depósito\n- Autoexclusión disponible\n- Protección de datos personales",
-    "author": "Ana Rodríguez",
-    "authorRole": "Abogada Especialista",
-    "category": "Legal",
-    "tags": [
-      "regulación",
-      "legal",
-      "SEGOB",
-      "licencias"
-    ],
-    "featuredImage": "/images/blog/mexico-regulation.jpg",
-    "publishedAt": "2024-01-22T11:00:00Z",
-    "updatedAt": "2024-01-22T11:00:00Z",
-    "readTime": 7,
-    "views": 1434,
-    "likes": 76,
-    "status": "published"
-  },
-  {
-    "id": "estrategias-blackjack-principiantes",
-    "slug": "estrategias-blackjack-principiantes",
-    "title": "Estrategias de Blackjack para Principiantes",
-    "excerpt": "Aprende las estrategias básicas del blackjack, cuándo pedir carta, plantarse, doblar y dividir para maximizar tus probabilidades.",
-    "content": "El blackjack es uno de los juegos de casino con mejor RTP, pero solo si juegas con la estrategia correcta. Esta guía te enseñará todo lo necesario.\n\n## Estrategia Básica\n\n### Cuándo Pedir Carta (Hit)\n- Con 11 o menos siempre\n- Con 12-16 si el dealer muestra 7 o más\n- Con soft 17 o menos\n\n### Cuándo Plantarse (Stand)\n- Con 17 o más siempre\n- Con 12-16 si el dealer muestra 2-6\n- Con soft 18 contra 2-8 del dealer\n\n### Cuándo Doblar (Double Down)\n- Con 11 contra cualquier carta\n- Con 10 contra 2-9 del dealer\n- Con 9 contra 3-6 del dealer\n\n## Errores Comunes\n\n1. **Tomar seguro**: Nunca es rentable a largo plazo\n2. **Imitar al dealer**: No siempre pedir hasta 17\n3. **No dividir ases y ochos**: Siempre divídelos\n\n## Gestión de Bankroll\n\n- Define un presupuesto por sesión\n- Apuesta entre 1-2% de tu bankroll\n- Retírate cuando alcances tu objetivo\n- Nunca persigas pérdidas\n\n## Variantes Populares en México\n\n- **Blackjack Clásico**: RTP 99.5%\n- **Blackjack Europeo**: Sin hole card\n- **Spanish 21**: Sin 10s pero más bonificaciones",
-    "author": "Diego Fernández",
-    "authorRole": "Profesional de Blackjack",
-    "category": "Estrategia",
-    "tags": [
-      "blackjack",
-      "estrategia",
-      "cartas",
-      "tabla de manos"
-    ],
-    "featuredImage": "/images/blog/blackjack-strategy.jpg",
-    "publishedAt": "2024-01-25T16:45:00Z",
-    "updatedAt": "2024-01-25T16:45:00Z",
-    "readTime": 10,
-    "views": 2341,
-    "likes": 156,
-    "status": "published"
-  },
-  {
-    "id": "casinos-moviles-mexico-2024",
-    "slug": "casinos-moviles-mexico-2024",
-    "title": "Los Mejores Casinos Móviles para México 2024",
-    "excerpt": "Reseña de las mejores apps de casino y sitios móviles optimizados para jugadores mexicanos en iOS y Android.",
-    "content": "Jugar en móvil se ha convertido en la forma preferida de apostar para millones de mexicanos. Aquí analizamos las mejores opciones disponibles.\n\n## Top Apps Nativas\n\n### 1. Bet365 App\n- **Plataformas**: iOS, Android\n- **Tamaño**: 45MB\n- **Características**: Live streaming, cash out\n- **Calificación**: 4.8/5\n\n### 2. Codere México\n- **Plataformas**: iOS, Android\n- **Tamaño**: 38MB\n- **Especial**: Localizaciones físicas integradas\n- **Calificación**: 4.6/5\n\n### 3. Caliente.mx\n- **Plataformas**: iOS, Android\n- **Tamaño**: 52MB\n- **Deportes**: Excelente para apuestas\n- **Calificación**: 4.5/5\n\n## Sitios Web Móviles\n\nAlgunos casinos ofrecen excelentes experiencias sin app:\n\n- **Betano**: HTML5 perfectamente optimizado\n- **Parimatch**: Carga ultra rápida\n- **Novibet**: Interfaz intuitiva\n\n## Comparativa de Rendimiento\n\n| Casino | Velocidad | Juegos | Bonos Móvil |\n|--------|-----------|--------|-------------|\n| Bet365 | ⭐⭐⭐⭐⭐ | 500+ | Sí |\n| Codere | ⭐⭐⭐⭐ | 300+ | Sí |\n| Caliente | ⭐⭐⭐⭐ | 400+ | No |\n\n## Consejos para Jugar en Móvil\n\n1. Usa WiFi para ahorrar datos\n2. Activa autenticación biométrica\n3. Mantén la app actualizada\n4. Cierra sesión al terminar",
-    "author": "Luis Martínez",
-    "authorRole": "Tech Reviewer",
-    "category": "Tecnología",
-    "tags": [
-      "móvil",
-      "apps",
-      "iOS",
-      "Android"
-    ],
-    "featuredImage": "/images/blog/mobile-casinos.jpg",
-    "publishedAt": "2024-01-28T13:20:00Z",
-    "updatedAt": "2024-01-28T13:20:00Z",
-    "readTime": 6,
-    "views": 1998,
-    "likes": 112,
-    "status": "published"
-  }
-]
+  ]
+}
