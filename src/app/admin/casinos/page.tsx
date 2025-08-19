@@ -12,7 +12,11 @@ import {
   Upload,
   Filter,
   Star,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Folder,
+  X,
+  Check,
+  Loader2
 } from 'lucide-react';
 
 interface Casino {
@@ -68,11 +72,34 @@ export default function AdminCasinosList() {
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [loading, setLoading] = useState(true);
   const [uploadingLogo, setUploadingLogo] = useState<string | null>(null);
+  const [showLogoMenu, setShowLogoMenu] = useState<string | null>(null);
+  const [showGallery, setShowGallery] = useState(false);
+  const [selectedCasinoForGallery, setSelectedCasinoForGallery] = useState<string | null>(null);
+  const [galleryImages, setGalleryImages] = useState<string[]>([]);
+  const [galleryLoading, setGalleryLoading] = useState(false);
+  const [gallerySearchQuery, setGallerySearchQuery] = useState('');
   const fileInputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
 
   useEffect(() => {
     fetchCasinos();
   }, []);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (showLogoMenu) {
+        const target = event.target as HTMLElement;
+        if (!target.closest('.logo-menu-container')) {
+          setShowLogoMenu(null);
+        }
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showLogoMenu]);
 
   const fetchCasinos = async () => {
     try {
@@ -99,6 +126,59 @@ export default function AdminCasinosList() {
       }
     } catch (error) {
       console.error('Error deleting casino:', error);
+    }
+  };
+
+  const loadGalleryImages = async () => {
+    setGalleryLoading(true);
+    try {
+      const response = await fetch('/api/admin/media');
+      if (response.ok) {
+        const data = await response.json();
+        setGalleryImages(data.files || []);
+      }
+    } catch (error) {
+      console.error('Error loading gallery:', error);
+    } finally {
+      setGalleryLoading(false);
+    }
+  };
+
+  const openGallery = (casinoId: string) => {
+    setSelectedCasinoForGallery(casinoId);
+    setShowGallery(true);
+    setShowLogoMenu(null);
+    if (galleryImages.length === 0) {
+      loadGalleryImages();
+    }
+  };
+
+  const selectFromGallery = async (imageUrl: string) => {
+    if (!selectedCasinoForGallery) return;
+    
+    try {
+      // Update casino with new logo URL
+      const updateResponse = await fetch(`/api/admin/casinos/${selectedCasinoForGallery}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ logo: imageUrl }),
+      });
+      
+      if (updateResponse.ok) {
+        // Update local state
+        setCasinos(casinos.map(c => 
+          c.id === selectedCasinoForGallery ? { ...c, logo: imageUrl } : c
+        ));
+        setShowGallery(false);
+        setSelectedCasinoForGallery(null);
+      } else {
+        throw new Error('Failed to update casino');
+      }
+    } catch (error) {
+      console.error('Error updating logo:', error);
+      alert('Failed to update logo. Please try again.');
     }
   };
 
@@ -279,9 +359,12 @@ export default function AdminCasinosList() {
                 <tr key={casino.id} className="border-b border-neutral-700 hover:bg-neutral-700/50 transition-colors">
                   <td className="p-4">
                     <div className="flex items-center gap-3">
-                      <div className="relative group">
-                        <div className="w-12 h-12 bg-slate-700 rounded-lg flex items-center justify-center overflow-hidden">
-                          {casino.logo && casino.logo.startsWith('http') ? (
+                      <div className="relative group logo-menu-container">
+                        <div 
+                          className="w-12 h-12 bg-neutral-700 rounded-lg flex items-center justify-center overflow-hidden cursor-pointer"
+                          onClick={() => setShowLogoMenu(showLogoMenu === casino.id ? null : casino.id)}
+                        >
+                          {casino.logo ? (
                             <img 
                               src={casino.logo} 
                               alt={casino.name}
@@ -291,49 +374,71 @@ export default function AdminCasinosList() {
                                 target.style.display = 'none';
                                 const parent = target.parentElement;
                                 if (parent) {
-                                  parent.innerHTML = `<span class="text-xs font-bold text-white">${casino.name.substring(0, 3).toUpperCase()}</span>`;
+                                  const iconElement = document.createElement('div');
+                                  iconElement.className = 'flex items-center justify-center w-full h-full';
+                                  iconElement.innerHTML = '<svg class="w-6 h-6 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>';
+                                  parent.innerHTML = '';
+                                  parent.appendChild(iconElement);
                                 }
                               }}
                             />
                           ) : (
-                            <span className="text-xs font-bold text-white">
-                              {casino.logo || casino.name.substring(0, 3).toUpperCase()}
-                            </span>
+                            <ImageIcon className="w-6 h-6 text-neutral-400" />
                           )}
                         </div>
                         
-                        {/* Upload overlay */}
-                        <div className="absolute inset-0 bg-black/70 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                          <label 
-                            htmlFor={`logo-upload-${casino.id}`}
-                            className="cursor-pointer"
-                            title="Upload Logo"
-                          >
-                            {uploadingLogo === casino.id ? (
-                              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                            ) : (
-                              <ImageIcon className="w-5 h-5 text-white" />
-                            )}
-                          </label>
-                          <input
-                            ref={(el) => {
-                              if (el) {
-                                fileInputRefs.current[casino.id] = el;
-                              }
-                            }}
-                            type="file"
-                            id={`logo-upload-${casino.id}`}
-                            accept="image/*"
-                            className="hidden"
-                            onChange={(e) => {
-                              const file = e.target.files?.[0];
-                              if (file) {
-                                handleLogoUpload(casino.id, file);
-                              }
-                            }}
-                            disabled={uploadingLogo === casino.id}
-                          />
-                        </div>
+                        {/* Logo Menu Dropdown */}
+                        {showLogoMenu === casino.id && (
+                          <div className="absolute top-full left-0 mt-1 bg-neutral-800 rounded-lg shadow-xl border border-neutral-700 z-10">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                fileInputRefs.current[casino.id]?.click();
+                                setShowLogoMenu(null);
+                              }}
+                              className="flex items-center gap-2 w-full px-4 py-2 text-white hover:bg-neutral-700 transition-colors text-sm"
+                            >
+                              <Upload className="w-4 h-4" />
+                              Upload from local
+                            </button>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                openGallery(casino.id);
+                              }}
+                              className="flex items-center gap-2 w-full px-4 py-2 text-white hover:bg-neutral-700 transition-colors text-sm border-t border-neutral-700"
+                            >
+                              <Folder className="w-4 h-4" />
+                              Choose from gallery
+                            </button>
+                          </div>
+                        )}
+                        
+                        <input
+                          ref={(el) => {
+                            if (el) {
+                              fileInputRefs.current[casino.id] = el;
+                            }
+                          }}
+                          type="file"
+                          id={`logo-upload-${casino.id}`}
+                          accept="image/*"
+                          className="hidden"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              handleLogoUpload(casino.id, file);
+                            }
+                          }}
+                          disabled={uploadingLogo === casino.id}
+                        />
+                        
+                        {/* Upload spinner overlay */}
+                        {uploadingLogo === casino.id && (
+                          <div className="absolute inset-0 bg-black/70 rounded-lg flex items-center justify-center">
+                            <Loader2 className="w-5 h-5 text-white animate-spin" />
+                          </div>
+                        )}
                       </div>
                       <div>
                         <div className="font-semibold text-white">{casino.name}</div>
@@ -418,6 +523,89 @@ export default function AdminCasinosList() {
           )}
         </div>
       </div>
+
+      {/* Gallery Modal */}
+      {showGallery && (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+          <div className="bg-neutral-900 rounded-xl max-w-4xl w-full max-h-[80vh] flex flex-col">
+            <div className="p-4 border-b border-neutral-700">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-bold text-white">Select logo from gallery</h3>
+                <button
+                  onClick={() => {
+                    setShowGallery(false);
+                    setSelectedCasinoForGallery(null);
+                  }}
+                  className="p-2 hover:bg-neutral-800 rounded-lg transition-colors"
+                >
+                  <X className="w-5 h-5 text-neutral-400" />
+                </button>
+              </div>
+              
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
+                <input
+                  type="text"
+                  value={gallerySearchQuery}
+                  onChange={(e) => setGallerySearchQuery(e.target.value)}
+                  placeholder="Search images..."
+                  className="w-full pl-10 pr-4 py-2 bg-neutral-800 border border-neutral-700 rounded-lg text-white placeholder-neutral-400 focus:outline-none focus:border-primary"
+                />
+              </div>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-4">
+              {galleryLoading ? (
+                <div className="flex items-center justify-center h-48">
+                  <Loader2 className="w-8 h-8 text-primary animate-spin" />
+                </div>
+              ) : (
+                <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
+                  {galleryImages
+                    .filter(img => img.toLowerCase().includes(gallerySearchQuery.toLowerCase()))
+                    .map((imageUrl, index) => (
+                      <button
+                        key={index}
+                        onClick={() => selectFromGallery(imageUrl)}
+                        className="relative aspect-square bg-neutral-800 rounded-lg overflow-hidden hover:ring-2 hover:ring-primary transition-all group"
+                      >
+                        <img 
+                          src={imageUrl} 
+                          alt={`Gallery image ${index + 1}`}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                            const parent = target.parentElement;
+                            if (parent) {
+                              parent.innerHTML = '<div class="flex items-center justify-center w-full h-full"><svg class="w-8 h-8 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>';
+                            }
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <Check className="w-8 h-8 text-white" />
+                        </div>
+                      </button>
+                    ))
+                  }
+                </div>
+              )}
+            </div>
+
+            <div className="p-4 border-t border-neutral-700">
+              <button
+                onClick={() => {
+                  setShowGallery(false);
+                  setSelectedCasinoForGallery(null);
+                }}
+                className="px-4 py-2 bg-neutral-700 hover:bg-neutral-600 text-white rounded-lg transition-colors"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

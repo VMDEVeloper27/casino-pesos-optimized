@@ -234,8 +234,11 @@ export default function AddCasinoPage() {
                   step="0.1"
                   min="0"
                   max="5"
-                  value={formData.rating}
-                  onChange={(e) => setFormData({...formData, rating: parseFloat(e.target.value)})}
+                  value={formData.rating || 0}
+                  onChange={(e) => {
+                    const value = parseFloat(e.target.value);
+                    setFormData({...formData, rating: isNaN(value) ? 0 : value});
+                  }}
                   className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
                 />
               </div>
@@ -246,8 +249,11 @@ export default function AddCasinoPage() {
                 </label>
                 <input
                   type="number"
-                  value={formData.established}
-                  onChange={(e) => setFormData({...formData, established: parseInt(e.target.value)})}
+                  value={formData.established || new Date().getFullYear()}
+                  onChange={(e) => {
+                    const value = parseInt(e.target.value);
+                    setFormData({...formData, established: isNaN(value) ? new Date().getFullYear() : value});
+                  }}
                   className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
                 />
               </div>
@@ -258,8 +264,11 @@ export default function AddCasinoPage() {
                 </label>
                 <input
                   type="number"
-                  value={formData.priority}
-                  onChange={(e) => setFormData({...formData, priority: parseInt(e.target.value)})}
+                  value={formData.priority || 0}
+                  onChange={(e) => {
+                    const value = parseInt(e.target.value);
+                    setFormData({...formData, priority: isNaN(value) ? 0 : value});
+                  }}
                   className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
                 />
               </div>
@@ -751,8 +760,11 @@ export default function AddCasinoPage() {
                 </label>
                 <input
                   type="number"
-                  value={bonusData.amount}
-                  onChange={(e) => setBonusData({...bonusData, amount: parseInt(e.target.value)})}
+                  value={bonusData.amount || 0}
+                  onChange={(e) => {
+                    const value = parseInt(e.target.value);
+                    setBonusData({...bonusData, amount: isNaN(value) ? 0 : value});
+                  }}
                   className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
                 />
               </div>
@@ -763,8 +775,11 @@ export default function AddCasinoPage() {
                 </label>
                 <input
                   type="number"
-                  value={bonusData.percentage}
-                  onChange={(e) => setBonusData({...bonusData, percentage: parseInt(e.target.value)})}
+                  value={bonusData.percentage || 0}
+                  onChange={(e) => {
+                    const value = parseInt(e.target.value);
+                    setBonusData({...bonusData, percentage: isNaN(value) ? 0 : value});
+                  }}
                   className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
                 />
               </div>
@@ -775,8 +790,11 @@ export default function AddCasinoPage() {
                 </label>
                 <input
                   type="number"
-                  value={bonusData.minDeposit}
-                  onChange={(e) => setBonusData({...bonusData, minDeposit: parseInt(e.target.value)})}
+                  value={bonusData.minDeposit || 0}
+                  onChange={(e) => {
+                    const value = parseInt(e.target.value);
+                    setBonusData({...bonusData, minDeposit: isNaN(value) ? 0 : value});
+                  }}
                   className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
                 />
               </div>
@@ -787,8 +805,11 @@ export default function AddCasinoPage() {
                 </label>
                 <input
                   type="number"
-                  value={bonusData.wageringRequirement}
-                  onChange={(e) => setBonusData({...bonusData, wageringRequirement: parseInt(e.target.value)})}
+                  value={bonusData.wageringRequirement || 0}
+                  onChange={(e) => {
+                    const value = parseInt(e.target.value);
+                    setBonusData({...bonusData, wageringRequirement: isNaN(value) ? 0 : value});
+                  }}
                   className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
                 />
               </div>
@@ -799,8 +820,11 @@ export default function AddCasinoPage() {
                 </label>
                 <input
                   type="number"
-                  value={bonusData.freeSpins}
-                  onChange={(e) => setBonusData({...bonusData, freeSpins: parseInt(e.target.value)})}
+                  value={bonusData.freeSpins || 0}
+                  onChange={(e) => {
+                    const value = parseInt(e.target.value);
+                    setBonusData({...bonusData, freeSpins: isNaN(value) ? 0 : value});
+                  }}
                   className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
                 />
               </div>

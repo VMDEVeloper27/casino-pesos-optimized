@@ -25,7 +25,53 @@ export async function GET(request: NextRequest, { params }: Params) {
       throw error;
     }
     
-    return NextResponse.json(data);
+    // Map database fields to form fields
+    const mappedData = {
+      id: data.id || data.slug,
+      name: data.name,
+      logo: data.logo,
+      rating: data.rating || 4.0,
+      reviewCount: data.review_count || 0,
+      established: data.established || new Date().getFullYear(),
+      license: data.licenses?.join(', ') || '',
+      bonus: data.bonus_percentage && data.bonus_amount 
+        ? `${data.bonus_percentage}% hasta $${data.bonus_amount} MXN`
+        : 'Sin bono',
+      bonusExtra: data.bonus_free_spins 
+        ? `+ ${data.bonus_free_spins} Giros Gratis`
+        : '',
+      promoCode: data.bonus_code || '',
+      rollover: data.bonus_wagering || '30x',
+      minDeposit: data.bonus_min_deposit || 100,
+      games: data.games_total || 1000,
+      providers: data.providers || [],
+      withdrawal: data.withdrawal_time || '24-48 horas',
+      paymentMethods: data.payment_methods || [],
+      support: [
+        data.support_email && 'Email',
+        data.support_phone && 'Phone',
+        data.live_chat_available && 'Live Chat'
+      ].filter(Boolean),
+      languages: data.languages || ['Español'],
+      pros: data.pros || [],
+      cons: data.cons || [],
+      description: data.description || data.description_es || '',
+      features: {
+        liveCasino: data.features?.includes('live_casino') || false,
+        mobileApp: data.features?.includes('mobile_app') || false,
+        crypto: data.features?.includes('crypto') || false,
+        sportsbook: data.features?.includes('sportsbook') || false,
+        vipProgram: data.features?.includes('vip_program') || false,
+      },
+      status: data.status || 'pending',
+      // Additional fields from DB
+      websiteUrl: data.website_url || '',
+      affiliateLink: data.affiliate_link || '',
+      isActive: data.is_active ?? true,
+      isFeatured: data.is_featured || false,
+    };
+    
+    return NextResponse.json(mappedData);
   } catch (error) {
     console.error('Error fetching casino:', error);
     return NextResponse.json({ error: 'Failed to fetch casino' }, { status: 500 });
@@ -38,36 +84,72 @@ export async function PUT(request: NextRequest, { params }: Params) {
     const { id } = await params;
     const updatedCasino = await request.json();
     
-    // Map fields to database columns
-    const casinoData = {
-      name: updatedCasino.name,
-      slug: updatedCasino.slug,
-      logo: updatedCasino.logo,
-      rating: updatedCasino.rating,
-      established: updatedCasino.established,
-      affiliate_link: updatedCasino.affiliateLink,
-      features: updatedCasino.features,
-      bonus_type: updatedCasino.bonus?.type,
-      bonus_amount: updatedCasino.bonus?.amount,
-      bonus_percentage: updatedCasino.bonus?.percentage,
-      bonus_free_spins: updatedCasino.bonus?.freeSpins,
-      bonus_min_deposit: updatedCasino.bonus?.minDeposit,
-      bonus_wagering: updatedCasino.bonus?.wageringRequirement,
-      bonus_code: updatedCasino.bonus?.code,
-      games_total: updatedCasino.games?.total,
-      games_slots: updatedCasino.games?.slots,
-      games_live: updatedCasino.games?.live,
-      games_table: updatedCasino.games?.table,
-      payment_methods: updatedCasino.paymentMethods,
-      withdrawal_time: updatedCasino.withdrawalTime,
-      licenses: updatedCasino.licenses,
-      currencies: updatedCasino.currencies,
-      pros: updatedCasino.pros,
-      cons: updatedCasino.cons,
-      status: updatedCasino.status,
-      is_featured: updatedCasino.isFeatured,
+    // Parse bonus string if needed
+    let bonusPercentage = null;
+    let bonusAmount = null;
+    let bonusFreeSpins = null;
+    
+    if (updatedCasino.bonus && typeof updatedCasino.bonus === 'string') {
+      // Try to parse bonus like "100% hasta $30,000 MXN"
+      const percentMatch = updatedCasino.bonus.match(/(\d+)%/);
+      const amountMatch = updatedCasino.bonus.match(/\$([0-9,]+)/);
+      if (percentMatch) bonusPercentage = parseInt(percentMatch[1]);
+      if (amountMatch) bonusAmount = parseInt(amountMatch[1].replace(/,/g, ''));
+    }
+    
+    if (updatedCasino.bonusExtra && typeof updatedCasino.bonusExtra === 'string') {
+      // Try to parse extra bonus like "+ 200 Giros Gratis"
+      const spinsMatch = updatedCasino.bonusExtra.match(/(\d+)\s*(Giros|Spins)/i);
+      if (spinsMatch) bonusFreeSpins = parseInt(spinsMatch[1]);
+    }
+    
+    // Map fields to database columns - only include non-empty values
+    const casinoData: any = {
       updated_at: new Date().toISOString()
     };
+    
+    // Required fields
+    if (updatedCasino.name) casinoData.name = updatedCasino.name;
+    if (updatedCasino.logo) casinoData.logo = updatedCasino.logo;
+    if (updatedCasino.rating) casinoData.rating = updatedCasino.rating;
+    
+    // Optional fields - only add if they have values
+    if (updatedCasino.id) casinoData.slug = updatedCasino.id;
+    if (updatedCasino.established) casinoData.established = updatedCasino.established;
+    if (updatedCasino.license) {
+      casinoData.licenses = updatedCasino.license.split(',').map((l: string) => l.trim()).filter(Boolean);
+    }
+    
+    // Bonus fields
+    if (bonusPercentage !== null) casinoData.bonus_percentage = bonusPercentage;
+    if (bonusAmount !== null) casinoData.bonus_amount = bonusAmount;
+    if (bonusFreeSpins !== null) casinoData.bonus_free_spins = bonusFreeSpins;
+    if (updatedCasino.promoCode) casinoData.bonus_code = updatedCasino.promoCode;
+    if (updatedCasino.rollover) casinoData.bonus_wagering = updatedCasino.rollover;
+    if (updatedCasino.minDeposit) casinoData.bonus_min_deposit = updatedCasino.minDeposit;
+    
+    // Games
+    if (updatedCasino.games) casinoData.games_total = updatedCasino.games;
+    
+    // Other fields
+    if (updatedCasino.withdrawal) casinoData.withdrawal_time = updatedCasino.withdrawal;
+    if (updatedCasino.paymentMethods) casinoData.payment_methods = updatedCasino.paymentMethods;
+    if (updatedCasino.languages) casinoData.languages = updatedCasino.languages;
+    if (updatedCasino.pros) casinoData.pros = updatedCasino.pros;
+    if (updatedCasino.cons) casinoData.cons = updatedCasino.cons;
+    if (updatedCasino.description) casinoData.description = updatedCasino.description;
+    if (updatedCasino.status) casinoData.status = updatedCasino.status;
+    
+    // Features
+    if (updatedCasino.features) {
+      const features = [];
+      if (updatedCasino.features.liveCasino) features.push('live_casino');
+      if (updatedCasino.features.mobileApp) features.push('mobile_app');
+      if (updatedCasino.features.crypto) features.push('crypto');
+      if (updatedCasino.features.sportsbook) features.push('sportsbook');
+      if (updatedCasino.features.vipProgram) features.push('vip_program');
+      casinoData.features = features;
+    }
     
     const { data, error } = await supabase
       .from('casinos')

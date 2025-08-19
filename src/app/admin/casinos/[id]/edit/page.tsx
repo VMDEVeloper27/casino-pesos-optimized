@@ -173,11 +173,13 @@ export default function EditCasinoPage({ params }: PageProps) {
         {/* Basic Information */}
         <div className="bg-neutral-800 rounded-xl p-6 border border-neutral-700">
           <h2 className="text-xl font-bold text-white mb-6">Basic Information</h2>
+          <p className="text-neutral-400 text-sm mb-4">Fields marked with * are required</p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
                 Casino ID (URL slug)
+                <span className="text-neutral-500 text-xs ml-2">Unique identifier for URLs</span>
               </label>
               <input
                 type="text"
@@ -192,7 +194,8 @@ export default function EditCasinoPage({ params }: PageProps) {
 
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
-                Casino Name
+                Casino Name *
+                <span className="text-neutral-500 text-xs ml-2">Display name of the casino</span>
               </label>
               <input
                 type="text"
@@ -215,7 +218,8 @@ export default function EditCasinoPage({ params }: PageProps) {
 
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
-                Rating (1-5)
+                Rating (1-5) *
+                <span className="text-neutral-500 text-xs ml-2">Casino rating score</span>
               </label>
               <input
                 type="number"
@@ -232,6 +236,7 @@ export default function EditCasinoPage({ params }: PageProps) {
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
                 Established Year
+                <span className="text-neutral-500 text-xs ml-2">Year the casino was founded</span>
               </label>
               <input
                 type="number"
@@ -240,13 +245,13 @@ export default function EditCasinoPage({ params }: PageProps) {
                 className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 min="1900"
                 max={new Date().getFullYear()}
-                required
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
                 License
+                <span className="text-neutral-500 text-xs ml-2">Gaming licenses (comma-separated)</span>
               </label>
               <input
                 type="text"
@@ -254,7 +259,6 @@ export default function EditCasinoPage({ params }: PageProps) {
                 onChange={(e) => setFormData({ ...formData, license: e.target.value })}
                 className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 placeholder="Malta, Gibraltar, UK"
-                required
               />
             </div>
 
@@ -276,6 +280,7 @@ export default function EditCasinoPage({ params }: PageProps) {
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
                 Total Games
+                <span className="text-neutral-500 text-xs ml-2">Number of games available</span>
               </label>
               <input
                 type="number"
@@ -283,7 +288,6 @@ export default function EditCasinoPage({ params }: PageProps) {
                 onChange={(e) => setFormData({ ...formData, games: parseInt(e.target.value) })}
                 className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 min="0"
-                required
               />
             </div>
           </div>
@@ -296,7 +300,8 @@ export default function EditCasinoPage({ params }: PageProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
-                Main Bonus
+                Main Bonus *
+                <span className="text-neutral-500 text-xs ml-2">Welcome bonus offer</span>
               </label>
               <input
                 type="text"
@@ -337,6 +342,7 @@ export default function EditCasinoPage({ params }: PageProps) {
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
                 Rollover
+                <span className="text-neutral-500 text-xs ml-2">Wagering requirements</span>
               </label>
               <input
                 type="text"
@@ -344,13 +350,13 @@ export default function EditCasinoPage({ params }: PageProps) {
                 onChange={(e) => setFormData({ ...formData, rollover: e.target.value })}
                 className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 placeholder="30x"
-                required
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
                 Minimum Deposit (MXN)
+                <span className="text-neutral-500 text-xs ml-2">Min deposit for bonus</span>
               </label>
               <input
                 type="number"
@@ -358,13 +364,13 @@ export default function EditCasinoPage({ params }: PageProps) {
                 onChange={(e) => setFormData({ ...formData, minDeposit: parseInt(e.target.value) })}
                 className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 min="0"
-                required
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
                 Withdrawal Time
+                <span className="text-neutral-500 text-xs ml-2">Average payout time</span>
               </label>
               <input
                 type="text"
@@ -372,7 +378,6 @@ export default function EditCasinoPage({ params }: PageProps) {
                 onChange={(e) => setFormData({ ...formData, withdrawal: e.target.value })}
                 className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 placeholder="24-48 horas"
-                required
               />
             </div>
           </div>
@@ -487,7 +492,6 @@ export default function EditCasinoPage({ params }: PageProps) {
               className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               rows={4}
               placeholder="Detailed description of the casino..."
-              required
             />
           </div>
         </div>
