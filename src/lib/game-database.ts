@@ -1974,33 +1974,10 @@ export async function bulkImportGames(newGames: Game[]): Promise<number> {
   return gamesToAdd.length;
 }
 
-// Helper functions - These use the persisted data
-let cachedGames: Game[] | null = null;
-
+// Helper functions
 function getGamesSync(): Game[] {
-  // On client, always return static games to avoid hydration issues
-  if (typeof window !== 'undefined') {
-    return games;
-  }
-  
-  // On server, try to load from file
-  if (fs && path) {
-    try {
-      // Use cached games if available (per-request cache on server)
-      if (cachedGames) {
-        return cachedGames;
-      }
-      
-      const data = require('fs').readFileSync(GAMES_DATA_FILE, 'utf-8');
-      cachedGames = JSON.parse(data);
-      return cachedGames;
-    } catch {
-      // If file doesn't exist or error, return static games
-      return games;
-    }
-  }
-  
-  // Fallback to static games
+  // Always return static games array
+  // File system operations removed for Vercel deployment
   return games;
 }
 

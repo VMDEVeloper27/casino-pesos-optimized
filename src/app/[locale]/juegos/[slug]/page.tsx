@@ -36,21 +36,27 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-export async function generateStaticParams() {
-  const games = await getAllGames();
-  return games.map((game) => ({
-    slug: game.slug,
-  }));
-}
+// Disable static generation for now to avoid build-time errors
+// export async function generateStaticParams() {
+//   const games = await getAllGames();
+//   return games.map((game) => ({
+//     slug: game.slug,
+//   }));
+// }
 
 export default async function GamePage({ params }: PageProps) {
-  const { locale, slug } = await params;
-  const games = await getAllGames();
-  const game = games.find(g => g.slug === slug);
+  try {
+    const { locale, slug } = await params;
+    const games = await getAllGames();
+    const game = games.find(g => g.slug === slug);
 
-  if (!game) {
+    if (!game) {
+      notFound();
+    }
+
+    return <GameDetail game={game} locale={locale} />;
+  } catch (error) {
+    console.error('Error in GamePage:', error);
     notFound();
   }
-
-  return <GameDetail game={game} locale={locale} />;
 }
