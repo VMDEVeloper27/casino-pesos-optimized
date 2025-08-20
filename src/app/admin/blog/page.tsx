@@ -295,8 +295,16 @@ export default function AdminBlogPage() {
                 <tr key={post.id} className="border-b border-neutral-700 hover:bg-neutral-700/50 transition-colors">
                   <td className="p-4">
                     <div className="flex items-start gap-3">
-                      <div className="w-16 h-12 bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <FileText className="w-6 h-6 text-neutral-400" />
+                      <div className="w-16 h-12 bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
+                        {post.featuredImage ? (
+                          <img 
+                            src={post.featuredImage} 
+                            alt={post.title}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <FileText className="w-6 h-6 text-neutral-400" />
+                        )}
                       </div>
                       <div className="min-w-0">
                         <div className="font-semibold text-white truncate">{post.title}</div>

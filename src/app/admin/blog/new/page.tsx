@@ -14,7 +14,8 @@ import {
   Clock,
   Image,
   Globe,
-  Loader2
+  Loader2,
+  Upload
 } from 'lucide-react';
 
 interface BlogPostForm {
@@ -35,6 +36,7 @@ export default function NewBlogPost() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [tagInput, setTagInput] = useState('');
+  const [uploadingImage, setUploadingImage] = useState(false);
   
   const [formData, setFormData] = useState<BlogPostForm>({
     title: '',
@@ -45,7 +47,7 @@ export default function NewBlogPost() {
     authorRole: 'Editor Senior',
     category: 'Guías',
     tags: [],
-    featuredImage: '/images/blog/default.jpg',
+    featuredImage: '',
     status: 'draft',
     readTime: 5
   });
@@ -108,6 +110,51 @@ export default function NewBlogPost() {
       ...formData,
       tags: formData.tags.filter(tag => tag !== tagToRemove)
     });
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      alert('Please upload an image file');
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      alert('File size must be less than 5MB');
+      return;
+    }
+
+    setUploadingImage(true);
+
+    try {
+      const formDataFile = new FormData();
+      formDataFile.append('file', file);
+      formDataFile.append('gameId', formData.slug || 'blog-image'); // Use game-images bucket for blogs
+      formDataFile.append('type', 'game-image');
+
+      const uploadResponse = await fetch('/api/admin/media', {
+        method: 'POST',
+        body: formDataFile,
+      });
+
+      if (!uploadResponse.ok) {
+        throw new Error('Failed to upload image');
+      }
+
+      const { url } = await uploadResponse.json();
+      setFormData({
+        ...formData,
+        featuredImage: url
+      });
+      alert('Image uploaded successfully');
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      alert('Failed to upload image. Please try again.');
+    } finally {
+      setUploadingImage(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -248,6 +295,63 @@ export default function NewBlogPost() {
             <p className="text-xs text-neutral-400 mt-1">
               Estimated read time: {formData.readTime} minutes
             </p>
+          </div>
+        </div>
+
+        {/* Featured Image */}
+        <div className="bg-neutral-800 rounded-xl p-6 border border-neutral-700">
+          <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <Image className="w-5 h-5" />
+            Featured Image
+          </h2>
+          
+          <div className="space-y-4">
+            {formData.featuredImage && (
+              <div className="relative w-full h-48 bg-neutral-700 rounded-lg overflow-hidden">
+                <img 
+                  src={formData.featuredImage} 
+                  alt="Featured" 
+                  className="w-full h-full object-cover"
+                />
+                <button
+                  type="button"
+                  onClick={() => setFormData({...formData, featuredImage: ''})}
+                  className="absolute top-2 right-2 p-1 bg-red-600 hover:bg-red-700 rounded-full transition-colors"
+                >
+                  <X className="w-4 h-4 text-white" />
+                </button>
+              </div>
+            )}
+            
+            <div>
+              <label 
+                htmlFor="featured-image-upload"
+                className="block w-full px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors text-center cursor-pointer flex items-center justify-center gap-2"
+              >
+                {uploadingImage ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Uploading...
+                  </>
+                ) : (
+                  <>
+                    <Upload className="w-4 h-4" />
+                    Upload Featured Image
+                  </>
+                )}
+              </label>
+              <input
+                id="featured-image-upload"
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="hidden"
+                disabled={uploadingImage}
+              />
+              <p className="text-xs text-neutral-400 mt-1">
+                Recommended: 1200x630px for optimal social media sharing
+              </p>
+            </div>
           </div>
         </div>
 

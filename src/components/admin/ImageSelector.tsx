@@ -11,6 +11,14 @@ import {
   Loader2
 } from 'lucide-react';
 
+interface ImageFile {
+  name: string;
+  url: string;
+  size?: number;
+  created?: string;
+  bucket?: string;
+}
+
 interface ImageSelectorProps {
   value: string;
   onChange: (value: string) => void;
@@ -27,7 +35,7 @@ export default function ImageSelector({
   acceptedFormats = 'image/*'
 }: ImageSelectorProps) {
   const [showGallery, setShowGallery] = useState(false);
-  const [galleryImages, setGalleryImages] = useState<string[]>([]);
+  const [galleryImages, setGalleryImages] = useState<ImageFile[]>([]);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [uploading, setUploading] = useState(false);
@@ -36,7 +44,7 @@ export default function ImageSelector({
   const loadGalleryImages = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/admin/media');
+      const response = await fetch('/api/admin/media?type=all');
       if (response.ok) {
         const data = await response.json();
         setGalleryImages(data.files || []);
@@ -89,7 +97,8 @@ export default function ImageSelector({
   };
 
   const filteredImages = galleryImages.filter(img => 
-    img.toLowerCase().includes(searchQuery.toLowerCase())
+    img.url?.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    img.name?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -199,15 +208,15 @@ export default function ImageSelector({
                 </div>
               ) : (
                 <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
-                  {filteredImages.map((imageUrl, index) => (
+                  {filteredImages.map((image, index) => (
                     <button
                       key={index}
-                      onClick={() => selectFromGallery(imageUrl)}
+                      onClick={() => selectFromGallery(image.url)}
                       className="relative aspect-square bg-neutral-800 rounded-lg overflow-hidden hover:ring-2 hover:ring-primary transition-all group"
                     >
                       <img 
-                        src={imageUrl} 
-                        alt={`Gallery image ${index + 1}`}
+                        src={image.url} 
+                        alt={image.name || `Gallery image ${index + 1}`}
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
