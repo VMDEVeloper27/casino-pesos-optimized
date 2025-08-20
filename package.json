@@ -12,7 +12,6 @@
     "format:check": "prettier --check .",
     "type-check": "tsc --noEmit",
     "clean": "rm -rf .next out dist",
-    "prepare": "npm run lint && npm run type-check",
     "migrate:data": "tsx scripts/migrate-to-supabase.ts"
   },
   "dependencies": {

@@ -71,8 +71,8 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
       console.error('Error fetching blog post by slug:', error);
       
       // Fallback to JSON file
-      const { default: getFromFile } = await import('./blog-database');
-      return getFromFile.getBlogPostBySlug(slug);
+      const blogDb = await import('./blog-database');
+      return blogDb.getBlogPostBySlug(slug);
     }
 
     return data;
@@ -80,8 +80,8 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
     console.error('Error in getBlogPostBySlug:', error);
     
     // Fallback to JSON file
-    const { default: getFromFile } = await import('./blog-database');
-    return getFromFile.getBlogPostBySlug(slug);
+    const blogDb = await import('./blog-database');
+    return blogDb.getBlogPostBySlug(slug);
   }
 }
 
@@ -173,7 +173,7 @@ export async function getRelatedPosts(postId: string, limit: number = 3): Promis
       console.error('Error fetching related posts:', error);
       
       // Fallback to JSON file
-      const { default: getFromFile } = await import('./blog-database');
+      const blogDb = await import('./blog-database');
       return getFromFile.getRelatedPosts(postId, limit);
     }
 
@@ -182,7 +182,7 @@ export async function getRelatedPosts(postId: string, limit: number = 3): Promis
     console.error('Error in getRelatedPosts:', error);
     
     // Fallback to JSON file
-    const { default: getFromFile } = await import('./blog-database');
+    const blogDb = await import('./blog-database');
     return getFromFile.getRelatedPosts(postId, limit);
   }
 }
@@ -233,7 +233,7 @@ export async function getBlogStats() {
       console.error('Error fetching blog stats:', error);
       
       // Fallback to JSON file
-      const { default: getFromFile } = await import('./blog-database');
+      const blogDb = await import('./blog-database');
       return getFromFile.getBlogStats();
     }
 
@@ -274,7 +274,7 @@ export async function getBlogStats() {
     console.error('Error in getBlogStats:', error);
     
     // Fallback to JSON file
-    const { default: getFromFile } = await import('./blog-database');
+    const blogDb = await import('./blog-database');
     return getFromFile.getBlogStats();
   }
 }
