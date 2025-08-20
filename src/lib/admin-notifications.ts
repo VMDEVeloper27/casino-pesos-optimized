@@ -1,4 +1,4 @@
-// @ts-ignore - Using JavaScript file for Gmail
+// @ts-expect-error - Using JavaScript file for Gmail
 import { sendEmail, ADMIN_EMAILS } from './gmail-working.js';
 import { render } from '@react-email/render';
 import AdminNotificationEmail from '@/emails/AdminNotificationEmail';

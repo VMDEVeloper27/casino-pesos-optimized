@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
-// @ts-ignore
+// @ts-expect-error - Using JavaScript file for Gmail
 import { sendEmail, ADMIN_EMAILS, DEFAULT_FROM_EMAIL } from '@/lib/gmail-working.js';
 import { render } from '@react-email/render';
 

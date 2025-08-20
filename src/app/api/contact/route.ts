@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import type { APIResponse } from '@/types'
-// @ts-ignore - Using JavaScript file for Gmail
+// @ts-expect-error - Using JavaScript file for Gmail
 import { sendEmail, ADMIN_EMAILS, DEFAULT_FROM_EMAIL } from '@/lib/gmail-working.js'
 import { render } from '@react-email/render'
 import ContactFormEmail from '@/emails/ContactFormEmail'
