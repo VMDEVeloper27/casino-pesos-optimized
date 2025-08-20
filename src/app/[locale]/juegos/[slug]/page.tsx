@@ -37,16 +37,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export async function generateStaticParams() {
-  try {
-    const games = await getAllGames();
-    return games.map((game) => ({
-      slug: game.slug,
-    }));
-  } catch (error) {
-    console.error('Error generating static params:', error);
-    // Return empty array to prevent build failure
-    return [];
-  }
+  const games = await getAllGames();
+  return games.map((game) => ({
+    slug: game.slug,
+  }));
 }
 
 export default async function GamePage({ params }: PageProps) {

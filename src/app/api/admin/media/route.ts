@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, mkdir, readdir, stat, unlink } from 'fs/promises';
-import path from 'path';
-import { existsSync } from 'fs';
+import { uploadCasinoLogo, uploadGameImage, listCasinoLogos, deleteCasinoLogo } from '@/lib/supabase-storage';
 
 // Simple auth check - in production, use proper authentication
 async function checkAuth(req: NextRequest) {
@@ -9,7 +7,7 @@ async function checkAuth(req: NextRequest) {
   return true;
 }
 
-// Handle file uploads
+// Handle file uploads to Supabase Storage
 export async function POST(req: NextRequest) {
   try {
     const isAuthorized = await checkAuth(req);
@@ -46,51 +44,32 @@ export async function POST(req: NextRequest) {
       );
     }
     
-    // Determine upload directory based on type
-    let uploadSubDir = 'general';
+    let publicUrl: string | null = null;
+    
+    // Upload to Supabase Storage based on type
     if (type === 'casino-logo' && casinoId) {
-      uploadSubDir = 'casino-logos';
-    }
-    
-    // Create upload directory
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', uploadSubDir);
-    await mkdir(uploadDir, { recursive: true });
-    
-    // Generate unique filename
-    const timestamp = Date.now();
-    const randomStr = Math.random().toString(36).substring(7);
-    const ext = path.extname(file.name);
-    let filename: string;
-    
-    if (type === 'casino-logo' && casinoId) {
-      // For casino logos, use casinoId in filename for easy identification
-      filename = `casino-${casinoId}-${timestamp}${ext}`;
+      publicUrl = await uploadCasinoLogo(file, casinoId);
+    } else if (type === 'game-image' && casinoId) {
+      publicUrl = await uploadGameImage(file, casinoId);
     } else {
-      filename = `${timestamp}-${randomStr}${ext}`;
+      // Default to casino logo
+      publicUrl = await uploadCasinoLogo(file, `general-${Date.now()}`);
     }
     
-    const filepath = path.join(uploadDir, filename);
+    if (!publicUrl) {
+      return NextResponse.json(
+        { error: 'Failed to upload file to storage' },
+        { status: 500 }
+      );
+    }
     
-    // Save file
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    await writeFile(filepath, buffer);
-    
-    // Return the public URL
-    const publicUrl = `/uploads/${uploadSubDir}/${filename}`;
-    
-    return NextResponse.json({
+    return NextResponse.json({ 
       url: publicUrl,
-      filename,
-      originalName: file.name,
-      mimeType: file.type,
-      size: file.size,
-      type,
-      casinoId,
-      message: 'File uploaded successfully'
+      message: 'File uploaded successfully to Supabase Storage'
     });
+    
   } catch (error) {
-    console.error('Error uploading file:', error);
+    console.error('Upload error:', error);
     return NextResponse.json(
       { error: 'Failed to upload file' },
       { status: 500 }
@@ -98,7 +77,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// Get all media files
+// Get list of uploaded files from Supabase Storage
 export async function GET(req: NextRequest) {
   try {
     const isAuthorized = await checkAuth(req);
@@ -106,76 +85,26 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
     
-    const allImages: string[] = [];
-    const publicDir = path.join(process.cwd(), 'public');
+    const { searchParams } = new URL(req.url);
+    const type = searchParams.get('type') || 'casino-logos';
     
-    // Scan multiple directories for images
-    const imageDirs = [
-      'uploads/casino-logos',
-      'uploads/general',
-      'images'
-    ];
-    
-    for (const dir of imageDirs) {
-      const fullPath = path.join(publicDir, dir);
-      
-      if (existsSync(fullPath)) {
-        try {
-          const files = await readdir(fullPath);
-          const imageFiles = files.filter(file => 
-            /\.(jpg|jpeg|png|gif|svg|webp)$/i.test(file)
-          );
-          
-          // Add full URL path for each image
-          imageFiles.forEach(file => {
-            allImages.push(`/${dir}/${file}`);
-          });
-        } catch (error) {
-          console.error(`Error reading directory ${dir}:`, error);
-        }
-      }
+    if (type === 'casino-logos') {
+      const files = await listCasinoLogos();
+      return NextResponse.json({ files });
     }
     
-    // Check for known casino logos that actually exist
-    const knownLogos = [
-      '/images/bet365-logo.png',
-      '/images/caliente-logo.png',
-      '/images/codere-logo.png',
-      '/images/betano-logo.png',
-      '/images/novibet-logo.png', 
-      '/images/winpot-logo.png',
-      '/images/1xbet-logo.png',
-      '/images/parimatch-logo.png',
-      '/images/leon-logo.png',
-      '/images/vulkanbet-logo.png',
-      '/images/pin-up-logo.png',
-      '/images/mostbet-logo.png',
-      '/images/betmexico-logo.png'
-    ];
+    return NextResponse.json({ files: [] });
     
-    // Only add logos that actually exist on the filesystem
-    for (const logo of knownLogos) {
-      const logoPath = path.join(publicDir, logo.substring(1)); // Remove leading slash
-      if (existsSync(logoPath) && !allImages.includes(logo)) {
-        allImages.push(logo);
-      }
-    }
-    
-    // Return in the format expected by ImageSelector component
-    return NextResponse.json({
-      files: allImages,
-      total: allImages.length
-    });
   } catch (error) {
-    console.error('Error fetching media:', error);
+    console.error('List files error:', error);
     return NextResponse.json(
-      { files: [], error: 'Failed to fetch media' },
+      { error: 'Failed to list files' },
       { status: 500 }
     );
   }
 }
 
-// Delete media files
+// Delete file from Supabase Storage
 export async function DELETE(req: NextRequest) {
   try {
     const isAuthorized = await checkAuth(req);
@@ -184,7 +113,7 @@ export async function DELETE(req: NextRequest) {
     }
     
     const { searchParams } = new URL(req.url);
-    const fileUrl = searchParams.get('file');
+    const fileUrl = searchParams.get('url');
     
     if (!fileUrl) {
       return NextResponse.json(
@@ -193,38 +122,23 @@ export async function DELETE(req: NextRequest) {
       );
     }
     
-    // Extract path from URL (remove /uploads/ prefix)
-    const relativePath = fileUrl.replace(/^\/uploads\//, '');
-    const filepath = path.join(process.cwd(), 'public', 'uploads', relativePath);
+    const success = await deleteCasinoLogo(fileUrl);
     
-    // Security check: ensure the path is within uploads directory
-    const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
-    if (!filepath.startsWith(uploadsDir)) {
+    if (!success) {
       return NextResponse.json(
-        { error: 'Invalid file path' },
-        { status: 400 }
+        { error: 'Failed to delete file' },
+        { status: 500 }
       );
     }
     
-    // Check if file exists
-    if (!existsSync(filepath)) {
-      return NextResponse.json(
-        { error: 'File not found' },
-        { status: 404 }
-      );
-    }
-    
-    // Delete the file
-    await unlink(filepath);
-    
-    return NextResponse.json({
-      message: 'File deleted successfully',
-      file: fileUrl
+    return NextResponse.json({ 
+      message: 'File deleted successfully'
     });
+    
   } catch (error) {
-    console.error('Error deleting media:', error);
+    console.error('Delete error:', error);
     return NextResponse.json(
-      { error: 'Failed to delete media' },
+      { error: 'Failed to delete file' },
       { status: 500 }
     );
   }
