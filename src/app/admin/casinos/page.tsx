@@ -213,7 +213,9 @@ export default function AdminCasinosList() {
       });
       
       if (!uploadResponse.ok) {
-        throw new Error('Failed to upload image');
+        const errorData = await uploadResponse.json().catch(() => ({ error: 'Unknown error' }));
+        console.error('Upload failed:', errorData);
+        throw new Error(errorData.error || 'Failed to upload image');
       }
       
       const { url } = await uploadResponse.json();

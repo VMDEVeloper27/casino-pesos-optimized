@@ -18,6 +18,7 @@ export async function POST(req: NextRequest) {
     const formData = await req.formData();
     const file = formData.get('file') as File;
     const casinoId = formData.get('casinoId') as string;
+    const gameId = formData.get('gameId') as string;
     const type = formData.get('type') as string || 'general';
     
     if (!file) {
@@ -47,18 +48,26 @@ export async function POST(req: NextRequest) {
     let publicUrl: string | null = null;
     
     // Upload to Supabase Storage based on type
+    console.log('Uploading file:', { type, casinoId, gameId, fileName: file.name });
+    
     if (type === 'casino-logo' && casinoId) {
       publicUrl = await uploadCasinoLogo(file, casinoId);
+    } else if (type === 'game-image' && gameId) {
+      publicUrl = await uploadGameImage(file, gameId);
     } else if (type === 'game-image' && casinoId) {
+      // Fallback for compatibility
       publicUrl = await uploadGameImage(file, casinoId);
     } else {
       // Default to casino logo
       publicUrl = await uploadCasinoLogo(file, `general-${Date.now()}`);
     }
     
+    console.log('Upload result:', publicUrl);
+    
     if (!publicUrl) {
+      console.error('Upload to Supabase Storage failed');
       return NextResponse.json(
-        { error: 'Failed to upload file to storage' },
+        { error: 'Failed to upload file to Supabase Storage. Check if buckets are created and accessible.' },
         { status: 500 }
       );
     }

@@ -132,8 +132,8 @@ export default function AdminGamesList() {
       
       const { url } = await uploadResponse.json();
       
-      // Update game with new image URL
-      const updateResponse = await fetch(`/api/admin/games/${gameId}`, {
+      // Update game with new image URL (use v2 API)
+      const updateResponse = await fetch(`/api/v2/games/${gameId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
