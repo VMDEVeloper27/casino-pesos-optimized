@@ -27,6 +27,20 @@ const nextConfig: NextConfig = {
     SITE_URL: process.env.SITE_URL || 'http://localhost:3000',
   },
 
+  // Webpack configuration to handle Node.js modules on client side
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        path: false,
+        os: false,
+        crypto: false,
+      };
+    }
+    return config;
+  },
+
   // Add cache headers for static assets
   async headers() {
     return [

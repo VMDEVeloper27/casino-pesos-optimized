@@ -1898,14 +1898,19 @@ let fs: any;
 let path: any;
 let GAMES_DATA_FILE: string = '';
 
-if (typeof window === 'undefined') {
-  fs = require('fs').promises;
-  path = require('path');
-  GAMES_DATA_FILE = path.join(process.cwd(), 'data', 'games.json');
+if (typeof window === 'undefined' && typeof process !== 'undefined') {
+  try {
+    fs = require('fs').promises;
+    path = require('path');
+    GAMES_DATA_FILE = path.join(process.cwd(), 'data', 'games.json');
+  } catch (error) {
+    // Fallback for environments where fs is not available
+    console.warn('File system operations not available');
+  }
 }
 
 async function loadGamesFromFile(): Promise<Game[]> {
-  if (typeof window !== 'undefined') return games;
+  if (typeof window !== 'undefined' || !fs || !path) return games;
   
   try {
     const dataDir = path.dirname(GAMES_DATA_FILE);
@@ -1930,7 +1935,7 @@ async function loadGamesFromFile(): Promise<Game[]> {
 }
 
 async function saveGamesToFile(gamesData: Game[]): Promise<void> {
-  if (typeof window !== 'undefined') return;
+  if (typeof window !== 'undefined' || !fs || !path) return;
   
   try {
     const dataDir = path.dirname(GAMES_DATA_FILE);
