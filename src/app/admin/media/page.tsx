@@ -52,12 +52,32 @@ export default function MediaLibrary() {
   const fetchFiles = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api/admin/media/files');
+      
+      // Fetch from both buckets via our API
+      const response = await fetch('/api/admin/media?type=all');
       if (response.ok) {
         const data = await response.json();
-        setFiles(data);
+        
+        // Transform the data to match MediaFile interface
+        const transformedFiles: MediaFile[] = data.files.map((file: any, index: number) => ({
+          id: file.name || `file-${index}`,
+          filename: file.name,
+          originalName: file.name,
+          mimeType: file.name.endsWith('.svg') ? 'image/svg+xml' : 
+                   file.name.endsWith('.webp') ? 'image/webp' :
+                   file.name.endsWith('.png') ? 'image/png' : 
+                   file.name.endsWith('.jpg') || file.name.endsWith('.jpeg') ? 'image/jpeg' : 'image/unknown',
+          size: file.size || 0,
+          url: file.url,
+          thumbnailUrl: file.url,
+          uploadedBy: 'admin',
+          createdAt: file.created || new Date().toISOString(),
+          directory: file.bucket || 'unknown'
+        }));
+        
+        setFiles(transformedFiles);
       } else {
-        console.error('Failed to fetch files');
+        console.error('Failed to fetch files from Supabase Storage');
       }
     } catch (error) {
       console.error('Error fetching files:', error);

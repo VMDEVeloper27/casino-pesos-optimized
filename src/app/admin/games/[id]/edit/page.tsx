@@ -49,6 +49,7 @@ export default function EditGamePage(props: { params: Promise<{ id: string }> })
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
+  const [uploadingImage, setUploadingImage] = useState(false);
   const [newFeature, setNewFeature] = useState('');
   const [newCasino, setNewCasino] = useState('');
   
@@ -524,7 +525,7 @@ export default function EditGamePage(props: { params: Promise<{ id: string }> })
                           return;
                         }
                         
-                        setSaving(true);
+                        setUploadingImage(true);
                         try {
                           // Upload to Supabase Storage
                           const formData = new FormData();
@@ -548,16 +549,27 @@ export default function EditGamePage(props: { params: Promise<{ id: string }> })
                           console.error('Upload error:', error);
                           alert('Failed to upload image');
                         } finally {
-                          setSaving(false);
+                          setUploadingImage(false);
                         }
                       }}
                     />
                     <label
                       htmlFor="game-image-upload"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg cursor-pointer transition-colors"
+                      className={`inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg cursor-pointer transition-colors ${
+                        uploadingImage ? 'opacity-50 cursor-not-allowed' : ''
+                      }`}
                     >
-                      <Upload className="w-4 h-4" />
-                      Upload New Image
+                      {uploadingImage ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          Uploading...
+                        </>
+                      ) : (
+                        <>
+                          <Upload className="w-4 h-4" />
+                          Upload New Image
+                        </>
+                      )}
                     </label>
                   </div>
                 </div>

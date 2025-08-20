@@ -136,3 +136,27 @@ export async function listCasinoLogos() {
     return [];
   }
 }
+
+// List all game images
+export async function listGameImages() {
+  try {
+    const { data, error } = await supabase.storage
+      .from(GAME_IMAGES_BUCKET)
+      .list();
+    
+    if (error) {
+      console.error('Error listing game images:', error);
+      return [];
+    }
+    
+    return data?.map(file => ({
+      name: file.name,
+      url: supabase.storage.from(GAME_IMAGES_BUCKET).getPublicUrl(file.name).data.publicUrl,
+      size: file.metadata?.size || 0,
+      created: file.created_at
+    })) || [];
+  } catch (error) {
+    console.error('Error in listGameImages:', error);
+    return [];
+  }
+}

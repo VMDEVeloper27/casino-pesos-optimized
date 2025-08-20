@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { uploadCasinoLogo, uploadGameImage, listCasinoLogos, deleteCasinoLogo } from '@/lib/supabase-storage';
+import { uploadCasinoLogo, uploadGameImage, listCasinoLogos, listGameImages, deleteCasinoLogo } from '@/lib/supabase-storage';
 
 // Simple auth check - in production, use proper authentication
 async function checkAuth(req: NextRequest) {
@@ -97,8 +97,22 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const type = searchParams.get('type') || 'casino-logos';
     
-    if (type === 'casino-logos') {
+    if (type === 'all') {
+      // Get files from both buckets
+      const casinoLogos = await listCasinoLogos();
+      const gameImages = await listGameImages();
+      
+      // Add bucket info to each file
+      const casinoFiles = casinoLogos.map(f => ({ ...f, bucket: 'casino-logos' }));
+      const gameFiles = gameImages.map(f => ({ ...f, bucket: 'game-images' }));
+      
+      const allFiles = [...casinoFiles, ...gameFiles];
+      return NextResponse.json({ files: allFiles });
+    } else if (type === 'casino-logos') {
       const files = await listCasinoLogos();
+      return NextResponse.json({ files });
+    } else if (type === 'game-images') {
+      const files = await listGameImages();
       return NextResponse.json({ files });
     }
     
