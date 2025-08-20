@@ -1948,9 +1948,8 @@ async function saveGamesToFile(gamesData: Game[]): Promise<void> {
 
 // CRUD Operations
 export async function getAllGames(): Promise<Game[]> {
-  if (typeof window === 'undefined') {
-    return await loadGamesFromFile();
-  }
+  // Always return static games array for now
+  // TODO: Implement Supabase integration
   return games;
 }
 
