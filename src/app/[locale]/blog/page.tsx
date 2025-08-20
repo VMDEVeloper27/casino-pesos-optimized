@@ -364,7 +364,7 @@ export default function BlogPage({ params }: PageProps) {
                       </div>
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
-                        <span>{(featuredPost.publishedAt || featuredPost.published_at || featuredPost.publishDate || '').split('T')[0]}</span>
+                        <span>{(featuredPost.publishedAt || featuredPost.published_at || '').split('T')[0]}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Clock className="w-4 h-4" />

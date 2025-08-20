@@ -42,14 +42,6 @@ export default function AdminBlogPage() {
   const [selectedPosts, setSelectedPosts] = useState<string[]>([]);
   const [showActions, setShowActions] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
-
-  useEffect(() => {
-    filterPosts();
-  }, [filterPosts]);
-
   const fetchPosts = async () => {
     try {
       setLoading(true);
@@ -119,6 +111,14 @@ export default function AdminBlogPage() {
     
     setFilteredPosts(filtered);
   }, [posts, searchQuery, statusFilter, categoryFilter]);
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  useEffect(() => {
+    filterPosts();
+  }, [filterPosts]);
 
   const handleDelete = async (id: string) => {
     if (!confirm('¿Estás seguro de que quieres eliminar este post?')) return;

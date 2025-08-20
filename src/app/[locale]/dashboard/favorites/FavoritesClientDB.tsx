@@ -222,7 +222,8 @@ export default function FavoritesClientDB({ userEmail }: FavoritesClientProps) {
               {favoriteCasinos.length > 0 ? (
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {favoriteCasinos.map((favorite) => {
-                    const casino = favorite.fullCasino;
+                    const casino = favorite?.fullCasino;
+                    if (!casino) return null;
                     return (
                       <motion.div
                         key={favorite.id}
