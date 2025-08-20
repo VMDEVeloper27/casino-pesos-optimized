@@ -135,6 +135,7 @@ export default function AdminLayout({
               <span>Audit Log</span>
             </Link>
             
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <a
               href="/api/auth/signout?callbackUrl=/"
               className="flex items-center gap-3 px-4 py-3 rounded-lg text-neutral-300 hover:bg-neutral-700 hover:text-white transition-colors w-full cursor-pointer"
