@@ -1948,9 +1948,8 @@ async function saveGamesToFile(gamesData: Game[]): Promise<void> {
 
 // CRUD Operations
 export async function getAllGames(): Promise<Game[]> {
-  if (typeof window === 'undefined') {
-    return await loadGamesFromFile();
-  }
+  // In production, always return the static games array
+  // File system operations don't work on Vercel serverless functions
   return games;
 }
 
