@@ -31,9 +31,9 @@ export async function GET(request: NextRequest, { params }: Params) {
       name: data.name,
       logo: data.logo,
       rating: data.rating || 4.0,
-      reviewCount: data.review_count || 0,
+      reviewCount: 0, // Field doesn't exist in DB
       established: data.established || new Date().getFullYear(),
-      license: data.licenses?.join(', ') || '',
+      license: Array.isArray(data.licenses) ? data.licenses.join(', ') : '',
       bonus: data.bonus_percentage && data.bonus_amount 
         ? `${data.bonus_percentage}% hasta $${data.bonus_amount} MXN`
         : 'Sin bono',
@@ -41,33 +41,30 @@ export async function GET(request: NextRequest, { params }: Params) {
         ? `+ ${data.bonus_free_spins} Giros Gratis`
         : '',
       promoCode: data.bonus_code || '',
-      rollover: data.bonus_wagering || '30x',
+      rollover: data.bonus_wagering ? `${data.bonus_wagering}x` : '30x',
       minDeposit: data.bonus_min_deposit || 100,
       games: data.games_total || 1000,
-      providers: data.providers || [],
+      providers: [], // Field doesn't exist in DB
       withdrawal: data.withdrawal_time || '24-48 horas',
       paymentMethods: data.payment_methods || [],
-      support: [
-        data.support_email && 'Email',
-        data.support_phone && 'Phone',
-        data.live_chat_available && 'Live Chat'
-      ].filter(Boolean),
-      languages: data.languages || ['Español'],
+      support: [], // Fields don't exist in DB
+      languages: ['Español'], // Field doesn't exist in DB
       pros: data.pros || [],
       cons: data.cons || [],
-      description: data.description || data.description_es || '',
+      description: '', // Field doesn't exist in DB
       features: {
-        liveCasino: data.features?.includes('live_casino') || false,
-        mobileApp: data.features?.includes('mobile_app') || false,
-        crypto: data.features?.includes('crypto') || false,
-        sportsbook: data.features?.includes('sportsbook') || false,
-        vipProgram: data.features?.includes('vip_program') || false,
+        liveCasino: Array.isArray(data.features) && data.features.includes('live_casino'),
+        mobileApp: Array.isArray(data.features) && data.features.includes('mobile_app'),
+        crypto: Array.isArray(data.features) && data.features.includes('crypto'),
+        sportsbook: Array.isArray(data.features) && data.features.includes('sportsbook') || 
+                    Array.isArray(data.features) && data.features.includes('Deportes'),
+        vipProgram: Array.isArray(data.features) && data.features.includes('vip_program'),
       },
       status: data.status || 'pending',
       // Additional fields from DB
-      websiteUrl: data.website_url || '',
+      websiteUrl: '', // Field doesn't exist in DB
       affiliateLink: data.affiliate_link || '',
-      isActive: data.is_active ?? true,
+      isActive: true, // Field doesn't exist in DB
       isFeatured: data.is_featured || false,
     };
     
@@ -83,6 +80,9 @@ export async function PUT(request: NextRequest, { params }: Params) {
   try {
     const { id } = await params;
     const updatedCasino = await request.json();
+    
+    console.log('Updating casino with ID:', id);
+    console.log('Received data:', updatedCasino);
     
     // Parse bonus string if needed
     let bonusPercentage = null;
@@ -103,42 +103,41 @@ export async function PUT(request: NextRequest, { params }: Params) {
       if (spinsMatch) bonusFreeSpins = parseInt(spinsMatch[1]);
     }
     
-    // Map fields to database columns - only include non-empty values
+    // Map fields to database columns - include ALL fields, even empty ones
     const casinoData: any = {
-      updated_at: new Date().toISOString()
+      updated_at: new Date().toISOString(),
+      // Basic fields - always update
+      name: updatedCasino.name || '',
+      logo: updatedCasino.logo || null, // Allow null for empty logo
+      rating: parseFloat(updatedCasino.rating) || 4.0,
+      slug: updatedCasino.id || id,
+      established: parseInt(updatedCasino.established) || new Date().getFullYear(),
+      licenses: updatedCasino.license 
+        ? updatedCasino.license.split(',').map((l: string) => l.trim()).filter(Boolean)
+        : [],
+      
+      // Bonus fields - always update
+      bonus_percentage: bonusPercentage,
+      bonus_amount: bonusAmount,
+      bonus_free_spins: bonusFreeSpins,
+      bonus_code: updatedCasino.promoCode || null,
+      bonus_wagering: updatedCasino.rollover 
+        ? parseInt(updatedCasino.rollover.toString().replace(/[^0-9]/g, '')) || null
+        : null,
+      bonus_min_deposit: parseInt(updatedCasino.minDeposit) || null,
+      
+      // Games  
+      games_total: parseInt(updatedCasino.games) || 0,
+      
+      // Other fields
+      withdrawal_time: updatedCasino.withdrawal || null,
+      payment_methods: updatedCasino.paymentMethods || [],
+      // Skip languages field as it doesn't exist in the database
+      pros: updatedCasino.pros || [],
+      cons: updatedCasino.cons || [],
+      // Skip description field as it doesn't exist in the database
+      status: updatedCasino.status || 'pending'
     };
-    
-    // Required fields
-    if (updatedCasino.name) casinoData.name = updatedCasino.name;
-    if (updatedCasino.logo) casinoData.logo = updatedCasino.logo;
-    if (updatedCasino.rating) casinoData.rating = updatedCasino.rating;
-    
-    // Optional fields - only add if they have values
-    if (updatedCasino.id) casinoData.slug = updatedCasino.id;
-    if (updatedCasino.established) casinoData.established = updatedCasino.established;
-    if (updatedCasino.license) {
-      casinoData.licenses = updatedCasino.license.split(',').map((l: string) => l.trim()).filter(Boolean);
-    }
-    
-    // Bonus fields
-    if (bonusPercentage !== null) casinoData.bonus_percentage = bonusPercentage;
-    if (bonusAmount !== null) casinoData.bonus_amount = bonusAmount;
-    if (bonusFreeSpins !== null) casinoData.bonus_free_spins = bonusFreeSpins;
-    if (updatedCasino.promoCode) casinoData.bonus_code = updatedCasino.promoCode;
-    if (updatedCasino.rollover) casinoData.bonus_wagering = updatedCasino.rollover;
-    if (updatedCasino.minDeposit) casinoData.bonus_min_deposit = updatedCasino.minDeposit;
-    
-    // Games
-    if (updatedCasino.games) casinoData.games_total = updatedCasino.games;
-    
-    // Other fields
-    if (updatedCasino.withdrawal) casinoData.withdrawal_time = updatedCasino.withdrawal;
-    if (updatedCasino.paymentMethods) casinoData.payment_methods = updatedCasino.paymentMethods;
-    if (updatedCasino.languages) casinoData.languages = updatedCasino.languages;
-    if (updatedCasino.pros) casinoData.pros = updatedCasino.pros;
-    if (updatedCasino.cons) casinoData.cons = updatedCasino.cons;
-    if (updatedCasino.description) casinoData.description = updatedCasino.description;
-    if (updatedCasino.status) casinoData.status = updatedCasino.status;
     
     // Features
     if (updatedCasino.features) {
@@ -151,6 +150,8 @@ export async function PUT(request: NextRequest, { params }: Params) {
       casinoData.features = features;
     }
     
+    console.log('Sending to Supabase:', casinoData);
+    
     const { data, error } = await supabase
       .from('casinos')
       .update(casinoData)
@@ -159,10 +160,14 @@ export async function PUT(request: NextRequest, { params }: Params) {
       .single();
     
     if (error) {
+      console.error('Supabase update error:', error);
       if (error.code === 'PGRST116') {
         return NextResponse.json({ error: 'Casino not found' }, { status: 404 });
       }
-      throw error;
+      return NextResponse.json({ 
+        error: error.message || 'Database update failed',
+        details: error 
+      }, { status: 500 });
     }
     
     return NextResponse.json(data);

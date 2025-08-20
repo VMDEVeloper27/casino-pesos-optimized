@@ -63,23 +63,14 @@ export default function CookieConsent() {
   };
 
   const acceptSelected = () => {
-    localStorage.setItem('cookieConsent', JSON.stringify(preferences));
-    localStorage.setItem('cookieConsentDate', new Date().toISOString());
-    applyPreferences(preferences);
-    setShowBanner(false);
+    // Только скрываем баннер без сохранения
+    // Пользователь просто выбрал настройки, но не принял их
+    setShowDetails(false);
   };
 
   const rejectAll = () => {
-    const onlyNecessary = {
-      necessary: true,
-      analytics: false,
-      marketing: false,
-      preferences: false,
-    };
-    setPreferences(onlyNecessary);
-    localStorage.setItem('cookieConsent', JSON.stringify(onlyNecessary));
-    localStorage.setItem('cookieConsentDate', new Date().toISOString());
-    applyPreferences(onlyNecessary);
+    // При отклонении просто скрываем баннер без сохранения в localStorage
+    // Баннер появится снова при перезагрузке страницы
     setShowBanner(false);
   };
 
@@ -92,18 +83,18 @@ export default function CookieConsent() {
       
       {/* Banner */}
       <div className="fixed bottom-0 left-0 right-0 z-[9999] p-4 md:p-6">
-        <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-2xl border border-gray-200">
+        <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-2xl border-2 border-green-100">
           <div className="p-6 md:p-8">
             {/* Header */}
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center gap-3">
-                <Cookie className="w-8 h-8 text-primary" />
+                <Cookie className="w-8 h-8 text-green-600" />
                 <h2 className="text-2xl font-bold text-gray-900">
                   Configuración de Cookies
                 </h2>
               </div>
               <button
-                onClick={rejectAll}
+                onClick={() => setShowBanner(false)}
                 className="text-gray-500 hover:text-gray-700 transition-colors"
                 aria-label="Cerrar"
               >
@@ -128,13 +119,13 @@ export default function CookieConsent() {
                 </button>
                 <button
                   onClick={() => setShowDetails(true)}
-                  className="px-6 py-3 bg-white border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary/10 transition-colors"
+                  className="px-6 py-3 bg-white border-2 border-green-600 text-green-600 rounded-lg font-semibold hover:bg-green-50 transition-colors"
                 >
                   Personalizar
                 </button>
                 <button
                   onClick={acceptAll}
-                  className="px-6 py-3 bg-primary text-black rounded-lg font-semibold hover:bg-primary/90 transition-colors flex-1 sm:flex-initial"
+                  className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors flex-1 sm:flex-initial shadow-md hover:shadow-lg"
                 >
                   Aceptar todas
                 </button>
@@ -162,7 +153,7 @@ export default function CookieConsent() {
                       type="checkbox"
                       checked={preferences.necessary}
                       disabled
-                      className="w-5 h-5 text-primary rounded cursor-not-allowed opacity-50"
+                      className="w-5 h-5 text-green-600 rounded cursor-not-allowed opacity-50 accent-green-600"
                     />
                   </div>
                 </div>
@@ -185,7 +176,7 @@ export default function CookieConsent() {
                       type="checkbox"
                       checked={preferences.analytics}
                       onChange={(e) => setPreferences({...preferences, analytics: e.target.checked})}
-                      className="w-5 h-5 text-primary rounded cursor-pointer"
+                      className="w-5 h-5 text-green-600 rounded cursor-pointer accent-green-600"
                     />
                   </div>
                 </div>
@@ -208,7 +199,7 @@ export default function CookieConsent() {
                       type="checkbox"
                       checked={preferences.marketing}
                       onChange={(e) => setPreferences({...preferences, marketing: e.target.checked})}
-                      className="w-5 h-5 text-primary rounded cursor-pointer"
+                      className="w-5 h-5 text-green-600 rounded cursor-pointer accent-green-600"
                     />
                   </div>
                 </div>
@@ -231,7 +222,7 @@ export default function CookieConsent() {
                       type="checkbox"
                       checked={preferences.preferences}
                       onChange={(e) => setPreferences({...preferences, preferences: e.target.checked})}
-                      className="w-5 h-5 text-primary rounded cursor-pointer"
+                      className="w-5 h-5 text-green-600 rounded cursor-pointer accent-green-600"
                     />
                   </div>
                 </div>
@@ -245,14 +236,14 @@ export default function CookieConsent() {
                     Rechazar todas
                   </button>
                   <button
-                    onClick={acceptSelected}
-                    className="px-6 py-3 bg-white border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary/10 transition-colors"
+                    onClick={() => setShowDetails(false)}
+                    className="px-6 py-3 bg-white border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
                   >
-                    Guardar preferencias
+                    Volver
                   </button>
                   <button
                     onClick={acceptAll}
-                    className="px-6 py-3 bg-primary text-black rounded-lg font-semibold hover:bg-primary/90 transition-colors flex-1 sm:flex-initial"
+                    className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors flex-1 sm:flex-initial shadow-md hover:shadow-lg"
                   >
                     Aceptar todas
                   </button>
@@ -263,13 +254,13 @@ export default function CookieConsent() {
             {/* Footer Links */}
             <div className="mt-6 pt-4 border-t border-gray-200">
               <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/privacy" className="text-gray-500 hover:text-primary transition-colors">
+                <Link href="/privacy" className="text-gray-500 hover:text-green-600 transition-colors">
                   Política de Privacidad
                 </Link>
-                <Link href="/cookies" className="text-gray-500 hover:text-primary transition-colors">
+                <Link href="/cookies" className="text-gray-500 hover:text-green-600 transition-colors">
                   Política de Cookies
                 </Link>
-                <Link href="/terms" className="text-gray-500 hover:text-primary transition-colors">
+                <Link href="/terms" className="text-gray-500 hover:text-green-600 transition-colors">
                   Términos y Condiciones
                 </Link>
               </div>

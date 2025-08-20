@@ -122,7 +122,7 @@ export default function GameBrowser({
       <div className="bg-gradient-to-br from-green-800 via-green-700 to-green-900 text-white py-12">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
               {isSpanish ? 'Explorador de Juegos' : 'Game Explorer'}
             </h1>
             <p className="text-lg text-green-100 max-w-3xl mx-auto">

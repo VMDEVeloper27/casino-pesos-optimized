@@ -117,17 +117,19 @@ export default function EditCasinoPage({ params }: PageProps) {
       if (response.ok) {
         router.push('/admin/casinos');
       } else {
-        alert('Error updating casino');
+        const errorData = await response.json();
+        console.error('Server error:', errorData);
+        alert(`Error updating casino: ${errorData.error || 'Unknown error'}`);
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('Error updating casino');
+      alert('Error updating casino: ' + (error as Error).message);
     } finally {
       setLoading(false);
     }
   };
 
-  const addArrayItem = (field: 'pros' | 'cons' | 'providers' | 'paymentMethods' | 'support' | 'languages') => {
+  const addArrayItem = (field: 'pros' | 'cons' | 'paymentMethods' | 'support') => {
     const newItem = prompt(`Add new ${field.slice(0, -1)}:`);
     if (newItem) {
       setFormData({
@@ -137,7 +139,7 @@ export default function EditCasinoPage({ params }: PageProps) {
     }
   };
 
-  const removeArrayItem = (field: 'pros' | 'cons' | 'providers' | 'paymentMethods' | 'support' | 'languages', index: number) => {
+  const removeArrayItem = (field: 'pros' | 'cons' | 'paymentMethods' | 'support', index: number) => {
     setFormData({
       ...formData,
       [field]: (formData[field] as string[]).filter((_, i) => i !== index)
@@ -173,7 +175,6 @@ export default function EditCasinoPage({ params }: PageProps) {
         {/* Basic Information */}
         <div className="bg-neutral-800 rounded-xl p-6 border border-neutral-700">
           <h2 className="text-xl font-bold text-white mb-6">Basic Information</h2>
-          <p className="text-neutral-400 text-sm mb-4">Fields marked with * are required</p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -187,14 +188,13 @@ export default function EditCasinoPage({ params }: PageProps) {
                 onChange={(e) => setFormData({ ...formData, id: e.target.value.toLowerCase().replace(/\s+/g, '-') })}
                 className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 placeholder="bet365"
-                required
                 disabled
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
-                Casino Name *
+                Casino Name
                 <span className="text-neutral-500 text-xs ml-2">Display name of the casino</span>
               </label>
               <input
@@ -203,7 +203,6 @@ export default function EditCasinoPage({ params }: PageProps) {
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 placeholder="Bet365 Casino"
-                required
               />
             </div>
 
@@ -218,7 +217,7 @@ export default function EditCasinoPage({ params }: PageProps) {
 
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
-                Rating (1-5) *
+                Rating (1-5)
                 <span className="text-neutral-500 text-xs ml-2">Casino rating score</span>
               </label>
               <input
@@ -229,7 +228,6 @@ export default function EditCasinoPage({ params }: PageProps) {
                 min="1"
                 max="5"
                 step="0.1"
-                required
               />
             </div>
 
@@ -300,7 +298,7 @@ export default function EditCasinoPage({ params }: PageProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-neutral-300 mb-2">
-                Main Bonus *
+                Main Bonus
                 <span className="text-neutral-500 text-xs ml-2">Welcome bonus offer</span>
               </label>
               <input
@@ -309,7 +307,6 @@ export default function EditCasinoPage({ params }: PageProps) {
                 onChange={(e) => setFormData({ ...formData, bonus: e.target.value })}
                 className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 placeholder="100% hasta $30,000 MXN"
-                required
               />
             </div>
 
@@ -481,8 +478,10 @@ export default function EditCasinoPage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* Description */}
-          <div>
+          {/* Languages - Hidden as field doesn't exist in DB */}
+
+          {/* Description - Hidden as field doesn't exist in DB */}
+          {/* <div>
             <label className="block text-sm font-medium text-neutral-300 mb-2">
               Description
             </label>
@@ -493,7 +492,7 @@ export default function EditCasinoPage({ params }: PageProps) {
               rows={4}
               placeholder="Detailed description of the casino..."
             />
-          </div>
+          </div> */}
         </div>
 
         {/* Features */}
