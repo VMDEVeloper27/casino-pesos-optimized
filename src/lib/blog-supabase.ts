@@ -174,7 +174,7 @@ export async function getRelatedPosts(postId: string, limit: number = 3): Promis
       
       // Fallback to JSON file
       const blogDb = await import('./blog-database');
-      return getFromFile.getRelatedPosts(postId, limit);
+      return blogDb.getRelatedPosts(postId, limit);
     }
 
     return data || [];
@@ -183,7 +183,7 @@ export async function getRelatedPosts(postId: string, limit: number = 3): Promis
     
     // Fallback to JSON file
     const blogDb = await import('./blog-database');
-    return getFromFile.getRelatedPosts(postId, limit);
+    return blogDb.getRelatedPosts(postId, limit);
   }
 }
 
@@ -234,7 +234,7 @@ export async function getBlogStats() {
       
       // Fallback to JSON file
       const blogDb = await import('./blog-database');
-      return getFromFile.getBlogStats();
+      return blogDb.getBlogStats();
     }
 
     if (!posts) return {
@@ -275,7 +275,7 @@ export async function getBlogStats() {
     
     // Fallback to JSON file
     const blogDb = await import('./blog-database');
-    return getFromFile.getBlogStats();
+    return blogDb.getBlogStats();
   }
 }
 
@@ -376,7 +376,8 @@ async function sendNewPostNotifications(post: BlogPost) {
     console.log(`📨 Sending notifications to ${blogSubscribers.length} subscribers`);
 
     // Import Gmail sender
-    const { sendEmail } = await import('./gmail-working.js');
+    const gmailSender = await import('./gmail-working.js');
+    const sendEmail = gmailSender.sendEmail;
     
     // Send emails to each subscriber
     let successCount = 0;
