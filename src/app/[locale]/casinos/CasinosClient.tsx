@@ -112,7 +112,7 @@ export default function CasinosClient({ casinos }: CasinosClientProps) {
                     {/* Casino Info */}
                     <div className="text-center lg:text-left">
                       <div className="w-24 h-16 bg-gray-100 border border-gray-200 rounded-lg flex items-center justify-center mx-auto lg:mx-0 mb-3 relative overflow-hidden">
-                        {casino.logo && casino.logo.startsWith('/') ? (
+                        {casino.logo && (casino.logo.startsWith('/') || casino.logo.startsWith('http')) ? (
                           <Image
                             src={casino.logo}
                             alt={`${casino.name} logo`}

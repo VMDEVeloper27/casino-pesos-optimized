@@ -146,7 +146,7 @@ export default function CasinoSelector({
                         {/* Casino Info */}
                         <div className="flex items-center gap-3 flex-1">
                           <div className="w-14 h-10 sm:w-16 sm:h-12 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
-                            {casino.logo && casino.logo.startsWith('/') ? (
+                            {casino.logo && (casino.logo.startsWith('/') || casino.logo.startsWith('http')) ? (
                               <Image
                                 src={casino.logo}
                                 alt={casino.name}

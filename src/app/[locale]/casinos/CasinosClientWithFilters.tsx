@@ -345,7 +345,7 @@ export default function CasinosClientWithFilters({ casinos }: CasinosClientWithF
                       <div className="text-center lg:text-left">
                         <div className="relative">
                           <div className="w-24 h-16 bg-gray-100 border border-gray-200 rounded-lg flex items-center justify-center mx-auto lg:mx-0 mb-3 relative overflow-hidden">
-                            {casino.logo && casino.logo.startsWith('/') ? (
+                            {casino.logo && (casino.logo.startsWith('/') || casino.logo.startsWith('http')) ? (
                               <Image
                                 src={casino.logo}
                                 alt={`${casino.name} logo`}
@@ -358,7 +358,7 @@ export default function CasinosClientWithFilters({ casinos }: CasinosClientWithF
                               />
                             ) : (
                               <span className="text-2xl font-bold text-gray-900">
-                                {casino.logo || casino.name.substring(0, 3).toUpperCase()}
+                                {casino.name.substring(0, 3).toUpperCase()}
                               </span>
                             )}
                           </div>

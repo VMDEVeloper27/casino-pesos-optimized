@@ -175,7 +175,7 @@ export default function CompararClientCompact({ allCasinos, initialCasinos, loca
                         </button>
                         <div className="flex flex-col items-center pt-2">
                           <div className="w-16 h-10 bg-white rounded border border-gray-200 mb-1 flex items-center justify-center overflow-hidden">
-                            {casino.logo && casino.logo.startsWith('/') ? (
+                            {casino.logo && (casino.logo.startsWith('/') || casino.logo.startsWith('http')) ? (
                               <Image
                                 src={casino.logo}
                                 alt={casino.name}

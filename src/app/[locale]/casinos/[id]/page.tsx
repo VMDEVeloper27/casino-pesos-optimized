@@ -151,7 +151,7 @@ export default async function CasinoDetailPage({ params }: PageProps) {
             {/* Logo and Rating */}
             <div className="text-center">
               <div className="w-32 h-24 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4 relative overflow-hidden">
-                {casino.logo && casino.logo.startsWith('/') ? (
+                {casino.logo && (casino.logo.startsWith('/') || casino.logo.startsWith('http')) ? (
                   <Image
                     src={casino.logo}
                     alt={`${casino.name} logo`}

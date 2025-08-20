@@ -223,7 +223,7 @@ export default function CompararClient({ allCasinos, initialCasinos, locale }: C
                     </button>
                     <div className="bg-gray-50 rounded-lg p-4 text-center">
                       <div className="w-20 h-14 bg-white rounded-lg flex items-center justify-center mx-auto mb-3 overflow-hidden">
-                        {casino.logo && casino.logo.startsWith('/') ? (
+                        {casino.logo && (casino.logo.startsWith('/') || casino.logo.startsWith('http')) ? (
                           <Image
                             src={casino.logo}
                             alt={casino.name}
