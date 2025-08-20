@@ -150,8 +150,8 @@ export default function Footer() {
             </div>
             <div className="flex items-center gap-4">
               <span className="bg-white px-3 py-1 rounded-lg text-gray-900 font-bold text-sm border border-gray-200">+18</span>
-              <a href="https://www.jugarbien.org.mx" target="_blank" rel="noopener noreferrer" className="text-orange-600 hover:text-orange-700 font-medium text-sm">
-                www.jugarbien.org.mx
+              <a href="https://casinospesos.com" target="_blank" rel="noopener noreferrer" className="text-orange-600 hover:text-orange-700 font-medium text-sm">
+                casinospesos.com
               </a>
             </div>
           </div>
