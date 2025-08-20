@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { 
   Plus, 
@@ -48,7 +48,7 @@ export default function AdminBlogPage() {
 
   useEffect(() => {
     filterPosts();
-  }, [posts, searchQuery, statusFilter, categoryFilter]);
+  }, [filterPosts]);
 
   const fetchPosts = async () => {
     try {
@@ -94,7 +94,7 @@ export default function AdminBlogPage() {
     }
   };
 
-  const filterPosts = () => {
+  const filterPosts = useCallback(() => {
     if (!Array.isArray(posts)) {
       setFilteredPosts([]);
       return;
@@ -118,7 +118,7 @@ export default function AdminBlogPage() {
     }
     
     setFilteredPosts(filtered);
-  };
+  }, [posts, searchQuery, statusFilter, categoryFilter]);
 
   const handleDelete = async (id: string) => {
     if (!confirm('¿Estás seguro de que quieres eliminar este post?')) return;
