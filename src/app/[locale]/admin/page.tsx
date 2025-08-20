@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { 
   FileText, 
   Users, 
@@ -196,30 +197,30 @@ export default function AdminDashboard() {
             Acciones Rápidas
           </h2>
           <div className="space-y-3">
-            <a
+            <Link
               href="/es/admin/blog/new"
               className="block w-full px-4 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg text-center font-medium transition-colors"
             >
               Crear Nuevo Blog Post
-            </a>
-            <a
+            </Link>
+            <Link
               href="/es/admin/subscribers"
               className="block w-full px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-center font-medium transition-colors"
             >
               Ver Suscriptores
-            </a>
-            <a
+            </Link>
+            <Link
               href="/es/admin/casinos"
               className="block w-full px-4 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-center font-medium transition-colors"
             >
               Gestionar Casinos
-            </a>
-            <a
+            </Link>
+            <Link
               href="/es/admin/settings"
               className="block w-full px-4 py-3 border-2 border-gray-200 hover:border-gray-300 text-gray-700 rounded-lg text-center font-medium transition-colors"
             >
               Configuración del Sitio
-            </a>
+            </Link>
           </div>
         </div>
       </div>
