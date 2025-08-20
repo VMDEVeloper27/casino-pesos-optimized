@@ -157,7 +157,7 @@ export default async function CasinoDetailPage({ params }: PageProps) {
                     alt={`${casino.name} logo`}
                     width={128}
                     height={96}
-                    className="object-contain"
+                    className="object-contain p-2"
                     priority
                   />
                 ) : (

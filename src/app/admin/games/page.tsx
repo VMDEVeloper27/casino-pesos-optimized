@@ -313,7 +313,7 @@ export default function AdminGamesList() {
                             <img 
                               src={game.image} 
                               alt={game.name}
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-contain p-1"
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;
                                 target.style.display = 'none';

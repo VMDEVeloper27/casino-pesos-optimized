@@ -181,7 +181,7 @@ export default function CompararClientCompact({ allCasinos, initialCasinos, loca
                                 alt={casino.name}
                                 width={60}
                                 height={36}
-                                className="object-contain"
+                                className="object-contain p-1"
                               />
                             ) : (
                               <span className="text-sm font-bold text-gray-700">

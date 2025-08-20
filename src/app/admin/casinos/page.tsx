@@ -370,7 +370,7 @@ export default function AdminCasinosList() {
                             <img 
                               src={casino.logo} 
                               alt={casino.name}
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-contain p-1"
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;
                                 target.style.display = 'none';
@@ -578,7 +578,7 @@ export default function AdminCasinosList() {
                         <img 
                           src={image.url} 
                           alt={image.name || `Gallery image ${index + 1}`}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-contain p-1"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
                             target.style.display = 'none';

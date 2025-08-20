@@ -118,7 +118,7 @@ export default function CasinosClient({ casinos }: CasinosClientProps) {
                             alt={`${casino.name} logo`}
                             width={96}
                             height={64}
-                            className="object-contain"
+                            className="object-contain p-1"
                             loading={index < 3 ? "eager" : "lazy"}
                             placeholder="blur"
                             blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='64'%3E%3Crect width='96' height='64' fill='%23f3f4f6'/%3E%3C/svg%3E"

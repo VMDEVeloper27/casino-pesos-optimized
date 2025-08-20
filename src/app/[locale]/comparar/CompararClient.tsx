@@ -229,7 +229,7 @@ export default function CompararClient({ allCasinos, initialCasinos, locale }: C
                             alt={casino.name}
                             width={80}
                             height={56}
-                            className="object-contain"
+                            className="object-contain p-2"
                           />
                         ) : (
                           <span className="text-2xl font-bold text-gray-700">

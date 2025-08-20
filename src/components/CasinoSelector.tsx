@@ -152,7 +152,7 @@ export default function CasinoSelector({
                                 alt={casino.name}
                                 width={64}
                                 height={48}
-                                className="object-contain"
+                                className="object-contain p-1"
                               />
                             ) : (
                               <span className="text-base sm:text-lg font-bold text-gray-700">
