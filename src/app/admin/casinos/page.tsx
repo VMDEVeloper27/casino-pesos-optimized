@@ -75,7 +75,7 @@ export default function AdminCasinosList() {
   const [showLogoMenu, setShowLogoMenu] = useState<string | null>(null);
   const [showGallery, setShowGallery] = useState(false);
   const [selectedCasinoForGallery, setSelectedCasinoForGallery] = useState<string | null>(null);
-  const [galleryImages, setGalleryImages] = useState<string[]>([]);
+  const [galleryImages, setGalleryImages] = useState<any[]>([]);
   const [galleryLoading, setGalleryLoading] = useState(false);
   const [gallerySearchQuery, setGallerySearchQuery] = useState('');
   const fileInputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
@@ -132,7 +132,7 @@ export default function AdminCasinosList() {
   const loadGalleryImages = async () => {
     setGalleryLoading(true);
     try {
-      const response = await fetch('/api/admin/media');
+      const response = await fetch('/api/admin/media?type=all');
       if (response.ok) {
         const data = await response.json();
         setGalleryImages(data.files || []);
@@ -564,16 +564,20 @@ export default function AdminCasinosList() {
               ) : (
                 <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
                   {galleryImages
-                    .filter(img => img.toLowerCase().includes(gallerySearchQuery.toLowerCase()))
-                    .map((imageUrl, index) => (
+                    .filter(img => {
+                      const searchLower = gallerySearchQuery.toLowerCase();
+                      return (img.url?.toLowerCase().includes(searchLower) || 
+                              img.name?.toLowerCase().includes(searchLower));
+                    })
+                    .map((image, index) => (
                       <button
                         key={index}
-                        onClick={() => selectFromGallery(imageUrl)}
+                        onClick={() => selectFromGallery(image.url)}
                         className="relative aspect-square bg-neutral-800 rounded-lg overflow-hidden hover:ring-2 hover:ring-primary transition-all group"
                       >
                         <img 
-                          src={imageUrl} 
-                          alt={`Gallery image ${index + 1}`}
+                          src={image.url} 
+                          alt={image.name || `Gallery image ${index + 1}`}
                           className="w-full h-full object-cover"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
