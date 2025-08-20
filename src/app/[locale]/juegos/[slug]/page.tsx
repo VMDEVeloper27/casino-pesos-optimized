@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import GameDetail from './GameDetail';
-import { getGameBySlug, getAllGames } from '@/lib/game-database';
+import { getAllGames } from '@/lib/game-database';
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -9,7 +9,8 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
-  const game = getGameBySlug(slug);
+  const games = await getAllGames();
+  const game = games.find(g => g.slug === slug);
   
   if (!game) {
     return {
@@ -44,7 +45,8 @@ export async function generateStaticParams() {
 
 export default async function GamePage({ params }: PageProps) {
   const { locale, slug } = await params;
-  const game = getGameBySlug(slug);
+  const games = await getAllGames();
+  const game = games.find(g => g.slug === slug);
 
   if (!game) {
     notFound();

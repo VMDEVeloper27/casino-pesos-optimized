@@ -2083,9 +2083,14 @@ export function searchGames(query: string): Game[] {
   );
 }
 
-export function getGameBySlug(slug: string): Game | undefined {
-  const allGames = getGamesSync();
+export async function getGameBySlug(slug: string): Promise<Game | undefined> {
+  const allGames = await getAllGames();
   return allGames.find(game => game.slug === slug);
+}
+
+// Synchronous version for client-side usage only
+export function getGameBySlugSync(slug: string): Game | undefined {
+  return games.find(game => game.slug === slug);
 }
 
 export function getUniqueProviders(): string[] {
