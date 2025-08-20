@@ -1893,58 +1893,7 @@ export const games: Game[] = [
   }
 ];
 
-// Server-side only modules
-let fs: any;
-let path: any;
-let GAMES_DATA_FILE: string = '';
-
-if (typeof window === 'undefined' && typeof process !== 'undefined') {
-  try {
-    fs = require('fs').promises;
-    path = require('path');
-    GAMES_DATA_FILE = path.join(process.cwd(), 'data', 'games.json');
-  } catch (error) {
-    // Fallback for environments where fs is not available
-    console.warn('File system operations not available');
-  }
-}
-
-async function loadGamesFromFile(): Promise<Game[]> {
-  if (typeof window !== 'undefined' || !fs || !path) return games;
-  
-  try {
-    const dataDir = path.dirname(GAMES_DATA_FILE);
-    try {
-      await fs.access(dataDir);
-    } catch {
-      await fs.mkdir(dataDir, { recursive: true });
-    }
-    
-    try {
-      const data = await fs.readFile(GAMES_DATA_FILE, 'utf-8');
-      return JSON.parse(data);
-    } catch {
-      // If file doesn't exist, save current games
-      await saveGamesToFile(games);
-      return games;
-    }
-  } catch (error) {
-    console.error('Error loading games:', error);
-    return games;
-  }
-}
-
-async function saveGamesToFile(gamesData: Game[]): Promise<void> {
-  if (typeof window !== 'undefined' || !fs || !path) return;
-  
-  try {
-    const dataDir = path.dirname(GAMES_DATA_FILE);
-    await fs.mkdir(dataDir, { recursive: true });
-    await fs.writeFile(GAMES_DATA_FILE, JSON.stringify(gamesData, null, 2));
-  } catch (error) {
-    console.error('Error saving games:', error);
-  }
-}
+// File system operations removed - using static data only for Vercel deployment
 
 // CRUD Operations
 export async function getAllGames(): Promise<Game[]> {
@@ -1970,8 +1919,8 @@ export async function createGame(gameData: Omit<Game, 'id'>): Promise<Game> {
     id: `game-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
   };
   
-  allGames.push(newGame);
-  await saveGamesToFile(allGames);
+  games.push(newGame);
+  // TODO: Save to Supabase
   
   return newGame;
 }
@@ -1990,7 +1939,7 @@ export async function updateGame(id: string, updates: Partial<Game>): Promise<Ga
     id // Ensure ID doesn't change
   };
   
-  await saveGamesToFile(allGames);
+  // TODO: Save to Supabase
   return allGames[gameIndex];
 }
 
@@ -2002,7 +1951,12 @@ export async function deleteGame(id: string): Promise<boolean> {
     return false; // Game not found
   }
   
-  await saveGamesToFile(filteredGames);
+  // TODO: Save to Supabase
+  // For now, remove from static array
+  const index = games.findIndex(g => g.id === id);
+  if (index > -1) {
+    games.splice(index, 1);
+  }
   return true;
 }
 
@@ -2013,8 +1967,9 @@ export async function bulkImportGames(newGames: Game[]): Promise<number> {
   const existingIds = new Set(allGames.map(g => g.id));
   const gamesToAdd = newGames.filter(g => !existingIds.has(g.id));
   
-  const updatedGames = [...allGames, ...gamesToAdd];
-  await saveGamesToFile(updatedGames);
+  // Add to static array
+  games.push(...gamesToAdd);
+  // TODO: Save to Supabase
   
   return gamesToAdd.length;
 }
