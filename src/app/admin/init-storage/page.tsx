@@ -33,13 +33,13 @@ export default function InitStoragePage() {
           This will create the necessary storage buckets in Supabase for casino logos and game images.
         </p>
         
-        <p className="mb-6 text-sm text-gray-500">
-          Buckets to be created:
+        <div className="mb-6 text-sm text-gray-500">
+          <p>Buckets to be created:</p>
           <ul className="list-disc ml-6 mt-2">
             <li>casino-logos (public, for casino images)</li>
             <li>game-images (public, for game screenshots)</li>
           </ul>
-        </p>
+        </div>
         
         <button
           onClick={handleInit}
