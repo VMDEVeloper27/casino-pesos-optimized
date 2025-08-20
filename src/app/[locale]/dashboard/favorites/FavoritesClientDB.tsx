@@ -226,7 +226,7 @@ export default function FavoritesClientDB({ userEmail }: FavoritesClientProps) {
                     if (!casino) return null;
                     return (
                       <motion.div
-                        key={favorite.id}
+                        key={favorite?.id}
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all"
@@ -343,10 +343,11 @@ export default function FavoritesClientDB({ userEmail }: FavoritesClientProps) {
               {favoriteGames.length > 0 ? (
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {favoriteGames.map((favorite) => {
-                    const game = favorite.fullGame;
+                    const game = favorite?.fullGame;
+                    if (!game) return null;
                     return (
                       <motion.div
-                        key={favorite.id}
+                        key={favorite?.id}
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all"
@@ -362,7 +363,7 @@ export default function FavoritesClientDB({ userEmail }: FavoritesClientProps) {
                             />
                           )}
                           <button
-                            onClick={() => removeFavorite(favorite.gameId || game.id, 'game')}
+                            onClick={() => removeFavorite(favorite?.gameId || game.id, 'game')}
                             className="absolute top-2 right-2 p-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
                             title="Eliminar de favoritos"
                           >
@@ -396,7 +397,7 @@ export default function FavoritesClientDB({ userEmail }: FavoritesClientProps) {
 
                           {/* Added date */}
                           <p className="text-xs text-gray-500 mt-3 text-center">
-                            {new Date(favorite.created_at || favorite.createdAt || '').toLocaleDateString()}
+                            {new Date(favorite?.created_at || favorite?.createdAt || '').toLocaleDateString()}
                           </p>
                         </div>
                       </motion.div>

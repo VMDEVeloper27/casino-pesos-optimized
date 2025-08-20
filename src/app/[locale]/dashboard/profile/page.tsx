@@ -282,10 +282,10 @@ export default function ProfilePage({ params }: { params: Promise<{ locale: stri
                 <p className="text-sm text-gray-500">{session?.user?.email}</p>
                 
                 {/* Role Badge */}
-                {session?.user?.role && (
-                  <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mt-3 ${getRoleBadgeColor(session.user.role)}`}>
+                {(session?.user as any)?.role && (
+                  <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mt-3 ${getRoleBadgeColor((session.user as any).role)}`}>
                     <Shield className="w-3 h-3 mr-1" />
-                    {getRoleLabel(session.user.role)}
+                    {getRoleLabel((session.user as any).role)}
                   </span>
                 )}
               </div>
