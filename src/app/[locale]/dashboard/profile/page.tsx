@@ -283,9 +283,9 @@ export default function ProfilePage({ params }: { params: Promise<{ locale: stri
                 
                 {/* Role Badge */}
                 {(session?.user as any)?.role && (
-                  <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mt-3 ${getRoleBadgeColor((session.user as any).role)}`}>
+                  <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mt-3 ${getRoleBadgeColor((session?.user as any)?.role)}`}>
                     <Shield className="w-3 h-3 mr-1" />
-                    {getRoleLabel((session.user as any).role)}
+                    {getRoleLabel((session?.user as any)?.role)}
                   </span>
                 )}
               </div>
@@ -297,7 +297,7 @@ export default function ProfilePage({ params }: { params: Promise<{ locale: stri
                     {locale === 'es' ? 'Miembro desde' : 'Member since'}
                   </span>
                   <span className="text-sm font-medium text-gray-900">
-                    {new Date(session?.user?.created_at || Date.now()).toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US', {
+                    {new Date((session?.user as any)?.created_at || Date.now()).toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US', {
                       month: 'long',
                       year: 'numeric'
                     })}
