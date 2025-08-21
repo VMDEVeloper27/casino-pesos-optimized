@@ -70,7 +70,7 @@ export const ContactConfirmationEmail = ({
               Gracias por contactarnos. Tu opinión es muy importante para nosotros.
             </Text>
             <Text style={footerText}>
-              © 2024 CasinosPesos. Todos los derechos reservados.
+              © 2025 CasinosPesos. Todos los derechos reservados.
             </Text>
             <Text style={footerText}>
               Este es un mensaje automático, por favor no respondas a este email.

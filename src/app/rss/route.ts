@@ -19,10 +19,10 @@ interface BlogPost {
 const blogPosts: BlogPost[] = [
   {
     id: '1',
-    title: 'Cómo Elegir el Mejor Casino Online en 2024',
+    title: 'Cómo Elegir el Mejor Casino Online en 2025',
     description: 'Guía completa para principiantes sobre cómo evaluar y elegir un casino online seguro y confiable en México.',
     link: `${siteUrl}/guias/1`,
-    pubDate: new Date('2024-01-15'),
+    pubDate: new Date('2025-01-15'),
     author: 'Carlos Mendoza',
     category: 'Principiantes'
   },
@@ -31,7 +31,7 @@ const blogPosts: BlogPost[] = [
     title: 'Estrategias Avanzadas de Blackjack',
     description: 'Domina el blackjack con estrategias matemáticas probadas y aumenta tus probabilidades de ganar.',
     link: `${siteUrl}/guias/2`,
-    pubDate: new Date('2024-01-14'),
+    pubDate: new Date('2025-01-14'),
     author: 'Ana García',
     category: 'Estrategia'
   },
@@ -40,7 +40,7 @@ const blogPosts: BlogPost[] = [
     title: 'Gestión de Bankroll: La Clave del Éxito',
     description: 'Aprende a gestionar tu presupuesto de juego de forma responsable y maximiza tu tiempo de entretenimiento.',
     link: `${siteUrl}/guias/3`,
-    pubDate: new Date('2024-01-13'),
+    pubDate: new Date('2025-01-13'),
     author: 'Roberto Silva',
     category: 'Finanzas'
   },
@@ -49,7 +49,7 @@ const blogPosts: BlogPost[] = [
     title: 'Los Mejores Slots con RTP Alto',
     description: 'Descubre qué son los RTPs y cuáles son las tragamonedas con mejores porcentajes de retorno al jugador.',
     link: `${siteUrl}/guias/4`,
-    pubDate: new Date('2024-01-12'),
+    pubDate: new Date('2025-01-12'),
     author: 'María López',
     category: 'Juegos'
   },
@@ -58,7 +58,7 @@ const blogPosts: BlogPost[] = [
     title: 'Bonos de Casino: Términos y Condiciones Explicados',
     description: 'Todo lo que necesitas saber sobre rollover, requisitos de apuesta y cómo aprovechar los bonos.',
     link: `${siteUrl}/guias/5`,
-    pubDate: new Date('2024-01-11'),
+    pubDate: new Date('2025-01-11'),
     author: 'Diego Ramírez',
     category: 'Bonos'
   },
@@ -67,7 +67,7 @@ const blogPosts: BlogPost[] = [
     title: 'Juego Responsable: Señales y Recursos',
     description: 'Identifica las señales de problemas con el juego y conoce los recursos de ayuda disponibles.',
     link: `${siteUrl}/guias/6`,
-    pubDate: new Date('2024-01-10'),
+    pubDate: new Date('2025-01-10'),
     author: 'Laura Fernández',
     category: 'Responsabilidad'
   },
@@ -76,7 +76,7 @@ const blogPosts: BlogPost[] = [
     title: 'Métodos de Pago Seguros para Casinos Online',
     description: 'Conoce los métodos de pago más seguros y cómo proteger tu información financiera en casinos online.',
     link: `${siteUrl}/guias/7`,
-    pubDate: new Date('2024-01-09'),
+    pubDate: new Date('2025-01-09'),
     author: 'Carlos Mendoza',
     category: 'Finanzas'
   },
@@ -85,7 +85,7 @@ const blogPosts: BlogPost[] = [
     title: 'Torneos de Poker Online: Estrategias para Principiantes',
     description: 'Aprende las estrategias básicas para participar en torneos de poker online y mejorar tu juego.',
     link: `${siteUrl}/guias/8`,
-    pubDate: new Date('2024-01-08'),
+    pubDate: new Date('2025-01-08'),
     author: 'Ana García',
     category: 'Estrategia'
   },
@@ -94,7 +94,7 @@ const blogPosts: BlogPost[] = [
     title: 'Casinos con Criptomonedas: Ventajas y Desventajas',
     description: 'Todo lo que necesitas saber sobre jugar en casinos que aceptan Bitcoin y otras criptomonedas.',
     link: `${siteUrl}/guias/9`,
-    pubDate: new Date('2024-01-07'),
+    pubDate: new Date('2025-01-07'),
     author: 'Roberto Silva',
     category: 'Finanzas'
   },
@@ -103,7 +103,7 @@ const blogPosts: BlogPost[] = [
     title: 'Análisis de Volatilidad en Slots Online',
     description: 'Entiende qué es la volatilidad en las tragamonedas y cómo afecta tu estrategia de juego.',
     link: `${siteUrl}/guias/10`,
-    pubDate: new Date('2024-01-06'),
+    pubDate: new Date('2025-01-06'),
     author: 'María López',
     category: 'Juegos'
   }

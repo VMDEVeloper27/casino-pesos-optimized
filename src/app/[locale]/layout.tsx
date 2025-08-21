@@ -24,7 +24,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'CasinosPesos - Mejores Casinos Online en Pesos 2024',
+  title: 'CasinosPesos - Mejores Casinos Online en Pesos 2025',
   description: 'Descubre los mejores casinos online que aceptan pesos mexicanos, argentinos y colombianos. Bonos exclusivos, guías expertas y reseñas honestas.',
   alternates: {
     types: {
@@ -81,7 +81,7 @@ export default async function LocaleLayout({
         <meta name="bingbot" content="index, follow" />
         <meta name="author" content="CasinosPesos" />
         <meta name="publisher" content="CasinosPesos" />
-        <meta name="copyright" content="© 2024 CasinosPesos. Todos los derechos reservados." />
+        <meta name="copyright" content="© 2025 CasinosPesos. Todos los derechos reservados." />
         <meta name="rating" content="adult" />
         <meta name="distribution" content="global" />
         <meta name="language" content={locale === 'es' ? 'Spanish' : 'English'} />

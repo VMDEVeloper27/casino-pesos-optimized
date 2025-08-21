@@ -107,7 +107,7 @@ export default function AdminDashboard() {
     {
       type: 'post',
       action: 'Nuevo blog publicado',
-      title: 'Estrategias de Blackjack 2024',
+      title: 'Estrategias de Blackjack 2025',
       time: 'Hace 2 horas',
       icon: FileText,
       color: 'text-blue-600'

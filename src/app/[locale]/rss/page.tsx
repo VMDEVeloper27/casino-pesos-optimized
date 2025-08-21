@@ -222,7 +222,7 @@ export default function RSSPage() {
           <div className="space-y-3">
             <div className="bg-white rounded-lg p-4">
               <h3 className="font-semibold text-gray-900 mb-1">
-                Cómo Elegir el Mejor Casino Online en 2024
+                Cómo Elegir el Mejor Casino Online en 2025
               </h3>
               <p className="text-sm text-gray-600">
                 Guía completa para principiantes sobre cómo evaluar y elegir un casino online seguro...

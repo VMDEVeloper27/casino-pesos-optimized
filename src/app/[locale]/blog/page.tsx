@@ -38,11 +38,11 @@ interface PageProps {
   
   if (isSpanish) {
     return {
-      title: 'Blog Casino México 2024 - Noticias y Guías | CasinosPesos',
+      title: 'Blog Casino México 2025 - Noticias y Guías | CasinosPesos',
       description: 'Últimas noticias de casinos online en México 📰 Guías de juego ✅ Estrategias ganadoras ✅ Bonos exclusivos ✅ Tips para jugadores mexicanos.',
       keywords: 'blog casino méxico, noticias casino online, guías juego, estrategias casino, bonos casino méxico, tips gambling',
       openGraph: {
-        title: 'Blog Casino México 2024 - Noticias y Guías',
+        title: 'Blog Casino México 2025 - Noticias y Guías',
         description: 'Las últimas noticias y guías del mundo de los casinos online en México.',
         url: pageUrl,
         siteName: 'CasinosPesos',
@@ -78,11 +78,11 @@ interface PageProps {
   }
   
   return {
-    title: 'Casino Mexico Blog 2024 - News & Guides | CasinosPesos',
+    title: 'Casino Mexico Blog 2025 - News & Guides | CasinosPesos',
     description: 'Latest online casino news in Mexico 📰 Gaming guides ✅ Winning strategies ✅ Exclusive bonuses ✅ Tips for Mexican players.',
     keywords: 'casino blog mexico, online casino news, gaming guides, casino strategies, mexican casino bonuses',
     openGraph: {
-      title: 'Casino Mexico Blog 2024 - News & Guides',
+      title: 'Casino Mexico Blog 2025 - News & Guides',
       description: 'The latest news and guides from the online casino world in Mexico.',
       url: pageUrl,
       siteName: 'CasinosPesos',
@@ -102,25 +102,25 @@ interface PageProps {
 
 const blogPosts = [
   {
-    slug: 'nuevos-casinos-mexico-enero-2024',
-    title: 'Los 5 Nuevos Casinos Online que Llegan a México en Enero 2024',
+    slug: 'nuevos-casinos-mexico-enero-2025',
+    title: 'Los 5 Nuevos Casinos Online que Llegan a México en Enero 2025',
     excerpt: 'Descubre las últimas plataformas de casino que han llegado al mercado mexicano con licencias internacionales, bonos exclusivos y métodos de pago locales como OXXO y SPEI.',
     content: 'El mercado de casinos online en México continúa expandiéndose...',
     author: 'Carlos Mendoza',
-    publishDate: '2024-01-15',
+    publishDate: '2025-01-15',
     readTime: '5 min',
     category: 'Noticias',
-    tags: ['nuevos casinos', 'méxico', '2024', 'licencias'],
+    tags: ['nuevos casinos', 'méxico', '2025', 'licencias'],
     featured: true,
-    image: '/images/blog/nuevos-casinos-2024.jpg'
+    image: '/images/blog/nuevos-casinos-2025.jpg'
   },
   {
     slug: 'estrategias-blackjack-mexico',
-    title: 'Estrategias de Blackjack para Jugadores Mexicanos: Guía Completa 2024',
+    title: 'Estrategias de Blackjack para Jugadores Mexicanos: Guía Completa 2025',
     excerpt: 'Aprende las mejores estrategias básicas de blackjack adaptadas al mercado mexicano. Incluye tablas de probabilidades y consejos para maximizar tus ganancias.',
     content: 'El blackjack es uno de los juegos más populares...',
     author: 'Ana Rodríguez',
-    publishDate: '2024-01-12',
+    publishDate: '2025-01-12',
     readTime: '8 min',
     category: 'Guías',
     tags: ['blackjack', 'estrategias', 'guía', 'méxico'],
@@ -133,7 +133,7 @@ const blogPosts = [
     excerpt: 'Tutorial completo para depositar dinero en casinos online mexicanos usando OXXO. Ventajas, límites, tiempos de procesamiento y casinos recomendados.',
     content: 'OXXO se ha convertido en el método de pago favorito...',
     author: 'Miguel Torres',
-    publishDate: '2024-01-10',
+    publishDate: '2025-01-10',
     readTime: '6 min',
     category: 'Guías',
     tags: ['OXXO', 'depósitos', 'métodos pago', 'tutorial'],
@@ -141,25 +141,25 @@ const blogPosts = [
     image: '/images/blog/depositar-oxxo.jpg'
   },
   {
-    slug: 'bonos-sin-deposito-febrero-2024',
-    title: 'Mejores Bonos Sin Depósito de Febrero 2024 en México',
+    slug: 'bonos-sin-deposito-febrero-2025',
+    title: 'Mejores Bonos Sin Depósito de Febrero 2025 en México',
     excerpt: 'Recopilación actualizada de los mejores bonos sin depósito disponibles para jugadores mexicanos. Códigos promocionales exclusivos y términos claros.',
     content: 'Los bonos sin depósito son perfectos para probar casinos...',
     author: 'Laura García',
-    publishDate: '2024-01-08',
+    publishDate: '2025-01-08',
     readTime: '4 min',
     category: 'Bonos',
-    tags: ['bonos sin depósito', 'febrero 2024', 'códigos promocionales'],
+    tags: ['bonos sin depósito', 'febrero 2025', 'códigos promocionales'],
     featured: false,
     image: '/images/blog/bonos-sin-deposito.jpg'
   },
   {
-    slug: 'slots-mas-populares-mexico-2024',
-    title: 'Top 10: Las Tragamonedas Más Populares en México Durante 2024',
+    slug: 'slots-mas-populares-mexico-2025',
+    title: 'Top 10: Las Tragamonedas Más Populares en México Durante 2025',
     excerpt: 'Ranking de las slots online más jugadas por mexicanos. Incluye RTP, volatilidad, temática y dónde encontrarlas con los mejores bonos.',
     content: 'Las tragamonedas siguen siendo el juego favorito...',
     author: 'Diego Ramírez',
-    publishDate: '2024-01-05',
+    publishDate: '2025-01-05',
     readTime: '7 min',
     category: 'Juegos',
     tags: ['slots', 'tragamonedas', 'populares', 'ranking'],
@@ -167,12 +167,12 @@ const blogPosts = [
     image: '/images/blog/slots-populares.jpg'
   },
   {
-    slug: 'regulacion-casinos-online-mexico-2024',
-    title: 'Estado de la Regulación de Casinos Online en México: Actualización 2024',
-    excerpt: 'Análisis completo del marco legal de los casinos online en México. SEGOB, licencias internacionales y qué esperar en 2024.',
+    slug: 'regulacion-casinos-online-mexico-2025',
+    title: 'Estado de la Regulación de Casinos Online en México: Actualización 2025',
+    excerpt: 'Análisis completo del marco legal de los casinos online en México. SEGOB, licencias internacionales y qué esperar en 2025.',
     content: 'La regulación de casinos online en México...',
     author: 'Carla Vázquez',
-    publishDate: '2024-01-03',
+    publishDate: '2025-01-03',
     readTime: '10 min',
     category: 'Legal',
     tags: ['regulación', 'SEGOB', 'legal', 'licencias'],

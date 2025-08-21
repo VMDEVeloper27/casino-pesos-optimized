@@ -3,7 +3,7 @@
 ## Hero Section
 
 ### Headline
-**Los Mejores Casinos Online que Aceptan Pesos en 2024**
+**Los Mejores Casinos Online que Aceptan Pesos en 2025**
 
 ### Subheadline
 Encuentra casinos confiables con bonos exclusivos en MXN, ARS y COP. Compara, elige y gana con total seguridad.
@@ -105,7 +105,7 @@ Maximiza tu bankroll con estas ofertas especiales negociadas exclusivamente para
 | **Codere** | 200% hasta $3,000 MXN | $100 | 30x | PESO200 |
 | **Betsson** | 100% hasta $50,000 ARS | $1,000 ARS | 35x | ARGPESO |
 | **RushBet** | 100% hasta $1,000,000 COP | $20,000 COP | 40x | COPBONUS |
-| **LeoVegas** | 100% + 200 giros | $200 | 35x | LEO2024 |
+| **LeoVegas** | 100% + 200 giros | $200 | 35x | LEO2025 |
 
 ### Tipos de Bonos Explicados
 
@@ -314,7 +314,7 @@ Absolutamente. Todos nuestros casinos recomendados tienen apps o sitios móviles
 "Descubre los mejores casinos online que aceptan pesos mexicanos, argentinos y colombianos ⭐ Bonos exclusivos hasta $50,000 ✅ Guías expertas y reseñas honestas."
 
 ### Title Tag
-"Mejores Casinos Online en Pesos 2024 | CasinosPesos.com"
+"Mejores Casinos Online en Pesos 2025 | CasinosPesos.com"
 
 ### Keywords Focus
 - casinos online pesos
@@ -326,6 +326,6 @@ Absolutamente. Todos nuestros casinos recomendados tienen apps o sitios móviles
 
 ---
 
-*Contenido actualizado: Enero 2024*
+*Contenido actualizado: Enero 2025*
 *Palabras: 2,847*
 *Tiempo de lectura: 12 minutos*

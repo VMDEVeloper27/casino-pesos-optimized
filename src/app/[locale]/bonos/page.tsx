@@ -26,13 +26,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   
   if (isSpanish) {
     return {
-      title: 'Mejores Bonos de Casino 2024 - Ofertas Exclusivas | CasinosPesos',
+      title: 'Mejores Bonos de Casino 2025 - Ofertas Exclusivas | CasinosPesos',
       description: 'Bonos de casino verificados diariamente. Sin depósito, bienvenida, giros gratis y más. Códigos promocionales exclusivos para México.',
       keywords: 'bonos casino, bonos sin depósito, giros gratis, códigos promocionales casino, ofertas casino méxico',
     };
   } else {
     return {
-      title: 'Best Casino Bonuses 2024 - Exclusive Offers | CasinosPesos',
+      title: 'Best Casino Bonuses 2025 - Exclusive Offers | CasinosPesos',
       description: 'Daily verified casino bonuses. No deposit, welcome, free spins and more. Exclusive promo codes for Mexico.',
       keywords: 'casino bonuses, no deposit bonuses, free spins, casino promo codes, mexico casino offers',
     };
@@ -79,7 +79,7 @@ export default async function BonosPage({ params }: PageProps) {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Mejores Bonos de Casino 2024
+            Mejores Bonos de Casino 2025
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Bonos exclusivos, códigos promocionales y ofertas especiales verificadas diariamente

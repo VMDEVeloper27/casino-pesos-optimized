@@ -33,11 +33,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   
   if (isSpanish) {
     return {
-      title: `${data.title} México 2024 - Ofertas Exclusivas | CasinosPesos`,
+      title: `${data.title} México 2025 - Ofertas Exclusivas | CasinosPesos`,
       description: `${data.description} ✅ Ofertas verificadas ✅ Sin depósito requerido ✅ Términos claros ✅ Para jugadores mexicanos.`,
       keywords: `${data.title.toLowerCase()}, bonos casino méxico, casino bonos sin depósito, ofertas casino online méxico, ${category} casino`,
       openGraph: {
-        title: `${data.title} México 2024 - Ofertas Exclusivas`,
+        title: `${data.title} México 2025 - Ofertas Exclusivas`,
         description: `${data.description} Ofertas verificadas para jugadores mexicanos.`,
         url: pageUrl,
         siteName: 'CasinosPesos',
@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       },
       twitter: {
         card: 'summary_large_image',
-        title: `${data.title} México 2024`,
+        title: `${data.title} México 2025`,
         description: `${data.description}`,
       },
       alternates: {
@@ -78,11 +78,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   
   return {
-    title: `${data.title} Mexico 2024 - Exclusive Offers | CasinosPesos`,
+    title: `${data.title} Mexico 2025 - Exclusive Offers | CasinosPesos`,
     description: `${data.description} ✅ Verified offers ✅ No deposit required ✅ Clear terms ✅ For Mexican players.`,
     keywords: `casino bonuses mexico, no deposit bonus mexico, online casino offers mexico, ${category} casino bonus`,
     openGraph: {
-      title: `${data.title} Mexico 2024 - Exclusive Offers`,
+      title: `${data.title} Mexico 2025 - Exclusive Offers`,
       description: `${data.description} Verified offers for Mexican players.`,
       url: pageUrl,
       siteName: 'CasinosPesos',

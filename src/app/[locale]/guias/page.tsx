@@ -40,12 +40,12 @@ import {
 const guides = [
   {
     id: 1,
-    slug: 'como-elegir-mejor-casino-online-2024',
-    title: 'Cómo Elegir el Mejor Casino Online en 2024',
+    slug: 'como-elegir-mejor-casino-online-2025',
+    title: 'Cómo Elegir el Mejor Casino Online en 2025',
     category: 'Principiantes',
     readTime: '12 min',
     author: 'Carlos Mendoza',
-    date: '2024-08-21',
+    date: '2025-08-21',
     icon: Target,
     featured: true,
     excerpt: 'Guía completa para principiantes sobre cómo evaluar y elegir un casino online seguro y confiable en México. Incluye verificación de licencias, métodos de pago, bonos y juego responsable.',
@@ -59,7 +59,7 @@ const guides = [
     category: 'Estrategia',
     readTime: '15 min',
     author: 'Ana García',
-    date: '2024-01-14',
+    date: '2025-01-14',
     icon: Brain,
     featured: false,
     excerpt: 'Domina el blackjack con estrategias matemáticas probadas y aumenta tus probabilidades de ganar.',
@@ -73,7 +73,7 @@ const guides = [
     category: 'Finanzas',
     readTime: '8 min',
     author: 'Roberto Silva',
-    date: '2024-01-13',
+    date: '2025-01-13',
     icon: DollarSign,
     featured: true,
     excerpt: 'Aprende a gestionar tu presupuesto de juego de forma responsable y maximiza tu tiempo de entretenimiento.',
@@ -87,7 +87,7 @@ const guides = [
     category: 'Juegos',
     readTime: '12 min',
     author: 'María López',
-    date: '2024-01-12',
+    date: '2025-01-12',
     icon: Gamepad2,
     featured: false,
     excerpt: 'Descubre qué son los RTPs y cuáles son las tragamonedas con mejores porcentajes de retorno al jugador.',
@@ -101,7 +101,7 @@ const guides = [
     category: 'Bonos',
     readTime: '7 min',
     author: 'Diego Ramírez',
-    date: '2024-01-11',
+    date: '2025-01-11',
     icon: Gift,
     featured: false,
     excerpt: 'Todo lo que necesitas saber sobre rollover, requisitos de apuesta y cómo aprovechar los bonos.',
@@ -115,7 +115,7 @@ const guides = [
     category: 'Responsabilidad',
     readTime: '6 min',
     author: 'Laura Fernández',
-    date: '2024-01-10',
+    date: '2025-01-10',
     icon: Shield,
     featured: true,
     excerpt: 'Identifica las señales de problemas con el juego y conoce los recursos de ayuda disponibles.',
@@ -129,7 +129,7 @@ const guides = [
     category: 'Finanzas',
     readTime: '9 min',
     author: 'Carlos Mendoza',
-    date: '2024-01-09',
+    date: '2025-01-09',
     icon: CreditCard,
     featured: false,
     excerpt: 'Conoce los métodos de pago más seguros y cómo proteger tu información financiera en casinos online.',
@@ -143,7 +143,7 @@ const guides = [
     category: 'Estrategia',
     readTime: '18 min',
     author: 'Ana García',
-    date: '2024-01-08',
+    date: '2025-01-08',
     icon: Trophy,
     featured: false,
     excerpt: 'Aprende las estrategias básicas para participar en torneos de poker online y mejorar tu juego.',
@@ -157,7 +157,7 @@ const guides = [
     category: 'Finanzas',
     readTime: '11 min',
     author: 'Roberto Silva',
-    date: '2024-01-07',
+    date: '2025-01-07',
     icon: Bitcoin,
     featured: false,
     excerpt: 'Todo lo que necesitas saber sobre jugar en casinos que aceptan Bitcoin y otras criptomonedas.',
@@ -171,7 +171,7 @@ const guides = [
     category: 'Juegos',
     readTime: '14 min',
     author: 'María López',
-    date: '2024-01-06',
+    date: '2025-01-06',
     icon: BarChart3,
     featured: false,
     excerpt: 'Entiende qué es la volatilidad en las tragamonedas y cómo afecta tu estrategia de juego.',
@@ -185,7 +185,7 @@ const guides = [
     category: 'Principiantes',
     readTime: '8 min',
     author: 'Diego Ramírez',
-    date: '2024-01-05',
+    date: '2025-01-05',
     icon: FileCheck,
     featured: false,
     excerpt: 'Aprende a identificar y evaluar las licencias de casino para jugar de forma segura.',
@@ -199,7 +199,7 @@ const guides = [
     category: 'Juegos',
     readTime: '10 min',
     author: 'Laura Fernández',
-    date: '2024-01-04',
+    date: '2025-01-04',
     icon: Smartphone,
     featured: false,
     excerpt: 'Guía completa para elegir la mejor app de casino móvil y jugar desde tu teléfono.',
@@ -359,7 +359,7 @@ export default function GuiasPage() {
             </div>
             
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-green-100">
-              Guía Definitiva para Principiantes 2024
+              Guía Definitiva para Principiantes 2025
             </h2>
             
             <p className="text-green-50 mb-8 max-w-2xl text-lg">
@@ -369,7 +369,7 @@ export default function GuiasPage() {
             
             <div className="flex flex-wrap gap-4 items-center">
               <Link 
-                href="/es/guias/guia-principiantes-2024" 
+                href="/es/guias/guia-principiantes-2025" 
                 className="bg-white text-green-600 hover:bg-green-50 px-6 py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl inline-flex items-center gap-2"
               >
                 <BookOpen className="w-5 h-5" />

@@ -12,11 +12,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   
   if (locale === 'es') {
     return {
-      title: 'Mejores Casinos Online México 2024 | Pesos Mexicanos | CasinosPesos',
+      title: 'Mejores Casinos Online México 2025 | Pesos Mexicanos | CasinosPesos',
       description: 'Descubre los mejores casinos online que aceptan pesos mexicanos ⭐ Bonos hasta $50,000 MXN ✅ OXXO, SPEI, PayPal ✅ Retiros rápidos ✅ Guías expertas',
       keywords: 'casinos online méxico, casino pesos mexicanos, mejores casinos mexico, casino online seguro méxico, bonos casino méxico, casino OXXO, casino PayPal méxico',
       openGraph: {
-        title: 'Mejores Casinos Online México 2024 | Bonos hasta $50,000 MXN',
+        title: 'Mejores Casinos Online México 2025 | Bonos hasta $50,000 MXN',
         description: 'Los casinos online más seguros de México. Bonos exclusivos, pagos con OXXO y retiros rápidos.',
         url: 'https://casinospesos.com/es',
         siteName: 'CasinosPesos',
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       },
       twitter: {
         card: 'summary_large_image',
-        title: 'Mejores Casinos Online México 2024',
+        title: 'Mejores Casinos Online México 2025',
         description: 'Bonos exclusivos hasta $50,000 MXN en los casinos más seguros',
       },
       alternates: {
@@ -58,11 +58,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   
   // English version
   return {
-    title: 'Best Online Casinos Mexico 2024 | Mexican Pesos | CasinosPesos',
+    title: 'Best Online Casinos Mexico 2025 | Mexican Pesos | CasinosPesos',
     description: 'Discover the best online casinos accepting Mexican pesos ⭐ Bonuses up to $50,000 MXN ✅ OXXO, SPEI, PayPal ✅ Fast withdrawals ✅ Expert guides',
     keywords: 'online casinos mexico, mexican peso casino, best casinos mexico, secure online casino mexico, casino bonuses mexico',
     openGraph: {
-      title: 'Best Online Casinos Mexico 2024 | Bonuses up to $50,000 MXN',
+      title: 'Best Online Casinos Mexico 2025 | Bonuses up to $50,000 MXN',
       description: 'The safest online casinos in Mexico. Exclusive bonuses, OXXO payments and fast withdrawals.',
       url: 'https://casinospesos.com/en',
       siteName: 'CasinosPesos',

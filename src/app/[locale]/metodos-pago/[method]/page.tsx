@@ -181,8 +181,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const pageUrl = `${baseUrl}/${locale}/metodos-pago/${method}`;
   
   const title = isSpanish 
-    ? `${methodData.name}: Guía Completa para Casinos Online 2024`
-    : `${methodData.name}: Complete Guide for Online Casinos 2024`;
+    ? `${methodData.name}: Guía Completa para Casinos Online 2025`
+    : `${methodData.name}: Complete Guide for Online Casinos 2025`;
     
   const description = isSpanish
     ? `Todo sobre ${methodData.name} en casinos online: cómo depositar, límites, comisiones, tiempos y los mejores casinos que lo aceptan.`

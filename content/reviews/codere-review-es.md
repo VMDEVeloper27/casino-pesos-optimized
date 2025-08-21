@@ -1,6 +1,6 @@
-# Codere Casino Review 2024 - El Favorito de México
+# Codere Casino Review 2025 - El Favorito de México
 
-**Última actualización:** Enero 2024  
+**Última actualización:** Enero 2025  
 **Rating:** ⭐⭐⭐⭐⭐ 4.8/5  
 **Autor:** María González, Especialista en Casinos LATAM
 
@@ -294,4 +294,4 @@ Si vives en México y buscas un casino **100% legal y confiable**, Codere es la 
 
 **¿Listo para jugar legal?** [Visita Codere Casino →](affiliate-link)
 
-*Reseña actualizada el 15 de enero de 2024. Aplican términos y condiciones. Juega con responsabilidad. 18+*
+*Reseña actualizada el 15 de enero de 2025. Aplican términos y condiciones. Juega con responsabilidad. 18+*

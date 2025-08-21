@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
               </p>
             </div>
             <div class="footer">
-              <p>© 2024 CasinosPesos. Todos los derechos reservados.</p>
+              <p>© 2025 CasinosPesos. Todos los derechos reservados.</p>
             </div>
           </div>
         </body>

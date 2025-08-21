@@ -86,7 +86,7 @@ export default function SettingsPage() {
       language: 'es'
     },
     seo: {
-      defaultTitle: 'Mejores Casinos Online México 2024',
+      defaultTitle: 'Mejores Casinos Online México 2025',
       titleSeparator: '|',
       defaultDescription: 'Descubre los mejores casinos online en México',
       defaultKeywords: 'casinos, online, méxico, bonos, juegos',

@@ -93,7 +93,7 @@ const allCasinos: Casino[] = [
     rating: 4.8,
     established: 1980,
     affiliateLink: 'https://codere.mx',
-    features: ['Licencia DGJS/2475/2024', 'OXXO', 'Salas Físicas', 'Deportes'],
+    features: ['Licencia DGJS/2475/2025', 'OXXO', 'Salas Físicas', 'Deportes'],
     bonus: {
       type: 'welcome',
       amount: 3000,
@@ -111,7 +111,7 @@ const allCasinos: Casino[] = [
     },
     paymentMethods: ['OXXO', 'SPEI', 'CoDi', 'Visa', 'Mastercard'],
     withdrawalTime: '24-48 horas',
-    licenses: ['SEGOB México (DGJS/2475/2024)', 'España'],
+    licenses: ['SEGOB México (DGJS/2475/2025)', 'España'],
     currencies: ['MXN'],
     pros: [
       'Licencia SEGOB oficial',
@@ -347,7 +347,7 @@ const allCasinos: Casino[] = [
       freeSpins: 30,
       minDeposit: 200,
       wageringRequirement: 30,
-      code: 'NOVI2024'
+      code: 'NOVI2025'
     },
     games: {
       total: 3000,

@@ -38,9 +38,9 @@ import Link from 'next/link';
 
 // Comprehensive guide data
 const guidesData = {
-  'como-elegir-mejor-casino-online-2024': {
-    id: 'como-elegir-mejor-casino-online-2024',
-    title: 'Cómo Elegir el Mejor Casino Online en 2024',
+  'como-elegir-mejor-casino-online-2025': {
+    id: 'como-elegir-mejor-casino-online-2025',
+    title: 'Cómo Elegir el Mejor Casino Online en 2025',
     subtitle: 'Guía completa para elegir un casino online seguro y confiable',
     category: 'Principiantes',
     readTime: '12 min',
@@ -49,8 +49,8 @@ const guidesData = {
       role: 'Experto en Casinos Online',
       avatar: '👨‍💼'
     },
-    publishDate: '2024-01-15',
-    lastUpdate: '2024-08-21',
+    publishDate: '2025-01-15',
+    lastUpdate: '2025-08-21',
     image: '🎰',
     difficulty: 'Fácil',
     views: 15432,
@@ -837,8 +837,8 @@ const guidesData = {
     `,
     relatedGuides: [
       {
-        slug: 'guia-bonos-casino-2024',
-        title: 'Guía Completa de Bonos de Casino 2024',
+        slug: 'guia-bonos-casino-2025',
+        title: 'Guía Completa de Bonos de Casino 2025',
         category: 'Bonos',
         readTime: '8 min'
       },
@@ -865,7 +865,7 @@ const guidesData = {
       role: 'Experto en Estrategias de Casino',
       avatar: '🎰'
     },
-    date: '27 de Diciembre, 2024',
+    date: '27 de Diciembre, 2025',
     readTime: '15 min',
     category: 'Estrategia',
     difficulty: 'Avanzado',
@@ -931,7 +931,7 @@ const guidesData = {
     ],
     relatedGuides: [
       {
-        slug: 'como-elegir-mejor-casino-online-2024',
+        slug: 'como-elegir-mejor-casino-online-2025',
         title: 'Cómo Elegir el Mejor Casino Online',
         category: 'Principiante',
         readTime: '8 min'
@@ -947,7 +947,7 @@ const guidesData = {
       role: 'Analista Financiera de Juegos',
       avatar: '💰'
     },
-    date: '26 de Diciembre, 2024',
+    date: '26 de Diciembre, 2025',
     readTime: '12 min',
     category: 'Finanzas',
     difficulty: 'Intermedio',
@@ -1026,7 +1026,7 @@ const guidesData = {
       role: 'Matemático y Analista de Juegos',
       avatar: '🎲'
     },
-    date: '25 de Diciembre, 2024',
+    date: '25 de Diciembre, 2025',
     readTime: '14 min',
     category: 'Juegos',
     difficulty: 'Intermedio',
@@ -1111,7 +1111,7 @@ const guidesData = {
       role: 'Especialista en Slots Online',
       avatar: '🎰'
     },
-    date: '24 de Diciembre, 2024',
+    date: '24 de Diciembre, 2025',
     readTime: '11 min',
     category: 'Juegos',
     difficulty: 'Principiante',
@@ -1188,7 +1188,7 @@ const guidesData = {
       role: 'Jugador Profesional de Póker',
       avatar: '♠️'
     },
-    date: '23 de Diciembre, 2024',
+    date: '23 de Diciembre, 2025',
     readTime: '18 min',
     category: 'Estrategia',
     difficulty: 'Avanzado',
@@ -1270,7 +1270,7 @@ const guidesData = {
       role: 'Experta en Promociones de Casino',
       avatar: '🎁'
     },
-    date: '22 de Diciembre, 2024',
+    date: '22 de Diciembre, 2025',
     readTime: '13 min',
     category: 'Bonos',
     difficulty: 'Intermedio',
@@ -1352,7 +1352,7 @@ const guidesData = {
       role: 'Analista de Tecnología de Juegos',
       avatar: '📱'
     },
-    date: '21 de Diciembre, 2024',
+    date: '21 de Diciembre, 2025',
     readTime: '10 min',
     category: 'Tecnología',
     difficulty: 'Principiante',
@@ -1423,7 +1423,7 @@ const guidesData = {
       role: 'Psicóloga Especializada en Ludopatía',
       avatar: '🧠'
     },
-    date: '20 de Diciembre, 2024',
+    date: '20 de Diciembre, 2025',
     readTime: '10 min',
     category: 'Responsabilidad',
     difficulty: 'Principiante',
@@ -1501,7 +1501,7 @@ const guidesData = {
       role: 'Experto en Ciberseguridad',
       avatar: '🔒'
     },
-    date: '19 de Diciembre, 2024',
+    date: '19 de Diciembre, 2025',
     readTime: '9 min',
     category: 'Seguridad',
     difficulty: 'Principiante',
@@ -1569,7 +1569,7 @@ const guidesData = {
     ],
     relatedGuides: [
       {
-        slug: 'como-elegir-mejor-casino-online-2024',
+        slug: 'como-elegir-mejor-casino-online-2025',
         title: 'Cómo Elegir el Mejor Casino',
         category: 'Principiante',
         readTime: '8 min'
@@ -1585,7 +1585,7 @@ const guidesData = {
       role: 'Campeón de Torneos de Póker',
       avatar: '🏆'
     },
-    date: '18 de Diciembre, 2024',
+    date: '18 de Diciembre, 2025',
     readTime: '15 min',
     category: 'Estrategia',
     difficulty: 'Avanzado',
@@ -1671,16 +1671,16 @@ const guidesData = {
       }
     ]
   },
-  'metodos-pago-casino-2024': {
-    id: 'metodos-pago-casino-2024',
-    title: 'Métodos de Pago en Casinos 2024: Guía Completa',
+  'metodos-pago-casino-2025': {
+    id: 'metodos-pago-casino-2025',
+    title: 'Métodos de Pago en Casinos 2025: Guía Completa',
     subtitle: 'Criptomonedas, e-wallets y opciones tradicionales',
     author: {
       name: 'Lucía Vázquez',
       role: 'Analista Fintech',
       avatar: '💳'
     },
-    date: '17 de Diciembre, 2024',
+    date: '17 de Diciembre, 2025',
     readTime: '12 min',
     category: 'Finanzas',
     difficulty: 'Intermedio',
@@ -1779,7 +1779,7 @@ const guidesData = {
       role: 'Especialista en Tragamonedas',
       avatar: '🎰'
     },
-    date: '12 de Enero, 2024',
+    date: '12 de Enero, 2025',
     readTime: '12 min',
     category: 'Juegos',
     difficulty: 'Fácil',
@@ -1816,7 +1816,7 @@ const guidesData = {
         type: 'section',
         id: 'mejores-slots',
         title: 'Top 10 Slots con RTP Alto',
-        content: 'Estos son los slots con mejor RTP disponibles en 2024:',
+        content: 'Estos son los slots con mejor RTP disponibles en 2025:',
         subsections: [
           {
             title: '1. Mega Joker (99%)',
@@ -1861,7 +1861,7 @@ const guidesData = {
       role: 'Experto en Promociones',
       avatar: '🎁'
     },
-    date: '11 de Enero, 2024',
+    date: '11 de Enero, 2025',
     readTime: '7 min',
     category: 'Bonos',
     difficulty: 'Fácil',
@@ -1928,7 +1928,7 @@ const guidesData = {
       role: 'Consejera de Juego Responsable',
       avatar: '🚫'
     },
-    date: '10 de Enero, 2024',
+    date: '10 de Enero, 2025',
     readTime: '6 min',
     category: 'Responsabilidad',
     difficulty: 'Fácil',
@@ -2011,7 +2011,7 @@ const guidesData = {
       role: 'Especialista en Seguridad Financiera',
       avatar: '🔐'
     },
-    date: '9 de Enero, 2024',
+    date: '9 de Enero, 2025',
     readTime: '9 min',
     category: 'Finanzas',
     difficulty: 'Fácil',
@@ -2082,7 +2082,7 @@ const guidesData = {
       role: 'Jugadora Profesional de Poker',
       avatar: '♣️'
     },
-    date: '8 de Enero, 2024',
+    date: '8 de Enero, 2025',
     readTime: '18 min',
     category: 'Estrategia',
     difficulty: 'Intermedio',
@@ -2153,7 +2153,7 @@ const guidesData = {
       role: 'Experto en Fintech y Gambling',
       avatar: '₿'
     },
-    date: '7 de Enero, 2024',
+    date: '7 de Enero, 2025',
     readTime: '11 min',
     category: 'Finanzas',
     difficulty: 'Intermedio',
@@ -2231,8 +2231,8 @@ const guidesData = {
     ],
     relatedGuides: [
       {
-        slug: 'metodos-pago-casino-2024',
-        title: 'Métodos de Pago 2024',
+        slug: 'metodos-pago-casino-2025',
+        title: 'Métodos de Pago 2025',
         category: 'Finanzas',
         readTime: '12 min'
       }
@@ -2247,7 +2247,7 @@ const guidesData = {
       role: 'Experto en Regulación de Juegos',
       avatar: '📜'
     },
-    date: '4 de Enero, 2024',
+    date: '4 de Enero, 2025',
     readTime: '13 min',
     category: 'Legal',
     difficulty: 'Intermedio',
@@ -2350,7 +2350,7 @@ const guidesData = {
         readTime: '9 min'
       },
       {
-        slug: 'como-elegir-mejor-casino-online-2024',
+        slug: 'como-elegir-mejor-casino-online-2025',
         title: 'Cómo Elegir el Mejor Casino',
         category: 'Principiante',
         readTime: '8 min'
@@ -2366,7 +2366,7 @@ const guidesData = {
       role: 'Especialista en Tecnología Móvil',
       avatar: '📲'
     },
-    date: '3 de Enero, 2024',
+    date: '3 de Enero, 2025',
     readTime: '11 min',
     category: 'Tecnología',
     difficulty: 'Principiante',
@@ -2380,7 +2380,7 @@ const guidesData = {
       { id: 'nativa-vs-web', title: 'App Nativa vs Web App', level: 1 },
       { id: 'caracteristicas-esenciales', title: 'Características Esenciales', level: 1 },
       { id: 'seguridad-movil', title: 'Seguridad en Apps Móviles', level: 1 },
-      { id: 'mejores-apps', title: 'Las Mejores Apps de 2024', level: 1 }
+      { id: 'mejores-apps', title: 'Las Mejores Apps de 2025', level: 1 }
     ],
     content: [
       {
@@ -2488,7 +2488,7 @@ const guidesData = {
       role: 'Analista de Juegos de Casino',
       avatar: '📈'
     },
-    date: '6 de Enero, 2024',
+    date: '6 de Enero, 2025',
     readTime: '14 min',
     category: 'Juegos',
     difficulty: 'Intermedio',
@@ -2571,7 +2571,7 @@ const guidesData = {
       role: 'Instructor de Blackjack',
       avatar: '🃏'
     },
-    date: '5 de Enero, 2024',
+    date: '5 de Enero, 2025',
     readTime: '10 min',
     category: 'Estrategia',
     difficulty: 'Principiante',

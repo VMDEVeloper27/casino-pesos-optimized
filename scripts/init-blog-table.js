@@ -10,10 +10,10 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // Sample blog posts
 const samplePosts = [
   {
-    slug: 'nuevos-casinos-mexico-enero-2024',
-    title: 'Los 5 Nuevos Casinos Online que Llegan a México en Enero 2024',
+    slug: 'nuevos-casinos-mexico-enero-2025',
+    title: 'Los 5 Nuevos Casinos Online que Llegan a México en Enero 2025',
     excerpt: 'Descubre las últimas plataformas de casino que han llegado al mercado mexicano con licencias internacionales, bonos exclusivos y métodos de pago locales como OXXO y SPEI.',
-    content: `El mercado de casinos online en México continúa expandiéndose con nuevas opciones para los jugadores. En enero de 2024, cinco nuevas plataformas han llegado al país con ofertas competitivas y características innovadoras.
+    content: `El mercado de casinos online en México continúa expandiéndose con nuevas opciones para los jugadores. En enero de 2025, cinco nuevas plataformas han llegado al país con ofertas competitivas y características innovadoras.
 
 ## ¿Por qué elegir un casino nuevo?
 Los nuevos casinos online suelen ofrecer bonos más generosos para atraer jugadores, tecnología más moderna y mejores experiencias de usuario. Además, muchos han adaptado sus plataformas específicamente para el mercado mexicano, incluyendo métodos de pago locales y soporte en español 24/7.
@@ -50,20 +50,20 @@ Estos nuevos casinos representan excelentes opciones para jugadores mexicanos qu
     author: 'Carlos Mendoza',
     author_role: 'Editor Principal',
     category: 'Noticias',
-    tags: ['nuevos casinos', 'méxico', '2024', 'licencias', 'bonos'],
-    featured_image: '/images/blog/nuevos-casinos-2024.jpg',
-    published_at: new Date('2024-01-15').toISOString(),
+    tags: ['nuevos casinos', 'méxico', '2025', 'licencias', 'bonos'],
+    featured_image: '/images/blog/nuevos-casinos-2025.jpg',
+    published_at: new Date('2025-01-15').toISOString(),
     read_time: 5,
     views: 2547,
     likes: 187,
     status: 'published',
-    seo_title: 'Nuevos Casinos Online México 2024 | Top 5 Mejores Opciones',
-    seo_description: 'Descubre los 5 mejores nuevos casinos online en México para 2024. Bonos exclusivos, métodos de pago locales y licencias verificadas.',
-    seo_keywords: ['nuevos casinos méxico', 'casinos online 2024', 'mejores casinos nuevos', 'bonos casino méxico']
+    seo_title: 'Nuevos Casinos Online México 2025 | Top 5 Mejores Opciones',
+    seo_description: 'Descubre los 5 mejores nuevos casinos online en México para 2025. Bonos exclusivos, métodos de pago locales y licencias verificadas.',
+    seo_keywords: ['nuevos casinos méxico', 'casinos online 2025', 'mejores casinos nuevos', 'bonos casino méxico']
   },
   {
     slug: 'estrategias-blackjack-mexico',
-    title: 'Estrategias de Blackjack para Jugadores Mexicanos: Guía Completa 2024',
+    title: 'Estrategias de Blackjack para Jugadores Mexicanos: Guía Completa 2025',
     excerpt: 'Aprende las mejores estrategias básicas de blackjack adaptadas al mercado mexicano. Incluye tablas de probabilidades y consejos para maximizar tus ganancias.',
     content: `El blackjack es uno de los juegos de casino más populares en México, y con razón: ofrece algunas de las mejores probabilidades para el jugador cuando se juega con la estrategia correcta. En esta guía completa, te enseñaremos todo lo que necesitas saber para mejorar tu juego.
 
@@ -135,12 +135,12 @@ Dominar el blackjack requiere práctica y disciplina. Empieza practicando en mod
     category: 'Guías',
     tags: ['blackjack', 'estrategias', 'guía', 'méxico', 'casino'],
     featured_image: '/images/blog/blackjack-estrategias.jpg',
-    published_at: new Date('2024-01-12').toISOString(),
+    published_at: new Date('2025-01-12').toISOString(),
     read_time: 8,
     views: 3892,
     likes: 298,
     status: 'published',
-    seo_title: 'Estrategias Blackjack México 2024 | Guía Completa para Ganar',
+    seo_title: 'Estrategias Blackjack México 2025 | Guía Completa para Ganar',
     seo_description: 'Aprende las mejores estrategias de blackjack para jugadores mexicanos. Guía completa con tablas, consejos y gestión de bankroll.',
     seo_keywords: ['estrategias blackjack', 'blackjack méxico', 'cómo ganar blackjack', 'guía blackjack']
   },
@@ -167,7 +167,7 @@ Dominar el blackjack requiere práctica y disciplina. Empieza practicando en mod
 ## Guía Paso a Paso
 
 ### Paso 1: Elige un Casino que Acepte OXXO
-Verifica que el casino online acepte OXXO como método de pago. Los mejores casinos con OXXO en 2024 son:
+Verifica que el casino online acepte OXXO como método de pago. Los mejores casinos con OXXO en 2025 son:
 - Caliente.mx
 - Codere
 - Betway
@@ -251,12 +251,12 @@ OXXO es ideal para jugadores mexicanos que valoran la privacidad y no tienen acc
     category: 'Guías',
     tags: ['OXXO', 'depósitos', 'métodos pago', 'tutorial', 'méxico'],
     featured_image: '/images/blog/depositar-oxxo.jpg',
-    published_at: new Date('2024-01-10').toISOString(),
+    published_at: new Date('2025-01-10').toISOString(),
     read_time: 6,
     views: 5234,
     likes: 412,
     status: 'published',
-    seo_title: 'Depositar con OXXO en Casinos Online 2024 | Guía Completa',
+    seo_title: 'Depositar con OXXO en Casinos Online 2025 | Guía Completa',
     seo_description: 'Aprende cómo depositar en casinos online usando OXXO. Guía paso a paso, límites, tiempos y los mejores casinos que aceptan OXXO.',
     seo_keywords: ['depositar oxxo', 'casinos oxxo', 'pagar con oxxo', 'métodos de pago méxico']
   }

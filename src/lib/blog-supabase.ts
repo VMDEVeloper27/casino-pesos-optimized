@@ -475,7 +475,7 @@ async function sendNewPostNotifications(post: BlogPost) {
                           Cancelar suscripción
                         </a>
                         <p style="margin: 15px 0 0; color: #999999; font-size: 12px;">
-                          © 2024 CasinosPesos. Todos los derechos reservados.
+                          © 2025 CasinosPesos. Todos los derechos reservados.
                         </p>
                       </td>
                     </tr>

@@ -20,7 +20,7 @@ export function getAllCasinos() {
       isActive: true,
       isFeatured: true,
       priority: 1,
-      createdAt: new Date('2024-01-01').toISOString(),
+      createdAt: new Date('2025-01-01').toISOString(),
       lastModified: new Date().toISOString()
     },
     {
@@ -42,7 +42,7 @@ export function getAllCasinos() {
       isActive: true,
       isFeatured: true,
       priority: 2,
-      createdAt: new Date('2024-01-02').toISOString(),
+      createdAt: new Date('2025-01-02').toISOString(),
       lastModified: new Date().toISOString()
     },
     {
@@ -64,7 +64,7 @@ export function getAllCasinos() {
       isActive: true,
       isFeatured: false,
       priority: 3,
-      createdAt: new Date('2024-01-03').toISOString(),
+      createdAt: new Date('2025-01-03').toISOString(),
       lastModified: new Date().toISOString()
     }
   ];

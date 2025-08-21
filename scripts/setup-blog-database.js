@@ -165,10 +165,10 @@ CREATE POLICY "Authenticated users can manage posts" ON blog_posts
     
     const samplePosts = [
       {
-        slug: 'guia-completa-casino-online-mexico-2024',
-        title: 'Guía Completa de Casinos Online en México 2024',
+        slug: 'guia-completa-casino-online-mexico-2025',
+        title: 'Guía Completa de Casinos Online en México 2025',
         excerpt: 'Todo lo que necesitas saber sobre los casinos online en México: regulación, mejores sitios, bonos y métodos de pago.',
-        content: `# Guía Completa de Casinos Online en México 2024
+        content: `# Guía Completa de Casinos Online en México 2025
 
 ## Introducción
 
@@ -178,7 +178,7 @@ El mercado de casinos online en México ha experimentado un crecimiento exponenc
 
 Aunque México no tiene una regulación específica para casinos online, los operadores con licencias internacionales (Malta, Curazao, Gibraltar) operan de manera segura para jugadores mexicanos.
 
-## Mejores Casinos 2024
+## Mejores Casinos 2025
 
 1. **Caliente.mx** - El líder del mercado mexicano
 2. **Codere** - Tradición y confianza
@@ -216,15 +216,15 @@ Jugar en casinos online en México es seguro y entretenido cuando eliges operado
         views: 5432,
         likes: 342,
         status: 'published',
-        seo_title: 'Casinos Online México 2024 | Guía Completa y Actualizada',
-        seo_description: 'Descubre todo sobre casinos online en México: mejores sitios, bonos, métodos de pago y regulación. Guía actualizada 2024.',
-        seo_keywords: ['casinos online méxico', 'guía casinos', 'casinos 2024', 'jugar online méxico']
+        seo_title: 'Casinos Online México 2025 | Guía Completa y Actualizada',
+        seo_description: 'Descubre todo sobre casinos online en México: mejores sitios, bonos, métodos de pago y regulación. Guía actualizada 2025.',
+        seo_keywords: ['casinos online méxico', 'guía casinos', 'casinos 2025', 'jugar online méxico']
       },
       {
-        slug: 'mejores-bonos-casino-sin-deposito-2024',
-        title: 'Los Mejores Bonos de Casino Sin Depósito en 2024',
+        slug: 'mejores-bonos-casino-sin-deposito-2025',
+        title: 'Los Mejores Bonos de Casino Sin Depósito en 2025',
         excerpt: 'Descubre los mejores bonos sin depósito disponibles para jugadores mexicanos. Giros gratis, dinero gratis y más.',
-        content: `# Los Mejores Bonos de Casino Sin Depósito en 2024
+        content: `# Los Mejores Bonos de Casino Sin Depósito en 2025
 
 ## ¿Qué son los bonos sin depósito?
 
@@ -243,7 +243,7 @@ Los bonos sin depósito son promociones que los casinos ofrecen a nuevos jugador
 - Requisito: 35x
 
 ### 3. Casino C - $300 MXN + 20 Giros
-- Código: GRATIS2024
+- Código: GRATIS2025
 - Para nuevos usuarios
 - Apuesta: 25x
 
@@ -270,7 +270,7 @@ Los bonos sin depósito son promociones que los casinos ofrecen a nuevos jugador
         views: 3210,
         likes: 234,
         status: 'published',
-        seo_title: 'Bonos Sin Depósito 2024 | Mejores Ofertas México',
+        seo_title: 'Bonos Sin Depósito 2025 | Mejores Ofertas México',
         seo_description: 'Los mejores bonos de casino sin depósito para jugadores mexicanos. Dinero y giros gratis sin depositar.',
         seo_keywords: ['bonos sin depósito', 'bonos gratis', 'casino sin depósito']
       }

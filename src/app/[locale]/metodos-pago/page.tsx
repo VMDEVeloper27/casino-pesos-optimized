@@ -160,8 +160,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const pageUrl = `${baseUrl}/${locale}/metodos-pago`;
   
   const title = isSpanish 
-    ? 'Métodos de Pago para Casinos Online en México 2024'
-    : 'Payment Methods for Online Casinos in Mexico 2024';
+    ? 'Métodos de Pago para Casinos Online en México 2025'
+    : 'Payment Methods for Online Casinos in Mexico 2025';
     
   const description = isSpanish
     ? 'Guía completa de métodos de pago: OXXO, SPEI, PayPal, Bitcoin y más. Compara tiempos, comisiones y límites para casinos online mexicanos.'

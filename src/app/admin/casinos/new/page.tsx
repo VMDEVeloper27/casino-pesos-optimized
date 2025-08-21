@@ -881,7 +881,7 @@ export default function AddCasinoPage() {
                   type="text"
                   value={formData.metaTitle}
                   onChange={(e) => setFormData({...formData, metaTitle: e.target.value})}
-                  placeholder="Casino XYZ - Mejor Casino Online México 2024"
+                  placeholder="Casino XYZ - Mejor Casino Online México 2025"
                   className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white"
                 />
               </div>

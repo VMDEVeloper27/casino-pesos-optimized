@@ -17,7 +17,7 @@ export default function GuiaPrincipiantesPage() {
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: 'Guía Definitiva para Principiantes 2024',
+        title: 'Guía Definitiva para Principiantes 2025',
         text: 'Todo lo que necesitas saber antes de empezar a jugar en casinos online',
         url: window.location.href,
       });
@@ -54,7 +54,7 @@ export default function GuiaPrincipiantesPage() {
             </div>
 
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Guía Definitiva para Principiantes 2024
+              Guía Definitiva para Principiantes 2025
             </h1>
 
             <div className="flex flex-wrap items-center gap-4 text-gray-600 mb-6">
@@ -64,7 +64,7 @@ export default function GuiaPrincipiantesPage() {
               </span>
               <span className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                Actualizado: Enero 2024
+                Actualizado: Enero 2025
               </span>
               <span className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />

@@ -31,11 +31,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   
   if (isSpanish) {
     return {
-      title: `${casino.name} Reseña 2024 - Bono ${bonusText} | CasinosPesos`,
+      title: `${casino.name} Reseña 2025 - Bono ${bonusText} | CasinosPesos`,
       description: `Reseña completa de ${casino.name} ✅ Bono ${bonusText} ✅ Retiros ${casino.withdrawalTime} ✅ ${casino.paymentMethods.join(', ')}.`,
       keywords: `${casino.name.toLowerCase()}, ${casino.name.toLowerCase()} casino, ${casino.name.toLowerCase()} reseña, ${casino.name.toLowerCase()} bono, casino online méxico`,
       openGraph: {
-        title: `${casino.name} - Bono ${bonusText} | Reseña 2024`,
+        title: `${casino.name} - Bono ${bonusText} | Reseña 2025`,
         description: `Calificación ${casino.rating}/5 ⭐ Retiros en ${casino.withdrawalTime} 🚀`,
         url: pageUrl,
         siteName: 'CasinosPesos',
@@ -75,11 +75,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   } else {
     return {
-      title: `${casino.name} Review 2024 - ${bonusText} Bonus | CasinosPesos`,
+      title: `${casino.name} Review 2025 - ${bonusText} Bonus | CasinosPesos`,
       description: `Complete ${casino.name} review: ${bonusText} bonus ✅ ${casino.withdrawalTime} withdrawals ✅ ${casino.paymentMethods.join(', ')}.`,
       keywords: `${casino.name.toLowerCase()}, ${casino.name.toLowerCase()} casino, ${casino.name.toLowerCase()} review, ${casino.name.toLowerCase()} bonus, online casino mexico`,
       openGraph: {
-        title: `${casino.name} - ${bonusText} Bonus | Review 2024`,
+        title: `${casino.name} - ${bonusText} Bonus | Review 2025`,
         description: `Rating ${casino.rating}/5 ⭐ Withdrawals in ${casino.withdrawalTime} 🚀`,
         url: pageUrl,
         siteName: 'CasinosPesos',

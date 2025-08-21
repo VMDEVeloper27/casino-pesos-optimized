@@ -118,7 +118,7 @@ export function WebsiteStructuredData() {
       }
     },
     "inLanguage": ["es-MX", "en-US"],
-    "copyrightYear": "2024"
+    "copyrightYear": "2025"
   };
 
   return (

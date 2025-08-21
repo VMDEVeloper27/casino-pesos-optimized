@@ -18,7 +18,7 @@ async function testAddCasino() {
       slug: 'test-casino',
       logo: '/images/test-logo.png',
       rating: 4.5,
-      established: 2024,
+      established: 2025,
       affiliateLink: 'https://test-casino.com',
       features: ['Test Feature 1', 'Test Feature 2'],
       bonus: {

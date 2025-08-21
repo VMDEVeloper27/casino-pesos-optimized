@@ -108,7 +108,7 @@ export function generateCasinoMetadata(casino: {
   image?: string;
 }): Metadata {
   return generateSEOMetadata({
-    title: `${casino.name} - Reseña Completa 2024 | CasinosPesos`,
+    title: `${casino.name} - Reseña Completa 2025 | CasinosPesos`,
     description: `${casino.description} ⭐ Calificación: ${casino.rating}/5 ${casino.bonus ? `✅ Bono: ${casino.bonus}` : ''} ✅ Análisis experto y opiniones reales.`,
     keywords: `${casino.name}, ${casino.name} reseña, ${casino.name} opiniones, ${casino.name} bono, casino online méxico`,
     ogImage: casino.image || '/images/casinos/default.jpg',

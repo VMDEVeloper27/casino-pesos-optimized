@@ -73,7 +73,7 @@ export const NewsletterWelcomeEmail = ({
 
           <Section style={footer}>
             <Text style={footerText}>
-              © 2024 CasinosPesos. Todos los derechos reservados.
+              © 2025 CasinosPesos. Todos los derechos reservados.
             </Text>
             <Text style={footerText}>
               Juega con responsabilidad. 18+

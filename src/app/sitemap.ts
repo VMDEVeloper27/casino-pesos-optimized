@@ -64,7 +64,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Static blog posts list
   const blogPosts = [
-    'nuevos-casinos-mexico-enero-2024',
+    'nuevos-casinos-mexico-enero-2025',
     'como-ganar-tragamonedas',
     'mejores-bonos-sin-deposito',
     'casinos-con-pagos-rapidos',

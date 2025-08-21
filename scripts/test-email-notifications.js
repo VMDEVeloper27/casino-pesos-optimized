@@ -112,7 +112,7 @@ async function testEmailNotifications() {
     console.log('   │ ');
     console.log('   │ [Leer Artículo Completo →]');
     console.log('   │ ');
-    console.log('   │ © 2024 CasinosPesos');
+    console.log('   │ © 2025 CasinosPesos');
     console.log('   └─────────────────────────────────────┘');
   } else {
     console.log('   ⚠️ No subscribers to notify');
