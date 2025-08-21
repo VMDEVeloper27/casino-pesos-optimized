@@ -3,6 +3,21 @@ import Link from 'next/link';
 import { BreadcrumbStructuredData, FAQStructuredData } from '@/components/StructuredData';
 import type { Metadata } from 'next';
 import { getAllCasinos } from '@/lib/casino-database';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faGift, 
+  faPercent,
+  faDice, 
+  faMoneyBillTransfer,
+  faRotate,
+  faCrown,
+  faCheckCircle,
+  faClock,
+  faWallet,
+  faGamepad,
+  faTags,
+  faCoins
+} from '@fortawesome/free-solid-svg-icons';
 
 interface PageProps {
   params: Promise<{ locale: string; category: string }>;
@@ -85,10 +100,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+
 interface CategoryData {
   title: string;
   description: string;
-  icon: string;
+  icon: IconDefinition;
   bonusType?: string;
 }
 
@@ -96,37 +113,37 @@ const categoryData: Record<string, CategoryData> = {
   'sin-deposito': {
     title: 'Bonos Sin Depósito',
     description: 'Obtén dinero gratis sin necesidad de depositar. Perfectos para probar nuevos casinos.',
-    icon: '🎁',
+    icon: faGift,
     bonusType: 'no-deposit'
   },
   'bienvenida': {
     title: 'Bonos de Bienvenida',
     description: 'Los mejores bonos para nuevos jugadores. Duplica o triplica tu primer depósito.',
-    icon: '🎉',
+    icon: faPercent,
     bonusType: 'welcome'
   },
   'giros-gratis': {
     title: 'Giros Gratis',
     description: 'Consigue tiradas gratis en las mejores tragamonedas online.',
-    icon: '🎰',
+    icon: faDice,
     bonusType: 'free-spins'
   },
   'cashback': {
     title: 'Bonos de Cashback',
     description: 'Recupera un porcentaje de tus pérdidas. El seguro perfecto para tu bankroll.',
-    icon: '💸',
+    icon: faMoneyBillTransfer,
     bonusType: 'cashback'
   },
   'recarga': {
     title: 'Bonos de Recarga',
     description: 'Bonificaciones en tus siguientes depósitos. Mantén tu cuenta activa con ventajas.',
-    icon: '🔄',
+    icon: faRotate,
     bonusType: 'reload'
   },
   'vip': {
     title: 'Bonos VIP',
     description: 'Ofertas exclusivas para jugadores de alto nivel. Límites más altos y mejores recompensas.',
-    icon: '👑',
+    icon: faCrown,
     bonusType: 'vip'
   }
 };
@@ -211,7 +228,9 @@ export default async function BonusCategoryPage({ params }: PageProps) {
 
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="text-6xl mb-4">{data.icon}</div>
+          <div className="mb-4">
+            <FontAwesomeIcon icon={data.icon} className="text-6xl text-primary-600" />
+          </div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             {data.title}
           </h1>
@@ -267,18 +286,21 @@ export default async function BonusCategoryPage({ params }: PageProps) {
                   </div>
                   
                   <div className="flex flex-wrap gap-4 text-sm">
-                    <div>
+                    <div className="flex items-center gap-2">
+                      <FontAwesomeIcon icon={faRotate} className="text-gray-400 text-xs" />
                       <span className="text-gray-400">Rollover:</span>
-                      <span className="text-gray-900 font-semibold ml-2">{bonus.rollover}</span>
+                      <span className="text-gray-900 font-semibold">{bonus.rollover}</span>
                     </div>
-                    <div>
+                    <div className="flex items-center gap-2">
+                      <FontAwesomeIcon icon={faWallet} className="text-gray-400 text-xs" />
                       <span className="text-gray-400">Depósito Mín:</span>
-                      <span className="text-gray-900 font-semibold ml-2">
+                      <span className="text-gray-900 font-semibold">
                         {bonus.minDeposit === 0 ? 'Gratis' : `$${bonus.minDeposit} MXN`}
                       </span>
                     </div>
                     {bonus.code && (
-                      <div>
+                      <div className="flex items-center gap-2">
+                        <FontAwesomeIcon icon={faTags} className="text-gray-400 text-xs" />
                         <span className="text-gray-400">Código:</span>
                         <span className="text-primary font-mono font-bold ml-2">{bonus.code}</span>
                       </div>
@@ -309,8 +331,9 @@ export default async function BonusCategoryPage({ params }: PageProps) {
 
         {/* Info Section */}
         <div className="bg-white rounded-2xl p-8 mt-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            ℹ️ Sobre {data.title}
+          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+            <FontAwesomeIcon icon={faCheckCircle} className="text-primary-600" />
+            Sobre {data.title}
           </h2>
           <div className="prose prose-invert max-w-none">
             <p className="text-gray-600">
@@ -320,22 +343,52 @@ export default async function BonusCategoryPage({ params }: PageProps) {
             </p>
             
             <div className="grid md:grid-cols-2 gap-6 mt-6">
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">✅ Ventajas</h3>
-                <ul className="space-y-2 text-sm text-gray-600">
-                  <li>• Aumentan tu bankroll inicial</li>
-                  <li>• Más tiempo de juego y diversión</li>
-                  <li>• Oportunidad de ganar sin arriesgar tanto</li>
-                  <li>• Acceso a juegos premium</li>
+              <div className="bg-green-50 rounded-xl p-6 border border-green-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <FontAwesomeIcon icon={faCheckCircle} className="text-green-600" />
+                  Ventajas
+                </h3>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <FontAwesomeIcon icon={faCoins} className="text-green-500 mt-1 text-xs" />
+                    <span>Aumentan tu bankroll inicial</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <FontAwesomeIcon icon={faClock} className="text-green-500 mt-1 text-xs" />
+                    <span>Más tiempo de juego y diversión</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <FontAwesomeIcon icon={faWallet} className="text-green-500 mt-1 text-xs" />
+                    <span>Oportunidad de ganar sin arriesgar tanto</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <FontAwesomeIcon icon={faGamepad} className="text-green-500 mt-1 text-xs" />
+                    <span>Acceso a juegos premium</span>
+                  </li>
                 </ul>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">⚠️ Consideraciones</h3>
-                <ul className="space-y-2 text-sm text-gray-600">
-                  <li>• Requisitos de apuesta obligatorios</li>
-                  <li>• Tiempo límite para cumplir condiciones</li>
-                  <li>• Restricciones en juegos elegibles</li>
-                  <li>• Límites máximos de retiro</li>
+              <div className="bg-amber-50 rounded-xl p-6 border border-amber-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <Info className="w-5 h-5 text-amber-600" />
+                  Consideraciones
+                </h3>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-500 mt-1">•</span>
+                    <span>Requisitos de apuesta obligatorios</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-500 mt-1">•</span>
+                    <span>Tiempo límite para cumplir condiciones</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-500 mt-1">•</span>
+                    <span>Restricciones en juegos elegibles</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-500 mt-1">•</span>
+                    <span>Límites máximos de retiro</span>
+                  </li>
                 </ul>
               </div>
             </div>

@@ -1,7 +1,20 @@
-import { ChevronRight, Gift, Info, Shield, Star, TrendingUp, Zap } from 'lucide-react';
+import { ChevronRight, Info, Star } from 'lucide-react';
 import Link from 'next/link';
 import { getAllCasinos } from '@/lib/casino-database';
 import type { Metadata } from 'next';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faGift, 
+  faCoins, 
+  faDice, 
+  faMoneyBillTransfer,
+  faRotate,
+  faCrown,
+  faChartLine,
+  faBolt,
+  faShieldAlt,
+  faPercent
+} from '@fortawesome/free-solid-svg-icons';
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -27,12 +40,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 const bonusCategories = [
-  { name: 'Sin Depósito', count: 12, icon: '🎁', color: 'from-purple-500 to-pink-500', slug: 'sin-deposito' },
-  { name: 'Bienvenida', count: 45, icon: '🎉', color: 'from-blue-500 to-cyan-500', slug: 'bienvenida' },
-  { name: 'Giros Gratis', count: 38, icon: '🎰', color: 'from-green-500 to-emerald-500', slug: 'giros-gratis' },
-  { name: 'Cashback', count: 15, icon: '💸', color: 'from-orange-500 to-red-500', slug: 'cashback' },
-  { name: 'Recarga', count: 22, icon: '🔄', color: 'from-indigo-500 to-purple-500', slug: 'recarga' },
-  { name: 'VIP', count: 8, icon: '👑', color: 'from-yellow-500 to-orange-500', slug: 'vip' }
+  { name: 'Sin Depósito', count: 12, icon: faGift, color: 'from-purple-500 to-pink-500', slug: 'sin-deposito' },
+  { name: 'Bienvenida', count: 45, icon: faPercent, color: 'from-blue-500 to-cyan-500', slug: 'bienvenida' },
+  { name: 'Giros Gratis', count: 38, icon: faDice, color: 'from-green-500 to-emerald-500', slug: 'giros-gratis' },
+  { name: 'Cashback', count: 15, icon: faMoneyBillTransfer, color: 'from-orange-500 to-red-500', slug: 'cashback' },
+  { name: 'Recarga', count: 22, icon: faRotate, color: 'from-indigo-500 to-purple-500', slug: 'recarga' },
+  { name: 'VIP', count: 8, icon: faCrown, color: 'from-yellow-500 to-orange-500', slug: 'vip' }
 ];
 
 export default async function BonosPage({ params }: PageProps) {
@@ -76,22 +89,22 @@ export default async function BonosPage({ params }: PageProps) {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
-            <TrendingUp className="w-8 h-8 text-green-600 mb-2" />
+            <FontAwesomeIcon icon={faChartLine} className="w-8 h-8 text-green-600 mb-2" />
             <div className="text-2xl font-bold text-gray-900">$250K+</div>
             <div className="text-sm text-gray-600">En Bonos Totales</div>
           </div>
           <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-6 border border-yellow-200">
-            <Gift className="w-8 h-8 text-orange-600 mb-2" />
+            <FontAwesomeIcon icon={faGift} className="w-8 h-8 text-orange-600 mb-2" />
             <div className="text-2xl font-bold text-gray-900">140+</div>
             <div className="text-sm text-gray-600">Bonos Activos</div>
           </div>
           <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-200">
-            <Zap className="w-8 h-8 text-purple-600 mb-2" />
+            <FontAwesomeIcon icon={faBolt} className="w-8 h-8 text-purple-600 mb-2" />
             <div className="text-2xl font-bold text-gray-900">5,000+</div>
             <div className="text-sm text-gray-600">Giros Gratis</div>
           </div>
           <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 border border-blue-200">
-            <Shield className="w-8 h-8 text-blue-600 mb-2" />
+            <FontAwesomeIcon icon={faShieldAlt} className="w-8 h-8 text-blue-600 mb-2" />
             <div className="text-2xl font-bold text-gray-900">100%</div>
             <div className="text-sm text-gray-600">Verificados</div>
           </div>
@@ -108,7 +121,9 @@ export default async function BonosPage({ params }: PageProps) {
                 className="group relative overflow-hidden bg-white hover:bg-gray-50 border border-gray-200 hover:border-primary-200 rounded-xl p-4 text-center transition-all duration-300 hover:scale-105 shadow-sm hover:shadow-md"
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-10 transition-opacity`}></div>
-                <div className="text-3xl mb-2">{category.icon}</div>
+                <div className="mb-2">
+                  <FontAwesomeIcon icon={category.icon} className="text-3xl text-primary-600 group-hover:text-primary-700 transition-colors" />
+                </div>
                 <div className="text-sm font-semibold text-gray-900">{category.name}</div>
                 <div className="text-xs text-gray-500">{category.count} ofertas</div>
               </Link>
@@ -119,7 +134,9 @@ export default async function BonosPage({ params }: PageProps) {
         {/* Featured Bonus */}
         {featuredBonus && (
           <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-2xl p-8 mb-12 relative overflow-hidden shadow-xl">
-            <div className="absolute top-0 right-0 text-6xl opacity-20">🎁</div>
+            <div className="absolute top-0 right-0 opacity-20">
+              <FontAwesomeIcon icon={faGift} className="text-6xl text-white" />
+            </div>
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-4">
                 <Star className="w-6 h-6 text-white fill-white" />
