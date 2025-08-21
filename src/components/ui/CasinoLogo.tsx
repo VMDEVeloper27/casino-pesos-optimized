@@ -9,17 +9,17 @@ interface CasinoLogoProps {
 
 export function CasinoLogo({ name, logo, size = 'md', className = '' }: CasinoLogoProps) {
   const sizeClasses = {
-    sm: 'w-20 h-12',
-    md: 'w-28 h-16',
-    lg: 'w-36 h-20',
-    xl: 'w-44 h-24'
+    sm: 'w-24 h-14',
+    md: 'w-32 h-20',
+    lg: 'w-40 h-24',
+    xl: 'w-48 h-28'
   };
 
   const imageSizes = {
-    sm: { width: 80, height: 48 },
-    md: { width: 112, height: 64 },
-    lg: { width: 144, height: 80 },
-    xl: { width: 176, height: 96 }
+    sm: { width: 96, height: 56 },
+    md: { width: 128, height: 80 },
+    lg: { width: 160, height: 96 },
+    xl: { width: 192, height: 112 }
   };
 
   // Check if logo is an actual image path
@@ -68,7 +68,7 @@ export function CasinoLogo({ name, logo, size = 'md', className = '' }: CasinoLo
   const displayText = logo || name.split(' ')[0].substring(0, 3);
   
   return (
-    <div className={`${sizeClasses[size]} ${className} relative overflow-hidden rounded-lg flex items-center justify-center`}>
+    <div className={`${sizeClasses[size]} ${className} relative overflow-hidden rounded-lg flex items-center justify-center bg-gradient-to-br from-green-50 to-emerald-50`}>
       <svg 
         width="100%" 
         height="100%" 

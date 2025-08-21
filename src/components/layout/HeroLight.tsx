@@ -57,7 +57,7 @@ export function Hero() {
           >
             <span className="text-gray-900">Encuentra el</span>
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-primary-800">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-green-800">
               Casino Perfecto
             </span>
             <br />
@@ -96,7 +96,7 @@ export function Hero() {
               <button 
                 type="submit"
                 onClick={handleSearch}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white px-6 py-2.5 rounded-xl font-semibold transition-all shadow-md hover:shadow-lg"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-2.5 rounded-xl font-semibold transition-all shadow-md hover:shadow-lg"
               >
                 Buscar
               </button>

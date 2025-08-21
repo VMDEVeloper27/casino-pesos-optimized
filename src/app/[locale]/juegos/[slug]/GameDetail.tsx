@@ -101,14 +101,14 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
                       <img
                         src={game.image}
                         alt={game.name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain"
                       />
                     ) : (
                       <Image
                         src={game.image}
                         alt={game.name}
                         fill
-                        className="object-cover"
+                        className="object-contain"
                       />
                     )
                   )}
@@ -495,7 +495,7 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
                             <img
                               src={similarGame.image}
                               alt={similarGame.name}
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-contain"
                             />
                           )}
                         </div>

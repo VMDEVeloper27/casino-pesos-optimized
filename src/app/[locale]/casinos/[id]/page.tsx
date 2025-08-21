@@ -150,7 +150,7 @@ export default async function CasinoDetailPage({ params }: PageProps) {
           <div className="grid lg:grid-cols-[200px,1fr,300px] gap-8">
             {/* Logo and Rating */}
             <div className="text-center">
-              <div className="w-32 h-24 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl flex items-center justify-center mx-auto mb-4 relative overflow-hidden">
+              <div className="w-40 h-28 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl flex items-center justify-center mx-auto mb-4 relative overflow-hidden">
                 {casino.logo && (casino.logo.startsWith('/') || casino.logo.startsWith('http')) ? (
                   <Image
                     src={casino.logo}
