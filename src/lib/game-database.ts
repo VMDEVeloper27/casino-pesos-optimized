@@ -1,3 +1,5 @@
+import { supabase } from './supabase';
+
 export interface Game {
   id: string;
   name: string;
@@ -31,6 +33,27 @@ export interface Game {
   isNew?: boolean;
   isFeatured?: boolean;
   isHot?: boolean;
+  // Extended fields from game_details table
+  howToPlay?: {
+    title: string;
+    steps: string[];
+  };
+  bonusFeatures?: {
+    title: string;
+    features: Array<{
+      name: string;
+      description: string;
+    }>;
+  };
+  symbols?: Array<{
+    symbol: string;
+    payout: string;
+    description: string;
+  }>;
+  tipsStrategies?: {
+    title: string;
+    tips: string[];
+  };
 }
 
 export const games: Game[] = [
@@ -1895,11 +1918,52 @@ export const games: Game[] = [
 
 // File system operations removed - using static data only for Vercel deployment
 
+// Import Supabase client
+import { supabase } from './supabase';
+
 // CRUD Operations
 export async function getAllGames(): Promise<Game[]> {
-  // Always return static games array for now
-  // TODO: Implement Supabase integration
-  return games;
+  try {
+    const { data, error } = await supabase
+      .from('games')
+      .select('*')
+      .order('popularity', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching games from Supabase:', error);
+      return games; // Fallback to static data
+    }
+
+    // Transform Supabase data to match Game interface
+    const transformedGames = data?.map(game => ({
+      id: game.id,
+      name: game.name,
+      slug: game.slug,
+      provider: game.provider,
+      type: game.type,
+      category: game.category,
+      rtp: game.rtp,
+      volatility: game.volatility,
+      maxWin: game.max_win,
+      minBet: game.min_bet,
+      maxBet: game.max_bet,
+      popularity: 50, // Default value
+      image: game.image || '/images/games/default.jpg',
+      demoUrl: game.demo_url,
+      embedUrl: game.embed_url,
+      mobileOptimized: game.mobile_optimized,
+      availableAt: [], // Will need to be fetched separately or joined
+      isNew: game.is_new,
+      isFeatured: game.is_featured,
+      isHot: game.is_hot,
+      features: game.features || []
+    })) || [];
+
+    return transformedGames.length > 0 ? transformedGames : games;
+  } catch (error) {
+    console.error('Error in getAllGames:', error);
+    return games; // Fallback to static data
+  }
 }
 
 export function getAllGamesSync(): Game[] {
@@ -2017,6 +2081,28 @@ export function searchGames(query: string): Game[] {
 export async function getGameBySlug(slug: string): Promise<Game | undefined> {
   const allGames = await getAllGames();
   return allGames.find(game => game.slug === slug);
+}
+
+// Fetch detailed game data from game_details table
+export async function getGameDetailsBySlug(slug: string): Promise<any | null> {
+  try {
+    const { data, error } = await supabase
+      .from('game_details')
+      .select('*')
+      .eq('slug', slug)
+      .eq('is_active', true)
+      .single();
+
+    if (error) {
+      console.error('Error fetching game details:', error);
+      return null;
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Error fetching game details:', error);
+    return null;
+  }
 }
 
 // Synchronous version for client-side usage only

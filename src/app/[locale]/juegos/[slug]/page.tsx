@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import GameDetail from './GameDetail';
-import { getAllGames } from '@/lib/game-database';
+import { getAllGames, getGameDetailsBySlug } from '@/lib/game-database';
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -9,6 +9,29 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
+  
+  // Try to fetch from game_details table first
+  const gameDetails = await getGameDetailsBySlug(slug);
+  
+  if (gameDetails) {
+    const isSpanish = locale === 'es';
+    
+    if (isSpanish) {
+      return {
+        title: gameDetails.meta_title || `${gameDetails.name} - Juega Gratis | Demo ${gameDetails.provider} | CasinosPesos`,
+        description: gameDetails.meta_description || gameDetails.description || `Juega ${gameDetails.name} gratis. RTP ${gameDetails.rtp}%, Volatilidad ${gameDetails.volatility}, Max Win ${gameDetails.max_win}x. Demo sin registro.`,
+        keywords: gameDetails.meta_keywords || [`${gameDetails.name.toLowerCase()}`, `${gameDetails.name.toLowerCase()} demo`, `${gameDetails.name.toLowerCase()} gratis`, `${gameDetails.provider.toLowerCase()}`, 'juegos casino'],
+      };
+    } else {
+      return {
+        title: gameDetails.meta_title || `${gameDetails.name} - Play Free | ${gameDetails.provider} Demo | CasinosPesos`,
+        description: gameDetails.meta_description || gameDetails.description || `Play ${gameDetails.name} for free. RTP ${gameDetails.rtp}%, Volatility ${gameDetails.volatility}, Max Win ${gameDetails.max_win}x. No registration demo.`,
+        keywords: gameDetails.meta_keywords || [`${gameDetails.name.toLowerCase()}`, `${gameDetails.name.toLowerCase()} demo`, `${gameDetails.name.toLowerCase()} free`, `${gameDetails.provider.toLowerCase()}`, 'casino games'],
+      };
+    }
+  }
+  
+  // Fallback to regular games table
   const games = await getAllGames();
   const game = games.find(g => g.slug === slug);
   
@@ -47,6 +70,56 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function GamePage({ params }: PageProps) {
   try {
     const { locale, slug } = await params;
+    
+    // Try to fetch from game_details table first
+    const gameDetails = await getGameDetailsBySlug(slug);
+    
+    if (gameDetails) {
+      // Transform game_details data to match Game interface
+      const transformedGame = {
+        id: gameDetails.game_id || gameDetails.id,
+        name: gameDetails.name,
+        slug: gameDetails.slug,
+        provider: gameDetails.provider,
+        type: gameDetails.type,
+        category: gameDetails.category,
+        rtp: gameDetails.rtp,
+        volatility: gameDetails.volatility,
+        maxWin: gameDetails.max_win,
+        minBet: gameDetails.min_bet,
+        maxBet: gameDetails.max_bet,
+        paylines: gameDetails.paylines,
+        reels: gameDetails.reels,
+        rows: gameDetails.rows,
+        features: gameDetails.features || [],
+        theme: gameDetails.theme,
+        releaseDate: gameDetails.release_date,
+        popularity: gameDetails.popularity || 50,
+        playCount: gameDetails.play_count,
+        image: gameDetails.image,
+        screenshots: gameDetails.screenshots,
+        demoUrl: gameDetails.demo_url,
+        embedUrl: gameDetails.embed_url,
+        fullscreenMode: gameDetails.fullscreen_mode,
+        mobileOptimized: gameDetails.mobile_optimized,
+        availableAt: gameDetails.available_casinos || [],
+        description: gameDetails.description,
+        instructions: gameDetails.instructions,
+        paytable: gameDetails.paytable,
+        isNew: gameDetails.is_new,
+        isFeatured: gameDetails.is_featured,
+        isHot: gameDetails.is_hot,
+        // Add additional detailed fields
+        howToPlay: gameDetails.how_to_play,
+        bonusFeatures: gameDetails.bonus_features,
+        symbols: gameDetails.symbols,
+        tipsStrategies: gameDetails.tips_strategies
+      };
+      
+      return <GameDetail game={transformedGame} locale={locale} />;
+    }
+    
+    // Fallback to regular games table
     const games = await getAllGames();
     const game = games.find(g => g.slug === slug);
 

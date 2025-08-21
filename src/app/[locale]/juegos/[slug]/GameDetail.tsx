@@ -343,6 +343,63 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
                         )}
                       </div>
                     </div>
+
+                    {/* How to Play */}
+                    {game.howToPlay && (
+                      <div>
+                        <h3 className="font-bold text-gray-900 mb-3">
+                          {game.howToPlay.title || (isSpanish ? 'Cómo Jugar' : 'How to Play')}
+                        </h3>
+                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                          <ol className="space-y-2">
+                            {game.howToPlay.steps.map((step, index) => (
+                              <li key={index} className="flex gap-3">
+                                <span className="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                                  {index + 1}
+                                </span>
+                                <span className="text-gray-700">{step}</span>
+                              </li>
+                            ))}
+                          </ol>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Bonus Features */}
+                    {game.bonusFeatures && (
+                      <div>
+                        <h3 className="font-bold text-gray-900 mb-3">
+                          {game.bonusFeatures.title || (isSpanish ? 'Funciones de Bonificación' : 'Bonus Features')}
+                        </h3>
+                        <div className="space-y-3">
+                          {game.bonusFeatures.features.map((feature, index) => (
+                            <div key={index} className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                              <h4 className="font-semibold text-purple-900 mb-1">{feature.name}</h4>
+                              <p className="text-sm text-gray-700">{feature.description}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Tips & Strategies */}
+                    {game.tipsStrategies && (
+                      <div>
+                        <h3 className="font-bold text-gray-900 mb-3">
+                          {game.tipsStrategies.title || (isSpanish ? 'Consejos y Estrategias' : 'Tips & Strategies')}
+                        </h3>
+                        <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                          <ul className="space-y-2">
+                            {game.tipsStrategies.tips.map((tip, index) => (
+                              <li key={index} className="flex gap-2">
+                                <span className="text-green-600 mt-1">•</span>
+                                <span className="text-gray-700">{tip}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    )}
                   </motion.div>
                 )}
 
