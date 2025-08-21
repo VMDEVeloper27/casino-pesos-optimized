@@ -1918,9 +1918,6 @@ export const games: Game[] = [
 
 // File system operations removed - using static data only for Vercel deployment
 
-// Import Supabase client
-import { supabase } from './supabase';
-
 // CRUD Operations
 export async function getAllGames(): Promise<Game[]> {
   try {
@@ -1930,8 +1927,14 @@ export async function getAllGames(): Promise<Game[]> {
       .order('popularity', { ascending: false });
 
     if (error) {
-      console.error('Error fetching games from Supabase:', error);
+      console.error('Error fetching games from Supabase:', error.message || error);
+      console.error('Falling back to static data');
       return games; // Fallback to static data
+    }
+    
+    if (!data || data.length === 0) {
+      console.log('No games found in Supabase, using static data');
+      return games;
     }
 
     // Transform Supabase data to match Game interface
