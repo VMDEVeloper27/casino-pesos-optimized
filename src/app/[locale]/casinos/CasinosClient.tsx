@@ -111,7 +111,7 @@ export default function CasinosClient({ casinos }: CasinosClientProps) {
                   <div className="grid lg:grid-cols-[200px,1fr,300px] gap-6">
                     {/* Casino Info */}
                     <div className="text-center lg:text-left">
-                      <div className="w-24 h-16 bg-gray-100 border border-gray-200 rounded-lg flex items-center justify-center mx-auto lg:mx-0 mb-3 relative overflow-hidden">
+                      <div className="w-24 h-16 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-lg flex items-center justify-center mx-auto lg:mx-0 mb-3 relative overflow-hidden">
                         {casino.logo && (casino.logo.startsWith('/') || casino.logo.startsWith('http')) ? (
                           <Image
                             src={casino.logo}

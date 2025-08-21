@@ -48,7 +48,7 @@ export function CasinoLogo({ name, logo, size = 'md', className = '' }: CasinoLo
   // Display actual image if available
   if (isImagePath) {
     return (
-      <div className={`${sizeClasses[size]} ${className} relative overflow-hidden rounded-lg flex items-center justify-center bg-white`}>
+      <div className={`${sizeClasses[size]} ${className} relative overflow-hidden rounded-lg flex items-center justify-center bg-gradient-to-br from-green-50 to-emerald-50`}>
         <Image
           src={logo}
           alt={`${name} Casino Logo - Juega en ${name} online con pesos mexicanos, bonos exclusivos y retiros rápidos`}

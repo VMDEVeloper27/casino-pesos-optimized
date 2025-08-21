@@ -346,7 +346,7 @@ export default function AdminCasinosList() {
                   <td className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="relative group">
-                        <div className="w-12 h-12 bg-neutral-700 rounded-lg flex items-center justify-center overflow-hidden">
+                        <div className="w-12 h-12 bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg flex items-center justify-center overflow-hidden">
                           {casino.logo ? (
                             <img 
                               src={casino.logo} 
