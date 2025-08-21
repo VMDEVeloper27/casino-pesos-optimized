@@ -872,6 +872,7 @@ const guidesData = {
     tags: ['blackjack', 'estrategia', 'conteo-cartas', 'casino'],
     likes: 342,
     shares: 89,
+    views: 4521,
     image: '/images/guides/blackjack-strategy.jpg',
     featuredImage: '/images/guides/blackjack-strategy-hero.jpg',
     tableOfContents: [
@@ -953,6 +954,7 @@ const guidesData = {
     tags: ['bankroll', 'finanzas', 'gestión', 'estrategia'],
     likes: 512,
     shares: 156,
+    views: 6234,
     image: '/images/guides/bankroll-management.jpg',
     featuredImage: '/images/guides/bankroll-hero.jpg',
     tableOfContents: [
@@ -1031,6 +1033,7 @@ const guidesData = {
     tags: ['ruleta', 'sistemas', 'mitos', 'matemáticas'],
     likes: 423,
     shares: 134,
+    views: 5189,
     image: '/images/guides/roulette-systems.jpg',
     featuredImage: '/images/guides/roulette-hero.jpg',
     tableOfContents: [
@@ -1115,6 +1118,7 @@ const guidesData = {
     tags: ['slots', 'RTP', 'volatilidad', 'tragamonedas'],
     likes: 687,
     shares: 201,
+    views: 8934,
     image: '/images/guides/slots-guide.jpg',
     featuredImage: '/images/guides/slots-hero.jpg',
     tableOfContents: [
@@ -1191,6 +1195,7 @@ const guidesData = {
     tags: ['póker', 'estrategia', 'psicología', 'profesional'],
     likes: 892,
     shares: 267,
+    views: 10342,
     image: '/images/guides/poker-pro.jpg',
     featuredImage: '/images/guides/poker-hero.jpg',
     tableOfContents: [
@@ -1272,6 +1277,7 @@ const guidesData = {
     tags: ['bonos', 'promociones', 'rollover', 'estrategia'],
     likes: 1024,
     shares: 412,
+    views: 15678,
     image: '/images/guides/casino-bonuses.jpg',
     featuredImage: '/images/guides/bonuses-hero.jpg',
     tableOfContents: [
@@ -1353,6 +1359,7 @@ const guidesData = {
     tags: ['móvil', 'desktop', 'tecnología', 'plataformas'],
     likes: 456,
     shares: 123,
+    views: 3456,
     image: '/images/guides/mobile-vs-desktop.jpg',
     featuredImage: '/images/guides/mobile-desktop-hero.jpg',
     tableOfContents: [
@@ -1423,6 +1430,7 @@ const guidesData = {
     tags: ['responsable', 'psicología', 'control', 'salud'],
     likes: 789,
     shares: 345,
+    views: 9876,
     image: '/images/guides/responsible-gaming.jpg',
     featuredImage: '/images/guides/responsible-hero.jpg',
     tableOfContents: [
@@ -1500,6 +1508,7 @@ const guidesData = {
     tags: ['seguridad', 'protección', 'licencias', 'fraude'],
     likes: 567,
     shares: 234,
+    views: 7234,
     image: '/images/guides/online-security.jpg',
     featuredImage: '/images/guides/security-hero.jpg',
     tableOfContents: [
@@ -1583,6 +1592,7 @@ const guidesData = {
     tags: ['torneos', 'competencia', 'estrategia', 'premios'],
     likes: 678,
     shares: 189,
+    views: 8123,
     image: '/images/guides/casino-tournaments.jpg',
     featuredImage: '/images/guides/tournaments-hero.jpg',
     tableOfContents: [
@@ -1677,6 +1687,7 @@ const guidesData = {
     tags: ['pagos', 'criptomonedas', 'e-wallets', 'finanzas'],
     likes: 534,
     shares: 156,
+    views: 6789,
     image: '/images/guides/payment-methods.jpg',
     featuredImage: '/images/guides/payments-hero.jpg',
     tableOfContents: [
@@ -1775,6 +1786,7 @@ const guidesData = {
     tags: ['slots', 'RTP', 'tragamonedas', 'retorno'],
     likes: 723,
     shares: 189,
+    views: 9234,
     image: '/images/guides/high-rtp-slots.jpg',
     featuredImage: '/images/guides/high-rtp-hero.jpg',
     tableOfContents: [
@@ -1856,6 +1868,7 @@ const guidesData = {
     tags: ['bonos', 'rollover', 'promociones', 'términos'],
     likes: 892,
     shares: 312,
+    views: 11456,
     image: '/images/guides/bonus-terms.jpg',
     featuredImage: '/images/guides/bonus-terms-hero.jpg',
     tableOfContents: [
@@ -1922,6 +1935,7 @@ const guidesData = {
     tags: ['responsable', 'ayuda', 'prevención', 'recursos'],
     likes: 956,
     shares: 423,
+    views: 12789,
     image: '/images/guides/responsible-signals.jpg',
     featuredImage: '/images/guides/responsible-signals-hero.jpg',
     tableOfContents: [
@@ -2004,6 +2018,7 @@ const guidesData = {
     tags: ['pagos', 'seguridad', 'finanzas', 'protección'],
     likes: 567,
     shares: 178,
+    views: 6543,
     image: '/images/guides/secure-payments.jpg',
     featuredImage: '/images/guides/secure-payments-hero.jpg',
     tableOfContents: [
@@ -2074,6 +2089,7 @@ const guidesData = {
     tags: ['poker', 'torneos', 'estrategia', 'principiantes'],
     likes: 734,
     shares: 201,
+    views: 8901,
     image: '/images/guides/poker-tournaments.jpg',
     featuredImage: '/images/guides/poker-tournaments-hero.jpg',
     tableOfContents: [
@@ -2144,6 +2160,7 @@ const guidesData = {
     tags: ['criptomonedas', 'bitcoin', 'blockchain', 'pagos'],
     likes: 612,
     shares: 189,
+    views: 7432,
     image: '/images/guides/crypto-casinos.jpg',
     featuredImage: '/images/guides/crypto-casinos-hero.jpg',
     tableOfContents: [
@@ -2221,6 +2238,247 @@ const guidesData = {
       }
     ]
   },
+  'licencias-casino-significado-importancia': {
+    id: 'licencias-casino-significado-importancia',
+    title: 'Licencias de Casino: Significado e Importancia',
+    subtitle: 'Todo lo que necesitas saber sobre regulación y licencias',
+    author: {
+      name: 'Alejandro Torres',
+      role: 'Experto en Regulación de Juegos',
+      avatar: '📜'
+    },
+    date: '4 de Enero, 2024',
+    readTime: '13 min',
+    category: 'Legal',
+    difficulty: 'Intermedio',
+    tags: ['licencias', 'regulación', 'legal', 'seguridad'],
+    likes: 645,
+    shares: 198,
+    views: 7856,
+    image: '/images/guides/casino-licenses.jpg',
+    featuredImage: '/images/guides/licenses-hero.jpg',
+    tableOfContents: [
+      { id: 'que-son-licencias', title: '¿Qué son las Licencias de Casino?', level: 1 },
+      { id: 'principales-reguladores', title: 'Principales Reguladores Mundiales', level: 1 },
+      { id: 'como-verificar', title: 'Cómo Verificar una Licencia', level: 1 },
+      { id: 'importancia-jugador', title: 'Importancia para el Jugador', level: 1 }
+    ],
+    content: [
+      {
+        type: 'introduction',
+        content: 'Las licencias de casino son fundamentales para garantizar un juego seguro y justo. En esta guía, exploraremos todo lo que necesitas saber sobre las licencias de casino online y por qué son tan importantes.'
+      },
+      {
+        type: 'section',
+        id: 'que-son-licencias',
+        title: '¿Qué son las Licencias de Casino?',
+        content: 'Una licencia de casino es un permiso legal otorgado por una autoridad reguladora que permite a un operador ofrecer servicios de juego.',
+        subsections: [
+          {
+            title: 'Requisitos para Obtener una Licencia',
+            content: 'Los casinos deben cumplir estrictos requisitos financieros, técnicos y operativos. Incluye auditorías, garantías bancarias y sistemas de seguridad.'
+          },
+          {
+            title: 'Proceso de Licenciamiento',
+            content: 'Puede tomar de 6 a 18 meses. Incluye verificación de antecedentes, auditorías financieras y pruebas de software.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'principales-reguladores',
+        title: 'Principales Reguladores Mundiales',
+        content: 'Conoce las autoridades de licencias más respetadas en la industria:',
+        subsections: [
+          {
+            title: 'Malta Gaming Authority (MGA)',
+            content: 'Una de las más prestigiosas. Ofrece protección al jugador, resolución de disputas y estrictos controles.'
+          },
+          {
+            title: 'UK Gambling Commission',
+            content: 'La más estricta del mundo. Requiere los más altos estándares de protección al jugador y responsabilidad social.'
+          },
+          {
+            title: 'Curaçao eGaming',
+            content: 'Popular entre casinos internacionales. Proceso más rápido pero menos estricto que MGA o UKGC.'
+          },
+          {
+            title: 'Gibraltar Regulatory Authority',
+            content: 'Alta reputación, especialmente para operadores europeos. Requiere presencia física en Gibraltar.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'como-verificar',
+        title: 'Cómo Verificar una Licencia',
+        content: 'Verificar la autenticidad de una licencia es crucial para tu seguridad:',
+        subsections: [
+          {
+            title: 'Pasos para Verificar',
+            content: '1. Busca el número de licencia en el footer del casino. 2. Visita el sitio web del regulador. 3. Usa su herramienta de búsqueda. 4. Verifica que coincida el operador.'
+          },
+          {
+            title: 'Señales de Alerta',
+            content: 'Licencia no clickeable, número inválido, regulador desconocido, información contradictoria.'
+          }
+        ]
+      },
+      {
+        type: 'checklist',
+        title: 'Checklist de Verificación',
+        items: [
+          'Número de licencia visible en el sitio',
+          'Logo del regulador con enlace activo',
+          'Licencia verificable en sitio del regulador',
+          'Fecha de licencia vigente',
+          'Nombre del operador coincide',
+          'Jurisdicción apropiada para tu país'
+        ]
+      },
+      {
+        type: 'warning',
+        title: 'Importante',
+        content: 'Nunca juegues en casinos sin licencia. No tienes protección legal, no hay garantía de pagos, y tus datos personales están en riesgo.'
+      }
+    ],
+    relatedGuides: [
+      {
+        slug: 'seguridad-casinos-online',
+        title: 'Seguridad en Casinos Online',
+        category: 'Seguridad',
+        readTime: '9 min'
+      },
+      {
+        slug: 'como-elegir-mejor-casino-online-2024',
+        title: 'Cómo Elegir el Mejor Casino',
+        category: 'Principiante',
+        readTime: '8 min'
+      }
+    ]
+  },
+  'apps-moviles-casino-que-buscar': {
+    id: 'apps-moviles-casino-que-buscar',
+    title: 'Apps Móviles de Casino: Qué Buscar',
+    subtitle: 'Guía completa para elegir la mejor app de casino móvil',
+    author: {
+      name: 'Sofia Mendez',
+      role: 'Especialista en Tecnología Móvil',
+      avatar: '📲'
+    },
+    date: '3 de Enero, 2024',
+    readTime: '11 min',
+    category: 'Tecnología',
+    difficulty: 'Principiante',
+    tags: ['apps', 'móvil', 'tecnología', 'casino'],
+    likes: 523,
+    shares: 156,
+    views: 6234,
+    image: '/images/guides/mobile-apps.jpg',
+    featuredImage: '/images/guides/mobile-apps-hero.jpg',
+    tableOfContents: [
+      { id: 'nativa-vs-web', title: 'App Nativa vs Web App', level: 1 },
+      { id: 'caracteristicas-esenciales', title: 'Características Esenciales', level: 1 },
+      { id: 'seguridad-movil', title: 'Seguridad en Apps Móviles', level: 1 },
+      { id: 'mejores-apps', title: 'Las Mejores Apps de 2024', level: 1 }
+    ],
+    content: [
+      {
+        type: 'introduction',
+        content: 'El juego móvil ha revolucionado los casinos online. Esta guía te ayudará a identificar las mejores apps de casino y qué características buscar.'
+      },
+      {
+        type: 'section',
+        id: 'nativa-vs-web',
+        title: 'App Nativa vs Web App',
+        content: 'Entender la diferencia es crucial para elegir la mejor opción:',
+        subsections: [
+          {
+            title: 'Apps Nativas',
+            content: 'Descargables desde App Store/Google Play. Mejor rendimiento, acceso offline a ciertas funciones, notificaciones push, pero requieren actualizaciones manuales.'
+          },
+          {
+            title: 'Web Apps',
+            content: 'Accesibles desde el navegador. No ocupan espacio, siempre actualizadas, compatibles con todos los dispositivos, pero requieren conexión constante.'
+          },
+          {
+            title: 'Apps Híbridas',
+            content: 'Combinan lo mejor de ambos mundos. Instalables pero basadas en tecnología web. Balance entre rendimiento y flexibilidad.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'caracteristicas-esenciales',
+        title: 'Características Esenciales',
+        content: 'Estas son las características que toda buena app de casino debe tener:',
+        subsections: [
+          {
+            title: 'Interfaz y Navegación',
+            content: 'Menús intuitivos, carga rápida, diseño adaptado a pantallas táctiles, búsqueda eficiente de juegos.'
+          },
+          {
+            title: 'Catálogo de Juegos',
+            content: 'Mínimo 200+ juegos, slots optimizados para móvil, mesas en vivo disponibles, nuevos lanzamientos frecuentes.'
+          },
+          {
+            title: 'Funcionalidades Bancarias',
+            content: 'Depósitos y retiros completos, múltiples métodos de pago, historial de transacciones, límites configurables.'
+          },
+          {
+            title: 'Soporte al Cliente',
+            content: 'Chat en vivo integrado, FAQ accesible, soporte telefónico con un toque, respuesta rápida.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'seguridad-movil',
+        title: 'Seguridad en Apps Móviles',
+        content: 'La seguridad es aún más crítica en dispositivos móviles:',
+        subsections: [
+          {
+            title: 'Autenticación',
+            content: 'Login biométrico (huella, Face ID), 2FA obligatorio, cierre de sesión automático, PIN de seguridad.'
+          },
+          {
+            title: 'Encriptación',
+            content: 'SSL/TLS para todas las comunicaciones, almacenamiento seguro de datos, sin guardar información sensible localmente.'
+          }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Comparación de Características',
+        categories: [
+          { feature: 'Velocidad de Carga', nativa: '⭐⭐⭐⭐⭐', web: '⭐⭐⭐' },
+          { feature: 'Espacio Requerido', nativa: '⭐⭐', web: '⭐⭐⭐⭐⭐' },
+          { feature: 'Funciones Offline', nativa: '⭐⭐⭐⭐', web: '⭐' },
+          { feature: 'Actualizaciones', nativa: '⭐⭐', web: '⭐⭐⭐⭐⭐' }
+        ]
+      },
+      {
+        type: 'checklist',
+        title: 'Checklist para Evaluar Apps',
+        items: [
+          'Compatible con tu dispositivo y OS',
+          'Tamaño de descarga razonable (<100MB)',
+          'Valoraciones positivas en tiendas',
+          'Actualizaciones frecuentes',
+          'Sin permisos innecesarios',
+          'Modo de juego responsable incluido'
+        ]
+      }
+    ],
+    relatedGuides: [
+      {
+        slug: 'casinos-movil-vs-desktop',
+        title: 'Casinos Móvil vs Desktop',
+        category: 'Tecnología',
+        readTime: '10 min'
+      }
+    ]
+  },
   'analisis-volatilidad-slots': {
     id: 'analisis-volatilidad-slots',
     title: 'Análisis de Volatilidad en Slots Online',
@@ -2237,6 +2495,7 @@ const guidesData = {
     tags: ['slots', 'volatilidad', 'varianza', 'estrategia'],
     likes: 534,
     shares: 145,
+    views: 6234,
     image: '/images/guides/slot-volatility.jpg',
     featuredImage: '/images/guides/slot-volatility-hero.jpg',
     tableOfContents: [
@@ -2319,6 +2578,7 @@ const guidesData = {
     tags: ['blackjack', 'estrategia', 'principiantes', 'cartas'],
     likes: 823,
     shares: 267,
+    views: 10123,
     image: '/images/guides/blackjack-basic.jpg',
     featuredImage: '/images/guides/blackjack-basic-hero.jpg',
     tableOfContents: [
@@ -2712,32 +2972,6 @@ export default function GuiaDetailPage() {
                 </div>
               </motion.div>
             )}
-
-            {/* Newsletter Signup */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-8 text-center text-white mb-8"
-            >
-              <div className="max-w-md mx-auto">
-                <div className="text-4xl mb-4">📧</div>
-                <h3 className="text-2xl font-bold mb-2">Mantente Actualizado</h3>
-                <p className="mb-6 opacity-90">
-                  Recibe las últimas guías, reseñas y ofertas exclusivas directamente en tu email.
-                </p>
-                <div className="flex gap-2">
-                  <input
-                    type="email"
-                    placeholder="Tu email aquí..."
-                    className="flex-1 px-4 py-2 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
-                  />
-                  <button className="bg-white text-green-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                    Suscribirse
-                  </button>
-                </div>
-              </div>
-            </motion.div>
           </div>
         </div>
       </div>
