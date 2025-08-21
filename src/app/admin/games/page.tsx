@@ -19,8 +19,10 @@ import {
   Sparkles,
   Trophy,
   CreditCard,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Folder
 } from 'lucide-react';
+import ImageSelectorModal from '@/components/admin/ImageSelectorModal';
 
 interface Game {
   id: string;
@@ -62,6 +64,8 @@ export default function AdminGamesList() {
   const [filterProvider, setFilterProvider] = useState<string>('all');
   const [loading, setLoading] = useState(true);
   const [uploadingImage, setUploadingImage] = useState<string | null>(null);
+  const [showImageSelector, setShowImageSelector] = useState(false);
+  const [selectedGameId, setSelectedGameId] = useState<string | null>(null);
   const fileInputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
 
   useEffect(() => {
@@ -160,6 +164,44 @@ export default function AdminGamesList() {
         fileInputRefs.current[gameId]!.value = '';
       }
     }
+  };
+
+  const handleImageSelect = async (imageUrl: string) => {
+    if (!selectedGameId) return;
+    
+    setUploadingImage(selectedGameId);
+    
+    try {
+      // Update game with new image URL
+      const updateResponse = await fetch(`/api/v2/games/${selectedGameId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ image: imageUrl }),
+      });
+      
+      if (updateResponse.ok) {
+        // Update local state
+        setGames(games.map(g => 
+          g.id === selectedGameId ? { ...g, image: imageUrl } : g
+        ));
+      } else {
+        throw new Error('Failed to update game');
+      }
+    } catch (error) {
+      console.error('Error updating image:', error);
+      alert('Failed to update image');
+    } finally {
+      setUploadingImage(null);
+      setShowImageSelector(false);
+      setSelectedGameId(null);
+    }
+  };
+
+  const openImageSelector = (gameId: string) => {
+    setSelectedGameId(gameId);
+    setShowImageSelector(true);
   };
 
   const handleExport = () => {
@@ -329,18 +371,25 @@ export default function AdminGamesList() {
                         </div>
                         
                         {/* Upload overlay */}
-                        <div className="absolute inset-0 bg-black/70 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <div className="absolute inset-0 bg-black/70 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                           <label 
                             htmlFor={`image-upload-${game.id}`}
-                            className="cursor-pointer"
+                            className="cursor-pointer p-1 bg-white/20 rounded hover:bg-white/30 transition-colors"
                             title="Upload Image"
                           >
                             {uploadingImage === game.id ? (
-                              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                             ) : (
-                              <ImageIcon className="w-5 h-5 text-white" />
+                              <ImageIcon className="w-4 h-4 text-white" />
                             )}
                           </label>
+                          <button
+                            onClick={() => openImageSelector(game.id)}
+                            className="p-1 bg-white/20 rounded hover:bg-white/30 transition-colors"
+                            title="Select from Gallery"
+                          >
+                            <Folder className="w-4 h-4 text-white" />
+                          </button>
                           <input
                             ref={(el) => {
                               if (el) {
@@ -448,6 +497,19 @@ export default function AdminGamesList() {
           )}
         </div>
       </div>
+
+      {/* Image Selector Modal */}
+      {showImageSelector && (
+        <ImageSelectorModal
+          isOpen={showImageSelector}
+          onClose={() => {
+            setShowImageSelector(false);
+            setSelectedGameId(null);
+          }}
+          onSelect={handleImageSelect}
+          title="Select Game Image"
+        />
+      )}
     </div>
   );
 }

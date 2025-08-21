@@ -10,6 +10,7 @@ import {
   Plus,
   Gamepad2
 } from 'lucide-react';
+import ImageSelector from '@/components/admin/ImageSelector';
 
 interface GameFormData {
   name: string;
@@ -431,16 +432,11 @@ export default function NewGamePage() {
           
           <div className="grid grid-cols-1 gap-4">
             <div>
-              <label className="block text-sm font-medium text-neutral-400 mb-2">
-                Image URL *
-              </label>
-              <input
-                type="url"
+              <ImageSelector
                 value={formData.image}
-                onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="https://example.com/game-image.jpg"
-                required
+                onChange={(value) => setFormData({ ...formData, image: value })}
+                label="Game Image *"
+                placeholder="Select or upload game image"
               />
             </div>
             

@@ -8,10 +8,9 @@ import {
   Save,
   X,
   Plus,
-  Gamepad2,
-  Loader2,
-  Upload
+  Gamepad2
 } from 'lucide-react';
+import ImageSelector from '@/components/admin/ImageSelector';
 
 interface GameFormData {
   name: string;
@@ -49,7 +48,6 @@ export default function EditGamePage(props: { params: Promise<{ id: string }> })
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
-  const [uploadingImage, setUploadingImage] = useState(false);
   const [newFeature, setNewFeature] = useState('');
   const [newCasino, setNewCasino] = useState('');
   
@@ -482,107 +480,12 @@ export default function EditGamePage(props: { params: Promise<{ id: string }> })
           
           <div className="grid grid-cols-1 gap-4">
             <div>
-              <label className="block text-sm font-medium text-neutral-400 mb-2">
-                Game Image
-              </label>
-              <div className="space-y-2">
-                {/* Image preview and upload */}
-                <div className="flex items-center gap-4">
-                  {formData.image ? (
-                    <img 
-                      src={formData.image} 
-                      alt="Game preview" 
-                      className="h-20 w-20 object-cover rounded-lg"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.src = '/images/game-placeholder.jpg';
-                      }}
-                    />
-                  ) : (
-                    <div className="h-20 w-20 bg-neutral-700 rounded-lg flex items-center justify-center text-neutral-500">
-                      No image
-                    </div>
-                  )}
-                  
-                  <div className="flex-1">
-                    <input
-                      type="file"
-                      id="game-image-upload"
-                      className="hidden"
-                      accept="image/*"
-                      onChange={async (e) => {
-                        const file = e.target.files?.[0];
-                        if (!file) return;
-                        
-                        // Validate file
-                        if (!file.type.startsWith('image/')) {
-                          alert('Please select an image file');
-                          return;
-                        }
-                        
-                        if (file.size > 5 * 1024 * 1024) {
-                          alert('File size must be less than 5MB');
-                          return;
-                        }
-                        
-                        setUploadingImage(true);
-                        try {
-                          // Upload to Supabase Storage
-                          const formData = new FormData();
-                          formData.append('file', file);
-                          formData.append('gameId', params.id);
-                          formData.append('type', 'game-image');
-                          
-                          const uploadResponse = await fetch('/api/admin/media', {
-                            method: 'POST',
-                            body: formData,
-                          });
-                          
-                          if (!uploadResponse.ok) {
-                            throw new Error('Failed to upload image');
-                          }
-                          
-                          const { url } = await uploadResponse.json();
-                          setFormData(prev => ({ ...prev, image: url }));
-                          alert('Image uploaded successfully!');
-                        } catch (error) {
-                          console.error('Upload error:', error);
-                          alert('Failed to upload image');
-                        } finally {
-                          setUploadingImage(false);
-                        }
-                      }}
-                    />
-                    <label
-                      htmlFor="game-image-upload"
-                      className={`inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg cursor-pointer transition-colors ${
-                        uploadingImage ? 'opacity-50 cursor-not-allowed' : ''
-                      }`}
-                    >
-                      {uploadingImage ? (
-                        <>
-                          <Loader2 className="w-4 h-4 animate-spin" />
-                          Uploading...
-                        </>
-                      ) : (
-                        <>
-                          <Upload className="w-4 h-4" />
-                          Upload New Image
-                        </>
-                      )}
-                    </label>
-                  </div>
-                </div>
-                
-                {/* Manual URL input (optional) */}
-                <input
-                  type="text"
-                  value={formData.image}
-                  onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                  className="w-full bg-neutral-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm"
-                  placeholder="Or paste image URL directly"
-                />
-              </div>
+              <ImageSelector
+                value={formData.image}
+                onChange={(value) => setFormData({ ...formData, image: value })}
+                label="Game Image"
+                placeholder="Select or upload game image"
+              />
             </div>
             
             <div>
