@@ -855,6 +855,843 @@ const guidesData = {
         readTime: '10 min'
       }
     ]
+  },
+  'estrategias-avanzadas-blackjack': {
+    title: 'Estrategias Avanzadas de Blackjack para Jugadores Experimentados',
+    subtitle: 'Domina las técnicas profesionales para maximizar tus ganancias',
+    author: 'Carlos Mendoza',
+    authorRole: 'Experto en Estrategias de Casino',
+    date: '27 de Diciembre, 2024',
+    readTime: '15 min',
+    category: 'Estrategia',
+    likes: 342,
+    shares: 89,
+    image: '/images/guides/blackjack-strategy.jpg',
+    featuredImage: '/images/guides/blackjack-strategy-hero.jpg',
+    tableOfContents: [
+      { id: 'conteo-cartas', title: 'Sistemas de Conteo de Cartas', level: 1 },
+      { id: 'estrategia-basica', title: 'Perfeccionando la Estrategia Básica', level: 1 },
+      { id: 'apuestas-laterales', title: 'Apuestas Laterales y Cuándo Usarlas', level: 1 },
+      { id: 'manejo-banca', title: 'Gestión Avanzada de Bankroll', level: 1 }
+    ],
+    content: [
+      {
+        type: 'introduction',
+        content: 'El blackjack es uno de los pocos juegos de casino donde la habilidad del jugador puede marcar una diferencia significativa. En esta guía avanzada, exploraremos técnicas profesionales que te ayudarán a reducir la ventaja de la casa y maximizar tus oportunidades de ganar.'
+      },
+      {
+        type: 'section',
+        id: 'conteo-cartas',
+        title: 'Sistemas de Conteo de Cartas',
+        content: 'Aunque el conteo de cartas no es ilegal, es importante entender sus principios. Los sistemas más populares incluyen Hi-Lo, KO y Omega II. Cada sistema asigna valores a las cartas y requiere práctica constante para dominar.',
+        subsections: [
+          {
+            title: 'Sistema Hi-Lo',
+            content: 'El sistema más utilizado por su balance entre simplicidad y efectividad. Cartas 2-6 valen +1, 7-9 valen 0, y 10-As valen -1.'
+          },
+          {
+            title: 'True Count',
+            content: 'Dividir el running count por el número de mazos restantes te da el true count, crucial para ajustar tus apuestas.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'estrategia-basica',
+        title: 'Perfeccionando la Estrategia Básica',
+        content: 'La estrategia básica reduce la ventaja de la casa a menos del 1%. Memoriza las tablas de decisiones y practica regularmente.',
+        subsections: [
+          {
+            title: 'Decisiones Cruciales',
+            content: 'Siempre divide ases y ochos. Nunca dividas dieces o cincos. Dobla con 11 contra cualquier carta del dealer excepto un as.'
+          },
+          {
+            title: 'Soft Hands',
+            content: 'Con manos suaves (as contando como 11), sé más agresivo. Dobla A-6 contra 3-6 del dealer.'
+          }
+        ]
+      },
+      {
+        type: 'tips',
+        title: 'Consejos Profesionales',
+        items: [
+          'Nunca tomes seguro, incluso con blackjack',
+          'Evita mesas con pago 6:5 en blackjack natural',
+          'Busca mesas con surrender tardío',
+          'Practica con simuladores antes de jugar con dinero real'
+        ]
+      }
+    ],
+    relatedGuides: [
+      {
+        slug: 'como-elegir-mejor-casino-online-2024',
+        title: 'Cómo Elegir el Mejor Casino Online',
+        category: 'Principiante',
+        readTime: '8 min'
+      }
+    ]
+  },
+  'gestion-bankroll-clave-exito': {
+    title: 'Gestión de Bankroll: La Clave del Éxito en los Casinos',
+    subtitle: 'Aprende a administrar tu dinero como un profesional',
+    author: 'Laura Gutiérrez',
+    authorRole: 'Analista Financiera de Juegos',
+    date: '26 de Diciembre, 2024',
+    readTime: '12 min',
+    category: 'Finanzas',
+    likes: 512,
+    shares: 156,
+    image: '/images/guides/bankroll-management.jpg',
+    featuredImage: '/images/guides/bankroll-hero.jpg',
+    tableOfContents: [
+      { id: 'que-es-bankroll', title: '¿Qué es el Bankroll?', level: 1 },
+      { id: 'establecer-limites', title: 'Estableciendo Límites Inteligentes', level: 1 },
+      { id: 'estrategias-apuesta', title: 'Estrategias de Apuesta', level: 1 },
+      { id: 'errores-comunes', title: 'Errores Comunes a Evitar', level: 1 }
+    ],
+    content: [
+      {
+        type: 'introduction',
+        content: 'La gestión adecuada del bankroll es la diferencia entre un jugador recreativo y un jugador profesional. Sin importar qué tan bueno seas en los juegos, sin una gestión financiera adecuada, el fracaso es inevitable.'
+      },
+      {
+        type: 'section',
+        id: 'que-es-bankroll',
+        title: '¿Qué es el Bankroll?',
+        content: 'Tu bankroll es el dinero destinado exclusivamente para jugar, separado de tus gastos diarios y ahorros. Nunca juegues con dinero que no puedes permitirte perder.',
+        subsections: [
+          {
+            title: 'Calculando tu Bankroll',
+            content: 'Para juegos de casino, tu bankroll debe ser al menos 100 veces tu apuesta promedio. Para póker, necesitas 20-30 buy-ins del nivel que juegas.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'establecer-limites',
+        title: 'Estableciendo Límites Inteligentes',
+        content: 'Los límites protegen tu bankroll y tu bienestar emocional. Establece límites de pérdida diaria, semanal y mensual.',
+        subsections: [
+          {
+            title: 'Regla del 5%',
+            content: 'Nunca arriesgues más del 5% de tu bankroll total en una sola sesión de juego.'
+          },
+          {
+            title: 'Stop-Loss y Stop-Win',
+            content: 'Define puntos de salida tanto para pérdidas como ganancias. Retírate cuando alcances cualquiera de estos límites.'
+          }
+        ]
+      },
+      {
+        type: 'checklist',
+        title: 'Checklist de Gestión de Bankroll',
+        items: [
+          'Separar fondos de juego de gastos personales',
+          'Establecer límites de pérdida antes de jugar',
+          'Llevar registro detallado de sesiones',
+          'Nunca perseguir pérdidas',
+          'Retirar ganancias regularmente'
+        ]
+      }
+    ],
+    relatedGuides: [
+      {
+        slug: 'psicologia-juego-responsable',
+        title: 'Psicología del Juego Responsable',
+        category: 'Responsabilidad',
+        readTime: '10 min'
+      }
+    ]
+  },
+  'ruleta-sistemas-apuestas-mitos': {
+    title: 'Ruleta: Sistemas de Apuestas y Mitos Desmentidos',
+    subtitle: 'La verdad sobre las estrategias de ruleta más populares',
+    author: 'Roberto Jiménez',
+    authorRole: 'Matemático y Analista de Juegos',
+    date: '25 de Diciembre, 2024',
+    readTime: '14 min',
+    category: 'Juegos',
+    likes: 423,
+    shares: 134,
+    image: '/images/guides/roulette-systems.jpg',
+    featuredImage: '/images/guides/roulette-hero.jpg',
+    tableOfContents: [
+      { id: 'tipos-ruleta', title: 'Tipos de Ruleta', level: 1 },
+      { id: 'sistemas-populares', title: 'Sistemas de Apuestas Populares', level: 1 },
+      { id: 'mitos-verdades', title: 'Mitos y Verdades', level: 1 },
+      { id: 'estrategias-realistas', title: 'Estrategias Realistas', level: 1 }
+    ],
+    content: [
+      {
+        type: 'introduction',
+        content: 'La ruleta ha fascinado a jugadores durante siglos, generando innumerables sistemas de apuestas. En esta guía, analizaremos matemáticamente los sistemas más populares y separaremos los mitos de la realidad.'
+      },
+      {
+        type: 'section',
+        id: 'tipos-ruleta',
+        title: 'Tipos de Ruleta',
+        content: 'Existen tres variantes principales de ruleta, cada una con diferentes probabilidades y ventaja de la casa.',
+        subsections: [
+          {
+            title: 'Ruleta Europea',
+            content: 'Con un solo cero, ofrece una ventaja de la casa del 2.7%. Es la mejor opción para el jugador.'
+          },
+          {
+            title: 'Ruleta Americana',
+            content: 'Con doble cero, la ventaja de la casa aumenta al 5.26%. Evítala si tienes alternativas.'
+          },
+          {
+            title: 'Ruleta Francesa',
+            content: 'Similar a la europea pero con reglas La Partage y En Prison que reducen la ventaja de la casa al 1.35% en apuestas externas.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'sistemas-populares',
+        title: 'Sistemas de Apuestas Populares',
+        content: 'Analizamos los sistemas más conocidos desde una perspectiva matemática.',
+        subsections: [
+          {
+            title: 'Martingala',
+            content: 'Doblar la apuesta después de cada pérdida. Funciona a corto plazo pero requiere bankroll infinito y no hay límites de mesa.'
+          },
+          {
+            title: 'Fibonacci',
+            content: 'Seguir la secuencia de Fibonacci para las apuestas. Menos agresivo que Martingala pero con los mismos problemas fundamentales.'
+          },
+          {
+            title: "D'Alembert",
+            content: 'Aumentar una unidad tras perder, disminuir una tras ganar. Más conservador pero no supera la ventaja de la casa.'
+          }
+        ]
+      },
+      {
+        type: 'warning',
+        title: 'Advertencia Importante',
+        content: 'Ningún sistema de apuestas puede superar la ventaja matemática de la casa a largo plazo. La ruleta es un juego de azar puro donde cada giro es independiente.'
+      }
+    ],
+    relatedGuides: [
+      {
+        slug: 'gestion-bankroll-clave-exito',
+        title: 'Gestión de Bankroll',
+        category: 'Finanzas',
+        readTime: '12 min'
+      }
+    ]
+  },
+  'slots-online-rtp-volatilidad': {
+    title: 'Slots Online: Entendiendo RTP, Volatilidad y Bonificaciones',
+    subtitle: 'Guía completa para maximizar tu experiencia en tragamonedas',
+    author: 'Ana Martínez',
+    authorRole: 'Especialista en Slots Online',
+    date: '24 de Diciembre, 2024',
+    readTime: '11 min',
+    category: 'Juegos',
+    likes: 687,
+    shares: 201,
+    image: '/images/guides/slots-guide.jpg',
+    featuredImage: '/images/guides/slots-hero.jpg',
+    tableOfContents: [
+      { id: 'que-es-rtp', title: '¿Qué es el RTP?', level: 1 },
+      { id: 'volatilidad-explicada', title: 'Volatilidad Explicada', level: 1 },
+      { id: 'tipos-bonificaciones', title: 'Tipos de Bonificaciones', level: 1 },
+      { id: 'elegir-slot', title: 'Cómo Elegir el Slot Ideal', level: 1 }
+    ],
+    content: [
+      {
+        type: 'introduction',
+        content: 'Los slots online son los juegos más populares en los casinos digitales. Comprender conceptos como RTP y volatilidad te ayudará a tomar decisiones informadas y disfrutar más de tu experiencia de juego.'
+      },
+      {
+        type: 'section',
+        id: 'que-es-rtp',
+        title: '¿Qué es el RTP?',
+        content: 'El Return to Player (RTP) es el porcentaje teórico que un slot devuelve a los jugadores a largo plazo. Un RTP del 96% significa que por cada $100 apostados, el juego devuelve $96 en promedio.',
+        subsections: [
+          {
+            title: 'RTP Alto vs Bajo',
+            content: 'Busca slots con RTP superior al 96%. Algunos slots progresivos tienen RTP más bajo pero ofrecen jackpots millonarios.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'volatilidad-explicada',
+        title: 'Volatilidad Explicada',
+        content: 'La volatilidad determina la frecuencia y tamaño de los premios.',
+        subsections: [
+          {
+            title: 'Baja Volatilidad',
+            content: 'Pagos frecuentes pero pequeños. Ideal para sesiones largas con bankroll limitado.'
+          },
+          {
+            title: 'Alta Volatilidad',
+            content: 'Pagos menos frecuentes pero más grandes. Requiere paciencia y mayor bankroll.'
+          }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Comparación de Tipos de Slots',
+        items: [
+          { type: 'Clásicos', rtp: '95-97%', volatilidad: 'Baja', caracteristica: 'Simples, nostálgicos' },
+          { type: 'Video Slots', rtp: '94-98%', volatilidad: 'Media', caracteristica: 'Más funciones bonus' },
+          { type: 'Progresivos', rtp: '88-95%', volatilidad: 'Alta', caracteristica: 'Jackpots millonarios' }
+        ]
+      }
+    ],
+    relatedGuides: [
+      {
+        slug: 'bonos-casino-guia-completa',
+        title: 'Guía Completa de Bonos',
+        category: 'Bonos',
+        readTime: '13 min'
+      }
+    ]
+  },
+  'poker-online-principiantes-pros': {
+    title: 'Póker Online: De Principiante a Profesional',
+    subtitle: 'Estrategias, psicología y gestión para dominar el póker',
+    author: 'Diego Rodríguez',
+    authorRole: 'Jugador Profesional de Póker',
+    date: '23 de Diciembre, 2024',
+    readTime: '18 min',
+    category: 'Estrategia',
+    likes: 892,
+    shares: 267,
+    image: '/images/guides/poker-pro.jpg',
+    featuredImage: '/images/guides/poker-hero.jpg',
+    tableOfContents: [
+      { id: 'fundamentos', title: 'Fundamentos del Póker', level: 1 },
+      { id: 'posicion-importancia', title: 'La Importancia de la Posición', level: 1 },
+      { id: 'lectura-rivales', title: 'Lectura de Rivales', level: 1 },
+      { id: 'gestion-mental', title: 'Gestión Mental y Tilt', level: 1 }
+    ],
+    content: [
+      {
+        type: 'introduction',
+        content: 'El póker es mucho más que un juego de cartas; es una batalla psicológica donde la estrategia, la disciplina y el control emocional determinan el éxito a largo plazo.'
+      },
+      {
+        type: 'section',
+        id: 'fundamentos',
+        title: 'Fundamentos del Póker',
+        content: 'Dominar los fundamentos es esencial antes de avanzar a conceptos más complejos.',
+        subsections: [
+          {
+            title: 'Selección de Manos Iniciales',
+            content: 'Juega tight en posiciones tempranas y amplía tu rango en posiciones tardías. En UTG, juega solo el top 10% de manos.'
+          },
+          {
+            title: 'Pot Odds y Equity',
+            content: 'Calcula siempre si el tamaño del bote justifica tu call basándote en las probabilidades de mejorar tu mano.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'posicion-importancia',
+        title: 'La Importancia de la Posición',
+        content: 'La posición es poder en el póker. Actuar último te da información valiosa sobre las intenciones de tus oponentes.',
+        subsections: [
+          {
+            title: 'Button Play',
+            content: 'Desde el button puedes jugar hasta el 40% de las manos. Roba los blinds agresivamente.'
+          },
+          {
+            title: 'Blinds Defense',
+            content: 'Defiende tu big blind con un rango amplio contra robos tardíos, pero sé cauteloso post-flop sin posición.'
+          }
+        ]
+      },
+      {
+        type: 'strategy',
+        title: 'Conceptos Avanzados',
+        items: [
+          'GTO vs Explotativo: Balancea tu juego pero explota las debilidades obvias',
+          'Ranges de 3-bet: Construye ranges balanceados con value y bluffs',
+          'Blocker Theory: Usa blockers para bluffear más efectivamente',
+          'ICM en torneos: Ajusta tu juego según el valor de las fichas'
+        ]
+      }
+    ],
+    relatedGuides: [
+      {
+        slug: 'psicologia-juego-responsable',
+        title: 'Psicología del Juego',
+        category: 'Responsabilidad',
+        readTime: '10 min'
+      }
+    ]
+  },
+  'bonos-casino-guia-completa': {
+    title: 'Guía Completa de Bonos de Casino: Maximiza tu Valor',
+    subtitle: 'Todo sobre bonos, requisitos de apuesta y estrategias',
+    author: 'Patricia López',
+    authorRole: 'Experta en Promociones de Casino',
+    date: '22 de Diciembre, 2024',
+    readTime: '13 min',
+    category: 'Bonos',
+    likes: 1024,
+    shares: 412,
+    image: '/images/guides/casino-bonuses.jpg',
+    featuredImage: '/images/guides/bonuses-hero.jpg',
+    tableOfContents: [
+      { id: 'tipos-bonos', title: 'Tipos de Bonos', level: 1 },
+      { id: 'requisitos-apuesta', title: 'Requisitos de Apuesta Explicados', level: 1 },
+      { id: 'estrategias-clearing', title: 'Estrategias para Liberar Bonos', level: 1 },
+      { id: 'terminos-trampa', title: 'Términos Trampa a Evitar', level: 1 }
+    ],
+    content: [
+      {
+        type: 'introduction',
+        content: 'Los bonos de casino pueden multiplicar tu bankroll inicial, pero es crucial entender sus términos y condiciones. Esta guía te enseñará a identificar los mejores bonos y cómo liberarlos eficientemente.'
+      },
+      {
+        type: 'section',
+        id: 'tipos-bonos',
+        title: 'Tipos de Bonos',
+        content: 'Cada tipo de bono tiene sus ventajas y estrategias óptimas de uso.',
+        subsections: [
+          {
+            title: 'Bono de Bienvenida',
+            content: 'Generalmente el más generoso, puede ser del 100-200% hasta cierto límite. Ideal para construir un bankroll inicial.'
+          },
+          {
+            title: 'Bonos Sin Depósito',
+            content: 'Dinero o giros gratis sin depositar. Perfectos para probar un casino sin riesgo.'
+          },
+          {
+            title: 'Cashback',
+            content: 'Devolución de un porcentaje de pérdidas. Reduce la varianza y extiende tu tiempo de juego.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'requisitos-apuesta',
+        title: 'Requisitos de Apuesta Explicados',
+        content: 'Los requisitos de apuesta (rollover) determinan cuánto debes apostar antes de poder retirar.',
+        subsections: [
+          {
+            title: 'Cálculo del Rollover',
+            content: 'Con un bono de $100 y rollover 30x, debes apostar $3,000. Busca requisitos de 35x o menos.'
+          },
+          {
+            title: 'Contribución de Juegos',
+            content: 'Slots: 100%, Ruleta: 10-20%, Blackjack: 5-10%. Planifica tu juego según estas contribuciones.'
+          }
+        ]
+      },
+      {
+        type: 'calculator',
+        title: 'Calculadora de Valor Esperado',
+        formula: 'EV = (Bono × RTP) - (Rollover × Ventaja Casa)',
+        example: 'Bono $100, RTP 96%, Rollover 30x: EV = $100 × 0.96 - $3000 × 0.04 = -$24'
+      }
+    ],
+    relatedGuides: [
+      {
+        slug: 'slots-online-rtp-volatilidad',
+        title: 'Entendiendo RTP en Slots',
+        category: 'Juegos',
+        readTime: '11 min'
+      }
+    ]
+  },
+  'casinos-movil-vs-desktop': {
+    title: 'Casinos Móvil vs Desktop: ¿Cuál es Mejor para Ti?',
+    subtitle: 'Comparación completa de plataformas de juego',
+    author: 'Miguel Fernández',
+    authorRole: 'Analista de Tecnología de Juegos',
+    date: '21 de Diciembre, 2024',
+    readTime: '10 min',
+    category: 'Tecnología',
+    likes: 456,
+    shares: 123,
+    image: '/images/guides/mobile-vs-desktop.jpg',
+    featuredImage: '/images/guides/mobile-desktop-hero.jpg',
+    tableOfContents: [
+      { id: 'experiencia-usuario', title: 'Experiencia de Usuario', level: 1 },
+      { id: 'catalogo-juegos', title: 'Catálogo de Juegos', level: 1 },
+      { id: 'seguridad-pagos', title: 'Seguridad y Pagos', level: 1 },
+      { id: 'cual-elegir', title: '¿Cuál Elegir?', level: 1 }
+    ],
+    content: [
+      {
+        type: 'introduction',
+        content: 'La evolución tecnológica ha transformado la forma en que jugamos en casinos online. Hoy analizamos las ventajas y desventajas de jugar en móvil versus desktop.'
+      },
+      {
+        type: 'section',
+        id: 'experiencia-usuario',
+        title: 'Experiencia de Usuario',
+        content: 'Cada plataforma ofrece una experiencia única adaptada a diferentes necesidades.',
+        subsections: [
+          {
+            title: 'Móvil: Conveniencia Total',
+            content: 'Juega desde cualquier lugar con conexión. Interfaces táctiles intuitivas y notificaciones push para promociones.'
+          },
+          {
+            title: 'Desktop: Inmersión Completa',
+            content: 'Pantallas grandes, mejor multitarea, ideal para sesiones largas de póker o juegos con estadísticas complejas.'
+          }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Comparación Directa',
+        categories: [
+          { aspecto: 'Portabilidad', movil: '⭐⭐⭐⭐⭐', desktop: '⭐' },
+          { aspecto: 'Calidad Gráfica', movil: '⭐⭐⭐', desktop: '⭐⭐⭐⭐⭐' },
+          { aspecto: 'Batería/Energía', movil: '⭐⭐', desktop: '⭐⭐⭐⭐' },
+          { aspecto: 'Multitarea', movil: '⭐⭐', desktop: '⭐⭐⭐⭐⭐' }
+        ]
+      },
+      {
+        type: 'recommendation',
+        title: 'Nuestra Recomendación',
+        content: 'Usa móvil para sesiones casuales y slots. Prefiere desktop para póker, blackjack multihand y sesiones largas. Lo ideal es tener cuentas sincronizadas para alternar según la situación.'
+      }
+    ],
+    relatedGuides: [
+      {
+        slug: 'seguridad-casinos-online',
+        title: 'Seguridad en Casinos Online',
+        category: 'Seguridad',
+        readTime: '9 min'
+      }
+    ]
+  },
+  'psicologia-juego-responsable': {
+    title: 'Psicología del Juego y Juego Responsable',
+    subtitle: 'Mantén el control y disfruta sanamente',
+    author: 'Dra. Isabel Ruiz',
+    authorRole: 'Psicóloga Especializada en Ludopatía',
+    date: '20 de Diciembre, 2024',
+    readTime: '10 min',
+    category: 'Responsabilidad',
+    likes: 789,
+    shares: 345,
+    image: '/images/guides/responsible-gaming.jpg',
+    featuredImage: '/images/guides/responsible-hero.jpg',
+    tableOfContents: [
+      { id: 'senales-alerta', title: 'Señales de Alerta', level: 1 },
+      { id: 'herramientas-control', title: 'Herramientas de Control', level: 1 },
+      { id: 'mitos-realidades', title: 'Mitos y Realidades', level: 1 },
+      { id: 'buscar-ayuda', title: 'Cuándo Buscar Ayuda', level: 1 }
+    ],
+    content: [
+      {
+        type: 'introduction',
+        content: 'El juego debe ser siempre una forma de entretenimiento, nunca una necesidad o una forma de ganar dinero. Comprender la psicología detrás del juego te ayudará a mantener hábitos saludables.'
+      },
+      {
+        type: 'section',
+        id: 'senales-alerta',
+        title: 'Señales de Alerta',
+        content: 'Reconocer las señales tempranas es crucial para prevenir problemas.',
+        subsections: [
+          {
+            title: 'Comportamientos Preocupantes',
+            content: 'Jugar más tiempo del planeado, perseguir pérdidas, mentir sobre el juego, o pedir dinero prestado para jugar.'
+          },
+          {
+            title: 'Impacto Emocional',
+            content: 'Ansiedad cuando no juegas, irritabilidad al intentar reducir el juego, o usar el juego para escapar de problemas.'
+          }
+        ]
+      },
+      {
+        type: 'checklist',
+        title: 'Test de Autoevaluación',
+        items: [
+          '¿Has intentado recuperar dinero perdido jugando más?',
+          '¿Has mentido sobre cuánto juegas o pierdes?',
+          '¿El juego ha afectado tus relaciones?',
+          '¿Has pedido prestado para jugar?',
+          '¿Te sientes ansioso cuando no puedes jugar?'
+        ],
+        note: 'Si respondiste sí a 2 o más preguntas, considera buscar ayuda profesional.'
+      },
+      {
+        type: 'resources',
+        title: 'Recursos de Ayuda',
+        items: [
+          'Jugadores Anónimos: Grupos de apoyo gratuitos',
+          'Líneas de ayuda 24/7 disponibles',
+          'Terapia cognitivo-conductual especializada',
+          'Apps de autoexclusión y control'
+        ]
+      }
+    ],
+    relatedGuides: [
+      {
+        slug: 'gestion-bankroll-clave-exito',
+        title: 'Gestión de Bankroll',
+        category: 'Finanzas',
+        readTime: '12 min'
+      }
+    ]
+  },
+  'seguridad-casinos-online': {
+    title: 'Seguridad en Casinos Online: Protege tu Dinero y Datos',
+    subtitle: 'Guía completa para jugar con total tranquilidad',
+    author: 'Carlos Sánchez',
+    authorRole: 'Experto en Ciberseguridad',
+    date: '19 de Diciembre, 2024',
+    readTime: '9 min',
+    category: 'Seguridad',
+    likes: 567,
+    shares: 234,
+    image: '/images/guides/online-security.jpg',
+    featuredImage: '/images/guides/security-hero.jpg',
+    tableOfContents: [
+      { id: 'licencias-regulacion', title: 'Licencias y Regulación', level: 1 },
+      { id: 'encriptacion-datos', title: 'Encriptación y Protección de Datos', level: 1 },
+      { id: 'metodos-pago-seguros', title: 'Métodos de Pago Seguros', level: 1 },
+      { id: 'evitar-fraudes', title: 'Cómo Evitar Fraudes', level: 1 }
+    ],
+    content: [
+      {
+        type: 'introduction',
+        content: 'La seguridad debe ser tu prioridad número uno al elegir un casino online. Esta guía te enseñará a identificar casinos seguros y proteger tu información personal y financiera.'
+      },
+      {
+        type: 'section',
+        id: 'licencias-regulacion',
+        title: 'Licencias y Regulación',
+        content: 'Una licencia válida es el primer indicador de un casino confiable.',
+        subsections: [
+          {
+            title: 'Licencias Premium',
+            content: 'Malta Gaming Authority (MGA), UK Gambling Commission, y Curaçao eGaming son las más respetadas.'
+          },
+          {
+            title: 'Verificación de Licencias',
+            content: 'Siempre verifica el número de licencia en el sitio web del regulador. No confíes solo en logos.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'encriptacion-datos',
+        title: 'Encriptación y Protección de Datos',
+        content: 'La tecnología de seguridad protege tu información durante las transacciones.',
+        subsections: [
+          {
+            title: 'SSL/TLS Encryption',
+            content: 'Busca el candado en la barra de direcciones y URLs que comiencen con https://.'
+          },
+          {
+            title: '2FA - Autenticación de Dos Factores',
+            content: 'Activa siempre 2FA cuando esté disponible. Añade una capa extra de seguridad crucial.'
+          }
+        ]
+      },
+      {
+        type: 'security-checklist',
+        title: 'Checklist de Seguridad',
+        items: [
+          'Licencia válida y verificable',
+          'Encriptación SSL activa',
+          'Políticas de privacidad claras',
+          'Auditorías de juego justo (eCOGRA, iTech Labs)',
+          'Opciones de juego responsable',
+          'Soporte al cliente accesible'
+        ]
+      }
+    ],
+    relatedGuides: [
+      {
+        slug: 'como-elegir-mejor-casino-online-2024',
+        title: 'Cómo Elegir el Mejor Casino',
+        category: 'Principiante',
+        readTime: '8 min'
+      }
+    ]
+  },
+  'torneos-casino-estrategias': {
+    title: 'Torneos de Casino: Estrategias para Competir y Ganar',
+    subtitle: 'Maximiza tus oportunidades en competencias de casino',
+    author: 'Fernando Torres',
+    authorRole: 'Campeón de Torneos de Póker',
+    date: '18 de Diciembre, 2024',
+    readTime: '15 min',
+    category: 'Estrategia',
+    likes: 678,
+    shares: 189,
+    image: '/images/guides/casino-tournaments.jpg',
+    featuredImage: '/images/guides/tournaments-hero.jpg',
+    tableOfContents: [
+      { id: 'tipos-torneos', title: 'Tipos de Torneos', level: 1 },
+      { id: 'estrategia-etapas', title: 'Estrategia por Etapas', level: 1 },
+      { id: 'gestion-stack', title: 'Gestión del Stack', level: 1 },
+      { id: 'psicologia-competitiva', title: 'Psicología Competitiva', level: 1 }
+    ],
+    content: [
+      {
+        type: 'introduction',
+        content: 'Los torneos de casino ofrecen la oportunidad de convertir una pequeña inversión en grandes premios. Dominar la estrategia de torneos requiere un enfoque diferente al cash game.'
+      },
+      {
+        type: 'section',
+        id: 'tipos-torneos',
+        title: 'Tipos de Torneos',
+        content: 'Cada formato requiere ajustes estratégicos específicos.',
+        subsections: [
+          {
+            title: 'Freezeout',
+            content: 'Sin recompras. Juega conservador al inicio y ajusta según el field se reduce.'
+          },
+          {
+            title: 'Rebuy',
+            content: 'Permite recompras. Sé más agresivo durante el período de rebuy para acumular fichas.'
+          },
+          {
+            title: 'Torneos de Slots',
+            content: 'Velocidad es clave. Maximiza el número de giros y usa auto-spin cuando sea posible.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'estrategia-etapas',
+        title: 'Estrategia por Etapas',
+        content: 'Adapta tu juego según la fase del torneo.',
+        subsections: [
+          {
+            title: 'Fase Inicial',
+            content: 'Juega tight y observa. Identifica jugadores débiles y acumula información.'
+          },
+          {
+            title: 'Fase Media',
+            content: 'Aumenta la agresión. Roba blinds y ataca stacks medianos que juegan para sobrevivir.'
+          },
+          {
+            title: 'Burbuja',
+            content: 'Máxima presión sobre stacks cortos. Si tienes stack grande, abusa de tu posición.'
+          },
+          {
+            title: 'Mesa Final',
+            content: 'ICM es crucial. Calcula el valor real de las fichas según los premios.'
+          }
+        ]
+      },
+      {
+        type: 'tips',
+        title: 'Consejos de Campeón',
+        items: [
+          'Nunca juegues torneos con buy-in superior al 2% de tu bankroll',
+          'Estudia las estructuras de pago antes de registrarte',
+          'Mantén notas sobre regulares del circuito',
+          'Practica con torneos freeroll antes de invertir dinero real',
+          'La paciencia es más valiosa que la agresión ciega'
+        ]
+      }
+    ],
+    relatedGuides: [
+      {
+        slug: 'poker-online-principiantes-pros',
+        title: 'Póker: De Principiante a Pro',
+        category: 'Estrategia',
+        readTime: '18 min'
+      }
+    ]
+  },
+  'metodos-pago-casino-2024': {
+    title: 'Métodos de Pago en Casinos 2024: Guía Completa',
+    subtitle: 'Criptomonedas, e-wallets y opciones tradicionales',
+    author: 'Lucía Vázquez',
+    authorRole: 'Analista Fintech',
+    date: '17 de Diciembre, 2024',
+    readTime: '12 min',
+    category: 'Finanzas',
+    likes: 534,
+    shares: 156,
+    image: '/images/guides/payment-methods.jpg',
+    featuredImage: '/images/guides/payments-hero.jpg',
+    tableOfContents: [
+      { id: 'metodos-tradicionales', title: 'Métodos Tradicionales', level: 1 },
+      { id: 'e-wallets', title: 'E-Wallets y Monederos Digitales', level: 1 },
+      { id: 'criptomonedas', title: 'Criptomonedas en Casinos', level: 1 },
+      { id: 'comparacion-completa', title: 'Comparación Completa', level: 1 }
+    ],
+    content: [
+      {
+        type: 'introduction',
+        content: 'La elección del método de pago correcto puede marcar la diferencia en tu experiencia de casino. Velocidad, seguridad y costos son factores clave a considerar.'
+      },
+      {
+        type: 'section',
+        id: 'metodos-tradicionales',
+        title: 'Métodos Tradicionales',
+        content: 'Aunque más lentos, siguen siendo populares por su familiaridad.',
+        subsections: [
+          {
+            title: 'Tarjetas de Crédito/Débito',
+            content: 'Visa y Mastercard aceptadas universalmente. Depósitos instantáneos pero retiros de 3-5 días.'
+          },
+          {
+            title: 'Transferencias Bancarias',
+            content: 'Ideales para montos grandes. Muy seguras pero pueden tardar hasta 7 días.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'e-wallets',
+        title: 'E-Wallets y Monederos Digitales',
+        content: 'La opción preferida por su velocidad y conveniencia.',
+        subsections: [
+          {
+            title: 'PayPal',
+            content: 'Retiros en 24 horas. No disponible en todos los países para gambling.'
+          },
+          {
+            title: 'Skrill/Neteller',
+            content: 'Especializados en gambling. Retiros instantáneos y programas VIP con cashback.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'criptomonedas',
+        title: 'Criptomonedas en Casinos',
+        content: 'La revolución del gambling online con transacciones rápidas y anónimas.',
+        subsections: [
+          {
+            title: 'Bitcoin',
+            content: 'Aceptado ampliamente. Retiros en 10 minutos pero con fees variables.'
+          },
+          {
+            title: 'Ethereum y Altcoins',
+            content: 'Fees más bajos que Bitcoin. Smart contracts permiten provably fair gaming.'
+          }
+        ]
+      },
+      {
+        type: 'comparison-table',
+        title: 'Comparación de Métodos',
+        headers: ['Método', 'Depósito', 'Retiro', 'Fees', 'Límites'],
+        rows: [
+          ['Visa/MC', 'Instantáneo', '3-5 días', '2-3%', '$10-$5000'],
+          ['PayPal', 'Instantáneo', '24 horas', 'Gratis', '$10-$10000'],
+          ['Bitcoin', '10 min', '10 min', 'Variable', 'Sin límite'],
+          ['Skrill', 'Instantáneo', 'Instantáneo', '1%', '$10-$10000']
+        ]
+      }
+    ],
+    relatedGuides: [
+      {
+        slug: 'seguridad-casinos-online',
+        title: 'Seguridad en Casinos Online',
+        category: 'Seguridad',
+        readTime: '9 min'
+      }
+    ]
   }
 };
 
