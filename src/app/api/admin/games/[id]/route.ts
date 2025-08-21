@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getGameById, updateGame, deleteGame } from '@/lib/game-database';
+import { supabase } from '@/lib/supabase';
 import { z } from 'zod';
 
 const updateGameSchema = z.object({
@@ -80,6 +81,8 @@ export async function PATCH(
     const { id } = await context.params;
     const body = await request.json();
     
+    console.log('PATCH /api/admin/games - Updating game:', id, 'with data:', body);
+    
     // Find game by id or slug to get the actual ID
     let game = await getGameById(id);
     if (!game) {
@@ -98,17 +101,71 @@ export async function PATCH(
     // Validate input
     const validatedData = updateGameSchema.parse(body);
     
-    // Update game using the actual ID
-    const updatedGame = await updateGame(game.id, validatedData);
-    
-    if (!updatedGame) {
-      return NextResponse.json(
-        { error: 'Failed to update game' },
-        { status: 500 }
-      );
+    // Direct update to Supabase (like casinos do)
+    try {
+      const { supabase } = await import('@/lib/supabase');
+      
+      // Map the validated data to database columns
+      const updateData: any = {
+        updated_at: new Date().toISOString()
+      };
+      
+      // Map all fields that exist in the request
+      if (validatedData.name !== undefined) updateData.name = validatedData.name;
+      if (validatedData.slug !== undefined) updateData.slug = validatedData.slug;
+      if (validatedData.provider !== undefined) updateData.provider = validatedData.provider;
+      if (validatedData.type !== undefined) updateData.type = validatedData.type;
+      if (validatedData.category !== undefined) updateData.category = validatedData.category;
+      if (validatedData.rtp !== undefined) updateData.rtp = validatedData.rtp;
+      if (validatedData.volatility !== undefined) updateData.volatility = validatedData.volatility;
+      if (validatedData.maxWin !== undefined) updateData.max_win = validatedData.maxWin;
+      if (validatedData.minBet !== undefined) updateData.min_bet = validatedData.minBet;
+      if (validatedData.maxBet !== undefined) updateData.max_bet = validatedData.maxBet;
+      if (validatedData.paylines !== undefined) updateData.paylines = validatedData.paylines;
+      if (validatedData.reels !== undefined) updateData.reels = validatedData.reels;
+      if (validatedData.rows !== undefined) updateData.rows = validatedData.rows;
+      if (validatedData.features !== undefined) updateData.features = validatedData.features;
+      if (validatedData.theme !== undefined) updateData.theme = validatedData.theme;
+      if (validatedData.releaseDate !== undefined) updateData.release_date = validatedData.releaseDate;
+      if (validatedData.image !== undefined) updateData.image = validatedData.image;
+      if (validatedData.screenshots !== undefined) updateData.screenshots = validatedData.screenshots;
+      if (validatedData.demoUrl !== undefined) updateData.demo_url = validatedData.demoUrl;
+      if (validatedData.embedUrl !== undefined) updateData.embed_url = validatedData.embedUrl;
+      if (validatedData.fullscreenMode !== undefined) updateData.fullscreen_mode = validatedData.fullscreenMode;
+      if (validatedData.mobileOptimized !== undefined) updateData.mobile_optimized = validatedData.mobileOptimized;
+      if (validatedData.description !== undefined) updateData.description = validatedData.description;
+      if (validatedData.instructions !== undefined) updateData.instructions = validatedData.instructions;
+      if (validatedData.paytable !== undefined) updateData.paytable = validatedData.paytable;
+      if (validatedData.isNew !== undefined) updateData.is_new = validatedData.isNew;
+      if (validatedData.isFeatured !== undefined) updateData.is_featured = validatedData.isFeatured;
+      if (validatedData.isHot !== undefined) updateData.is_hot = validatedData.isHot;
+      
+      console.log('Updating game in Supabase with data:', updateData);
+      
+      const { data, error } = await supabase
+        .from('games')
+        .update(updateData)
+        .eq('id', game.id)
+        .select()
+        .single();
+      
+      if (error) {
+        console.error('Supabase update error:', error);
+        throw error;
+      }
+      
+      console.log('Game updated successfully in Supabase:', data);
+      
+      // Also update in memory for consistency
+      await updateGame(game.id, validatedData);
+      
+      return NextResponse.json(data || game);
+    } catch (dbError) {
+      console.error('Database update error:', dbError);
+      // Fallback to memory update
+      const updatedGame = await updateGame(game.id, validatedData);
+      return NextResponse.json(updatedGame);
     }
-    
-    return NextResponse.json(updatedGame);
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(

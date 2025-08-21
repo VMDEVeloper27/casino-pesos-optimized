@@ -1924,7 +1924,7 @@ export async function getAllGames(): Promise<Game[]> {
     const { data, error } = await supabase
       .from('games')
       .select('*')
-      .order('popularity', { ascending: false });
+      .order('created_at', { ascending: false });
 
     if (error) {
       console.error('Error fetching games from Supabase:', error.message || error);
@@ -1950,7 +1950,7 @@ export async function getAllGames(): Promise<Game[]> {
       maxWin: game.max_win,
       minBet: game.min_bet,
       maxBet: game.max_bet,
-      popularity: 50, // Default value
+      popularity: 50, // Default value since column doesn't exist in DB
       image: game.image || '/images/games/default.jpg',
       demoUrl: game.demo_url,
       embedUrl: game.embed_url,
@@ -2000,13 +2000,36 @@ export async function updateGame(id: string, updates: Partial<Game>): Promise<Ga
     return null;
   }
   
+  // Update in memory
   allGames[gameIndex] = {
     ...allGames[gameIndex],
     ...updates,
     id // Ensure ID doesn't change
   };
   
-  // TODO: Save to Supabase
+  // Update in Supabase
+  try {
+    const { supabase } = await import('@/lib/supabase');
+    const { data, error } = await supabase
+      .from('games')
+      .update({
+        ...updates,
+        updated_at: new Date().toISOString()
+      })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) {
+      console.error('Error updating game in Supabase:', error);
+      // Still return the updated game from memory
+    } else if (data) {
+      console.log('Game updated in Supabase:', data);
+    }
+  } catch (error) {
+    console.error('Error updating game in Supabase:', error);
+  }
+  
   return allGames[gameIndex];
 }
 
