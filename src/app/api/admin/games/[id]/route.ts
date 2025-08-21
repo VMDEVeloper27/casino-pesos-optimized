@@ -36,14 +36,23 @@ const updateGameSchema = z.object({
   isHot: z.boolean().optional(),
 });
 
-// GET /api/admin/games/[id] - Get a single game
+// GET /api/admin/games/[id] - Get a single game (by id or slug)
 export async function GET(
   request: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await context.params;
-    const game = await getGameById(id);
+    
+    // First try to get by ID
+    let game = await getGameById(id);
+    
+    // If not found by ID, try to find by slug
+    if (!game) {
+      const { getAllGames } = await import('@/lib/game-database');
+      const allGames = await getAllGames();
+      game = allGames.find(g => g.slug === id || g.id === id);
+    }
     
     if (!game) {
       return NextResponse.json(
@@ -62,7 +71,7 @@ export async function GET(
   }
 }
 
-// PATCH /api/admin/games/[id] - Update a game
+// PATCH /api/admin/games/[id] - Update a game (by id or slug)
 export async function PATCH(
   request: NextRequest,
   context: { params: Promise<{ id: string }> }
@@ -71,16 +80,31 @@ export async function PATCH(
     const { id } = await context.params;
     const body = await request.json();
     
-    // Validate input
-    const validatedData = updateGameSchema.parse(body);
+    // Find game by id or slug to get the actual ID
+    let game = await getGameById(id);
+    if (!game) {
+      const { getAllGames } = await import('@/lib/game-database');
+      const allGames = await getAllGames();
+      game = allGames.find(g => g.slug === id || g.id === id);
+    }
     
-    // Update game
-    const updatedGame = await updateGame(id, validatedData);
-    
-    if (!updatedGame) {
+    if (!game) {
       return NextResponse.json(
         { error: 'Game not found' },
         { status: 404 }
+      );
+    }
+    
+    // Validate input
+    const validatedData = updateGameSchema.parse(body);
+    
+    // Update game using the actual ID
+    const updatedGame = await updateGame(game.id, validatedData);
+    
+    if (!updatedGame) {
+      return NextResponse.json(
+        { error: 'Failed to update game' },
+        { status: 500 }
       );
     }
     
@@ -101,19 +125,35 @@ export async function PATCH(
   }
 }
 
-// DELETE /api/admin/games/[id] - Delete a game
+// DELETE /api/admin/games/[id] - Delete a game (by id or slug)
 export async function DELETE(
   request: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await context.params;
-    const deleted = await deleteGame(id);
     
-    if (!deleted) {
+    // Find game by id or slug to get the actual ID
+    let game = await getGameById(id);
+    if (!game) {
+      const { getAllGames } = await import('@/lib/game-database');
+      const allGames = await getAllGames();
+      game = allGames.find(g => g.slug === id || g.id === id);
+    }
+    
+    if (!game) {
       return NextResponse.json(
         { error: 'Game not found' },
         { status: 404 }
+      );
+    }
+    
+    const deleted = await deleteGame(game.id);
+    
+    if (!deleted) {
+      return NextResponse.json(
+        { error: 'Failed to delete game' },
+        { status: 500 }
       );
     }
     

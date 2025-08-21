@@ -136,8 +136,8 @@ export default function AdminGamesList() {
       
       const { url } = await uploadResponse.json();
       
-      // Update game with new image URL (use v2 API)
-      const updateResponse = await fetch(`/api/v2/games/${gameId}`, {
+      // Update game with new image URL
+      const updateResponse = await fetch(`/api/admin/games/${gameId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -173,7 +173,7 @@ export default function AdminGamesList() {
     
     try {
       // Update game with new image URL
-      const updateResponse = await fetch(`/api/v2/games/${selectedGameId}`, {
+      const updateResponse = await fetch(`/api/admin/games/${selectedGameId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -186,6 +186,7 @@ export default function AdminGamesList() {
         setGames(games.map(g => 
           g.id === selectedGameId ? { ...g, image: imageUrl } : g
         ));
+        alert('Image updated successfully');
       } else {
         throw new Error('Failed to update game');
       }

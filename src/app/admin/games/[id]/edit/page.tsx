@@ -8,7 +8,8 @@ import {
   Save,
   X,
   Plus,
-  Gamepad2
+  Gamepad2,
+  Loader2
 } from 'lucide-react';
 import ImageSelector from '@/components/admin/ImageSelector';
 
