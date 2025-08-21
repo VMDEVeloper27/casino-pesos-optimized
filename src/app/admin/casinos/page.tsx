@@ -84,22 +84,6 @@ export default function AdminCasinosList() {
     fetchCasinos();
   }, []);
 
-  // Close menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (showLogoMenu) {
-        const target = event.target as HTMLElement;
-        if (!target.closest('.logo-menu-container')) {
-          setShowLogoMenu(null);
-        }
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [showLogoMenu]);
 
   const fetchCasinos = async () => {
     try {
@@ -361,11 +345,8 @@ export default function AdminCasinosList() {
                 <tr key={casino.id} className="border-b border-neutral-700 hover:bg-neutral-700/50 transition-colors">
                   <td className="p-4">
                     <div className="flex items-center gap-3">
-                      <div className="relative group logo-menu-container">
-                        <div 
-                          className="w-12 h-12 bg-neutral-700 rounded-lg flex items-center justify-center overflow-hidden cursor-pointer"
-                          onClick={() => setShowLogoMenu(showLogoMenu === casino.id ? null : casino.id)}
-                        >
+                      <div className="relative group">
+                        <div className="w-12 h-12 bg-neutral-700 rounded-lg flex items-center justify-center overflow-hidden">
                           {casino.logo ? (
                             <img 
                               src={casino.logo} 
@@ -389,32 +370,27 @@ export default function AdminCasinosList() {
                           )}
                         </div>
                         
-                        {/* Logo Menu Dropdown */}
-                        {showLogoMenu === casino.id && (
-                          <div className="absolute top-full left-0 mt-1 bg-neutral-800 rounded-lg shadow-xl border border-neutral-700 z-10">
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                fileInputRefs.current[casino.id]?.click();
-                                setShowLogoMenu(null);
-                              }}
-                              className="flex items-center gap-2 w-full px-4 py-2 text-white hover:bg-neutral-700 transition-colors text-sm"
-                            >
-                              <Upload className="w-4 h-4" />
-                              Upload from local
-                            </button>
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                openGallery(casino.id);
-                              }}
-                              className="flex items-center gap-2 w-full px-4 py-2 text-white hover:bg-neutral-700 transition-colors text-sm border-t border-neutral-700"
-                            >
-                              <Folder className="w-4 h-4" />
-                              Choose from gallery
-                            </button>
-                          </div>
-                        )}
+                        {/* Upload overlay with icons */}
+                        <div className="absolute inset-0 bg-black/70 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                          <label 
+                            htmlFor={`logo-upload-${casino.id}`}
+                            className="cursor-pointer p-1 bg-white/20 rounded hover:bg-white/30 transition-colors"
+                            title="Upload Image"
+                          >
+                            {uploadingLogo === casino.id ? (
+                              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                            ) : (
+                              <ImageIcon className="w-4 h-4 text-white" />
+                            )}
+                          </label>
+                          <button
+                            onClick={() => openGallery(casino.id)}
+                            className="p-1 bg-white/20 rounded hover:bg-white/30 transition-colors"
+                            title="Select from Gallery"
+                          >
+                            <Folder className="w-4 h-4 text-white" />
+                          </button>
+                        </div>
                         
                         <input
                           ref={(el) => {
@@ -434,13 +410,6 @@ export default function AdminCasinosList() {
                           }}
                           disabled={uploadingLogo === casino.id}
                         />
-                        
-                        {/* Upload spinner overlay */}
-                        {uploadingLogo === casino.id && (
-                          <div className="absolute inset-0 bg-black/70 rounded-lg flex items-center justify-center">
-                            <Loader2 className="w-5 h-5 text-white animate-spin" />
-                          </div>
-                        )}
                       </div>
                       <div>
                         <div className="font-semibold text-white">{casino.name}</div>
