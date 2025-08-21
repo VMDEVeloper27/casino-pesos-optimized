@@ -25,6 +25,7 @@ import {
 import { cn } from '@/lib/utils';
 import { useCountry, countries } from '@/contexts/CountryContext';
 import { useSession, signOut } from 'next-auth/react';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 interface ProfessionalHeaderProps {
   locale: string;
@@ -204,14 +205,8 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
 
               {/* Right Side Actions */}
               <div className="flex items-center gap-4">
-                {/* Simple Country Badge */}
-                <div className="flex items-center gap-2 px-3 py-2 bg-gray-100 rounded-lg text-gray-700 border border-gray-200">
-                  <Globe className="w-4 h-4 text-green-600" />
-                  <span className="text-sm">{selectedCountry.flag}</span>
-                  <span className="text-sm font-medium">
-                    {selectedCountry.code === 'MX' ? 'México' : selectedCountry.name}
-                  </span>
-                </div>
+                {/* Language Switcher */}
+                <LanguageSwitcher />
 
                 {/* Auth Buttons or User Menu */}
                 {status === 'loading' ? (
@@ -446,19 +441,13 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
                   ))}
                 </nav>
 
-                {/* Current Country Display */}
+                {/* Language Selector */}
                 <div className="mt-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
                   <h3 className="text-gray-900 font-medium mb-3 flex items-center gap-2">
                     <Globe className="w-5 h-5 text-green-600" />
-                    {locale === 'es' ? 'Región' : 'Region'}
+                    {locale === 'es' ? 'Idioma' : 'Language'}
                   </h3>
-                  <div className="flex items-center gap-3 p-3 bg-white rounded-lg border border-green-200">
-                    <span className="text-2xl">{selectedCountry.flag}</span>
-                    <div>
-                      <div className="font-medium text-gray-900">{selectedCountry.name}</div>
-                      <div className="text-sm text-green-700">{selectedCountry.currency}</div>
-                    </div>
-                  </div>
+                  <LanguageSwitcher />
                 </div>
 
                 {/* Auth Section */}

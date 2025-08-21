@@ -8,7 +8,7 @@ import { authRateLimit, apiRateLimit, registrationRateLimit } from '@/lib/rate-l
 const intlMiddleware = createIntlMiddleware({
   locales: ['es', 'en'],
   defaultLocale: 'es',
-  localePrefix: 'as-needed'
+  localePrefix: 'always' // Changed to always show locale in URL
 });
 
 export async function middleware(request: NextRequest) {
@@ -30,6 +30,11 @@ export async function middleware(request: NextRequest) {
   const localeMatch = pathname.match(/^\/(es|en)/);
   const locale = localeMatch ? localeMatch[1] : 'es';
   const hasLocalePrefix = localeMatch !== null;
+  
+  // Redirect root path to default locale
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL('/es', request.url));
+  }
   
   // Protected routes that require authentication
   const protectedRoutes = [

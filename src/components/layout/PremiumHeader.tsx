@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useCountry, countries } from '@/contexts/CountryContext';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 interface PremiumHeaderProps {
   locale: string;

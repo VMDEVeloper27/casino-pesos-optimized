@@ -9,17 +9,17 @@ interface CasinoLogoProps {
 
 export function CasinoLogo({ name, logo, size = 'md', className = '' }: CasinoLogoProps) {
   const sizeClasses = {
-    sm: 'w-16 h-8',
-    md: 'w-24 h-12',
-    lg: 'w-32 h-16',
-    xl: 'w-40 h-20'
+    sm: 'w-20 h-12',
+    md: 'w-28 h-16',
+    lg: 'w-36 h-20',
+    xl: 'w-44 h-24'
   };
 
   const imageSizes = {
-    sm: { width: 64, height: 32 },
-    md: { width: 96, height: 48 },
-    lg: { width: 128, height: 64 },
-    xl: { width: 160, height: 80 }
+    sm: { width: 80, height: 48 },
+    md: { width: 112, height: 64 },
+    lg: { width: 144, height: 80 },
+    xl: { width: 176, height: 96 }
   };
 
   // Check if logo is an actual image path
@@ -48,14 +48,14 @@ export function CasinoLogo({ name, logo, size = 'md', className = '' }: CasinoLo
   // Display actual image if available
   if (isImagePath) {
     return (
-      <div className={`${sizeClasses[size]} ${className} relative overflow-hidden rounded-lg flex items-center justify-center bg-neutral-800`}>
+      <div className={`${sizeClasses[size]} ${className} relative overflow-hidden rounded-lg flex items-center justify-center bg-white`}>
         <Image
           src={logo}
           alt={`${name} Casino Logo - Juega en ${name} online con pesos mexicanos, bonos exclusivos y retiros rápidos`}
           title={`${name} - Casino online confiable en México`}
           width={imageSizes[size].width}
           height={imageSizes[size].height}
-          className="object-contain p-1"
+          className="object-contain p-2 w-full h-full"
           loading="lazy"
           placeholder="blur"
           blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwABmX/9k="

@@ -11,6 +11,7 @@ import CopyButton from '@/components/CopyButton';
 import CasinoFilters, { FilterState } from '@/components/CasinoFilters';
 import ActiveFilterChips from '@/components/ActiveFilterChips';
 import FavoriteButtonAuth from '@/components/FavoriteButtonAuth';
+import { CasinoLogo } from '@/components/ui/CasinoLogo';
 
 interface CasinosClientWithFiltersProps {
   casinos: Casino[];
@@ -343,25 +344,13 @@ export default function CasinosClientWithFilters({ casinos }: CasinosClientWithF
                     <div className="grid lg:grid-cols-[200px,1fr,300px] gap-6">
                       {/* Casino Info */}
                       <div className="text-center lg:text-left">
-                        <div className="relative">
-                          <div className="w-24 h-16 bg-gray-100 border border-gray-200 rounded-lg flex items-center justify-center mx-auto lg:mx-0 mb-3 relative overflow-hidden">
-                            {casino.logo && (casino.logo.startsWith('/') || casino.logo.startsWith('http')) ? (
-                              <Image
-                                src={casino.logo}
-                                alt={`${casino.name} logo`}
-                                width={96}
-                                height={64}
-                                className="object-contain p-1"
-                                loading={index < 3 ? "eager" : "lazy"}
-                                placeholder="blur"
-                                blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='64'%3E%3Crect width='96' height='64' fill='%23f3f4f6'/%3E%3C/svg%3E"
-                              />
-                            ) : (
-                              <span className="text-2xl font-bold text-gray-900">
-                                {casino.name.substring(0, 3).toUpperCase()}
-                              </span>
-                            )}
-                          </div>
+                        <div className="relative flex justify-center lg:justify-start">
+                          <CasinoLogo 
+                            name={casino.name} 
+                            logo={casino.logo || casino.name.split(' ')[0].substring(0, 3)} 
+                            size="md"
+                            className="mb-3"
+                          />
                           <div className="absolute -top-2 -right-2">
                             <FavoriteButtonAuth 
                               entityId={casino.id}
