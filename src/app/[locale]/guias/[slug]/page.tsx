@@ -857,10 +857,14 @@ const guidesData = {
     ]
   },
   'estrategias-avanzadas-blackjack': {
+    id: 'estrategias-avanzadas-blackjack',
     title: 'Estrategias Avanzadas de Blackjack para Jugadores Experimentados',
     subtitle: 'Domina las técnicas profesionales para maximizar tus ganancias',
-    author: 'Carlos Mendoza',
-    authorRole: 'Experto en Estrategias de Casino',
+    author: {
+      name: 'Carlos Mendoza',
+      role: 'Experto en Estrategias de Casino',
+      avatar: '🎰'
+    },
     date: '27 de Diciembre, 2024',
     readTime: '15 min',
     category: 'Estrategia',
@@ -934,10 +938,14 @@ const guidesData = {
     ]
   },
   'gestion-bankroll-clave-exito': {
+    id: 'gestion-bankroll-clave-exito',
     title: 'Gestión de Bankroll: La Clave del Éxito en los Casinos',
     subtitle: 'Aprende a administrar tu dinero como un profesional',
-    author: 'Laura Gutiérrez',
-    authorRole: 'Analista Financiera de Juegos',
+    author: {
+      name: 'Laura Gutiérrez',
+      role: 'Analista Financiera de Juegos',
+      avatar: '💰'
+    },
     date: '26 de Diciembre, 2024',
     readTime: '12 min',
     category: 'Finanzas',
@@ -1008,10 +1016,14 @@ const guidesData = {
     ]
   },
   'ruleta-sistemas-apuestas-mitos': {
+    id: 'ruleta-sistemas-apuestas-mitos',
     title: 'Ruleta: Sistemas de Apuestas y Mitos Desmentidos',
     subtitle: 'La verdad sobre las estrategias de ruleta más populares',
-    author: 'Roberto Jiménez',
-    authorRole: 'Matemático y Analista de Juegos',
+    author: {
+      name: 'Roberto Jiménez',
+      role: 'Matemático y Analista de Juegos',
+      avatar: '🎲'
+    },
     date: '25 de Diciembre, 2024',
     readTime: '14 min',
     category: 'Juegos',
@@ -1088,10 +1100,14 @@ const guidesData = {
     ]
   },
   'slots-online-rtp-volatilidad': {
+    id: 'slots-online-rtp-volatilidad',
     title: 'Slots Online: Entendiendo RTP, Volatilidad y Bonificaciones',
     subtitle: 'Guía completa para maximizar tu experiencia en tragamonedas',
-    author: 'Ana Martínez',
-    authorRole: 'Especialista en Slots Online',
+    author: {
+      name: 'Ana Martínez',
+      role: 'Especialista en Slots Online',
+      avatar: '🎰'
+    },
     date: '24 de Diciembre, 2024',
     readTime: '11 min',
     category: 'Juegos',
@@ -1160,10 +1176,14 @@ const guidesData = {
     ]
   },
   'poker-online-principiantes-pros': {
+    id: 'poker-online-principiantes-pros',
     title: 'Póker Online: De Principiante a Profesional',
     subtitle: 'Estrategias, psicología y gestión para dominar el póker',
-    author: 'Diego Rodríguez',
-    authorRole: 'Jugador Profesional de Póker',
+    author: {
+      name: 'Diego Rodríguez',
+      role: 'Jugador Profesional de Póker',
+      avatar: '♠️'
+    },
     date: '23 de Diciembre, 2024',
     readTime: '18 min',
     category: 'Estrategia',
@@ -1237,10 +1257,14 @@ const guidesData = {
     ]
   },
   'bonos-casino-guia-completa': {
+    id: 'bonos-casino-guia-completa',
     title: 'Guía Completa de Bonos de Casino: Maximiza tu Valor',
     subtitle: 'Todo sobre bonos, requisitos de apuesta y estrategias',
-    author: 'Patricia López',
-    authorRole: 'Experta en Promociones de Casino',
+    author: {
+      name: 'Patricia López',
+      role: 'Experta en Promociones de Casino',
+      avatar: '🎁'
+    },
     date: '22 de Diciembre, 2024',
     readTime: '13 min',
     category: 'Bonos',
@@ -1314,10 +1338,14 @@ const guidesData = {
     ]
   },
   'casinos-movil-vs-desktop': {
+    id: 'casinos-movil-vs-desktop',
     title: 'Casinos Móvil vs Desktop: ¿Cuál es Mejor para Ti?',
     subtitle: 'Comparación completa de plataformas de juego',
-    author: 'Miguel Fernández',
-    authorRole: 'Analista de Tecnología de Juegos',
+    author: {
+      name: 'Miguel Fernández',
+      role: 'Analista de Tecnología de Juegos',
+      avatar: '📱'
+    },
     date: '21 de Diciembre, 2024',
     readTime: '10 min',
     category: 'Tecnología',
@@ -1380,10 +1408,14 @@ const guidesData = {
     ]
   },
   'psicologia-juego-responsable': {
+    id: 'psicologia-juego-responsable',
     title: 'Psicología del Juego y Juego Responsable',
     subtitle: 'Mantén el control y disfruta sanamente',
-    author: 'Dra. Isabel Ruiz',
-    authorRole: 'Psicóloga Especializada en Ludopatía',
+    author: {
+      name: 'Dra. Isabel Ruiz',
+      role: 'Psicóloga Especializada en Ludopatía',
+      avatar: '🧠'
+    },
     date: '20 de Diciembre, 2024',
     readTime: '10 min',
     category: 'Responsabilidad',
@@ -1453,10 +1485,14 @@ const guidesData = {
     ]
   },
   'seguridad-casinos-online': {
+    id: 'seguridad-casinos-online',
     title: 'Seguridad en Casinos Online: Protege tu Dinero y Datos',
     subtitle: 'Guía completa para jugar con total tranquilidad',
-    author: 'Carlos Sánchez',
-    authorRole: 'Experto en Ciberseguridad',
+    author: {
+      name: 'Carlos Sánchez',
+      role: 'Experto en Ciberseguridad',
+      avatar: '🔒'
+    },
     date: '19 de Diciembre, 2024',
     readTime: '9 min',
     category: 'Seguridad',
@@ -1532,10 +1568,14 @@ const guidesData = {
     ]
   },
   'torneos-casino-estrategias': {
+    id: 'torneos-casino-estrategias',
     title: 'Torneos de Casino: Estrategias para Competir y Ganar',
     subtitle: 'Maximiza tus oportunidades en competencias de casino',
-    author: 'Fernando Torres',
-    authorRole: 'Campeón de Torneos de Póker',
+    author: {
+      name: 'Fernando Torres',
+      role: 'Campeón de Torneos de Póker',
+      avatar: '🏆'
+    },
     date: '18 de Diciembre, 2024',
     readTime: '15 min',
     category: 'Estrategia',
@@ -1622,10 +1662,14 @@ const guidesData = {
     ]
   },
   'metodos-pago-casino-2024': {
+    id: 'metodos-pago-casino-2024',
     title: 'Métodos de Pago en Casinos 2024: Guía Completa',
     subtitle: 'Criptomonedas, e-wallets y opciones tradicionales',
-    author: 'Lucía Vázquez',
-    authorRole: 'Analista Fintech',
+    author: {
+      name: 'Lucía Vázquez',
+      role: 'Analista Fintech',
+      avatar: '💳'
+    },
     date: '17 de Diciembre, 2024',
     readTime: '12 min',
     category: 'Finanzas',
@@ -1716,10 +1760,14 @@ const guidesData = {
     ]
   },
   'mejores-slots-rtp-alto': {
+    id: 'mejores-slots-rtp-alto',
     title: 'Los Mejores Slots con RTP Alto',
     subtitle: 'Descubre las tragamonedas con mejores porcentajes de retorno',
-    author: 'María López',
-    authorRole: 'Especialista en Tragamonedas',
+    author: {
+      name: 'María López',
+      role: 'Especialista en Tragamonedas',
+      avatar: '🎰'
+    },
     date: '12 de Enero, 2024',
     readTime: '12 min',
     category: 'Juegos',
@@ -1793,10 +1841,14 @@ const guidesData = {
     ]
   },
   'bonos-casino-terminos-condiciones': {
+    id: 'bonos-casino-terminos-condiciones',
     title: 'Bonos de Casino: Términos y Condiciones Explicados',
     subtitle: 'Todo sobre rollover, requisitos de apuesta y cómo aprovechar bonos',
-    author: 'Diego Ramírez',
-    authorRole: 'Experto en Promociones',
+    author: {
+      name: 'Diego Ramírez',
+      role: 'Experto en Promociones',
+      avatar: '🎁'
+    },
     date: '11 de Enero, 2024',
     readTime: '7 min',
     category: 'Bonos',
@@ -1855,10 +1907,14 @@ const guidesData = {
     ]
   },
   'juego-responsable-senales-recursos': {
+    id: 'juego-responsable-senales-recursos',
     title: 'Juego Responsable: Señales y Recursos',
     subtitle: 'Identifica problemas con el juego y conoce los recursos de ayuda',
-    author: 'Laura Fernández',
-    authorRole: 'Consejera de Juego Responsable',
+    author: {
+      name: 'Laura Fernández',
+      role: 'Consejera de Juego Responsable',
+      avatar: '🚫'
+    },
     date: '10 de Enero, 2024',
     readTime: '6 min',
     category: 'Responsabilidad',
@@ -1933,10 +1989,14 @@ const guidesData = {
     ]
   },
   'metodos-pago-seguros-casinos': {
+    id: 'metodos-pago-seguros-casinos',
     title: 'Métodos de Pago Seguros para Casinos Online',
     subtitle: 'Protege tu información financiera al jugar online',
-    author: 'Carlos Mendoza',
-    authorRole: 'Especialista en Seguridad Financiera',
+    author: {
+      name: 'Carlos Mendoza',
+      role: 'Especialista en Seguridad Financiera',
+      avatar: '🔐'
+    },
     date: '9 de Enero, 2024',
     readTime: '9 min',
     category: 'Finanzas',
@@ -1999,10 +2059,14 @@ const guidesData = {
     ]
   },
   'torneos-poker-online-estrategias': {
+    id: 'torneos-poker-online-estrategias',
     title: 'Torneos de Poker Online: Estrategias para Principiantes',
     subtitle: 'Aprende las estrategias básicas para competir en torneos',
-    author: 'Ana García',
-    authorRole: 'Jugadora Profesional de Poker',
+    author: {
+      name: 'Ana García',
+      role: 'Jugadora Profesional de Poker',
+      avatar: '♣️'
+    },
     date: '8 de Enero, 2024',
     readTime: '18 min',
     category: 'Estrategia',
@@ -2065,10 +2129,14 @@ const guidesData = {
     ]
   },
   'casinos-criptomonedas-ventajas-desventajas': {
+    id: 'casinos-criptomonedas-ventajas-desventajas',
     title: 'Casinos con Criptomonedas: Ventajas y Desventajas',
     subtitle: 'Todo sobre jugar con Bitcoin y otras criptomonedas',
-    author: 'Roberto Silva',
-    authorRole: 'Experto en Fintech y Gambling',
+    author: {
+      name: 'Roberto Silva',
+      role: 'Experto en Fintech y Gambling',
+      avatar: '₿'
+    },
     date: '7 de Enero, 2024',
     readTime: '11 min',
     category: 'Finanzas',
@@ -2154,10 +2222,14 @@ const guidesData = {
     ]
   },
   'analisis-volatilidad-slots': {
+    id: 'analisis-volatilidad-slots',
     title: 'Análisis de Volatilidad en Slots Online',
     subtitle: 'Comprende cómo la volatilidad afecta tu experiencia de juego',
-    author: 'María López',
-    authorRole: 'Analista de Juegos de Casino',
+    author: {
+      name: 'María López',
+      role: 'Analista de Juegos de Casino',
+      avatar: '📈'
+    },
     date: '6 de Enero, 2024',
     readTime: '14 min',
     category: 'Juegos',
@@ -2232,10 +2304,14 @@ const guidesData = {
     ]
   },
   'estrategias-blackjack-basico': {
+    id: 'estrategias-blackjack-basico',
     title: 'Estrategias Básicas de Blackjack',
     subtitle: 'Domina las decisiones fundamentales del blackjack',
-    author: 'Pedro Martínez',
-    authorRole: 'Instructor de Blackjack',
+    author: {
+      name: 'Pedro Martínez',
+      role: 'Instructor de Blackjack',
+      avatar: '🃏'
+    },
     date: '5 de Enero, 2024',
     readTime: '10 min',
     category: 'Estrategia',
