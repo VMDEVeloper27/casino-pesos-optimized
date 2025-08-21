@@ -1932,37 +1932,101 @@ export async function getAllGames(): Promise<Game[]> {
       return games; // Fallback to static data
     }
     
-    if (!data || data.length === 0) {
-      console.log('No games found in Supabase, using static data');
-      return games;
+    // Create a map of Supabase games by ID for quick lookup
+    const supabaseGamesMap = new Map();
+    if (data && data.length > 0) {
+      data.forEach(game => {
+        supabaseGamesMap.set(game.id, game);
+      });
     }
+    
+    // Merge static games with Supabase data, preferring Supabase data
+    const mergedGames = games.map(staticGame => {
+      const supabaseGame = supabaseGamesMap.get(staticGame.id);
+      
+      if (supabaseGame) {
+        // Merge Supabase data with static data, preferring Supabase
+        return {
+          ...staticGame,
+          id: supabaseGame.id,
+          name: supabaseGame.name || staticGame.name,
+          slug: supabaseGame.slug || staticGame.slug,
+          provider: supabaseGame.provider || staticGame.provider,
+          type: supabaseGame.type || staticGame.type,
+          category: supabaseGame.category || staticGame.category,
+          rtp: supabaseGame.rtp ?? staticGame.rtp,
+          volatility: supabaseGame.volatility || staticGame.volatility,
+          maxWin: supabaseGame.max_win ?? staticGame.maxWin,
+          minBet: supabaseGame.min_bet ?? staticGame.minBet,
+          maxBet: supabaseGame.max_bet ?? staticGame.maxBet,
+          popularity: staticGame.popularity || 50, // Keep static popularity
+          image: supabaseGame.image || staticGame.image, // Prefer Supabase image
+          demoUrl: supabaseGame.demo_url || staticGame.demoUrl,
+          embedUrl: supabaseGame.embed_url || staticGame.embedUrl,
+          mobileOptimized: supabaseGame.mobile_optimized ?? staticGame.mobileOptimized,
+          availableAt: staticGame.availableAt, // Keep static data for now
+          description: supabaseGame.description || staticGame.description,
+          isNew: supabaseGame.is_new ?? staticGame.isNew,
+          isFeatured: supabaseGame.is_featured ?? staticGame.isFeatured,
+          isHot: supabaseGame.is_hot ?? staticGame.isHot,
+          features: supabaseGame.features || staticGame.features || [],
+          theme: supabaseGame.theme || staticGame.theme,
+          releaseDate: supabaseGame.release_date || staticGame.releaseDate,
+          paylines: supabaseGame.paylines ?? staticGame.paylines,
+          reels: supabaseGame.reels ?? staticGame.reels,
+          rows: supabaseGame.rows ?? staticGame.rows,
+          screenshots: supabaseGame.screenshots || staticGame.screenshots,
+          instructions: supabaseGame.instructions || staticGame.instructions,
+          paytable: supabaseGame.paytable || staticGame.paytable,
+          playCount: supabaseGame.play_count ?? staticGame.playCount,
+          fullscreenMode: supabaseGame.fullscreen_mode ?? staticGame.fullscreenMode
+        };
+      }
+      
+      return staticGame;
+    });
+    
+    // Add any Supabase games that don't exist in static data
+    data?.forEach(supabaseGame => {
+      if (!games.find(g => g.id === supabaseGame.id)) {
+        mergedGames.push({
+          id: supabaseGame.id,
+          name: supabaseGame.name,
+          slug: supabaseGame.slug,
+          provider: supabaseGame.provider,
+          type: supabaseGame.type,
+          category: supabaseGame.category,
+          rtp: supabaseGame.rtp,
+          volatility: supabaseGame.volatility,
+          maxWin: supabaseGame.max_win,
+          minBet: supabaseGame.min_bet,
+          maxBet: supabaseGame.max_bet,
+          popularity: 50,
+          image: supabaseGame.image || '/images/games/default.jpg',
+          demoUrl: supabaseGame.demo_url,
+          embedUrl: supabaseGame.embed_url,
+          mobileOptimized: supabaseGame.mobile_optimized,
+          availableAt: [],
+          isNew: supabaseGame.is_new,
+          isFeatured: supabaseGame.is_featured,
+          isHot: supabaseGame.is_hot,
+          features: supabaseGame.features || [],
+          description: supabaseGame.description,
+          theme: supabaseGame.theme,
+          releaseDate: supabaseGame.release_date,
+          paylines: supabaseGame.paylines,
+          reels: supabaseGame.reels,
+          rows: supabaseGame.rows,
+          screenshots: supabaseGame.screenshots,
+          instructions: supabaseGame.instructions,
+          paytable: supabaseGame.paytable,
+          playCount: supabaseGame.play_count,
+          fullscreenMode: supabaseGame.fullscreen_mode
+        });
+      }
+    });
 
-    // Transform Supabase data to match Game interface
-    const transformedGames = data?.map(game => ({
-      id: game.id,
-      name: game.name,
-      slug: game.slug,
-      provider: game.provider,
-      type: game.type,
-      category: game.category,
-      rtp: game.rtp,
-      volatility: game.volatility,
-      maxWin: game.max_win,
-      minBet: game.min_bet,
-      maxBet: game.max_bet,
-      popularity: 50, // Default value since column doesn't exist in DB
-      image: game.image || '/images/games/default.jpg',
-      demoUrl: game.demo_url,
-      embedUrl: game.embed_url,
-      mobileOptimized: game.mobile_optimized,
-      availableAt: [], // Will need to be fetched separately or joined
-      isNew: game.is_new,
-      isFeatured: game.is_featured,
-      isHot: game.is_hot,
-      features: game.features || []
-    })) || [];
-
-    return transformedGames.length > 0 ? transformedGames : games;
+    return mergedGames;
   } catch (error) {
     console.error('Error in getAllGames:', error);
     return games; // Fallback to static data
@@ -2120,13 +2184,16 @@ export async function getGameDetailsBySlug(slug: string): Promise<any | null> {
       .single();
 
     if (error) {
-      console.error('Error fetching game details:', error);
+      // Don't log error if table doesn't exist or no rows found - it's expected
+      if (error.code !== 'PGRST116' && error.code !== '42P01') {
+        console.error('Error fetching game details:', error);
+      }
       return null;
     }
 
     return data;
   } catch (error) {
-    console.error('Error fetching game details:', error);
+    // Silently return null for expected errors
     return null;
   }
 }
