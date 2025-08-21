@@ -228,8 +228,10 @@ export default async function BonusCategoryPage({ params }: PageProps) {
 
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="mb-4">
-            <FontAwesomeIcon icon={data.icon} className="text-6xl text-primary-600" />
+          <div className="mb-4 flex justify-center">
+            <div className="w-12 h-12 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl flex items-center justify-center border border-green-200">
+              <FontAwesomeIcon icon={data.icon} className="text-green-600" style={{ fontSize: '1.25rem', width: '1.25rem', height: '1.25rem' }} />
+            </div>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             {data.title}
@@ -267,8 +269,8 @@ export default async function BonusCategoryPage({ params }: PageProps) {
                         key={i}
                         className={`w-4 h-4 ${
                           i < Math.floor(bonus.rating)
-                            ? 'fill-primary text-primary'
-                            : 'text-neutral-600'
+                            ? 'fill-yellow-400 text-yellow-400'
+                            : 'text-gray-300'
                         }`}
                       />
                     ))}
@@ -278,7 +280,7 @@ export default async function BonusCategoryPage({ params }: PageProps) {
 
                 {/* Bonus Details */}
                 <div>
-                  <div className="bg-gradient-to-r from-primary/20 to-accent/20 rounded-xl p-4 mb-4 border border-primary/30">
+                  <div className="bg-gradient-to-r from-green-100 to-emerald-100 rounded-xl p-4 mb-4 border border-green-300">
                     <div className="text-2xl font-bold text-gray-900 mb-1">{bonus.amount}</div>
                     {bonus.extra && (
                       <div className="text-sm text-green-600">{bonus.extra}</div>
@@ -287,12 +289,12 @@ export default async function BonusCategoryPage({ params }: PageProps) {
                   
                   <div className="flex flex-wrap gap-4 text-sm">
                     <div className="flex items-center gap-2">
-                      <FontAwesomeIcon icon={faRotate} className="text-gray-400 text-xs" />
+                      <FontAwesomeIcon icon={faRotate} className="text-gray-400" style={{ fontSize: '0.75rem', width: '0.75rem', height: '0.75rem' }} />
                       <span className="text-gray-400">Rollover:</span>
                       <span className="text-gray-900 font-semibold">{bonus.rollover}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <FontAwesomeIcon icon={faWallet} className="text-gray-400 text-xs" />
+                      <FontAwesomeIcon icon={faWallet} className="text-gray-400" style={{ fontSize: '0.75rem', width: '0.75rem', height: '0.75rem' }} />
                       <span className="text-gray-400">Depósito Mín:</span>
                       <span className="text-gray-900 font-semibold">
                         {bonus.minDeposit === 0 ? 'Gratis' : `$${bonus.minDeposit} MXN`}
@@ -300,9 +302,9 @@ export default async function BonusCategoryPage({ params }: PageProps) {
                     </div>
                     {bonus.code && (
                       <div className="flex items-center gap-2">
-                        <FontAwesomeIcon icon={faTags} className="text-gray-400 text-xs" />
+                        <FontAwesomeIcon icon={faTags} className="text-gray-400" style={{ fontSize: '0.75rem', width: '0.75rem', height: '0.75rem' }} />
                         <span className="text-gray-400">Código:</span>
-                        <span className="text-primary font-mono font-bold ml-2">{bonus.code}</span>
+                        <span className="text-green-600 font-mono font-bold ml-2">{bonus.code}</span>
                       </div>
                     )}
                   </div>
@@ -310,9 +312,11 @@ export default async function BonusCategoryPage({ params }: PageProps) {
 
                 {/* Actions */}
                 <div className="flex flex-col gap-3">
-                  <button className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-black px-6 py-3 rounded-xl font-bold transition-all duration-200 transform hover:scale-105">
+                  <Link 
+                    href={`/${locale}/casinos/${bonus.slug}`}
+                    className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 block text-center">
                     Reclamar Bono
-                  </button>
+                  </Link>
                   <Link 
                     href={`/${locale}/casinos/${bonus.slug}`}
                     className="bg-gray-100 hover:bg-gray-200 text-gray-900 px-6 py-3 rounded-xl font-semibold text-center transition-colors"
@@ -332,7 +336,7 @@ export default async function BonusCategoryPage({ params }: PageProps) {
         {/* Info Section */}
         <div className="bg-white rounded-2xl p-8 mt-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
-            <FontAwesomeIcon icon={faCheckCircle} className="text-primary-600" />
+            <FontAwesomeIcon icon={faCheckCircle} className="text-green-600" style={{ fontSize: '1rem', width: '1rem', height: '1rem' }} />
             Sobre {data.title}
           </h2>
           <div className="prose prose-invert max-w-none">
@@ -345,24 +349,24 @@ export default async function BonusCategoryPage({ params }: PageProps) {
             <div className="grid md:grid-cols-2 gap-6 mt-6">
               <div className="bg-green-50 rounded-xl p-6 border border-green-200">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <FontAwesomeIcon icon={faCheckCircle} className="text-green-600" />
+                  <FontAwesomeIcon icon={faCheckCircle} className="text-green-600" style={{ fontSize: '0.875rem', width: '0.875rem', height: '0.875rem' }} />
                   Ventajas
                 </h3>
                 <ul className="space-y-2 text-sm text-gray-700">
                   <li className="flex items-start gap-2">
-                    <FontAwesomeIcon icon={faCoins} className="text-green-500 mt-1 text-xs" />
+                    <FontAwesomeIcon icon={faCoins} className="text-green-500 mt-0.5" style={{ fontSize: '0.75rem', width: '0.75rem', height: '0.75rem' }} />
                     <span>Aumentan tu bankroll inicial</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <FontAwesomeIcon icon={faClock} className="text-green-500 mt-1 text-xs" />
+                    <FontAwesomeIcon icon={faClock} className="text-green-500 mt-0.5" style={{ fontSize: '0.75rem', width: '0.75rem', height: '0.75rem' }} />
                     <span>Más tiempo de juego y diversión</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <FontAwesomeIcon icon={faWallet} className="text-green-500 mt-1 text-xs" />
+                    <FontAwesomeIcon icon={faWallet} className="text-green-500 mt-0.5" style={{ fontSize: '0.75rem', width: '0.75rem', height: '0.75rem' }} />
                     <span>Oportunidad de ganar sin arriesgar tanto</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <FontAwesomeIcon icon={faGamepad} className="text-green-500 mt-1 text-xs" />
+                    <FontAwesomeIcon icon={faGamepad} className="text-green-500 mt-0.5" style={{ fontSize: '0.75rem', width: '0.75rem', height: '0.75rem' }} />
                     <span>Acceso a juegos premium</span>
                   </li>
                 </ul>
