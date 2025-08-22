@@ -1,62 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
-import { prisma } from '@/lib/prisma';
+import { supabaseAdmin } from '@/lib/supabase-admin';
 import fs from 'fs/promises';
 import path from 'path';
 
 export async function GET(request: NextRequest) {
   try {
-    // Check if user is admin or editor (temporarily disabled for development)
-    // const session = await getServerSession(authOptions);
-    // if (!session || (session.user?.role !== 'admin' && session.user?.role !== 'editor')) {
-    //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    // }
-
-    // Try to fetch from database first
-    let posts = [];
+    // Fetch from Supabase only
+    const { data: posts, error } = await supabaseAdmin
+      .from('blog_posts')
+      .select('*')
+      .order('created_at', { ascending: false });
     
-    try {
-      // Use Prisma to fetch blog posts
-      const blogPosts = await prisma.blogPost.findMany({
-        orderBy: {
-          createdAt: 'desc'
-        }
-      });
-      
-      if (blogPosts && blogPosts.length > 0) {
-        // Map to match expected format
-        posts = blogPosts.map(post => ({
-          ...post,
-          publishedAt: post.publishedAt?.toISOString(),
-          createdAt: post.createdAt.toISOString(),
-          updatedAt: post.updatedAt.toISOString()
-        }));
-      } else {
-        // If no posts in DB, try JSON fallback
-        const jsonPath = path.join(process.cwd(), 'data', 'blog-posts.json');
-        try {
-          const jsonData = await fs.readFile(jsonPath, 'utf-8');
-          const blogData = JSON.parse(jsonData);
-          posts = blogData.posts || [];
-        } catch (fileError) {
-          console.error('Error reading JSON file:', fileError);
-        }
-      }
-    } catch (dbError) {
-      console.log('Database error:', dbError);
-      // Fallback to JSON file
-      const jsonPath = path.join(process.cwd(), 'data', 'blog-posts.json');
-      try {
-        const jsonData = await fs.readFile(jsonPath, 'utf-8');
-        const blogData = JSON.parse(jsonData);
-        posts = blogData.posts || [];
-      } catch (fileError) {
-        console.error('Error reading JSON file:', fileError);
-      }
+    if (error) {
+      console.error('Error fetching blog posts:', error);
+      return NextResponse.json({ posts: [] });
     }
-    
-    return NextResponse.json({ posts });
+
+    return NextResponse.json({ posts: posts || [] });
   } catch (error) {
     console.error('Error fetching blog posts:', error);
     return NextResponse.json({ error: 'Failed to fetch posts' }, { status: 500 });
@@ -65,12 +25,6 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    // Check if user is admin or editor (temporarily disabled for development)
-    // const session = await getServerSession(authOptions);
-    // if (!session || (session.user?.role !== 'admin' && session.user?.role !== 'editor')) {
-    //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    // }
-
     const postData = await request.json();
     
     // Generate slug if not provided
@@ -88,135 +42,55 @@ export async function POST(request: NextRequest) {
     postData.readTime = postData.readTime || 5;
     
     // Set published date if status is published
-    if (postData.status === 'PUBLISHED' && !postData.publishedAt) {
-      postData.publishedAt = new Date();
+    if (postData.status === 'published' && !postData.published_at) {
+      postData.published_at = new Date().toISOString();
     }
     
-    // Try to save to database first
-    try {
-      // Use Prisma to create blog post
-      const newPost = await prisma.blogPost.create({
-        data: {
-          slug: postData.slug,
-          title: postData.title,
-          titleEs: postData.titleEs,
-          titleEn: postData.titleEn,
-          excerpt: postData.excerpt,
-          excerptEs: postData.excerptEs,
-          excerptEn: postData.excerptEn,
-          content: postData.content,
-          contentEs: postData.contentEs,
-          contentEn: postData.contentEn,
-          author: postData.author,
-          authorRole: postData.authorRole,
-          authorEmail: postData.authorEmail,
-          authorAvatar: postData.authorAvatar,
-          category: postData.category,
-          tags: postData.tags || [],
-          featuredImage: postData.featuredImage,
-          images: postData.images || [],
-          metaTitle: postData.metaTitle,
-          metaDescription: postData.metaDescription,
-          metaKeywords: postData.metaKeywords || [],
-          canonicalUrl: postData.canonicalUrl,
-          views: postData.views,
-          likes: postData.likes,
-          shares: postData.shares,
-          readTime: postData.readTime,
-          status: postData.status || 'DRAFT',
-          isFeatured: postData.isFeatured || false,
-          publishedAt: postData.publishedAt
-        }
-      });
-      
-      // If published, send notifications
-      if (newPost.status === 'PUBLISHED') {
-        await sendNewPostNotifications(newPost);
-      }
-      
-      return NextResponse.json(newPost);
-    } catch (dbError) {
-      console.log('Database save failed:', dbError);
-      
-      // Fallback to JSON file
-      postData.id = postData.id || `post-${Date.now()}`;
-      postData.createdAt = new Date().toISOString();
-      postData.updatedAt = new Date().toISOString();
-      
-      const jsonPath = path.join(process.cwd(), 'data', 'blog-posts.json');
-      let blogData = { posts: [] };
-      
-      try {
-        const jsonContent = await fs.readFile(jsonPath, 'utf-8');
-        blogData = JSON.parse(jsonContent);
-      } catch (err) {
-        // File doesn't exist, will create it
-      }
-      
-      blogData.posts.unshift(postData);
-      await fs.writeFile(jsonPath, JSON.stringify(blogData, null, 2));
-      
-      // Send notifications if published
-      if (postData.status === 'PUBLISHED') {
-        await sendNewPostNotifications(postData);
-      }
-      
-      return NextResponse.json(postData);
+    // Save to Supabase
+    const { data: newPost, error } = await supabaseAdmin
+      .from('blog_posts')
+      .insert({
+        slug: postData.slug,
+        title: postData.title,
+        title_es: postData.titleEs || postData.title,
+        title_en: postData.titleEn || postData.title,
+        excerpt: postData.excerpt,
+        excerpt_es: postData.excerptEs || postData.excerpt,
+        excerpt_en: postData.excerptEn || postData.excerpt,
+        content: postData.content,
+        content_es: postData.contentEs || postData.content,
+        content_en: postData.contentEn || postData.content,
+        author: postData.author || 'Admin',
+        author_role: postData.authorRole || postData.author_role || 'Editor',
+        author_email: postData.authorEmail || postData.author_email,
+        author_avatar: postData.authorAvatar || postData.author_avatar,
+        category: postData.category,
+        tags: postData.tags || [],
+        featured_image: postData.featuredImage || postData.featured_image,
+        images: postData.images || [],
+        meta_title: postData.metaTitle || postData.meta_title,
+        meta_description: postData.metaDescription || postData.meta_description,
+        meta_keywords: postData.metaKeywords || postData.meta_keywords || [],
+        canonical_url: postData.canonicalUrl || postData.canonical_url,
+        views: postData.views || 0,
+        likes: postData.likes || 0,
+        shares: postData.shares || 0,
+        read_time: postData.readTime || postData.read_time || 5,
+        status: postData.status || 'draft',
+        is_featured: postData.isFeatured || postData.is_featured || false,
+        published_at: postData.published_at || postData.publishedAt
+      })
+      .select()
+      .single();
+    
+    if (error) {
+      console.error('Error creating blog post:', error);
+      return NextResponse.json({ error: 'Failed to create post' }, { status: 500 });
     }
+    
+    return NextResponse.json(newPost);
   } catch (error) {
     console.error('Error creating blog post:', error);
     return NextResponse.json({ error: 'Failed to create post' }, { status: 500 });
-  }
-}
-
-async function sendNewPostNotifications(post: any) {
-  try {
-    console.log('📧 Sending notifications for new post:', post.title);
-    
-    // Get subscribers from database or JSON
-    let subscribers = [];
-    
-    try {
-      const { supabase } = await import('@/lib/supabase');
-      const { data } = await supabase
-        .from('newsletter_subscribers')
-        .select('email, first_name')
-        .eq('status', 'active');
-      
-      if (data) {
-        subscribers = data;
-      }
-    } catch (err) {
-      console.log('Could not fetch subscribers from database');
-    }
-    
-    // If no subscribers from DB, try JSON
-    if (subscribers.length === 0) {
-      try {
-        const jsonPath = path.join(process.cwd(), 'data', 'subscribers.json');
-        const jsonData = await fs.readFile(jsonPath, 'utf-8');
-        const subData = JSON.parse(jsonData);
-        subscribers = subData.subscribers || [];
-      } catch (err) {
-        console.log('No subscribers found');
-      }
-    }
-    
-    if (subscribers.length === 0) {
-      console.log('No subscribers to notify');
-      return;
-    }
-    
-    console.log(`📨 Would send notifications to ${subscribers.length} subscribers`);
-    
-    // Here you would implement actual email sending
-    // For now, just log it
-    for (const subscriber of subscribers) {
-      console.log(`Email would be sent to: ${subscriber.email}`);
-      // In production, use your email service here
-    }
-    
-  } catch (error) {
-    console.error('Error sending notifications:', error);
   }
 }

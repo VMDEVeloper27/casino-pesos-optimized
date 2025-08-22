@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { supabaseAdminAdmin } from '@/lib/supabaseAdmin-admin';
 
 interface Params {
   params: Promise<{
@@ -12,7 +12,7 @@ export async function GET(request: NextRequest, { params }: Params) {
   try {
     const { id } = await params;
     
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from('casinos')
       .select('*')
       .eq('id', id)
@@ -152,7 +152,7 @@ export async function PUT(request: NextRequest, { params }: Params) {
     
     console.log('Sending to Supabase:', casinoData);
     
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from('casinos')
       .update(casinoData)
       .eq('id', id)
@@ -224,7 +224,7 @@ export async function PATCH(request: NextRequest, { params }: Params) {
       if (partialUpdate.games.table !== undefined) updateData.games_table = partialUpdate.games.table;
     }
     
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from('casinos')
       .update(updateData)
       .eq('id', id)
@@ -250,7 +250,7 @@ export async function DELETE(request: NextRequest, { params }: Params) {
   try {
     const { id } = await params;
     
-    const { error } = await supabase
+    const { error } = await supabaseAdmin
       .from('casinos')
       .delete()
       .eq('id', id);

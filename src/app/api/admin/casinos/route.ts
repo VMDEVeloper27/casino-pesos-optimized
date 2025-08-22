@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { supabaseAdminAdmin } from '@/lib/supabaseAdmin-admin';
 
 // Get all casinos
 export async function GET() {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from('casinos')
       .select('*')
       .order('created_at', { ascending: false });
@@ -98,7 +98,7 @@ export async function POST(request: NextRequest) {
     };
     
     // Insert into database
-    const { data: newCasino, error } = await supabase
+    const { data: newCasino, error } = await supabaseAdmin
       .from('casinos')
       .insert(casinoData)
       .select()

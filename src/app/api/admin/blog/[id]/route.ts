@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
-import { prisma } from '@/lib/prisma';
+import { supabaseAdmin } from '@/lib/supabase-admin';
+import { updateBlogPostDirect } from '@/lib/supabase-direct';
+import fs from 'fs/promises';
+import path from 'path';
 
 export async function GET(
   request: NextRequest,
@@ -10,43 +11,19 @@ export async function GET(
   try {
     const { id } = await params;
     
-    // Check if user is admin or editor (temporarily disabled for development)
-    // const session = await getServerSession(authOptions);
-    // if (!session || (session.user?.role !== 'admin' && session.user?.role !== 'editor')) {
-    //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    // }
-
-    // Try database first
-    try {
-      const post = await prisma.blogPost.findUnique({
-        where: { id }
-      });
-      
-      if (post) {
-        return NextResponse.json({
-          ...post,
-          publishedAt: post.publishedAt?.toISOString(),
-          createdAt: post.createdAt.toISOString(),
-          updatedAt: post.updatedAt.toISOString()
-        });
-      }
-    } catch (dbError) {
-      console.log('Database error:', dbError);
-      
-      // Fallback to JSON file
-      try {
-        const { getBlogPostById } = await import('@/lib/blog-database');
-        const post = await getBlogPostById(id);
-        
-        if (post) {
-          return NextResponse.json(post);
-        }
-      } catch (fileError) {
-        console.log('JSON fallback also failed');
-      }
+    // Fetch from Supabase only
+    const { data: post, error } = await supabaseAdmin
+      .from('blog_posts')
+      .select('*')
+      .eq('id', id)
+      .single();
+    
+    if (error) {
+      console.error('Error fetching post:', error);
+      return NextResponse.json({ error: 'Post not found' }, { status: 404 });
     }
     
-    return NextResponse.json({ error: 'Post not found' }, { status: 404 });
+    return NextResponse.json(post);
   } catch (error) {
     console.error('Error fetching post:', error);
     return NextResponse.json({ error: 'Failed to fetch post' }, { status: 500 });
@@ -59,100 +36,74 @@ export async function PUT(
 ) {
   try {
     const { id } = await params;
-    
-    // Check if user is admin or editor (temporarily disabled for development)
-    // const session = await getServerSession(authOptions);
-    // if (!session || (session.user?.role !== 'admin' && session.user?.role !== 'editor')) {
-    //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    // }
-
     const updates = await request.json();
     
-    // Prepare update data
+    console.log('Updating blog post:', { id, updates });
+    
+    // Prepare update data with proper field mapping
     const updateData: any = {};
     
-    // Map fields that exist in the update request
+    // Map fields to database columns
     if (updates.title !== undefined) updateData.title = updates.title;
-    if (updates.titleEs !== undefined) updateData.titleEs = updates.titleEs;
-    if (updates.titleEn !== undefined) updateData.titleEn = updates.titleEn;
+    if (updates.titleEs !== undefined) updateData.title_es = updates.titleEs;
+    if (updates.titleEn !== undefined) updateData.title_en = updates.titleEn;
     if (updates.slug !== undefined) updateData.slug = updates.slug;
     if (updates.excerpt !== undefined) updateData.excerpt = updates.excerpt;
-    if (updates.excerptEs !== undefined) updateData.excerptEs = updates.excerptEs;
-    if (updates.excerptEn !== undefined) updateData.excerptEn = updates.excerptEn;
+    if (updates.excerptEs !== undefined) updateData.excerpt_es = updates.excerptEs;
+    if (updates.excerptEn !== undefined) updateData.excerpt_en = updates.excerptEn;
     if (updates.content !== undefined) updateData.content = updates.content;
-    if (updates.contentEs !== undefined) updateData.contentEs = updates.contentEs;
-    if (updates.contentEn !== undefined) updateData.contentEn = updates.contentEn;
+    if (updates.contentEs !== undefined) updateData.content_es = updates.contentEs;
+    if (updates.contentEn !== undefined) updateData.content_en = updates.contentEn;
     if (updates.author !== undefined) updateData.author = updates.author;
-    if (updates.authorRole !== undefined) updateData.authorRole = updates.authorRole;
-    if (updates.authorEmail !== undefined) updateData.authorEmail = updates.authorEmail;
-    if (updates.authorAvatar !== undefined) updateData.authorAvatar = updates.authorAvatar;
+    if (updates.authorRole !== undefined) updateData.author_role = updates.authorRole || updates.author_role;
+    if (updates.authorEmail !== undefined) updateData.author_email = updates.authorEmail || updates.author_email;
+    if (updates.authorAvatar !== undefined) updateData.author_avatar = updates.authorAvatar || updates.author_avatar;
     if (updates.category !== undefined) updateData.category = updates.category;
     if (updates.tags !== undefined) updateData.tags = updates.tags;
-    if (updates.featuredImage !== undefined) updateData.featuredImage = updates.featuredImage;
+    if (updates.featuredImage !== undefined) updateData.featured_image = updates.featuredImage || updates.featured_image;
+    if (updates.featured_image !== undefined) updateData.featured_image = updates.featured_image;
     if (updates.images !== undefined) updateData.images = updates.images;
-    if (updates.metaTitle !== undefined) updateData.metaTitle = updates.metaTitle;
-    if (updates.metaDescription !== undefined) updateData.metaDescription = updates.metaDescription;
-    if (updates.metaKeywords !== undefined) updateData.metaKeywords = updates.metaKeywords;
-    if (updates.canonicalUrl !== undefined) updateData.canonicalUrl = updates.canonicalUrl;
+    if (updates.metaTitle !== undefined) updateData.meta_title = updates.metaTitle || updates.meta_title;
+    if (updates.metaDescription !== undefined) updateData.meta_description = updates.metaDescription || updates.meta_description;
+    if (updates.metaKeywords !== undefined) updateData.meta_keywords = updates.metaKeywords || updates.meta_keywords;
+    if (updates.canonicalUrl !== undefined) updateData.canonical_url = updates.canonicalUrl || updates.canonical_url;
     if (updates.views !== undefined) updateData.views = updates.views;
     if (updates.likes !== undefined) updateData.likes = updates.likes;
     if (updates.shares !== undefined) updateData.shares = updates.shares;
-    if (updates.readTime !== undefined) updateData.readTime = updates.readTime;
-    if (updates.isFeatured !== undefined) updateData.isFeatured = updates.isFeatured;
+    if (updates.readTime !== undefined) updateData.read_time = updates.readTime || updates.read_time;
+    if (updates.read_time !== undefined) updateData.read_time = updates.read_time;
+    if (updates.isFeatured !== undefined) updateData.is_featured = updates.isFeatured || updates.is_featured;
+    if (updates.is_featured !== undefined) updateData.is_featured = updates.is_featured;
     
-    // Handle status and publishedAt
+    // Handle status
     if (updates.status !== undefined) {
-      updateData.status = updates.status === 'published' ? 'PUBLISHED' : updates.status === 'draft' ? 'DRAFT' : 'ARCHIVED';
-      if (updateData.status === 'PUBLISHED' && !updates.publishedAt) {
-        updateData.publishedAt = new Date();
+      updateData.status = updates.status;
+      if (updates.status === 'published' && !updates.published_at) {
+        updateData.published_at = new Date().toISOString();
       }
     }
     
     if (updates.publishedAt !== undefined) {
-      updateData.publishedAt = updates.publishedAt ? new Date(updates.publishedAt) : null;
+      updateData.published_at = updates.publishedAt || updates.published_at;
+    }
+    if (updates.published_at !== undefined) {
+      updateData.published_at = updates.published_at;
     }
     
-    // Try database first
+    // Update timestamp
+    updateData.updated_at = new Date().toISOString();
+    
+    // Update in Supabase using direct method to bypass RLS return issue
+    console.log('Updating in Supabase with data:', updateData);
+    
     try {
-      const updatedPost = await prisma.blogPost.update({
-        where: { id },
-        data: updateData
-      });
-      
-      // Send notifications if newly published
-      if (updatedPost.status === 'PUBLISHED') {
-        await sendUpdateNotifications(updatedPost);
-      }
-      
-      return NextResponse.json({
-        ...updatedPost,
-        status: updatedPost.status === 'PUBLISHED' ? 'published' : updatedPost.status === 'DRAFT' ? 'draft' : 'archived',
-        publishedAt: updatedPost.publishedAt?.toISOString(),
-        createdAt: updatedPost.createdAt.toISOString(),
-        updatedAt: updatedPost.updatedAt.toISOString()
-      });
-    } catch (dbError) {
-      console.log('Database update failed:', dbError);
-      
-      // Fallback to JSON file
-      try {
-        const { updateBlogPost } = await import('@/lib/blog-database');
-        const result = await updateBlogPost(id, updates);
-        
-        if (result) {
-          // Send notifications if newly published
-          if (updates.status === 'published') {
-            await sendUpdateNotifications(result);
-          }
-          
-          return NextResponse.json(result);
-        }
-      } catch (fileError) {
-        console.log('JSON fallback also failed');
-      }
+      const updatedPost = await updateBlogPostDirect(id, updateData);
+      console.log('Supabase update successful:', updatedPost);
+      return NextResponse.json(updatedPost);
+    } catch (error: any) {
+      console.error('Supabase update error:', error);
+      return NextResponse.json({ error: error.message || 'Failed to update post' }, { status: 500 });
     }
-    
-    return NextResponse.json({ error: 'Failed to update post' }, { status: 500 });
   } catch (error) {
     console.error('Error updating post:', error);
     return NextResponse.json({ error: 'Failed to update post' }, { status: 500 });
@@ -166,44 +117,20 @@ export async function DELETE(
   try {
     const { id } = await params;
     
-    // Check if user is admin or editor (temporarily disabled for development)
-    // const session = await getServerSession(authOptions);
-    // if (!session || (session.user?.role !== 'admin' && session.user?.role !== 'editor')) {
-    //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    // }
-
-    // Try database first
-    try {
-      await prisma.blogPost.delete({
-        where: { id }
-      });
-      
-      return NextResponse.json({ success: true });
-    } catch (dbError) {
-      console.log('Database delete failed:', dbError);
-      
-      // Fallback to JSON file
-      try {
-        const { deleteBlogPost } = await import('@/lib/blog-database');
-        const deleted = await deleteBlogPost(id);
-        
-        if (deleted) {
-          return NextResponse.json({ success: true });
-        }
-      } catch (fileError) {
-        console.log('JSON fallback also failed');
-      }
+    // Delete from Supabase only
+    const { error } = await supabaseAdmin
+      .from('blog_posts')
+      .delete()
+      .eq('id', id);
+    
+    if (error) {
+      console.error('Error deleting post:', error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
     }
     
-    return NextResponse.json({ error: 'Failed to delete post' }, { status: 500 });
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error deleting post:', error);
     return NextResponse.json({ error: 'Failed to delete post' }, { status: 500 });
   }
-}
-
-async function sendUpdateNotifications(post: any) {
-  // Similar to sendNewPostNotifications but for updates
-  console.log('📧 Post updated:', post.title);
-  // Implement email sending logic here if needed
 }
