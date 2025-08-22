@@ -423,19 +423,21 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
                 <nav className="space-y-1">
                   {navItems.map((item) => (
                     <div key={item.href}>
-                      {item.submenu ? (
+                      {item.hasDropdown && item.dropdownItems ? (
                         <>
                           <button
-                            onClick={() => setActiveMobileSubmenu(activeMobileSubmenu === item.href ? null : item.href)}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              setActiveMobileSubmenu(activeMobileSubmenu === item.label ? null : item.label);
+                            }}
                             className={cn(
                               "w-full flex items-center justify-between p-4 rounded-lg transition-all font-medium",
-                              pathname.startsWith(item.href)
-                                ? "bg-green-50 text-green-700 border-l-4 border-green-600"
-                                : "text-gray-700 hover:text-green-700 hover:bg-gray-50"
+                              "text-gray-700 hover:text-green-700 hover:bg-gray-50"
                             )}
                           >
                             <div className="flex items-center gap-3">
-                              {item.icon && <item.icon className="w-5 h-5" />}
+                              {item.icon && item.icon !== ChevronDown && <item.icon className="w-5 h-5" />}
                               <span>{item.label}</span>
                               {item.badge && (
                                 <span className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs px-2 py-0.5 rounded-full font-bold animate-pulse-slow">
@@ -445,11 +447,11 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
                             </div>
                             <ChevronDown className={cn(
                               "w-4 h-4 transition-transform",
-                              activeMobileSubmenu === item.href && "rotate-180"
+                              activeMobileSubmenu === item.label && "rotate-180"
                             )} />
                           </button>
                           <AnimatePresence>
-                            {activeMobileSubmenu === item.href && (
+                            {activeMobileSubmenu === item.label && (
                               <motion.div
                                 initial={{ height: 0, opacity: 0 }}
                                 animate={{ height: 'auto', opacity: 1 }}
@@ -458,7 +460,7 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
                                 className="overflow-hidden"
                               >
                                 <div className="ml-8 mt-1 space-y-1">
-                                  {item.submenu.map((subItem) => (
+                                  {item.dropdownItems.map((subItem) => (
                                     <Link
                                       key={subItem.href}
                                       href={subItem.href}
