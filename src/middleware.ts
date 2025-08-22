@@ -14,13 +14,15 @@ const intlMiddleware = createIntlMiddleware({
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   
-  // Skip middleware for API routes and static files
+  // Skip middleware for API routes, static files, and sitemap
   if (
     pathname.startsWith('/api/') ||
     pathname.startsWith('/_next/') ||
     pathname.includes('/favicon') ||
     pathname.includes('/site.webmanifest') ||
     pathname.includes('/robots.txt') ||
+    pathname.includes('/sitemap.xml') ||
+    pathname.includes('/rss') ||
     pathname.match(/\.(png|jpg|jpeg|gif|svg|ico|webp|css|js|woff|woff2|ttf|otf)$/i)
   ) {
     return NextResponse.next();
@@ -116,8 +118,10 @@ export const config = {
      * - favicon.ico (favicon file)
      * - site.webmanifest (PWA manifest)
      * - robots.txt (SEO file)
+     * - sitemap.xml (SEO sitemap)
+     * - rss (RSS feed)
      * - public files
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|site.webmanifest|robots.txt).*)'
+    '/((?!api|_next/static|_next/image|favicon.ico|site.webmanifest|robots.txt|sitemap.xml|rss).*)'
   ]
 };
