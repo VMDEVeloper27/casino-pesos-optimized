@@ -1,5 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { uploadCasinoLogo, uploadGameImage, listCasinoLogos, listGameImages, deleteCasinoLogo } from '@/lib/supabase-storage';
+import { 
+  uploadCasinoLogo, 
+  uploadGameImage, 
+  uploadBlogImage,
+  listCasinoLogos, 
+  listGameImages, 
+  listBlogImages,
+  deleteCasinoLogo,
+  deleteBlogImage 
+} from '@/lib/supabase-storage';
 
 // Simple auth check - in production, use proper authentication
 async function checkAuth(req: NextRequest) {
@@ -19,6 +28,7 @@ export async function POST(req: NextRequest) {
     const file = formData.get('file') as File;
     const casinoId = formData.get('casinoId') as string;
     const gameId = formData.get('gameId') as string;
+    const blogId = formData.get('blogId') as string;
     const type = formData.get('type') as string || 'general';
     
     if (!file) {
@@ -48,12 +58,15 @@ export async function POST(req: NextRequest) {
     let publicUrl: string | null = null;
     
     // Upload to Supabase Storage based on type
-    console.log('Uploading file:', { type, casinoId, gameId, fileName: file.name });
+    console.log('Uploading file:', { type, casinoId, gameId, blogId, fileName: file.name });
     
     if (type === 'casino-logo' && casinoId) {
       publicUrl = await uploadCasinoLogo(file, casinoId);
     } else if (type === 'game-image' && gameId) {
       publicUrl = await uploadGameImage(file, gameId);
+    } else if (type === 'blog-image' && (blogId || gameId)) {
+      // Support both blogId and gameId for blog images (for compatibility)
+      publicUrl = await uploadBlogImage(file, blogId || gameId);
     } else if (type === 'game-image' && casinoId) {
       // Fallback for compatibility
       publicUrl = await uploadGameImage(file, casinoId);
@@ -98,21 +111,26 @@ export async function GET(req: NextRequest) {
     const type = searchParams.get('type') || 'casino-logos';
     
     if (type === 'all') {
-      // Get files from both buckets
+      // Get files from all buckets
       const casinoLogos = await listCasinoLogos();
       const gameImages = await listGameImages();
+      const blogImages = await listBlogImages();
       
       // Add bucket info to each file
       const casinoFiles = casinoLogos.map(f => ({ ...f, bucket: 'casino-logos' }));
       const gameFiles = gameImages.map(f => ({ ...f, bucket: 'game-images' }));
+      const blogFiles = blogImages.map(f => ({ ...f, bucket: 'blog-images' }));
       
-      const allFiles = [...casinoFiles, ...gameFiles];
+      const allFiles = [...casinoFiles, ...gameFiles, ...blogFiles];
       return NextResponse.json({ files: allFiles });
     } else if (type === 'casino-logos') {
       const files = await listCasinoLogos();
       return NextResponse.json({ files });
     } else if (type === 'game-images') {
       const files = await listGameImages();
+      return NextResponse.json({ files });
+    } else if (type === 'blog-images') {
+      const files = await listBlogImages();
       return NextResponse.json({ files });
     }
     

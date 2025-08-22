@@ -2,6 +2,7 @@ import { supabase } from './supabase';
 
 const CASINO_LOGOS_BUCKET = 'casino-logos';
 const GAME_IMAGES_BUCKET = 'game-images';
+const BLOG_IMAGES_BUCKET = 'blog-images';
 
 // Initialize storage buckets (run once)
 export async function initializeStorageBuckets() {
@@ -21,6 +22,14 @@ export async function initializeStorageBuckets() {
       await supabase.storage.createBucket(GAME_IMAGES_BUCKET, {
         public: true,
         allowedMimeTypes: ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'],
+        fileSizeLimit: 5242880 // 5MB
+      });
+    }
+    
+    if (!casinoBuckets?.find(b => b.name === BLOG_IMAGES_BUCKET)) {
+      await supabase.storage.createBucket(BLOG_IMAGES_BUCKET, {
+        public: true,
+        allowedMimeTypes: ['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'image/gif'],
         fileSizeLimit: 5242880 // 5MB
       });
     }
@@ -157,6 +166,83 @@ export async function listGameImages() {
     })) || [];
   } catch (error) {
     console.error('Error in listGameImages:', error);
+    return [];
+  }
+}
+
+// Upload blog image to Supabase Storage
+export async function uploadBlogImage(file: File, blogSlug: string): Promise<string | null> {
+  try {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${blogSlug}-${Date.now()}.${fileExt}`;
+    
+    const { data, error } = await supabase.storage
+      .from(BLOG_IMAGES_BUCKET)
+      .upload(fileName, file, {
+        cacheControl: '3600',
+        upsert: true
+      });
+    
+    if (error) {
+      console.error('Error uploading blog image:', error);
+      return null;
+    }
+    
+    // Get public URL
+    const { data: { publicUrl } } = supabase.storage
+      .from(BLOG_IMAGES_BUCKET)
+      .getPublicUrl(fileName);
+    
+    return publicUrl;
+  } catch (error) {
+    console.error('Error in uploadBlogImage:', error);
+    return null;
+  }
+}
+
+// Delete blog image from Supabase Storage
+export async function deleteBlogImage(url: string): Promise<boolean> {
+  try {
+    // Extract file path from URL
+    const urlParts = url.split('/');
+    const fileName = urlParts[urlParts.length - 1];
+    
+    const { error } = await supabase.storage
+      .from(BLOG_IMAGES_BUCKET)
+      .remove([fileName]);
+    
+    if (error) {
+      console.error('Error deleting blog image:', error);
+      return false;
+    }
+    
+    return true;
+  } catch (error) {
+    console.error('Error in deleteBlogImage:', error);
+    return false;
+  }
+}
+
+// List all blog images
+export async function listBlogImages() {
+  try {
+    const { data, error } = await supabase.storage
+      .from(BLOG_IMAGES_BUCKET)
+      .list();
+    
+    if (error) {
+      console.error('Error listing blog images:', error);
+      return [];
+    }
+    
+    return data?.map(file => ({
+      name: file.name,
+      url: supabase.storage.from(BLOG_IMAGES_BUCKET).getPublicUrl(file.name).data.publicUrl,
+      size: file.metadata?.size || 0,
+      created: file.created_at
+    })) || [];
+  } catch (error) {
+    console.error('Error in listBlogImages:', error);
     return [];
   }
 }

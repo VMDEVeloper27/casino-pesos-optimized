@@ -131,8 +131,8 @@ export default function NewBlogPost() {
     try {
       const formDataFile = new FormData();
       formDataFile.append('file', file);
-      formDataFile.append('gameId', formData.slug || 'blog-image'); // Use game-images bucket for blogs
-      formDataFile.append('type', 'game-image');
+      formDataFile.append('blogId', formData.slug || 'blog-image');
+      formDataFile.append('type', 'blog-image');
 
       const uploadResponse = await fetch('/api/admin/media', {
         method: 'POST',

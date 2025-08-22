@@ -158,8 +158,8 @@ export default function EditBlogPost({ params }: PageProps) {
     try {
       const formDataFile = new FormData();
       formDataFile.append('file', file);
-      formDataFile.append('gameId', formData.slug); // Use game-images bucket for blogs
-      formDataFile.append('type', 'game-image');
+      formDataFile.append('blogId', formData.slug);
+      formDataFile.append('type', 'blog-image');
 
       const uploadResponse = await fetch('/api/admin/media', {
         method: 'POST',
