@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 // Casino main entity
@@ -456,6 +457,69 @@ model Favorite {
   @@index([userId])
   @@index([casinoId])
   @@index([gameId])
+}
+
+// Blog posts
+model BlogPost {
+  id String @id @default(cuid())
+  
+  // Basic information
+  slug          String  @unique
+  title         String
+  titleEs       String?
+  titleEn       String?
+  excerpt       String
+  excerptEs     String?
+  excerptEn     String?
+  content       String  @db.Text
+  contentEs     String? @db.Text
+  contentEn     String? @db.Text
+  
+  // Author information
+  author        String
+  authorRole    String?
+  authorEmail   String?
+  authorAvatar  String?
+  
+  // Categorization
+  category      String
+  tags          String[]
+  
+  // Media
+  featuredImage String?
+  images        String[]
+  
+  // SEO
+  metaTitle       String?
+  metaDescription String?
+  metaKeywords    String[]
+  canonicalUrl    String?
+  
+  // Statistics
+  views         Int     @default(0)
+  likes         Int     @default(0)
+  shares        Int     @default(0)
+  readTime      Int     @default(5) // in minutes
+  
+  // Status
+  status        BlogStatus @default(DRAFT)
+  isFeatured    Boolean    @default(false)
+  
+  // Timestamps
+  publishedAt   DateTime?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  
+  @@index([slug])
+  @@index([status, publishedAt])
+  @@index([category])
+  @@index([isFeatured])
+}
+
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
 }
 
 // Content status enum

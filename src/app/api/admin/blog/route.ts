@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
+import { prisma } from '@/lib/prisma';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -16,14 +17,21 @@ export async function GET(request: NextRequest) {
     let posts = [];
     
     try {
-      const { supabase } = await import('@/lib/supabase');
-      const { data, error } = await supabase
-        .from('blog_posts')
-        .select('*')
-        .order('created_at', { ascending: false });
+      // Use Prisma to fetch blog posts
+      const blogPosts = await prisma.blogPost.findMany({
+        orderBy: {
+          createdAt: 'desc'
+        }
+      });
       
-      if (!error && data && data.length > 0) {
-        posts = data;
+      if (blogPosts && blogPosts.length > 0) {
+        // Map to match expected format
+        posts = blogPosts.map(post => ({
+          ...post,
+          publishedAt: post.publishedAt?.toISOString(),
+          createdAt: post.createdAt.toISOString(),
+          updatedAt: post.updatedAt.toISOString()
+        }));
       } else {
         // If no posts in DB, try JSON fallback
         const jsonPath = path.join(process.cwd(), 'data', 'blog-posts.json');
@@ -36,7 +44,7 @@ export async function GET(request: NextRequest) {
         }
       }
     } catch (dbError) {
-      console.log('Database not available, using JSON fallback');
+      console.log('Database error:', dbError);
       // Fallback to JSON file
       const jsonPath = path.join(process.cwd(), 'data', 'blog-posts.json');
       try {
@@ -73,61 +81,88 @@ export async function POST(request: NextRequest) {
         .replace(/[^\w-]/g, '');
     }
     
-    // Add timestamps
-    postData.created_at = new Date().toISOString();
-    postData.updated_at = new Date().toISOString();
-    postData.published_at = postData.status === 'published' 
-      ? new Date().toISOString() 
-      : postData.published_at || null;
-    
     // Set defaults
-    postData.views = 0;
-    postData.likes = 0;
-    postData.id = postData.id || `post-${Date.now()}`;
+    postData.views = postData.views || 0;
+    postData.likes = postData.likes || 0;
+    postData.shares = postData.shares || 0;
+    postData.readTime = postData.readTime || 5;
+    
+    // Set published date if status is published
+    if (postData.status === 'PUBLISHED' && !postData.publishedAt) {
+      postData.publishedAt = new Date();
+    }
     
     // Try to save to database first
     try {
-      const { supabase } = await import('@/lib/supabase');
-      const { data, error } = await supabase
-        .from('blog_posts')
-        .insert([postData])
-        .select()
-        .single();
-      
-      if (!error && data) {
-        // If published, send notifications
-        if (postData.status === 'published') {
-          await sendNewPostNotifications(data);
+      // Use Prisma to create blog post
+      const newPost = await prisma.blogPost.create({
+        data: {
+          slug: postData.slug,
+          title: postData.title,
+          titleEs: postData.titleEs,
+          titleEn: postData.titleEn,
+          excerpt: postData.excerpt,
+          excerptEs: postData.excerptEs,
+          excerptEn: postData.excerptEn,
+          content: postData.content,
+          contentEs: postData.contentEs,
+          contentEn: postData.contentEn,
+          author: postData.author,
+          authorRole: postData.authorRole,
+          authorEmail: postData.authorEmail,
+          authorAvatar: postData.authorAvatar,
+          category: postData.category,
+          tags: postData.tags || [],
+          featuredImage: postData.featuredImage,
+          images: postData.images || [],
+          metaTitle: postData.metaTitle,
+          metaDescription: postData.metaDescription,
+          metaKeywords: postData.metaKeywords || [],
+          canonicalUrl: postData.canonicalUrl,
+          views: postData.views,
+          likes: postData.likes,
+          shares: postData.shares,
+          readTime: postData.readTime,
+          status: postData.status || 'DRAFT',
+          isFeatured: postData.isFeatured || false,
+          publishedAt: postData.publishedAt
         }
-        
-        return NextResponse.json(data);
+      });
+      
+      // If published, send notifications
+      if (newPost.status === 'PUBLISHED') {
+        await sendNewPostNotifications(newPost);
       }
+      
+      return NextResponse.json(newPost);
     } catch (dbError) {
-      console.log('Database save failed, using JSON fallback');
+      console.log('Database save failed:', dbError);
+      
+      // Fallback to JSON file
+      postData.id = postData.id || `post-${Date.now()}`;
+      postData.createdAt = new Date().toISOString();
+      postData.updatedAt = new Date().toISOString();
+      
+      const jsonPath = path.join(process.cwd(), 'data', 'blog-posts.json');
+      let blogData = { posts: [] };
+      
+      try {
+        const jsonContent = await fs.readFile(jsonPath, 'utf-8');
+        blogData = JSON.parse(jsonContent);
+      } catch (err) {
+        // File doesn't exist, will create it
+      }
+      
+      blogData.posts.unshift(postData);
+      await fs.writeFile(jsonPath, JSON.stringify(blogData, null, 2));
+      
+      // Send notifications if published
+      if (postData.status === 'PUBLISHED') {
+        await sendNewPostNotifications(postData);
+      }
+      
+      return NextResponse.json(postData);
     }
-    
-    // Fallback to JSON file
-    const jsonPath = path.join(process.cwd(), 'data', 'blog-posts.json');
-    let blogData = { posts: [] };
-    
-    try {
-      const jsonContent = await fs.readFile(jsonPath, 'utf-8');
-      blogData = JSON.parse(jsonContent);
-    } catch (err) {
-      // File doesn't exist, will create it
-    }
-    
-    blogData.posts.unshift(postData);
-    await fs.writeFile(jsonPath, JSON.stringify(blogData, null, 2));
-    
-    // Send notifications if published
-    if (postData.status === 'published') {
-      await sendNewPostNotifications(postData);
-    }
-    
-    return NextResponse.json(postData);
-    
-    return NextResponse.json({ error: 'Failed to create post' }, { status: 500 });
   } catch (error) {
     console.error('Error creating blog post:', error);
     return NextResponse.json({ error: 'Failed to create post' }, { status: 500 });
