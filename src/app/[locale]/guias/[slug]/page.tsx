@@ -3310,6 +3310,105 @@ const guidesData = {
   }
 };
 
+// Function to render content based on its type (string or array)
+function renderContent(content: any) {
+  // If content is a string, return it as-is for dangerouslySetInnerHTML
+  if (typeof content === 'string') {
+    return content;
+  }
+  
+  // If content is an array, process each item and convert to HTML string
+  if (Array.isArray(content)) {
+    return content.map((item: any) => {
+      let html = '';
+      
+      if (item.type === 'introduction') {
+        html += `<div class="introduction mb-6">
+          <p class="text-lg leading-relaxed">${item.content}</p>
+        </div>`;
+      } else if (item.type === 'section') {
+        html += `<div id="${item.id || ''}" class="section mb-8">
+          <h2 class="text-2xl font-bold mb-4">${item.title}</h2>
+          <p class="mb-4">${item.content}</p>`;
+        
+        if (item.subsections && Array.isArray(item.subsections)) {
+          item.subsections.forEach((sub: any) => {
+            html += `<div class="subsection ml-4 mb-4">
+              <h3 class="text-xl font-semibold mb-2">${sub.title}</h3>
+              <p>${sub.content}</p>
+            </div>`;
+          });
+        }
+        html += '</div>';
+      } else if (item.type === 'tips') {
+        html += `<div class="tips-section bg-green-50 p-6 rounded-lg mb-6">
+          <h3 class="text-xl font-bold mb-4">${item.title}</h3>
+          <ul class="list-disc list-inside space-y-2">`;
+        
+        if (item.items && Array.isArray(item.items)) {
+          item.items.forEach((tip: string) => {
+            html += `<li>${tip}</li>`;
+          });
+        }
+        html += '</ul></div>';
+      } else if (item.type === 'warning') {
+        html += `<div class="warning-section bg-red-50 border-l-4 border-red-500 p-6 mb-6">
+          <h3 class="text-xl font-bold text-red-700 mb-2">${item.title || 'Advertencia'}</h3>
+          <p>${item.content}</p>
+        </div>`;
+      } else if (item.type === 'list') {
+        html += `<div class="list-section mb-6">
+          <h3 class="text-xl font-bold mb-4">${item.title}</h3>
+          <ul class="list-disc list-inside space-y-2">`;
+        
+        if (item.items && Array.isArray(item.items)) {
+          item.items.forEach((listItem: any) => {
+            if (typeof listItem === 'string') {
+              html += `<li>${listItem}</li>`;
+            } else if (listItem.title && listItem.content) {
+              html += `<li><strong>${listItem.title}:</strong> ${listItem.content}</li>`;
+            }
+          });
+        }
+        html += '</ul></div>';
+      } else if (item.type === 'table') {
+        html += `<div class="table-section mb-6">
+          <h3 class="text-xl font-bold mb-4">${item.title}</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full border-collapse border border-gray-300">
+              <thead>
+                <tr>`;
+        
+        if (item.headers && Array.isArray(item.headers)) {
+          item.headers.forEach((header: string) => {
+            html += `<th class="border border-gray-300 px-4 py-2 bg-gray-100">${header}</th>`;
+          });
+        }
+        html += '</tr></thead><tbody>';
+        
+        if (item.rows && Array.isArray(item.rows)) {
+          item.rows.forEach((row: any[]) => {
+            html += '<tr>';
+            row.forEach((cell: string) => {
+              html += `<td class="border border-gray-300 px-4 py-2">${cell}</td>`;
+            });
+            html += '</tr>';
+          });
+        }
+        html += '</tbody></table></div></div>';
+      } else {
+        // Default case for unhandled types
+        html += `<div class="mb-4">${item.content || ''}</div>`;
+      }
+      
+      return html;
+    }).join('');
+  }
+  
+  // Return empty string if content is neither string nor array
+  return '';
+}
+
 export default function GuiaDetailPage() {
   const params = useParams();
   const router = useRouter();
@@ -3554,7 +3653,7 @@ export default function GuiaDetailPage() {
             >
               <div 
                 className="prose prose-lg max-w-none guide-content"
-                dangerouslySetInnerHTML={{ __html: guide.content }}
+                dangerouslySetInnerHTML={{ __html: renderContent(guide.content) }}
               />
             </motion.article>
 
