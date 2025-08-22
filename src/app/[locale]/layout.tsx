@@ -58,6 +58,9 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${inter.variable} ${poppins.variable}`}>
       <head>
+        {/* Google Search Console Verification */}
+        <meta name="google-site-verification" content="itbx4DQrpNjRzsHSWh93F_KFA5WotzNWiES1IM1Uc0o" />
+        
         {/* Favicons and Web App */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
