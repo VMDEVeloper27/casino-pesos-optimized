@@ -4,7 +4,7 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 3600 // revalidate every hour
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://casinospesos.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://casinospesos.com'
   const locales = ['es', 'en']
   
   // Static pages with proper priorities
