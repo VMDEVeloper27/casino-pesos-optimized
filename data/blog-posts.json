@@ -23,8 +23,9 @@
       "likes": 187,
       "status": "published",
       "readTime": 1,
-      "updatedAt": "2025-08-19T09:48:57.169Z",
-      "publishedAt": "2025-08-19T09:48:56.919Z"
+      "updatedAt": "2025-08-22T08:41:51.680Z",
+      "publishedAt": "2025-08-19T09:48:56.919Z",
+      "featuredImage": "https://zwtadapqdlthqafdsloi.supabase.co/storage/v1/object/public/blog-images/los-5-nuevos-casinos-online-que-llegan-a-mexico-en-enero-2024-aaaaaa-1755852102093.webp"
     },
     {
       "id": "2",
@@ -47,7 +48,10 @@
       "read_time": 8,
       "views": 3892,
       "likes": 298,
-      "status": "published"
+      "status": "published",
+      "featuredImage": "https://zwtadapqdlthqafdsloi.supabase.co/storage/v1/object/public/blog-images/estrategias-blackjack-mexico-1755852125076.webp",
+      "updatedAt": "2025-08-22T08:42:11.346Z",
+      "publishedAt": "2025-08-22T08:42:09.058Z"
     },
     {
       "id": "3",
@@ -70,7 +74,10 @@
       "read_time": 6,
       "views": 5234,
       "likes": 412,
-      "status": "published"
+      "status": "published",
+      "featuredImage": "https://zwtadapqdlthqafdsloi.supabase.co/storage/v1/object/public/blog-images/depositar-oxxo-casinos-online-1755852145442.webp",
+      "updatedAt": "2025-08-22T08:42:31.439Z",
+      "publishedAt": "2025-08-22T08:42:29.135Z"
     },
     {
       "id": "4",
@@ -91,7 +98,10 @@
       "read_time": 4,
       "views": 1823,
       "likes": 95,
-      "status": "published"
+      "status": "published",
+      "featuredImage": "https://zwtadapqdlthqafdsloi.supabase.co/storage/v1/object/public/blog-images/bonos-sin-deposito-febrero-2024-1755852172069.webp",
+      "updatedAt": "2025-08-22T08:42:58.208Z",
+      "publishedAt": "2025-08-22T08:42:55.895Z"
     },
     {
       "id": "5",
