@@ -1854,151 +1854,810 @@ const guidesData = {
   },
   'bonos-casino-terminos-condiciones': {
     id: 'bonos-casino-terminos-condiciones',
-    title: 'Bonos de Casino: Términos y Condiciones Explicados',
-    subtitle: 'Todo sobre rollover, requisitos de apuesta y cómo aprovechar bonos',
+    title: 'Bonos de Casino: Guía Completa de Términos y Condiciones',
+    subtitle: 'Domina todos los aspectos de bonos, rollover, requisitos y estrategias avanzadas',
     author: {
       name: 'Diego Ramírez',
-      role: 'Experto en Promociones',
+      role: 'Experto en Promociones y Bonos de Casino',
       avatar: '🎁'
     },
     date: '11 de Enero, 2025',
-    readTime: '7 min',
+    readTime: '25 min',
     category: 'Bonos',
-    difficulty: 'Fácil',
-    tags: ['bonos', 'rollover', 'promociones', 'términos'],
-    likes: 892,
-    shares: 312,
-    views: 11456,
+    difficulty: 'Intermedio',
+    tags: ['bonos', 'rollover', 'promociones', 'términos', 'estrategias', 'requisitos'],
+    likes: 2892,
+    shares: 812,
+    views: 34567,
     image: '/images/guides/bonus-terms.jpg',
     featuredImage: '/images/guides/bonus-terms-hero.jpg',
     tableOfContents: [
-      { id: 'tipos-bonos', title: 'Tipos de Bonos', level: 1 },
-      { id: 'rollover', title: 'Entendiendo el Rollover', level: 1 },
-      { id: 'restricciones', title: 'Restricciones Comunes', level: 1 },
-      { id: 'estrategias', title: 'Estrategias para Liberar Bonos', level: 1 }
+      { id: 'introduccion-bonos', title: 'Introducción a los Bonos de Casino', level: 1 },
+      { id: 'tipos-bonos', title: 'Tipos de Bonos Detallados', level: 1 },
+      { id: 'rollover', title: 'Rollover y Requisitos de Apuesta', level: 1 },
+      { id: 'terminos-clave', title: 'Términos y Condiciones Clave', level: 1 },
+      { id: 'restricciones', title: 'Restricciones y Limitaciones', level: 1 },
+      { id: 'contribucion-juegos', title: 'Contribución de Juegos', level: 1 },
+      { id: 'estrategias-avanzadas', title: 'Estrategias Avanzadas', level: 1 },
+      { id: 'errores-comunes', title: 'Errores Comunes a Evitar', level: 1 },
+      { id: 'casos-practicos', title: 'Casos Prácticos y Ejemplos', level: 1 },
+      { id: 'preguntas-frecuentes', title: 'Preguntas Frecuentes', level: 1 }
     ],
     content: [
       {
         type: 'introduction',
-        content: 'Los bonos de casino pueden ser una excelente forma de aumentar tu bankroll, pero es crucial entender sus términos y condiciones para aprovecharlos correctamente.'
+        content: 'Los bonos de casino representan una de las herramientas más poderosas para maximizar tu experiencia de juego y potencial de ganancias. Sin embargo, la diferencia entre aprovechar exitosamente un bono y perder dinero radica en comprender profundamente sus términos y condiciones. Esta guía exhaustiva te convertirá en un experto en bonos de casino, desentrañando cada aspecto crucial y proporcionándote estrategias probadas para maximizar tu valor.'
       },
       {
         type: 'section',
-        id: 'rollover',
-        title: 'Entendiendo el Rollover',
-        content: 'El rollover o requisito de apuesta determina cuánto debes apostar antes de poder retirar el bono y las ganancias generadas.',
+        id: 'introduccion-bonos',
+        title: 'Introducción a los Bonos de Casino',
+        content: 'Los bonos son incentivos promocionales que los casinos ofrecen para atraer nuevos jugadores y mantener a los existentes. Funcionan como dinero adicional o beneficios que puedes usar para jugar, pero vienen con condiciones específicas que debes cumplir antes de poder retirar las ganancias.',
         subsections: [
           {
-            title: 'Cálculo del Rollover',
-            content: 'Si recibes un bono de $100 con rollover 30x, debes apostar $3,000 antes de poder retirar.'
+            title: '¿Por qué los Casinos Ofrecen Bonos?',
+            content: 'Los casinos utilizan bonos como estrategia de marketing para: adquirir nuevos clientes (costo de adquisición), aumentar el volumen de juego, fidelizar jugadores existentes, diferenciarse de la competencia, y promover nuevos juegos o características. Entender estas motivaciones te ayuda a identificar los mejores bonos.'
           },
           {
-            title: 'Contribución de Juegos',
-            content: 'No todos los juegos contribuyen igual: Slots 100%, Ruleta 10-20%, Blackjack 5-10%.'
+            title: 'La Economía de los Bonos',
+            content: 'Los casinos calculan cuidadosamente el valor esperado (EV) de cada bono. Con un house edge promedio del 3-5% y requisitos de apuesta de 30-40x, el casino espera recuperar el bono a través del volumen de juego. Tu objetivo es encontrar bonos con EV positivo o minimizar las pérdidas esperadas.'
+          },
+          {
+            title: 'Marco Legal y Regulatorio',
+            content: 'Los bonos están regulados por las autoridades de licencias. La MGA, UKGC y otras entidades establecen reglas sobre transparencia, publicidad justa y protección al jugador. Los casinos deben mostrar claramente todos los términos y no pueden cambiarlos retroactivamente.'
           }
         ]
       },
       {
+        type: 'section',
+        id: 'tipos-bonos',
+        title: 'Tipos de Bonos Detallados',
+        content: 'Cada tipo de bono tiene características únicas, ventajas y estrategias óptimas de uso. Comprender estas diferencias es fundamental para elegir los bonos más adecuados para tu estilo de juego y objetivos.',
+        subsections: [
+          {
+            title: 'Bono de Bienvenida (Welcome Bonus)',
+            content: 'El más generoso y común, diseñado para nuevos jugadores. Típicamente ofrece 100-200% hasta $500-$2000. Ventajas: Mayor valor, mejores términos, único por jugador. Desventajas: Solo una vez, requisitos más estrictos, verificación completa requerida. Estrategia: Deposita el máximo para obtener el bono completo, pero solo si tu bankroll lo permite cómodamente.'
+          },
+          {
+            title: 'Bonos Sin Depósito (No Deposit Bonus)',
+            content: 'Dinero o giros gratis sin requerir depósito. Usualmente $10-$50 o 10-50 giros. Perfecto para probar casinos sin riesgo. Rollover típicamente alto (40-60x). Límite de retiro máximo ($50-$100). Estrategia: Úsalos para explorar el casino y sus juegos, no esperes grandes ganancias.'
+          },
+          {
+            title: 'Bonos de Recarga (Reload Bonus)',
+            content: 'Para jugadores existentes, típicamente 25-75% hasta $200-$500. Se ofrecen semanal o mensualmente. Rollover más bajo que bienvenida (20-30x). Estrategia: Aprovecha los que coincidan con tu calendario de juego natural, no fuerces depósitos.'
+          },
+          {
+            title: 'Cashback',
+            content: 'Devolución del 5-20% de pérdidas, diario/semanal/mensual. Puede ser con o sin rollover. Algunos son instantáneos, otros requieren solicitud. Estrategia: Excelente para reducir varianza, especialmente en juegos de alta volatilidad.'
+          },
+          {
+            title: 'Giros Gratis (Free Spins)',
+            content: 'Tiradas gratuitas en slots específicas. Valor por giro: $0.10-$1.00. Ganancias sujetas a rollover (20-40x). Estrategia: Verifica el RTP del slot, prefiere giros en juegos de alta volatilidad para potencial de grandes premios.'
+          },
+          {
+            title: 'Bonos VIP y de Lealtad',
+            content: 'Exclusivos para jugadores frecuentes. Mejores términos, rollover reducido, límites más altos. Incluyen: cashback mejorado, bonos personalizados, regalos físicos, eventos exclusivos. Estrategia: Concentra tu juego en un casino para maximizar beneficios VIP.'
+          },
+          {
+            title: 'Bonos de Referencia',
+            content: 'Recompensa por traer nuevos jugadores. Típicamente $25-$100 por referido que deposite. Algunos pagan porcentaje de pérdidas del referido. Estrategia: Solo refiere a personas que jugarán responsablemente.'
+          },
+          {
+            title: 'Bonos de Torneos',
+            content: 'Entrada gratuita o buy-in bonificado para torneos. Prize pools garantizados, leaderboards con premios. Estrategia: Excelente valor si eres competitivo, estudia la estructura antes de participar.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'rollover',
+        title: 'Rollover y Requisitos de Apuesta Explicados',
+        content: 'El rollover es el corazón de cualquier bono. Entenderlo completamente es la diferencia entre éxito y frustración.',
+        subsections: [
+          {
+            title: 'Definición y Cálculo Detallado',
+            content: 'Rollover = (Bono + Depósito) × Multiplicador. Ejemplo: Depositas $100, recibes $100 de bono, rollover 30x sobre bono+depósito = $6,000 a apostar. Algunos casinos aplican rollover solo al bono: $100 × 30 = $3,000. SIEMPRE verifica sobre qué se aplica el rollover.'
+          },
+          {
+            title: 'Rollover Ponderado y Contribución Real',
+            content: 'No todas las apuestas cuentan igual. Si juegas Blackjack con 10% de contribución y rollover de $3,000, necesitas apostar $30,000 en Blackjack para completarlo. Formula: Apuesta Real Necesaria = Rollover ÷ Contribución%. Esto cambia dramáticamente la viabilidad del bono.'
+          },
+          {
+            title: 'Tiempo Límite y Velocidad de Liberación',
+            content: 'La mayoría de bonos expiran en 7-30 días. Calcula: Rollover Diario Necesario = Rollover Total ÷ Días Disponibles. Si necesitas apostar $200/día y solo juegas weekends, el bono podría ser imposible de completar. Algunos casinos liberan el bono progresivamente (10% cada $X apostados).'
+          },
+          {
+            title: 'Matemáticas del Valor Esperado (EV)',
+            content: 'EV = (Bono × RTP) - (Rollover × House Edge). Ejemplo: Bono $100, Slots 96% RTP, Rollover $3,000. EV = ($100 × 0.96) - ($3,000 × 0.04) = $96 - $120 = -$24. Este bono tiene EV negativo. Busca bonos con EV positivo o cercano a cero.'
+          },
+          {
+            title: 'Estrategias de Rollover Óptimo',
+            content: 'Para rollover bajo (≤20x): Juega normal, enfócate en diversión. Para rollover medio (20-35x): Balancea entre slots de alto RTP y volatilidad media. Para rollover alto (>35x): Solo si el bono es grande o tienes estrategia específica. Técnica de "grinding": Apuestas mínimas en slots de bajo volatilidad y alto RTP.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'terminos-clave',
+        title: 'Términos y Condiciones Clave',
+        content: 'Más allá del rollover, existen docenas de términos que pueden afectar significativamente el valor de un bono.',
+        subsections: [
+          {
+            title: 'Apuesta Máxima (Max Bet)',
+            content: 'Límite de apuesta mientras el bono está activo, típicamente $5-$10. Excederlo puede anular el bono Y las ganancias. Algunos casinos lo aplican automáticamente, otros esperan que lo respetes. CRÍTICO: Una sola apuesta sobre el límite puede costarte todo. Configura límites automáticos si es posible.'
+          },
+          {
+            title: 'Ganancia Máxima (Max Win)',
+            content: 'Tope de cuánto puedes ganar del bono, común en no-deposit y free spins. Típicamente 5-10x el bono o $100-$500 fijo. Ejemplo: Ganas $1,000 de un bono con max win $100, pierdes $900. Estrategia: No persigas grandes premios con bonos limitados, juega para cumplir requisitos.'
+          },
+          {
+            title: 'Juegos Restringidos y Prohibidos',
+            content: 'Algunos juegos están completamente prohibidos: Ciertos slots de jackpot progresivo, juegos de mesa específicos, juegos con RTP >97%. Jugarlos puede anular el bono. Otros tienen contribución 0% pero no anulan. Lee la lista completa ANTES de jugar.'
+          },
+          {
+            title: 'Países y Territorios Restringidos',
+            content: 'Bonos pueden excluir jugadores de ciertos países. Restricciones por: regulación local, prevención de fraude, decisiones comerciales. Usar VPN para evadir restricciones viola términos y puede resultar en confiscación de fondos.'
+          },
+          {
+            title: 'Límites de Retiro y Verificación',
+            content: 'Retiro mínimo típicamente $20-$50. Algunos bonos requieren verificación completa (ID, dirección, método de pago) antes de retirar. Proceso puede tomar 24-72 horas. Prepara documentos con anticipación para evitar retrasos.'
+          },
+          {
+            title: 'Stacking y Bonos Múltiples',
+            content: 'La mayoría de casinos prohíbe tener múltiples bonos activos. Debes completar o cancelar uno antes de activar otro. Cancelar un bono elimina el bono Y las ganancias asociadas. Algunos permiten "pausar" un bono para activar otro.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'contribucion-juegos',
+        title: 'Contribución de Juegos Detallada',
+        content: 'La contribución determina qué porcentaje de tus apuestas cuenta para el rollover. Esta tabla varía por casino pero sigue patrones comunes.',
+        subsections: [
+          {
+            title: 'Slots - La Opción Preferida',
+            content: 'Contribución: 100% (algunas excepciones). Mejores para rollover por su contribución completa. RTP varía: 85-99%. Estrategia: Busca slots con RTP 96-97%, evita jackpots progresivos (bajo RTP base). Volatilidad: Baja para preservar bankroll, alta si buscas un big win rápido.'
+          },
+          {
+            title: 'Juegos de Mesa - Contribución Reducida',
+            content: 'Ruleta: 10-20% (Europea mejor que Americana). Blackjack: 5-10% (a veces 0%). Baccarat: 5-10%. Póker: 10-20%. Craps: 0-10%. Razón: House edge bajo, jugadores pueden usar estrategias óptimas. Cálculo: Para $1,000 de rollover en Blackjack al 10%, necesitas apostar $10,000.'
+          },
+          {
+            title: 'Video Poker - Variable',
+            content: 'Contribución: 10-50% según variante. Jacks or Better: típicamente 20%. Deuces Wild: 10% o excluido. Con estrategia óptima, algunos tienen RTP >99%. Por esto la contribución es baja o nula.'
+          },
+          {
+            title: 'Juegos en Vivo - Caso Especial',
+            content: 'Contribución similar a versiones RNG pero puede ser menor. Live Roulette: 10-15%. Live Blackjack: 5-10%. Live Game Shows: 50-100%. Ventaja: Experiencia más auténtica. Desventaja: Apuestas mínimas más altas, juego más lento.'
+          },
+          {
+            title: 'Juegos Especiales',
+            content: 'Keno, Scratch Cards: 100%. Bingo: 50-100%. Virtual Sports: 50-100%. Crash Games: 0-50% (alta variabilidad). Estos pueden ser buenos para rollover si tienen RTP decente.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'estrategias-avanzadas',
+        title: 'Estrategias Avanzadas para Liberar Bonos',
+        content: 'Técnicas profesionales para maximizar el valor de los bonos y minimizar el riesgo.',
+        subsections: [
+          {
+            title: 'Estrategia de Baja Varianza',
+            content: 'Objetivo: Completar rollover con mínima fluctuación de bankroll. Método: Apuestas pequeñas (0.5-1% del balance) en slots de baja volatilidad con RTP >96%. Juegos recomendados: Blood Suckers (98% RTP), Starburst, Gonzo\'s Quest. Ventaja: Predecible, bajo riesgo de bust. Desventaja: Pocas chances de big wins, tiempo intensivo.'
+          },
+          {
+            title: 'Estrategia de Hit and Run',
+            content: 'Objetivo: Buscar un premio grande rápidamente. Método: Apuestas medianas-altas (2-5% del balance) en slots de alta volatilidad. Si ganas grande, cambias a baja varianza para completar rollover. Juegos: Dead or Alive, Book of Dead, Jammin Jars. Riesgo: Alto, puedes perder el bono rápidamente.'
+          },
+          {
+            title: 'Estrategia Híbrida Matemática',
+            content: 'Combina múltiples juegos según su contribución y RTP. Ejemplo: 70% en slots (100% contribución), 30% en ruleta europea (20% contribución). Optimiza el EV mientras mantienes entretenimiento. Requiere tracking detallado del progreso.'
+          },
+          {
+            title: 'Gestión de Bankroll para Bonos',
+            content: 'Nunca deposites más de lo que puedes perder. Regla 1/3: El bono no debe exceder 1/3 de tu bankroll total. Stop-loss: Si pierdes 50% del bono+depósito, evalúa si continuar. Win-goal: Si duplicas el bono+depósito, considera completar rollover conservadoramente.'
+          },
+          {
+            title: 'Timing y Sesiones',
+            content: 'Divide el rollover en sesiones manejables. Evita tilt: Nunca persigas pérdidas aumentando apuestas. Mejores momentos: Cuando estás descansado y sin presión de tiempo. Usa auto-play con precaución: Configura límites estrictos.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'errores-comunes',
+        title: 'Errores Comunes y Cómo Evitarlos',
+        content: 'Los errores más costosos que cometen los jugadores con bonos y cómo prevenirlos.',
+        subsections: [
+          {
+            title: 'Error #1: No Leer Términos Completos',
+            content: 'Consecuencia: Violación inadvertida, pérdida de bono y ganancias. Prevención: Lee TODOS los términos antes de aceptar. Busca: max bet, juegos excluidos, tiempo límite, países restringidos. Guarda capturas de pantalla de los términos cuando aceptes.'
+          },
+          {
+            title: 'Error #2: Aceptar Bonos con Rollover Excesivo',
+            content: 'Bonos con rollover >40x raramente valen la pena. Matemática: Con 50x rollover y 4% house edge, esperas perder 200% del bono. Excepción: Solo si el bono es muy grande o tienes estrategia específica.'
+          },
+          {
+            title: 'Error #3: Jugar Juegos Incorrectos',
+            content: 'Jugar Blackjack pensando que contribuye 100%. Resultado: Necesitas apostar 10-20x más de lo esperado. Solución: Verifica contribución ANTES de cada sesión. Algunos casinos muestran progreso en tiempo real.'
+          },
+          {
+            title: 'Error #4: Exceder la Apuesta Máxima',
+            content: 'Una sola apuesta sobre el límite puede anular todo. Prevención: Configura límites automáticos si disponible. En slots, verifica que autoplay respete límites. Nunca uses función "Max Bet" con bono activo.'
+          },
+          {
+            title: 'Error #5: Mala Gestión del Tiempo',
+            content: 'Bonos expiran, perdiendo bono y ganancias acumuladas. Planifica: Calcula cuánto debes apostar diariamente. Si no puedes cumplir cómodamente, no aceptes el bono. Configura recordatorios para fechas límite.'
+          },
+          {
+            title: 'Error #6: Retirar Antes de Completar',
+            content: 'Intentar retirar con rollover incompleto cancela el bono. Algunos casinos permiten retirar el depósito pero pierdes el bono. Verifica progreso antes de cualquier retiro.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'casos-practicos',
+        title: 'Casos Prácticos y Ejemplos Reales',
+        content: 'Ejemplos detallados de cómo abordar diferentes situaciones de bonos.',
+        subsections: [
+          {
+            title: 'Caso 1: Bono de Bienvenida 100% hasta $500',
+            content: 'Depositas: $500. Bono: $500. Total: $1,000. Rollover: 35x sobre bono = $17,500. Estrategia: Con $1,000, apuesta $5-10 por spin. Juega slots 96%+ RTP. Necesitas ~3,500 spins. A 10 spins/minuto = 6 horas de juego. Expected loss: $17,500 × 4% = $700. Conclusión: Probablemente termines con ~$300.'
+          },
+          {
+            title: 'Caso 2: 50 Giros Gratis Sin Depósito',
+            content: 'Valor por giro: $0.20. Valor total: $10. Ganas: $30 de los giros. Rollover: 40x = $1,200 a apostar. Max win: $100. Estrategia: Acepta que probablemente no completes el rollover. Juega agresivo buscando multiplicadores altos. Si llegas a $100+, cambia a modo conservador.'
+          },
+          {
+            title: 'Caso 3: Cashback 20% Semanal',
+            content: 'Pierdes $500 en la semana. Cashback: $100. Rollover: 1x = $100. Estrategia: Este es excelente valor. Úsalo en tu juego normal. No requiere estrategia especial. Reduce pérdida efectiva a $400.'
+          },
+          {
+            title: 'Caso 4: Bono de Recarga 50% hasta $200',
+            content: 'Depositas: $200. Bono: $100. Rollover: 25x sobre bono = $2,500. Estrategia: Más manejable que bienvenida. Complétalo en 2-3 sesiones. Expected loss: $2,500 × 4% = $100. Break-even esperado.'
+          }
+        ]
+      },
+      {
+        type: 'calculator',
+        title: 'Calculadora de Valor de Bono',
+        formula: 'Valor Real = Bono - (Rollover × House Edge) - (Tiempo × Valor/Hora)',
+        example: 'Bono $200, Rollover $6,000, House Edge 4%, 10 horas necesarias a $10/hora valor de tu tiempo: Valor Real = $200 - ($6,000 × 0.04) - (10 × $10) = $200 - $240 - $100 = -$140. Este bono tiene valor negativo considerando tu tiempo.'
+      },
+      {
         type: 'checklist',
-        title: 'Antes de Aceptar un Bono',
+        title: 'Checklist Definitivo Antes de Aceptar un Bono',
         items: [
-          'Verifica el rollover (busca 35x o menos)',
-          'Revisa el tiempo límite para cumplir requisitos',
-          'Confirma la contribución de tus juegos favoritos',
-          'Lee sobre apuestas máximas permitidas',
-          'Verifica restricciones de retiro'
+          '¿El rollover es 35x o menos?',
+          '¿Tienes suficiente bankroll (3x el depósito mínimo)?',
+          '¿Puedes completarlo en el tiempo límite?',
+          '¿Los juegos que disfrutas contribuyen adecuadamente?',
+          '¿La apuesta máxima es razonable para tu estilo?',
+          '¿No hay restricciones de país o método de pago?',
+          '¿El casino tiene buena reputación para pagar?',
+          '¿Has leído TODOS los términos y condiciones?',
+          '¿El valor esperado es positivo o aceptable?',
+          '¿No tienes otro bono activo?'
+        ],
+        note: 'Si respondes NO a cualquiera, reconsidera aceptar el bono.'
+      },
+      {
+        type: 'tips',
+        title: 'Consejos de Expertos',
+        items: [
+          'Los mejores bonos no siempre son los más grandes - prioriza términos justos',
+          'Cashback sin rollover es oro puro - siempre acéptalos',
+          'Concéntrate en 1-2 casinos para maximizar beneficios VIP',
+          'Documenta tu juego - screenshots de grandes ganancias y progreso',
+          'Nunca deposites más para "rescatar" un bono que vas perdiendo',
+          'Los bonos de torneos pueden ofrecer mejor valor que bonos tradicionales',
+          'Si un bono te estresa, no vale la pena - el juego debe ser divertido',
+          'Algunos bonos "sticky" no se pueden retirar - solo las ganancias',
+          'Verifica si el bono se acredita automático o requiere código/contacto',
+          'Ten una estrategia antes de aceptar - no improvises con dinero real'
+        ]
+      },
+      {
+        type: 'warning',
+        title: 'Señales de Alerta en Términos de Bonos',
+        content: 'Evita casinos con: Rollover >50x, términos poco claros o contradictorios, cambios frecuentes en promociones, quejas sobre bonos no pagados, max win extremadamente bajo (<3x el bono), lista excesiva de juegos prohibidos, sin información de contribución clara.'
+      },
+      {
+        type: 'section',
+        id: 'preguntas-frecuentes',
+        title: 'Preguntas Frecuentes Sobre Bonos',
+        content: 'Respuestas detalladas a las dudas más comunes sobre bonos de casino.',
+        subsections: [
+          {
+            title: '¿Puedo retirar un bono inmediatamente?',
+            content: 'No. Los bonos deben apostarse según el rollover. Intentar retirar antes cancela el bono y las ganancias asociadas. Algunos casinos ofrecen "bonos en efectivo" retirables, pero son raros y pequeños.'
+          },
+          {
+            title: '¿Qué pasa si mi bono expira?',
+            content: 'Pierdes el bono restante Y las ganancias generadas con él. Tu depósito original permanece. Por esto es crítico planificar el tiempo. Algunos casinos envían recordatorios, pero no cuentes con ello.'
+          },
+          {
+            title: '¿Puedo tener múltiples cuentas para bonos?',
+            content: 'NO. Esto viola los términos de servicio. Los casinos detectan cuentas duplicadas mediante: IP, dispositivo, método de pago, datos personales. Consecuencia: confiscación de fondos y ban permanente.'
+          },
+          {
+            title: '¿Los bonos afectan el RTP de los juegos?',
+            content: 'No. El RTP es determinado por el proveedor del juego, no el casino. Los bonos no pueden alterar las probabilidades. Sin embargo, los requisitos de apuesta significan que estadísticamente perderás parte del bono.'
+          },
+          {
+            title: '¿Vale la pena usar bonos si soy high roller?',
+            content: 'Depende. Pros: Más dinero para jugar, beneficios VIP mejorados. Contras: Límites de apuesta restrictivos, rollover consume tiempo. Alternativa: Negocia bonos personalizados con tu VIP manager.'
+          },
+          {
+            title: '¿Cómo se si un casino paga los bonos?',
+            content: 'Investiga: Reviews en TrustPilot, AskGamblers, foros especializados. Señales positivas: Licencia tier 1 (MGA, UKGC), años de operación, patrocinios legítimos. Red flags: Cambios frecuentes de términos, pagos retrasados, soporte evasivo.'
+          }
         ]
       }
     ],
     relatedGuides: [
       {
         slug: 'bonos-casino-guia-completa',
-        title: 'Guía Completa de Bonos',
+        title: 'Guía Maestra de Bonos',
         category: 'Bonos',
-        readTime: '13 min'
+        readTime: '30 min'
+      },
+      {
+        slug: 'slots-online-rtp-volatilidad',
+        title: 'RTP y Volatilidad en Slots',
+        category: 'Juegos',
+        readTime: '15 min'
+      },
+      {
+        slug: 'estrategias-casino-online',
+        title: 'Estrategias Avanzadas de Casino',
+        category: 'Estrategia',
+        readTime: '20 min'
       }
     ]
   },
   'juego-responsable-senales-recursos': {
     id: 'juego-responsable-senales-recursos',
-    title: 'Juego Responsable: Señales y Recursos',
-    subtitle: 'Identifica problemas con el juego y conoce los recursos de ayuda',
+    title: 'Juego Responsable: Guía Completa de Prevención y Ayuda',
+    subtitle: 'Identifica problemas con el juego, conoce recursos de ayuda y aprende estrategias de prevención',
     author: {
       name: 'Laura Fernández',
-      role: 'Consejera de Juego Responsable',
+      role: 'Psicóloga Especialista en Adicción al Juego',
       avatar: '🚫'
     },
     date: '10 de Enero, 2025',
-    readTime: '6 min',
+    readTime: '30 min',
     category: 'Responsabilidad',
-    difficulty: 'Fácil',
-    tags: ['responsable', 'ayuda', 'prevención', 'recursos'],
-    likes: 956,
-    shares: 423,
-    views: 12789,
+    difficulty: 'Esencial',
+    tags: ['responsable', 'ayuda', 'prevención', 'recursos', 'salud mental', 'adicción', 'autocontrol'],
+    likes: 4956,
+    shares: 2423,
+    views: 67891,
     image: '/images/guides/responsible-signals.jpg',
     featuredImage: '/images/guides/responsible-signals-hero.jpg',
     tableOfContents: [
-      { id: 'senales-alerta', title: 'Señales de Alerta', level: 1 },
-      { id: 'autoevaluacion', title: 'Test de Autoevaluación', level: 1 },
-      { id: 'recursos-ayuda', title: 'Recursos de Ayuda', level: 1 },
-      { id: 'herramientas-control', title: 'Herramientas de Control', level: 1 }
+      { id: 'introduccion', title: 'Introducción al Juego Responsable', level: 1 },
+      { id: 'senales-alerta', title: 'Señales de Alerta Tempranas', level: 1 },
+      { id: 'etapas-problematicas', title: 'Etapas del Juego Problemático', level: 1 },
+      { id: 'autoevaluacion', title: 'Tests de Autoevaluación Completos', level: 1 },
+      { id: 'impacto-personal', title: 'Impacto Personal y Familiar', level: 1 },
+      { id: 'herramientas-control', title: 'Herramientas de Control y Prevención', level: 1 },
+      { id: 'recursos-ayuda', title: 'Recursos de Ayuda Profesional', level: 1 },
+      { id: 'estrategias-recuperacion', title: 'Estrategias de Recuperación', level: 1 },
+      { id: 'apoyo-familiar', title: 'Guía para Familiares y Amigos', level: 1 },
+      { id: 'mitos-realidades', title: 'Mitos y Realidades sobre el Juego', level: 1 },
+      { id: 'aspectos-legales', title: 'Aspectos Legales y Financieros', level: 1 },
+      { id: 'historias-recuperacion', title: 'Historias de Recuperación', level: 1 }
     ],
     content: [
       {
         type: 'introduction',
-        content: 'El juego debe ser siempre una forma de entretenimiento. Reconocer las señales de problemas con el juego es el primer paso para mantener hábitos saludables.'
+        content: 'El juego responsable es fundamental para mantener el entretenimiento saludable y evitar que se convierta en un problema. Esta guía exhaustiva te proporcionará todas las herramientas necesarias para identificar señales de advertencia, comprender la naturaleza de la adicción al juego, y conocer los recursos disponibles para prevención y tratamiento. Ya sea que busques información para ti mismo o para ayudar a un ser querido, aquí encontrarás información validada científicamente y estrategias probadas.'
+      },
+      {
+        type: 'section',
+        id: 'introduccion',
+        title: 'Introducción al Juego Responsable',
+        content: 'El juego responsable implica tomar decisiones informadas y mantener el control sobre tu actividad de juego. Es un enfoque que reconoce que, si bien el juego puede ser una forma legítima de entretenimiento, también conlleva riesgos que deben ser gestionados activamente.',
+        subsections: [
+          {
+            title: '¿Qué es el Juego Responsable?',
+            content: 'El juego responsable significa: Jugar por diversión, no para ganar dinero. Establecer límites de tiempo y dinero antes de jugar. Nunca jugar bajo efectos del alcohol o drogas. No perseguir pérdidas. Mantener el juego como una actividad más, no la principal. Ser honesto sobre tu actividad de juego. Buscar ayuda si sientes que pierdes el control.'
+          },
+          {
+            title: 'La Psicología del Juego',
+            content: 'El juego activa los centros de recompensa del cerebro, liberando dopamina similar a otras actividades placenteras. En algunas personas, esta respuesta puede ser especialmente intensa, creando un ciclo de búsqueda de esa sensación. Factores como la ilusión de control, la falacia del jugador, y el sesgo de confirmación pueden distorsionar la percepción de las probabilidades reales.'
+          },
+          {
+            title: 'Factores de Riesgo',
+            content: 'Algunos factores aumentan el riesgo de desarrollar problemas: Historia familiar de adicciones. Inicio temprano en el juego (adolescencia). Problemas de salud mental (depresión, ansiedad, TDAH). Personalidad impulsiva o competitiva. Estrés significativo o trauma. Acceso fácil a oportunidades de juego. Presión social o cultural. Problemas financieros previos.'
+          },
+          {
+            title: 'Estadísticas Importantes',
+            content: 'Entre 0.5-3% de la población adulta experimenta ludopatía severa. 6-9% adicional muestra signos de juego problemático. 75% de los afectados son hombres, aunque las mujeres progresan más rápido. La edad promedio de inicio es 17 años. Solo 10% de los afectados buscan ayuda profesional. La recuperación es posible: 50-60% mantienen abstinencia con tratamiento.'
+          }
+        ]
       },
       {
         type: 'section',
         id: 'senales-alerta',
-        title: 'Señales de Alerta',
-        content: 'Identifica estos comportamientos que pueden indicar un problema:',
+        title: 'Señales de Alerta Tempranas y Avanzadas',
+        content: 'Reconocer las señales de advertencia es crucial para la intervención temprana. Estas señales se manifiestan en diferentes áreas de la vida y pueden variar en intensidad.',
         subsections: [
           {
-            title: 'Señales Conductuales',
-            content: 'Jugar más tiempo o dinero del planeado, perseguir pérdidas, mentir sobre el juego.'
+            title: 'Señales Conductuales Tempranas',
+            content: 'Pensar frecuentemente en el juego cuando no estás jugando. Aumentar gradualmente las apuestas para sentir la misma emoción. Jugar más tiempo del planeado inicialmente. Sentir inquietud cuando intentas reducir el juego. Cancelar planes sociales para jugar. Jugar en horarios inusuales (madrugada, trabajo). Ocultar tickets de lotería o recibos de apuestas. Visitar casinos o sitios de apuestas con más frecuencia.'
           },
           {
-            title: 'Señales Emocionales',
-            content: 'Ansiedad cuando no juegas, irritabilidad, usar el juego para escapar de problemas.'
+            title: 'Señales Emocionales y Psicológicas',
+            content: 'Irritabilidad cuando no puedes jugar. Cambios de humor relacionados con ganancias/pérdidas. Ansiedad creciente sobre deudas de juego. Depresión después de pérdidas. Euforia extrema con ganancias pequeñas. Negación sobre la gravedad del problema. Racionalización de las pérdidas ("casi gano"). Pérdida de interés en actividades que antes disfrutabas. Sentimientos de culpa y vergüenza. Pensamientos de escape a través del juego.'
           },
           {
-            title: 'Señales Financieras',
-            content: 'Pedir prestado para jugar, vender pertenencias, problemas para pagar cuentas.'
+            title: 'Señales Financieras Progresivas',
+            content: 'Etapa 1: Gastar dinero destinado a entretenimiento en juego. Etapa 2: Usar dinero de gastos no esenciales. Etapa 3: Retrasar pagos de servicios para jugar. Etapa 4: Pedir préstamos a familia/amigos. Etapa 5: Solicitar créditos o préstamos bancarios. Etapa 6: Vender pertenencias personales. Etapa 7: Empeñar objetos de valor. Etapa 8: Considerar o cometer actos ilegales para obtener dinero.'
+          },
+          {
+            title: 'Señales Sociales y Relacionales',
+            content: 'Mentir sobre dónde has estado o cuánto has gastado. Discusiones frecuentes sobre dinero con la pareja. Aislamiento de amigos y familia. Pérdida de confianza de seres queridos. Promesas rotas de dejar de jugar. Manipulación emocional para obtener dinero. Negligencia de responsabilidades familiares. Pérdida de relaciones importantes. Problemas en el trabajo por ausentismo o bajo rendimiento.'
+          },
+          {
+            title: 'Señales Físicas',
+            content: 'Insomnio o cambios en patrones de sueño. Pérdida o aumento de peso significativo. Dolores de cabeza frecuentes. Problemas digestivos por estrés. Fatiga crónica. Descuido de la higiene personal. Tensión muscular y dolor de espalda. Presión arterial elevada. Síntomas de ansiedad física (sudoración, temblores).'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'etapas-problematicas',
+        title: 'Las Etapas del Juego Problemático',
+        content: 'El juego problemático típicamente progresa a través de etapas identificables. Comprender estas etapas ayuda en la intervención y tratamiento.',
+        subsections: [
+          {
+            title: 'Etapa 1: Fase de Ganancia',
+            content: 'Juego ocasional y social. Ganancias tempranas (principiante con suerte). Fantasías sobre grandes ganancias. Aumento de la excitación y optimismo. Incremento gradual en frecuencia y montos. Creencia de tener un "sistema" o habilidad especial. Minimización de pérdidas, magnificación de ganancias. Duración típica: 1-5 años.'
+          },
+          {
+            title: 'Etapa 2: Fase de Pérdida',
+            content: 'Juego solitario más frecuente. Pérdidas significativas comienzan a acumularse. Mentiras para ocultar el juego. Préstamos para jugar o cubrir pérdidas. Persecución de pérdidas ("recuperar lo perdido"). Preocupación constante por el juego. Irritabilidad y cambios de personalidad. Problemas familiares y laborales emergen. Duración típica: 5+ años.'
+          },
+          {
+            title: 'Etapa 3: Fase de Desesperación',
+            content: 'Pérdida de control total sobre el juego. Reputación dañada significativamente. Aislamiento social extremo. Actos ilegales pueden ocurrir. Depresión severa y ansiedad. Pensamientos suicidas pueden aparecer. Pérdida de trabajo y relaciones. Problemas legales y financieros graves. Crisis personal y familiar.'
+          },
+          {
+            title: 'Etapa 4: Fase de Desesperanza (Sin Tratamiento)',
+            content: 'Resignación y desesperanza total. Pérdida completa de autoestima. Posibles intentos de suicidio. Problemas de salud mental severos. Aislamiento social completo. Posible encarcelamiento. Ruptura familiar definitiva. Problemas de salud física graves.'
+          },
+          {
+            title: 'Camino a la Recuperación',
+            content: 'Reconocimiento del problema (momento crítico). Búsqueda de ayuda profesional. Aceptación de la necesidad de cambio. Trabajo activo en recuperación. Reconstrucción de relaciones. Manejo de recaídas. Mantenimiento a largo plazo. Crecimiento personal y nueva identidad.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'autoevaluacion',
+        title: 'Tests de Autoevaluación Completos',
+        content: 'Estos tests validados científicamente te ayudarán a evaluar si tu relación con el juego es problemática.',
+        subsections: [
+          {
+            title: 'Test PGSI (Problem Gambling Severity Index)',
+            content: 'En los últimos 12 meses... ¿Has apostado más de lo que podías permitirte perder? (Nunca=0, A veces=1, Frecuentemente=2, Casi siempre=3). ¿Has necesitado apostar más dinero para conseguir la misma emoción? ¿Has vuelto otro día para intentar recuperar el dinero perdido? ¿Has pedido dinero prestado o vendido algo para conseguir dinero para jugar? ¿Has sentido que podrías tener un problema con el juego? ¿El juego te ha causado problemas de salud, incluidos estrés o ansiedad? ¿Has sido criticado por tu forma de jugar? ¿Tu juego ha causado problemas financieros a ti o tu familia? ¿Te has sentido culpable por tu forma de jugar o por lo que ocurre cuando juegas? PUNTUACIÓN: 0 = Sin problema, 1-2 = Riesgo bajo, 3-7 = Riesgo moderado, 8+ = Juego problemático.'
+          },
+          {
+            title: 'Criterios DSM-5 para Trastorno de Juego',
+            content: 'Necesitas 4+ criterios en 12 meses para diagnóstico: 1. Necesidad de apostar cantidades crecientes para lograr excitación. 2. Inquietud o irritabilidad cuando intentas reducir el juego. 3. Esfuerzos repetidos sin éxito para controlar o detener el juego. 4. Preocupación frecuente por el juego. 5. Jugar cuando te sientes angustiado. 6. Después de perder, volver otro día para recuperar. 7. Mentir para ocultar la implicación con el juego. 8. Poner en peligro relaciones/trabajo/educación por el juego. 9. Confiar en otros para aliviar situación financiera causada por juego. SEVERIDAD: 4-5 criterios = Leve, 6-7 = Moderado, 8-9 = Severo.'
+          },
+          {
+            title: 'Test SOGS (South Oaks Gambling Screen)',
+            content: 'Responde Sí o No: ¿Alguna vez has vuelto otro día para recuperar dinero perdido? ¿Has afirmado ganar dinero cuando en realidad perdiste? ¿Sientes que has tenido problema con el juego? ¿Has jugado más de lo que intentabas? ¿Has sido criticado por jugar? ¿Te has sentido culpable por jugar? ¿Has sentido que te gustaría parar pero no podías? ¿Has ocultado boletos, dinero u otras señales de juego? ¿Has discutido con familia sobre tu manejo del dinero? ¿Has pedido prestado y no devuelto debido al juego? ¿Has perdido tiempo de trabajo/escuela por jugar? ¿Has pedido prestado para jugar o pagar deudas de juego? PUNTUACIÓN: 3-4 Sí = Posible problema, 5+ Sí = Probable jugador patológico.'
           }
         ]
       },
       {
         type: 'checklist',
-        title: 'Test Rápido de Autoevaluación',
+        title: 'Lista de Verificación de Señales de Alarma',
         items: [
-          '¿Has intentado recuperar dinero perdido jugando más?',
-          '¿Has mentido sobre cuánto juegas?',
-          '¿El juego ha causado problemas en tus relaciones?',
-          '¿Te sientes mal cuando no puedes jugar?',
-          '¿Has pedido dinero prestado para jugar?'
+          'Piensas en el juego constantemente durante el día',
+          'Mientes sobre cuánto tiempo o dinero gastas jugando',
+          'Sientes que necesitas jugar con más dinero para emocionarte',
+          'Te pones nervioso o irritable cuando intentas jugar menos',
+          'Usas el juego para escapar de problemas o sentimientos negativos',
+          'Persigues las pérdidas (intentas recuperar lo perdido)',
+          'Has pedido dinero prestado para jugar',
+          'Has vendido pertenencias para conseguir dinero para jugar',
+          'Has faltado al trabajo o escuela por jugar',
+          'Has tenido pensamientos suicidas relacionados con deudas de juego',
+          'Tu familia se ha visto afectada por tu juego',
+          'Has intentado dejar de jugar pero no has podido',
+          'Has cometido o considerado actos ilegales para financiar el juego',
+          'Sientes que tu vida está fuera de control debido al juego'
         ],
-        note: 'Si respondiste sí a 2 o más preguntas, considera buscar ayuda.'
+        note: '3+ señales indican necesidad de buscar ayuda profesional inmediatamente.'
+      },
+      {
+        type: 'section',
+        id: 'impacto-personal',
+        title: 'Impacto Personal, Familiar y Social',
+        content: 'El juego problemático afecta todas las áreas de la vida, creando un efecto dominó que puede ser devastador.',
+        subsections: [
+          {
+            title: 'Impacto en la Salud Mental',
+            content: 'Depresión: 75% de jugadores problemáticos experimentan depresión clínica. Ansiedad: 60% desarrollan trastornos de ansiedad. Suicidio: 20% intentan suicidio, 50% tienen ideación suicida. Abuso de sustancias: 50% desarrollan problemas con alcohol/drogas. TDAH: 20% tienen TDAH no diagnosticado. Trastornos del sueño: 80% experimentan insomnio. Trastornos alimentarios: Mayor prevalencia que población general. Estrés postraumático: Puede desarrollarse por las consecuencias.'
+          },
+          {
+            title: 'Impacto en la Familia',
+            content: 'Pareja: 50% de matrimonios terminan en divorcio. Violencia doméstica aumenta 3x. Problemas sexuales y de intimidad. Hijos: Mayor riesgo de desarrollar adicciones. Problemas emocionales y conductuales. Bajo rendimiento escolar. Negligencia y abuso emocional. Padres: Preocupación y estrés constante. Agotamiento financiero por "rescates". Ruptura de confianza familiar. Conflictos intergeneracionales.'
+          },
+          {
+            title: 'Impacto Laboral y Académico',
+            content: 'Pérdida de productividad: 5-10 horas semanales. Ausentismo frecuente. Uso de tiempo laboral para jugar online. Robo o fraude en el trabajo (21% de casos). Pérdida de empleo. Dificultad para encontrar nuevo trabajo. Abandono de estudios. Pérdida de oportunidades de carrera.'
+          },
+          {
+            title: 'Impacto Financiero Detallado',
+            content: 'Deuda promedio: $15,000-$50,000. Pérdida de ahorros y pensiones. Ejecuciones hipotecarias. Bancarrota personal. Mal historial crediticio. Incapacidad para cubrir necesidades básicas. Dependencia financiera de otros. Pobreza intergeneracional.'
+          },
+          {
+            title: 'Impacto Social y Comunitario',
+            content: 'Aislamiento social progresivo. Pérdida de amistades. Estigma y vergüenza. Pérdida de estatus social. Criminalidad: 40% cometen actos ilegales. Costo social: $6 mil millones anuales. Sobrecarga del sistema de salud. Impacto en servicios sociales.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'herramientas-control',
+        title: 'Herramientas de Control y Prevención',
+        content: 'Existen múltiples herramientas y estrategias para mantener el control sobre el juego y prevenir problemas.',
+        subsections: [
+          {
+            title: 'Herramientas de Autoexclusión',
+            content: 'Autoexclusión de casinos físicos: Registro nacional que te prohíbe entrada. Período mínimo 6 meses, puede ser permanente. Autoexclusión online: GamStop (UK), ROGA (España), similar en otros países. Bloquea acceso a todos los sitios de juego licenciados. Software de bloqueo: Gamban, BetBlocker, GamBlock. Bloquean sitios de juego en tus dispositivos. Costo: Gratis a $100/año.'
+          },
+          {
+            title: 'Control Financiero',
+            content: 'Límites de depósito: Diarios, semanales, mensuales en sitios de juego. Bloqueo de tarjetas: Muchos bancos ofrecen bloqueo de transacciones de juego. Cuenta bancaria controlada: Acceso limitado, requiere co-firmante. Transferencia de control financiero: Temporal a persona de confianza. Alertas de gasto: Notificaciones cuando gastas en categorías específicas. Presupuesto estricto: Apps como YNAB, Mint para control total.'
+          },
+          {
+            title: 'Límites de Tiempo y Sesión',
+            content: 'Reality checks: Recordatorios cada 15-60 minutos de tiempo jugado. Límites de sesión: Cierre automático después de X tiempo. Horarios bloqueados: No poder jugar en ciertos horarios. Pausas obligatorias: Enfriamiento entre sesiones. Registro de actividad: Historial detallado de tiempo y dinero gastado.'
+          },
+          {
+            title: 'Herramientas Tecnológicas',
+            content: 'Apps de recuperación: Gambling Therapy, Quit Gamble. Rastreadores de sobriedad: I Am Sober, Sober Time. Bloqueadores de publicidad: Para evitar anuncios de juego. VPN inverso: Previene acceso a sitios extranjeros. Controles parentales: Para proteger a menores. Monitoreo de actividad: Para accountability con sponsor/terapeuta.'
+          },
+          {
+            title: 'Estrategias Personales',
+            content: 'Llevar solo efectivo limitado. Dejar tarjetas en casa. Evitar lugares de juego. Cambiar rutas si pasas por casinos. Buscar actividades alternativas. Ejercicio regular para manejar estrés. Mindfulness y meditación. Diario de triggers y emociones. Red de apoyo activa. Recompensas por días sin jugar.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'recursos-ayuda',
+        title: 'Recursos de Ayuda Profesional',
+        content: 'La ayuda profesional es fundamental para la recuperación. Existen múltiples opciones según tus necesidades y ubicación.',
+        subsections: [
+          {
+            title: 'Líneas de Ayuda 24/7',
+            content: 'Internacional: Gambling Therapy - Chat online gratuito. USA: 1-800-522-4700 - National Council on Problem Gambling. UK: 0808 8020 133 - GamCare. España: 900 200 225 - FEJAR. México: 55 5424 7200 - Centro de Integración Juvenil. Argentina: 0800 666 0006 - Juego Responsable. Chile: 1412 - Salud Responde. Colombia: 01 8000 113 113 - Línea Nacional.'
+          },
+          {
+            title: 'Grupos de Apoyo',
+            content: 'Jugadores Anónimos (GA): Programa de 12 pasos gratuito. Reuniones presenciales y online. Sin requisitos de ingreso. Gam-Anon: Para familiares y amigos. Smart Recovery: Alternativa a 12 pasos, basado en CBT. Celebrate Recovery: Enfoque cristiano. Women for Sobriety: Específico para mujeres. Grupos online: Reddit r/problemgambling, foros especializados.'
+          },
+          {
+            title: 'Tratamiento Profesional',
+            content: 'Terapia Cognitivo-Conductual (CBT): Más efectiva según estudios. 8-16 sesiones típicamente. Trabaja pensamientos y comportamientos. Terapia Motivacional: Para aumentar motivación al cambio. Terapia Familiar: Incluye a la familia en recuperación. Medicación: Antidepresivos, estabilizadores del ánimo, antagonistas opioides. Programas residenciales: 30-90 días, inmersión total. Programas ambulatorios intensivos: 3-5 días/semana, 3-4 horas/día.'
+          },
+          {
+            title: 'Recursos Online',
+            content: 'Gambling Therapy: Terapia online gratuita, 9 idiomas. BetterHelp: Terapeutas especializados en adicción. Gordon Moody: Programas residenciales y online (UK). Algamus: Tratamiento residencial (USA). BeGambleAware: Recursos y herramientas. GamCare: Chat, foros, información. NCPG: Directorio de terapeutas certificados.'
+          },
+          {
+            title: 'Ayuda Financiera y Legal',
+            content: 'Asesoría de deuda: StepChange, National Debtline. Asesoría legal gratuita: Legal Aid, pro bono. Planificación financiera: Financial counselors especializados. Negociación con acreedores: Debt management plans. Bancarrota: Como último recurso, asesoría especializada. Recuperación de dinero: Chargeback en algunos casos.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'estrategias-recuperacion',
+        title: 'Estrategias de Recuperación Efectivas',
+        content: 'La recuperación es un proceso, no un evento. Estas estrategias han demostrado efectividad en miles de casos.',
+        subsections: [
+          {
+            title: 'Primeros Pasos Críticos',
+            content: 'Admitir el problema: Sin minimización ni excusas. Confesar a alguien de confianza: Romper el secreto. Buscar ayuda profesional inmediatamente: No esperar. Autoexclusión total: Todos los lugares y sitios de juego. Control financiero: Entregar tarjetas y accesos. Evaluación de salud mental: Tratar condiciones subyacentes. Plan de seguridad: Para momentos de crisis. Eliminar triggers: Apps, publicidad, contactos.'
+          },
+          {
+            title: 'Fase de Estabilización (0-3 meses)',
+            content: 'Abstinencia completa: No "solo un poco". Terapia semanal mínimo. Grupo de apoyo 2-3 veces/semana. Rutina estructurada diaria. Ejercicio regular: 30 min/día mínimo. Alimentación saludable. Sueño regular: 7-8 horas. Medicación si es necesaria. Evitar alcohol y drogas. Actividades alternativas planificadas.'
+          },
+          {
+            title: 'Fase de Rehabilitación (3-12 meses)',
+            content: 'Trabajo profundo en terapia: Traumas, triggers, patrones. Reparación de relaciones: Honestidad, paciencia. Plan financiero: Pago de deudas, presupuesto. Desarrollo de habilidades: Manejo de estrés, comunicación. Nuevos hobbies e intereses. Voluntariado o servicio. Educación sobre adicción. Construcción de red de apoyo. Prevención de recaídas activa.'
+          },
+          {
+            title: 'Mantenimiento a Largo Plazo (12+ meses)',
+            content: 'Vigilancia continua: La adicción es crónica. Grupo de apoyo regular: Mínimo semanal. Terapia de mantenimiento: Mensual o según necesidad. Estilo de vida equilibrado. Propósito y significado: Nuevas metas. Ayudar a otros: Sponsor, voluntario. Crecimiento personal continuo. Manejo proactivo del estrés. Celebración de hitos sobriedad.'
+          },
+          {
+            title: 'Manejo de Recaídas',
+            content: 'Recaída no es fracaso: 90% recaen al menos una vez. Respuesta inmediata: No esperar, buscar ayuda. Analizar triggers: ¿Qué llevó a la recaída? Ajustar plan de tratamiento. Aumentar intensidad de apoyo temporalmente. No castigarse: Culpa excesiva es contraproducente. Aprender de la experiencia. Renovar compromiso. Considerar nivel más alto de cuidado si es necesario.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'apoyo-familiar',
+        title: 'Guía Completa para Familiares y Amigos',
+        content: 'Los familiares sufren enormemente y necesitan su propio apoyo y estrategias.',
+        subsections: [
+          {
+            title: 'Cómo Identificar el Problema en un Ser Querido',
+            content: 'Cambios de humor inexplicables. Ausencias frecuentes sin explicación. Mentiras sobre actividades o dinero. Peticiones de dinero frecuentes. Objetos personales que desaparecen. Llamadas de acreedores. Secretismo con teléfono/computadora. Pérdida de interés en familia. Promesas rotas repetidamente. Defensividad cuando se menciona el juego.'
+          },
+          {
+            title: 'Qué Hacer y Qué No Hacer',
+            content: 'QUÉ HACER: Educarte sobre la adicción al juego. Buscar tu propio apoyo (Gam-Anon). Establecer límites claros. Proteger tus finanzas. Cuidar tu salud mental. Ofrecer apoyo sin enabler. Ser paciente con el proceso. QUÉ NO HACER: Dar sermones o ultimátums vacíos. Prestar dinero "solo esta vez". Mentir para cubrir al jugador. Pagar sus deudas. Amenazar sin cumplir. Culparte a ti mismo. Ignorar el problema esperando que mejore.'
+          },
+          {
+            title: 'Conversación de Intervención',
+            content: 'Preparación: Elige momento calmado, no después de pérdida. Ten información de recursos lista. Habla desde el amor, no la ira. Usa declaraciones "Yo siento" no "Tú siempre". Sé específico con ejemplos. Ofrece apoyo concreto. Establece límites claros. Ten plan si rechaza ayuda. Considera intervención profesional si es necesario.'
+          },
+          {
+            title: 'Protección Financiera Familiar',
+            content: 'Separa cuentas bancarias inmediatamente. Cambia contraseñas y PINs. Congela crédito conjunto. Revisa y cancela poderes legales. Documenta todos los gastos. Consulta asesor legal si necesario. Protege activos importantes. No co-firmes préstamos. Revisa seguros y beneficiarios. Plan B financiero independiente.'
+          },
+          {
+            title: 'Cuidado de los Hijos',
+            content: 'Explicación apropiada para la edad: No detalles, pero honestidad. Asegurar que no es su culpa. Mantener rutinas estables. Apoyo escolar si hay problemas. Terapia infantil si es necesaria. Proteger de responsabilidades adultas. Mantener actividades normales. Red de apoyo (familia extendida, amigos). Monitorear signos de trauma. Educación preventiva sobre adicciones.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'mitos-realidades',
+        title: 'Mitos y Realidades sobre el Juego',
+        content: 'Desmantelar mitos es crucial para la prevención y recuperación.',
+        subsections: [
+          {
+            title: 'Mitos sobre la Probabilidad',
+            content: 'MITO: "Estoy debido para ganar" - REALIDAD: Cada evento es independiente. MITO: "Tengo un sistema" - REALIDAD: La casa siempre tiene ventaja matemática. MITO: "Casi gané" - REALIDAD: Casi ganar activa igual respuesta cerebral que ganar, es diseño intencional. MITO: "Puedo recuperar lo perdido" - REALIDAD: Perseguir pérdidas lleva a mayores pérdidas. MITO: "Soy bueno en esto" - REALIDAD: Resultados a corto plazo no indican habilidad.'
+          },
+          {
+            title: 'Mitos sobre la Adicción',
+            content: 'MITO: "Solo los débiles se vuelven adictos" - REALIDAD: La adicción es una enfermedad cerebral, no debilidad moral. MITO: "Puedo parar cuando quiera" - REALIDAD: La adicción altera el control voluntario. MITO: "No soy adicto si no juego diario" - REALIDAD: Patrón y consecuencias definen adicción, no frecuencia. MITO: "Solo necesito fuerza de voluntad" - REALIDAD: Se requiere tratamiento profesional. MITO: "Un trago no afecta" - REALIDAD: Alcohol reduce inhibiciones y aumenta riesgo.'
+          },
+          {
+            title: 'Mitos sobre el Tratamiento',
+            content: 'MITO: "Debo tocar fondo primero" - REALIDAD: Intervención temprana es más efectiva. MITO: "El tratamiento no funciona" - REALIDAD: 50-60% mantienen recuperación con tratamiento. MITO: "Una recaída significa fracaso" - REALIDAD: Recaídas son parte del proceso de recuperación. MITO: "Puedo hacerlo solo" - REALIDAD: Apoyo aumenta significativamente tasas de éxito. MITO: "Es muy caro" - REALIDAD: Existen opciones gratuitas y de bajo costo.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'aspectos-legales',
+        title: 'Aspectos Legales y Financieros',
+        content: 'Las consecuencias legales y financieras requieren atención especializada.',
+        subsections: [
+          {
+            title: 'Consecuencias Legales Comunes',
+            content: 'Fraude: Uso de tarjetas ajenas, cheques sin fondos. Robo: De empleador, familia, amigos. Malversación: Desvío de fondos. Falsificación: Documentos, firmas. Evasión fiscal: No declarar ganancias, deducciones falsas. Violencia doméstica: Relacionada con estrés del juego. Negligencia infantil: Por ausencia o falta de recursos.'
+          },
+          {
+            title: 'Defensa Legal y Mitigación',
+            content: 'La adicción al juego puede ser factor mitigante. Requiere diagnóstico profesional documentado. Participación activa en tratamiento ayuda. Restitución voluntaria vista favorablemente. Programas de diversión para primera ofensa. Importancia de abogado especializado. Documentar todo el tratamiento.'
+          },
+          {
+            title: 'Recuperación Financiera',
+            content: 'Evaluación completa de deudas. Priorización: Necesidades básicas primero. Negociación con acreedores. Planes de pago realistas. Consolidación de deuda si apropiado. Reconstrucción de crédito gradual. Presupuesto estricto. Metas financieras pequeñas. Educación financiera. Asesoría continua.'
+          }
+        ]
+      },
+      {
+        type: 'section',
+        id: 'historias-recuperacion',
+        title: 'Historias Reales de Recuperación',
+        content: 'Estas historias anónimas muestran que la recuperación es posible.',
+        subsections: [
+          {
+            title: 'Historia de María, 45 años',
+            content: 'Perdí mi casa, mi matrimonio y casi mi vida por las máquinas tragamonedas. Empezó inocentemente en el casino local para "relajarme" después del trabajo. En 5 años, había perdido $200,000, incluyendo la herencia de mis padres. El día que mi hija de 16 años me encontró llorando con pastillas en la mano fue mi momento de claridad. Llevo 3 años sin jugar. Fue el camino más difícil de mi vida, pero recuperé a mi familia. Mi hija está orgullosa de mí. Trabajo ayudando a otros en GA. La vida sin juego es infinitamente mejor.'
+          },
+          {
+            title: 'Historia de Carlos, 38 años',
+            content: 'Las apuestas deportivas online me consumieron. Empecé con $10 aquí y allá. En 2 años, debía $80,000. Robé de la empresa donde trabajaba y fui despedido. Mi esposa me dejó llevándose a nuestros dos hijos. Consideré el suicidio seriamente. Un amigo me llevó a GA. Al principio no creía que funcionaría. Pero día a día, con terapia, medicación para mi depresión, y el apoyo del grupo, empecé a sanar. Hoy, 5 años después, tengo un nuevo trabajo, veo a mis hijos regularmente, y ayudo a otros. La recuperación es real.'
+          },
+          {
+            title: 'Historia de Ana, 29 años',
+            content: 'El poker online me atrapó en la universidad. Era "inteligente", ganaba al principio. Pero la adicción no discrimina. Abandoné mis estudios, perdí amigos, mentí a todos. Mis padres me rescataron financieramente 3 veces antes de cortar el apoyo. Viví en mi auto por 2 meses. Una trabajadora social en un refugio me conectó con tratamiento. Hoy, 18 meses limpia, volví a la universidad. Es un día a la vez, pero cada día sin jugar es una victoria.'
+          }
+        ]
+      },
+      {
+        type: 'checklist',
+        title: 'Plan de Acción Inmediato si Necesitas Ayuda',
+        items: [
+          'Admite que necesitas ayuda - Este es el paso más importante',
+          'Llama a una línea de ayuda HOY - No esperes',
+          'Cuéntale a alguien de confianza - Rompe el secreto',
+          'Autoexclúyete de todos los sitios de juego - Hazlo ahora',
+          'Entrega el control de tus finanzas temporalmente',
+          'Busca una reunión de GA para esta semana',
+          'Agenda cita con terapeuta especializado',
+          'Elimina apps de juego y bloquea sitios',
+          'Crea plan para las próximas 24 horas sin juego',
+          'Escribe por qué quieres dejar de jugar',
+          'Identifica 3 actividades alternativas para hacer hoy',
+          'Comprométete solo con hoy - No pienses en "para siempre"'
+        ],
+        note: 'No tienes que hacer esto solo. La ayuda está disponible y la recuperación es posible.'
       },
       {
         type: 'resources',
-        title: 'Recursos de Ayuda Disponibles',
+        title: 'Directorio de Recursos Esenciales',
         items: [
-          'Jugadores Anónimos - Grupos de apoyo gratuitos',
-          'Línea Nacional de Ayuda: 1-800-522-4700',
-          'GamCare - Chat en línea y soporte',
-          'Terapia especializada en ludopatía',
-          'Apps de autoexclusión y control'
+          'EMERGENCIA SUICIDIO: 988 (USA) / 024 (España) / 911',
+          'Jugadores Anónimos: www.jugadoresanonimos.org',
+          'GamCare: www.gamcare.org.uk - Chat 24/7',
+          'Gambling Therapy: www.gamblingtherapy.org - Global',
+          'NCPG: www.ncpgambling.org - Recursos USA',
+          'BeGambleAware: www.begambleaware.org - UK',
+          'FEJAR: www.fejar.org - España',
+          'Smart Recovery: www.smartrecovery.org - Alternativa a 12 pasos',
+          'Gam-Anon: www.gam-anon.org - Para familiares',
+          'Reddit: r/problemgambling - Comunidad de apoyo',
+          'Gambling Commission: Reguladores por país',
+          'StepChange: www.stepchange.org - Ayuda con deudas'
         ]
+      },
+      {
+        type: 'tips',
+        title: 'Estrategias Diarias para Mantener la Recuperación',
+        items: [
+          'Comienza cada día con gratitud por estar sin jugar',
+          'Ten un plan estructurado para cada día',
+          'Identifica y evita triggers (lugares, personas, emociones)',
+          'Practica técnicas de relajación cuando sientas urgencias',
+          'Mantén contacto diario con tu red de apoyo',
+          'Celebra pequeñas victorias - cada día importa',
+          'Desarrolla nuevos hobbies que te apasionen',
+          'Cuida tu salud física - ejercicio, alimentación, sueño',
+          'Sé honesto sobre tus sentimientos y luchas',
+          'Ayuda a otros en recuperación cuando estés listo',
+          'Recuerda por qué dejaste de jugar',
+          'Perdónate por el pasado, enfócate en el presente',
+          'Busca ayuda profesional al primer signo de recaída',
+          'Mantén esperanza - miles se han recuperado exitosamente'
+        ]
+      },
+      {
+        type: 'warning',
+        title: 'Señales de Crisis - Busca Ayuda Inmediata Si:',
+        content: 'Tienes pensamientos de suicidio o autolesión. Has cometido o consideras actos ilegales para conseguir dinero. Tu familia está en peligro por tus acciones. Has perdido control total y no puedes parar. Estás experimentando síntomas psicóticos. Has amenazado o lastimado a alguien. Estás considerando huir o desaparecer. Tu salud física está en peligro grave. NO ESPERES - La ayuda de emergencia está disponible 24/7.'
       }
     ],
     relatedGuides: [
       {
         slug: 'psicologia-juego-responsable',
-        title: 'Psicología del Juego',
+        title: 'Psicología del Juego y Adicción',
         category: 'Responsabilidad',
-        readTime: '10 min'
+        readTime: '20 min'
+      },
+      {
+        slug: 'herramientas-autocontrol-juego',
+        title: 'Herramientas de Autocontrol',
+        category: 'Prevención',
+        readTime: '15 min'
+      },
+      {
+        slug: 'apoyo-familiar-ludopatia',
+        title: 'Guía para Familiares',
+        category: 'Apoyo',
+        readTime: '18 min'
       }
     ]
   },
