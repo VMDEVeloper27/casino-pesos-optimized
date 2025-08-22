@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabaseAdminAdmin } from '@/lib/supabaseAdmin-admin';
+import { supabaseAdmin } from '@/lib/supabase-admin';
 
 interface Params {
   params: Promise<{

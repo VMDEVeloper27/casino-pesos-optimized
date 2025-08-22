@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabaseAdminAdmin } from '@/lib/supabaseAdmin-admin';
+import { supabaseAdmin } from '@/lib/supabase-admin';
 
 // Get all casinos
 export async function GET() {
