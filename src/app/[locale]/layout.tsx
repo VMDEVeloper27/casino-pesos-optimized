@@ -10,6 +10,7 @@ import { CountryProvider } from '@/contexts/CountryContext';
 import { FacebookPixel, GoogleAnalytics, Hotjar } from '@/components/Analytics';
 import ClientSessionProvider from '@/components/providers/ClientSessionProvider';
 import CookieConsent from '@/components/CookieConsent';
+import GoogleAnalyticsScript from '@/components/GoogleAnalyticsScript';
 import '@/styles/globals.css';
 
 const inter = Inter({ 
@@ -57,19 +58,6 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${inter.variable} ${poppins.variable}`}>
       <head>
-        {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-EF14LWF4P0"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-EF14LWF4P0');
-            `,
-          }}
-        />
-        
         {/* Favicons and Web App */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
@@ -107,7 +95,10 @@ export default async function LocaleLayout({
         <link rel="alternate" hrefLang="x-default" href="https://casinospesos.com/es" />
       </head>
       <body className="bg-background text-foreground font-sans antialiased">
-        {/* Analytics */}
+        {/* Google Analytics */}
+        <GoogleAnalyticsScript />
+        
+        {/* Other Analytics */}
         {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
           <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
         )}
