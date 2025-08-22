@@ -90,7 +90,6 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
 
   // Close all menus on route change
   useEffect(() => {
-    setIsMobileMenuOpen(false);
     setIsUserDropdownOpen(false);
     setActiveDropdown(null);
   }, [pathname]);
