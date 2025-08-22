@@ -265,8 +265,8 @@ export default function BlogPage({ params }: PageProps) {
     setSearchQuery('');
   };
 
-  const featuredPost = filteredPosts[0];
-  const regularPosts = filteredPosts.slice(1);
+  // Все посты показываем одинаково
+  const regularPosts = filteredPosts;
   
   // Prevent hydration errors by not rendering dynamic content until mounted
   if (!mounted) {
@@ -349,97 +349,63 @@ export default function BlogPage({ params }: PageProps) {
           </div>
         ) : (
           <>
-            {/* Featured Post */}
-            {featuredPost && !searchQuery && page === 1 && (
-              <div className="mb-12">
-                <Link href={`/${locale}/blog/${featuredPost.slug}`}>
-                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-8 border border-green-200 hover:border-green-400 transition-all duration-300 group">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors">
-                      {featuredPost.title}
-                    </h2>
-                    <p className="text-gray-600 mb-6 line-clamp-2">
-                      {featuredPost.excerpt}
-                    </p>
-                    <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
-                      <div className="flex items-center gap-2">
-                        <User className="w-4 h-4" />
-                        <span>{featuredPost.author}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4" />
-                        <span>{(featuredPost.publishedAt || featuredPost.published_at || '').split('T')[0]}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4" />
-                        <span>{featuredPost.readTime || featuredPost.read_time || 5} min de lectura</span>
-                      </div>
-                      {featuredPost && featuredPost.views !== undefined && (
-                        <div className="flex items-center gap-2">
-                          <Eye className="w-4 h-4" />
-                          <span>{(featuredPost.views || 0).toLocaleString()} vistas</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            )}
-            
             {/* Posts Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               {regularPosts.map((post) => (
                 <article
                   key={post.id}
-                  className="bg-white rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 group"
+                  className="bg-white rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col h-full"
                 >
-                  <Link href={`/${locale}/blog/${post.slug}`}>
+                  <Link href={`/${locale}/blog/${post.slug}`} className="flex flex-col h-full">
                     <div className="aspect-video bg-gray-100 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-br from-green-100 to-emerald-100"></div>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <BookOpen className="w-12 h-12 text-gray-900/50" />
-                      </div>
+                      {post.featuredImage || post.featured_image ? (
+                        <img 
+                          src={post.featuredImage || post.featured_image} 
+                          alt={post.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                      ) : (
+                        <>
+                          <div className="absolute inset-0 bg-gradient-to-br from-green-100 to-emerald-100"></div>
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <BookOpen className="w-12 h-12 text-green-600/50" />
+                          </div>
+                        </>
+                      )}
                       <div className="absolute top-4 left-4">
                         <span className="px-3 py-1 bg-green-600 text-white backdrop-blur-sm rounded-lg text-xs font-semibold">
                           {post.category}
                         </span>
                       </div>
                     </div>
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors line-clamp-2">
+                    <div className="p-6 flex flex-col flex-grow">
+                      <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors line-clamp-2 h-[56px]">
                         {post.title}
                       </h3>
-                      <p className="text-gray-500 mb-4 line-clamp-3">
+                      <p className="text-gray-500 mb-4 line-clamp-3 h-[72px] text-sm">
                         {post.excerpt}
                       </p>
-                      <div className="flex items-center justify-between text-sm text-gray-400">
-                        <div className="flex items-center gap-3">
-                          <div className="flex items-center gap-1">
+                      <div className="mt-auto">
+                        <div className="flex items-center justify-between text-xs text-gray-400 pb-3 border-b border-gray-100">
+                          <div className="flex items-center gap-2">
                             <Calendar className="w-3 h-3" />
                             <span>{(post.publishedAt || post.published_at || '').split('T')[0]}</span>
                           </div>
-                          <div className="flex items-center gap-1">
+                          <div className="flex items-center gap-2">
                             <Clock className="w-3 h-3" />
                             <span>{post.readTime || post.read_time || 5} min</span>
                           </div>
                         </div>
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center justify-between text-xs text-gray-400 pt-3">
                           <div className="flex items-center gap-1">
                             <Eye className="w-3 h-3" />
-                            <span>{post.views || 0}</span>
+                            <span>{post.views || 0} vistas</span>
                           </div>
                           <div className="flex items-center gap-1">
                             <Heart className="w-3 h-3" />
-                            <span>{post.likes || 0}</span>
+                            <span>{post.likes || 0} likes</span>
                           </div>
                         </div>
-                      </div>
-                      <div className="flex flex-wrap gap-2 mt-4">
-                        {post.tags.slice(0, 3).map(tag => (
-                          <span key={tag} className="inline-flex items-center gap-1 px-2 py-1 bg-gray-100 rounded text-xs text-gray-600">
-                            <Tag className="w-2.5 h-2.5" />
-                            {tag}
-                          </span>
-                        ))}
                       </div>
                     </div>
                   </Link>

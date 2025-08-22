@@ -39,19 +39,104 @@ interface RelatedPost {
   readTime: number;
 }
 
-// Fetch blog post data
+// Import Supabase directly
+import { supabase } from '@/lib/supabase';
+
+// Fetch blog post data directly from Supabase
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-    const response = await fetch(`${baseUrl}/api/public/blog/${slug}`, {
-      next: { revalidate: 60 } // Cache for 1 minute
-    });
+    // Fetch post from Supabase directly
+    const { data: post, error } = await supabase
+      .from('blog_posts')
+      .select('*')
+      .eq('slug', slug)
+      .eq('status', 'published')
+      .single();
     
-    if (!response.ok) {
+    if (error || !post) {
+      // Fallback to JSON if not in DB
+      try {
+        const fs = require('fs').promises;
+        const path = require('path');
+        const jsonPath = path.join(process.cwd(), 'data', 'blog-posts.json');
+        const jsonData = await fs.readFile(jsonPath, 'utf-8');
+        const blogData = JSON.parse(jsonData);
+        const jsonPost = blogData.posts?.find((p: any) => p.slug === slug);
+        
+        if (jsonPost) {
+          return {
+            id: jsonPost.id,
+            slug: jsonPost.slug,
+            title: jsonPost.title,
+            excerpt: jsonPost.excerpt,
+            content: jsonPost.content || 'Content coming soon...',
+            author: jsonPost.author || 'Admin',
+            authorRole: jsonPost.authorRole || jsonPost.author_role || 'Editor',
+            category: jsonPost.category || 'General',
+            tags: jsonPost.tags || [],
+            featuredImage: jsonPost.featuredImage || jsonPost.featured_image || '',
+            publishedAt: jsonPost.publishedAt || jsonPost.published_at || new Date().toISOString(),
+            updatedAt: jsonPost.updatedAt || jsonPost.updated_at || new Date().toISOString(),
+            readTime: jsonPost.readTime || jsonPost.read_time || 5,
+            views: jsonPost.views || 0,
+            likes: jsonPost.likes || 0,
+            relatedPosts: []
+          };
+        }
+      } catch (fileError) {
+        console.log('JSON fallback failed:', fileError);
+      }
       return null;
     }
     
-    return response.json();
+    // Increment view count
+    try {
+      await supabase
+        .from('blog_posts')
+        .update({ views: (post.views || 0) + 1 })
+        .eq('id', post.id);
+    } catch (err) {
+      // Ignore view increment errors
+    }
+    
+    // Get related posts (same category)
+    const { data: relatedPosts } = await supabase
+      .from('blog_posts')
+      .select('id, slug, title, excerpt, category, published_at, featured_image, read_time')
+      .eq('status', 'published')
+      .eq('category', post.category)
+      .neq('id', post.id)
+      .order('published_at', { ascending: false })
+      .limit(3);
+    
+    // Format response
+    return {
+      id: post.id,
+      slug: post.slug,
+      title: post.title,
+      excerpt: post.excerpt,
+      content: post.content || 'Content coming soon...',
+      author: post.author,
+      authorRole: post.author_role || 'Editor',
+      category: post.category,
+      tags: post.tags || [],
+      featuredImage: post.featured_image,
+      publishedAt: post.published_at,
+      updatedAt: post.updated_at,
+      readTime: post.read_time || 5,
+      views: (post.views || 0) + 1,
+      likes: post.likes || 0,
+      relatedPosts: (relatedPosts || []).map(rp => ({
+        id: rp.id,
+        slug: rp.slug,
+        title: rp.title,
+        excerpt: rp.excerpt,
+        category: rp.category,
+        publishedAt: rp.published_at,
+        featuredImage: rp.featured_image,
+        readTime: rp.read_time || 5
+      }))
+    };
   } catch (error) {
     console.error('Error fetching blog post:', error);
     return null;
@@ -213,9 +298,11 @@ export default async function BlogPostPage({ params }: PageProps) {
         {/* Featured Image */}
         {post.featuredImage && (
           <div className="aspect-video bg-white rounded-xl mb-8 overflow-hidden">
-            <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-              <span className="text-6xl">📰</span>
-            </div>
+            <img 
+              src={post.featuredImage} 
+              alt={post.title}
+              className="w-full h-full object-cover"
+            />
           </div>
         )}
 
