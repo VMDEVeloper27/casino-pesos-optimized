@@ -95,17 +95,6 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
     setActiveDropdown(null);
   }, [pathname]);
 
-  // Prevent body scroll when mobile menu is open
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isMobileMenuOpen]);
 
   return (
     <>
@@ -114,10 +103,10 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
         <MobileNav locale={locale} />
       </div>
       
-      {/* Professional Light Header - Desktop Only */}
+      {/* Professional Light Header */}
       <header className="hidden lg:block bg-white border-b border-border sticky top-0 z-50 shadow-soft">
         {/* Desktop Header */}
-        <div>
+        <div className="hidden lg:block">
           <div className="container mx-auto px-6">
             <div className="flex items-center justify-between py-3">
               {/* Casino Chip Logo with Big C */}
