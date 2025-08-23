@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Shield, AlertCircle, FileText, Lock, Mail, Phone, Rss } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import { useState, useEffect } from 'react';
 
 const NewsletterForm = dynamic(() => import('@/components/NewsletterForm'), {
   ssr: false,
@@ -16,7 +17,13 @@ const NewsletterForm = dynamic(() => import('@/components/NewsletterForm'), {
 });
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
+  const [currentYear, setCurrentYear] = useState(2025);
+  const [lastUpdate, setLastUpdate] = useState('01/01/2025');
+  
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+    setLastUpdate(new Date().toLocaleDateString('es-MX'));
+  }, []);
 
   return (
     <footer className="bg-white border-t border-gray-200 mt-16">
@@ -62,7 +69,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/es/afiliados" className="text-gray-600 hover:text-green-600 text-sm">
+                <Link href="/es/contacto" className="text-gray-600 hover:text-green-600 text-sm">
                   Divulgación de Afiliados
                 </Link>
               </li>
@@ -84,12 +91,12 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/es/metodos-pago" className="text-gray-600 hover:text-green-600 text-sm">
+                <Link href="/es/guias" className="text-gray-600 hover:text-green-600 text-sm">
                   Métodos de Pago
                 </Link>
               </li>
               <li>
-                <Link href="/es/juego-responsable" className="text-gray-600 hover:text-green-600 text-sm flex items-center gap-2">
+                <Link href="/es/guias" className="text-gray-600 hover:text-green-600 text-sm flex items-center gap-2">
                   <AlertCircle className="w-4 h-4" />
                   Juego Responsable
                 </Link>
@@ -164,15 +171,15 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
             <p>© {currentYear} CasinosPesos. Todos los derechos reservados.</p>
             <div className="flex items-center gap-4">
-              <Link href="/es/sitemap" className="hover:text-gray-700">
+              <Link href="/sitemap.xml" className="hover:text-gray-700">
                 Mapa del Sitio
               </Link>
               <span>•</span>
-              <Link href="/es/rss" className="hover:text-gray-700">
+              <Link href="/rss" className="hover:text-gray-700">
                 RSS
               </Link>
               <span>•</span>
-              <span>Última actualización: {new Date().toLocaleDateString('es-MX')}</span>
+              <span>Última actualización: {lastUpdate}</span>
             </div>
           </div>
         </div>
