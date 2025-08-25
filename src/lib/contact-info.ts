@@ -1,8 +1,8 @@
 // Centralized contact information for consistency across the site
 export const contactInfo = {
-  phone: '+52 55 1234 5678', // Mexico City format
-  phoneDisplay: '+52 (55) 1234-5678',
-  phoneClean: '525512345678', // For tel: links
+  phone: '+52 55 8421 7639', // Mexico City format
+  phoneDisplay: '+52 (55) 8421-7639',
+  phoneClean: '525584217639', // For tel: links
   email: 'info@casinospesos.com',
   supportEmail: 'soporte@casinospesos.com',
   privacyEmail: 'privacy@casinospesos.com',
