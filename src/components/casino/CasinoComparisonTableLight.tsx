@@ -128,7 +128,7 @@ export function CasinoComparisonTableLight({ casinos, locale = 'es' }: Compariso
     setSelectedCasinos(prev => 
       prev.includes(casinoId) 
         ? prev.filter(id => id !== casinoId)
-        : [...prev, casinoId].slice(0, 3) // Max 3 for comparison
+        : [...prev, casinoId].slice(0, 4) // Max 4 for comparison
     );
   };
 
@@ -353,7 +353,8 @@ export function CasinoComparisonTableLight({ casinos, locale = 'es' }: Compariso
                     checked={selectedCasinos.includes(casino.id)}
                     onChange={() => toggleCasinoSelection(casino.id)}
                     className="w-5 h-5 rounded accent-primary-600 cursor-pointer"
-                    disabled={!selectedCasinos.includes(casino.id) && selectedCasinos.length >= 3}
+                    disabled={!selectedCasinos.includes(casino.id) && selectedCasinos.length >= 4}
+                    title={!selectedCasinos.includes(casino.id) && selectedCasinos.length >= 4 ? (locale === 'es' ? 'Máximo 4 casinos para comparar' : 'Maximum 4 casinos to compare') : ''}
                   />
                 </td>
 
@@ -485,7 +486,8 @@ export function CasinoComparisonTableLight({ casinos, locale = 'es' }: Compariso
                   checked={selectedCasinos.includes(casino.id)}
                   onChange={() => toggleCasinoSelection(casino.id)}
                   className="w-5 h-5 rounded accent-primary-600 cursor-pointer"
-                  disabled={!selectedCasinos.includes(casino.id) && selectedCasinos.length >= 3}
+                  disabled={!selectedCasinos.includes(casino.id) && selectedCasinos.length >= 4}
+                  title={!selectedCasinos.includes(casino.id) && selectedCasinos.length >= 4 ? (locale === 'es' ? 'Máximo 4 casinos para comparar' : 'Maximum 4 casinos to compare') : ''}
                 />
                 <CasinoLogo 
                   name={casino.name} 
@@ -565,9 +567,16 @@ export function CasinoComparisonTableLight({ casinos, locale = 'es' }: Compariso
           className="fixed bottom-4 left-4 right-4 lg:left-auto lg:right-4 lg:w-96 bg-white border-2 border-primary-300 rounded-xl p-4 shadow-2xl z-50"
         >
           <div className="flex items-center justify-between mb-3">
-            <h3 className="font-semibold text-gray-900">
-              {locale === 'es' ? 'Comparar Casinos' : 'Compare Casinos'} ({selectedCasinos.length})
-            </h3>
+            <div>
+              <h3 className="font-semibold text-gray-900">
+                {locale === 'es' ? 'Comparar Casinos' : 'Compare Casinos'} ({selectedCasinos.length}/4)
+              </h3>
+              {selectedCasinos.length === 4 && (
+                <p className="text-xs text-amber-600 mt-1">
+                  {locale === 'es' ? 'Límite máximo alcanzado' : 'Maximum limit reached'}
+                </p>
+              )}
+            </div>
             <button
               onClick={() => setSelectedCasinos([])}
               className="text-gray-500 hover:text-gray-700"
@@ -586,9 +595,12 @@ export function CasinoComparisonTableLight({ casinos, locale = 'es' }: Compariso
               ) : null;
             })}
           </div>
-          <button className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-3 rounded-lg font-bold shadow-lg hover:shadow-xl transition-all">
+          <a 
+            href={`/${locale}/comparar?casinos=${selectedCasinos.join(',')}`}
+            className="block w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-3 rounded-lg font-bold shadow-lg hover:shadow-xl transition-all text-center"
+          >
             {locale === 'es' ? 'Ver Comparación Detallada' : 'View Detailed Comparison'}
-          </button>
+          </a>
         </motion.div>
       )}
     </div>
