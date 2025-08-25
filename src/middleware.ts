@@ -33,9 +33,10 @@ export async function middleware(request: NextRequest) {
   const locale = localeMatch ? localeMatch[1] : 'es';
   const hasLocalePrefix = localeMatch !== null;
   
-  // Redirect root path to default locale
+  // Redirect root path to default locale with 301 permanent redirect
   if (pathname === '/') {
-    return NextResponse.redirect(new URL('/es', request.url));
+    const response = NextResponse.redirect(new URL('/es', request.url), 301);
+    return response;
   }
   
   // Protected routes that require authentication

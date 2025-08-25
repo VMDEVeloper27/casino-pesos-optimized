@@ -18,12 +18,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       openGraph: {
         title: 'Mejores Casinos Online México 2025 | Bonos hasta $50,000 MXN',
         description: 'Los casinos online más seguros de México. Bonos exclusivos, pagos con OXXO y retiros rápidos.',
-        url: 'https://casinospesos.com/es',
+        url: 'https://www.casinospesos.com/es',
         siteName: 'CasinosPesos',
         locale: 'es_MX',
         type: 'website',
         images: [{
-          url: 'https://casinospesos.com/images/og-homepage-es.jpg',
+          url: 'https://www.casinospesos.com/logo.png',
           width: 1200,
           height: 630,
           alt: 'Mejores Casinos Online México'
@@ -35,11 +35,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         description: 'Bonos exclusivos hasta $50,000 MXN en los casinos más seguros',
       },
       alternates: {
-        canonical: 'https://casinospesos.com/es',
+        canonical: 'https://www.casinospesos.com/es',
         languages: {
-          'es-MX': 'https://casinospesos.com/es',
-          'en-US': 'https://casinospesos.com/en',
-          'x-default': 'https://casinospesos.com/es'
+          'es-MX': 'https://www.casinospesos.com/es',
+          'en-US': 'https://www.casinospesos.com/en',
+          'x-default': 'https://www.casinospesos.com/es'
         }
       },
       robots: {
@@ -64,17 +64,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title: 'Best Online Casinos Mexico 2025 | Bonuses up to $50,000 MXN',
       description: 'The safest online casinos in Mexico. Exclusive bonuses, OXXO payments and fast withdrawals.',
-      url: 'https://casinospesos.com/en',
+      url: 'https://www.casinospesos.com/en',
       siteName: 'CasinosPesos',
       locale: 'en_US',
       type: 'website',
     },
     alternates: {
-      canonical: 'https://casinospesos.com/en',
+      canonical: 'https://www.casinospesos.com/en',
       languages: {
-        'es-MX': 'https://casinospesos.com/es',
-        'en-US': 'https://casinospesos.com/en',
-        'x-default': 'https://casinospesos.com/es'
+        'es-MX': 'https://www.casinospesos.com/es',
+        'en-US': 'https://www.casinospesos.com/en',
+        'x-default': 'https://www.casinospesos.com/es'
       }
     }
   }

@@ -7,6 +7,8 @@ Disallow: /admin/
 Disallow: /api/
 Disallow: /_next/
 Disallow: /static/
+Disallow: /dashboard/
+Disallow: /auth/
 Crawl-delay: 1
 
 # Googlebot specific
@@ -14,10 +16,12 @@ User-agent: Googlebot
 Allow: /
 Disallow: /admin/
 Disallow: /api/
+Disallow: /dashboard/
+Disallow: /auth/
 Crawl-delay: 0
 
 # Sitemap location
-Sitemap: https://casinospesos.com/sitemap.xml
+Sitemap: https://www.casinospesos.com/sitemap.xml
 
 # Block bad bots
 User-agent: AhrefsBot
