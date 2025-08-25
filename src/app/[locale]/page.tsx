@@ -1,11 +1,29 @@
 import { Hero } from '@/components/layout/HeroLight';
 import { CasinoCard } from '@/components/casino/CasinoCardLight';
-import { RelatedContentLight as RelatedContent, casinoRelatedContent } from '@/components/ui/RelatedContentLight';
-import { FAQStructuredData, WebsiteStructuredData } from '@/components/StructuredData';
 import { getAllCasinos } from '@/lib/casino-database';
 import { ChevronRight, Gift } from 'lucide-react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import { casinoRelatedContent } from '@/components/ui/RelatedContentLight';
+
+// Lazy load non-critical components
+const RelatedContent = dynamic(
+  () => import('@/components/ui/RelatedContentLight').then(mod => ({ default: mod.RelatedContentLight })),
+  { 
+    loading: () => <div className="animate-pulse bg-gray-200 h-48 rounded-lg" />,
+    ssr: true 
+  }
+);
+
+const FAQStructuredData = dynamic(
+  () => import('@/components/StructuredData').then(mod => ({ default: mod.FAQStructuredData })),
+  { ssr: true }
+);
+
+const WebsiteStructuredData = dynamic(
+  () => import('@/components/StructuredData').then(mod => ({ default: mod.WebsiteStructuredData })),
+  { ssr: true }
+);
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

@@ -25,13 +25,27 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 365, // 1 year cache
   },
   
-  // Enable experimental features
+  // Enable experimental features and optimizations
   experimental: {
-    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
+    optimizePackageImports: [
+      'lucide-react', 
+      '@radix-ui/react-icons',
+      '@radix-ui/react-select',
+      '@radix-ui/react-dialog',
+      '@radix-ui/react-slot',
+      'class-variance-authority',
+      'clsx',
+      'tailwind-merge'
+    ],
   },
   
   // Compression and performance
   compress: true,
+  poweredByHeader: false,
+  reactStrictMode: true,
+  
+  // Optimize bundle size
+  productionBrowserSourceMaps: false,
   
   // Environment variables
   env: {
@@ -39,16 +53,81 @@ const nextConfig: NextConfig = {
   },
 
   // Webpack configuration to handle Node.js modules on client side
-  webpack: (config, { isServer }) => {
+  webpack: (config, { isServer, dev }) => {
     if (!isServer) {
+      // Disable polyfills for modern browsers
       config.resolve.fallback = {
         ...config.resolve.fallback,
         fs: false,
         path: false,
         os: false,
         crypto: false,
+        stream: false,
+        buffer: false,
       };
+      
+      // Optimize chunks for production
+      if (!dev) {
+        config.optimization = {
+          ...config.optimization,
+          moduleIds: 'deterministic',
+          runtimeChunk: 'single',
+          splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+              default: false,
+              vendors: false,
+              framework: {
+                name: 'framework',
+                chunks: 'all',
+                test: /[\\/]node_modules[\\/](react|react-dom|scheduler|prop-types|use-subscription)[\\/]/,
+                priority: 40,
+                enforce: true,
+              },
+              lib: {
+                test(module) {
+                  return module.size() > 160000 &&
+                    /node_modules[/\\]/.test(module.identifier());
+                },
+                name(module) {
+                  const hash = require('crypto').createHash('sha1');
+                  hash.update(module.identifier());
+                  return hash.digest('hex').substring(0, 8);
+                },
+                priority: 30,
+                minChunks: 1,
+                reuseExistingChunk: true,
+              },
+              commons: {
+                name: 'commons',
+                chunks: 'all',
+                minChunks: 2,
+                priority: 20,
+              },
+              shared: {
+                name(module, chunks) {
+                  return 'shared';
+                },
+                priority: 10,
+                minChunks: 2,
+                reuseExistingChunk: true,
+              },
+            },
+            maxAsyncRequests: 25,
+            maxInitialRequests: 25,
+          },
+        };
+      }
     }
+    
+    // Remove moment.js locales
+    config.plugins.push(
+      new (require('webpack')).IgnorePlugin({
+        resourceRegExp: /^\.\/locale$/,
+        contextRegExp: /moment$/,
+      })
+    );
+    
     return config;
   },
 

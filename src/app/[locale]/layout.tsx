@@ -11,6 +11,7 @@ import { FacebookPixel, GoogleAnalytics, Hotjar } from '@/components/Analytics';
 import ClientSessionProvider from '@/components/providers/ClientSessionProvider';
 import CookieConsent from '@/components/CookieConsent';
 import GoogleAnalyticsScript from '@/components/GoogleAnalyticsScript';
+import { ClientOptimizations } from '@/components/ClientOptimizations';
 import '@/styles/globals.css';
 
 const inter = Inter({ 
@@ -83,6 +84,15 @@ export default async function LocaleLayout({
           body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
           .skip-to-main { position: absolute; left: -9999px; }
           .skip-to-main:focus { left: 0; top: 0; z-index: 999; }
+          /* Prevent layout shift for header */
+          header { min-height: 64px; }
+          /* Optimize font loading */
+          .font-inter { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+          .font-poppins { font-family: 'Poppins', system-ui, -apple-system, sans-serif; }
+          /* Reduce CLS for images */
+          img { max-width: 100%; height: auto; }
+          /* Smooth loading transitions */
+          * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
         `}} />
         
         {/* SEO Meta Tags */}
@@ -108,6 +118,9 @@ export default async function LocaleLayout({
         <a href="#main-content" className="skip-to-main">
           {locale === 'es' ? 'Saltar al contenido principal' : 'Skip to main content'}
         </a>
+        
+        {/* Client-side optimizations */}
+        <ClientOptimizations />
         
         {/* Google Analytics */}
         <GoogleAnalyticsScript />
