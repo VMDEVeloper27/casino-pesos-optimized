@@ -9,6 +9,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        'xl': '1300px', // Override xl breakpoint to 1300px for menu
+        '2xl': '1536px',
+      },
       colors: {
         // Clean, Consistent Color Palette
         border: "hsl(var(--border))",

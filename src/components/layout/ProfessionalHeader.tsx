@@ -114,7 +114,7 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
       {/* Professional Light Header */}
       <header className="bg-white border-b border-border sticky top-0 z-50 shadow-soft">
         {/* Desktop Header */}
-        <div className="hidden lg:block">
+        <div className="hidden xl:block">
           <div className="container mx-auto px-6">
             <div className="flex items-center justify-between py-3">
               {/* Casino Chip Logo with Big C */}
@@ -336,7 +336,7 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
         </div>
 
         {/* Mobile Header */}
-        <div className="lg:hidden">
+        <div className="xl:hidden">
           <div className="flex items-center justify-between p-3">
             {/* Mobile Logo */}
             <Link href={`/${locale}`} className="flex items-center gap-2">
@@ -395,7 +395,7 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="lg:hidden fixed inset-0 bg-black/50 z-40"
+              className="xl:hidden fixed inset-0 bg-black/50 z-40"
               onClick={() => setIsMobileMenuOpen(false)}
             />
 
@@ -405,7 +405,7 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="lg:hidden fixed top-0 right-0 bottom-0 w-[min(80vw,320px)] bg-white z-50 overflow-y-auto shadow-2xl mobile-menu-panel border-l border-gray-200"
+              className="xl:hidden fixed top-0 right-0 bottom-0 w-[min(80vw,320px)] bg-white z-50 overflow-y-auto shadow-2xl mobile-menu-panel border-l border-gray-200"
             >
               <div className="p-6">
                 {/* Close button */}
