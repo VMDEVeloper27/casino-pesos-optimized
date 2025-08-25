@@ -39,11 +39,24 @@ a:focus-visible {
 /* Ensure interactive elements are large enough */
 button, 
 a,
-input,
 select,
-textarea {
+textarea,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+input[type="date"] {
   min-height: 44px;
-  min-width: 44px;
+}
+
+/* Keep checkboxes and radio buttons normal size */
+input[type="checkbox"],
+input[type="radio"] {
+  min-height: auto;
+  min-width: auto;
 }
 
 /* Reduce motion for users who prefer it */
