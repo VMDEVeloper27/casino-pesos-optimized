@@ -99,37 +99,38 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
         {/* Casino Name */}
         <h3 className="text-xl font-bold text-white mb-4">{casino.name}</h3>
 
-        {/* Bonus Section */}
+        {/* Bonus Section - Responsive */}
         <div className="bg-gradient-to-r from-primary/20 to-accent/20 rounded-xl p-3 sm:p-4 mb-4 border border-primary/30">
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-primary text-lg">🎁</span>
-            <span className="text-sm font-semibold text-primary">
+            <span className="text-primary text-base sm:text-lg">🎁</span>
+            <span className="text-xs sm:text-sm font-semibold text-primary">
               {locale === 'es' ? 'Bono de Bienvenida' : 'Welcome Bonus'}
             </span>
           </div>
-          <div className="text-xl sm:text-2xl font-bold text-white mb-1">
-            {casino.bonus.percentage}% hasta ${casino.bonus.amount.toLocaleString()} MXN
+          <div className="text-base sm:text-xl lg:text-2xl font-bold text-white mb-1 break-words">
+            <span className="block sm:inline">{casino.bonus.percentage}%</span>
+            <span className="block sm:inline sm:ml-1">hasta ${casino.bonus.amount.toLocaleString()} MXN</span>
           </div>
-          <div className="h-6 flex items-center">
+          <div className="min-h-[1.5rem] flex items-center">
             {casino.bonus.freeSpins ? (
-              <div className="text-sm text-accent">
+              <div className="text-xs sm:text-sm text-accent">
                 + {casino.bonus.freeSpins} Giros Gratis
               </div>
             ) : (
-              <div className="text-sm text-slate-500">
+              <div className="text-xs sm:text-sm text-slate-500">
                 Sin giros incluidos
               </div>
             )}
           </div>
-          <div className="flex items-center gap-4 mt-2 text-xs text-slate-400 flex-wrap">
-            <span>Min: ${casino.bonus.minDeposit}</span>
-            <span>Rollover: {casino.bonus.wageringRequirement}x</span>
+          <div className="flex flex-wrap gap-2 sm:gap-4 mt-2 text-[10px] sm:text-xs text-slate-400">
+            <span className="whitespace-nowrap">Min: ${casino.bonus.minDeposit}</span>
+            <span className="whitespace-nowrap">Rollover: {casino.bonus.wageringRequirement}x</span>
             {casino.bonus.code ? (
-              <span className="bg-slate-700 px-2 py-1 rounded text-primary font-mono">
+              <span className="bg-slate-700 px-2 py-1 rounded text-primary font-mono whitespace-nowrap">
                 {casino.bonus.code}
               </span>
             ) : (
-              <span className="text-slate-600">Sin código</span>
+              <span className="text-slate-600 whitespace-nowrap">Sin código</span>
             )}
           </div>
         </div>

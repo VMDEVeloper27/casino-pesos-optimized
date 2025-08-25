@@ -63,14 +63,25 @@ export default function CookieConsent() {
   };
 
   const acceptSelected = () => {
-    // Только скрываем баннер без сохранения
-    // Пользователь просто выбрал настройки, но не принял их
-    setShowDetails(false);
+    // Сохраняем выбранные настройки
+    localStorage.setItem('cookieConsent', JSON.stringify(preferences));
+    localStorage.setItem('cookieConsentDate', new Date().toISOString());
+    applyPreferences(preferences);
+    setShowBanner(false);
   };
 
   const rejectAll = () => {
-    // При отклонении просто скрываем баннер без сохранения в localStorage
-    // Баннер появится снова при перезагрузке страницы
+    // При отклонении сохраняем только необходимые куки
+    const rejected = {
+      necessary: true,
+      analytics: false,
+      marketing: false,
+      preferences: false,
+    };
+    setPreferences(rejected);
+    localStorage.setItem('cookieConsent', JSON.stringify(rejected));
+    localStorage.setItem('cookieConsentDate', new Date().toISOString());
+    applyPreferences(rejected);
     setShowBanner(false);
   };
 
@@ -240,6 +251,12 @@ export default function CookieConsent() {
                     className="px-6 py-3 bg-white border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
                   >
                     Volver
+                  </button>
+                  <button
+                    onClick={acceptSelected}
+                    className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                  >
+                    Guardar preferencias
                   </button>
                   <button
                     onClick={acceptAll}

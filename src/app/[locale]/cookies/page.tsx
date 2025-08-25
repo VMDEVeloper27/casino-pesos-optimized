@@ -2,12 +2,86 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { Cookie, Settings, Shield, Eye, Trash2, Info, CheckCircle } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'Política de Cookies | CasinosPesos',
-  description: 'Información sobre cómo usamos las cookies y tecnologías similares en CasinosPesos.',
-};
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
 
-export default function CookiesPage() {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const isSpanish = locale === 'es';
+  
+  if (isSpanish) {
+    return {
+      title: 'Política de Cookies | CasinosPesos | Gestión Cookies 2025',
+      description: 'Información completa sobre cómo usamos las cookies y tecnologías similares en CasinosPesos. Tipos, gestión, configuración y control de cookies.',
+      keywords: 'politica cookies casinospesos, gestion cookies casinos, configuracion cookies, tecnologias seguimiento, cookies analiticas, cookies marketing',
+      alternates: {
+        canonical: 'https://www.casinospesos.com/es/cookies',
+        languages: {
+          'es-MX': 'https://www.casinospesos.com/es/cookies',
+          'en-US': 'https://www.casinospesos.com/en/cookies',
+        }
+      },
+      openGraph: {
+        title: 'Política de Cookies | CasinosPesos México',
+        description: 'Aprende sobre nuestro uso de cookies. Gestiona tus preferencias y entiende cómo mejoramos tu experiencia web.',
+        url: 'https://www.casinospesos.com/es/cookies',
+        siteName: 'CasinosPesos',
+        locale: 'es_MX',
+        type: 'website',
+        images: [{
+          url: 'https://www.casinospesos.com/logo.png',
+          width: 1200,
+          height: 630,
+          alt: 'Política de Cookies CasinosPesos - Gestión y Configuración'
+        }]
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Política de Cookies CasinosPesos',
+        description: 'Gestiona tus cookies y mejora tu experiencia web.',
+        images: ['https://www.casinospesos.com/logo.png'],
+      }
+    };
+  } else {
+    return {
+      title: 'Cookie Policy | CasinosPesos | Cookie Management 2025',
+      description: 'Complete information about how we use cookies and similar technologies at CasinosPesos. Types, management, configuration and cookie control.',
+      keywords: 'cookie policy casinospesos, casino cookie management, cookie configuration, tracking technologies, analytics cookies, marketing cookies',
+      alternates: {
+        canonical: 'https://www.casinospesos.com/en/cookies',
+        languages: {
+          'es-MX': 'https://www.casinospesos.com/es/cookies',
+          'en-US': 'https://www.casinospesos.com/en/cookies',
+        }
+      },
+      openGraph: {
+        title: 'Cookie Policy | CasinosPesos Mexico',
+        description: 'Learn about our cookie usage. Manage your preferences and understand how we improve your web experience.',
+        url: 'https://www.casinospesos.com/en/cookies',
+        siteName: 'CasinosPesos',
+        locale: 'en_US',
+        type: 'website',
+        images: [{
+          url: 'https://www.casinospesos.com/logo.png',
+          width: 1200,
+          height: 630,
+          alt: 'Cookie Policy CasinosPesos - Management and Configuration'
+        }]
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Cookie Policy CasinosPesos',
+        description: 'Manage your cookies and improve your web experience.',
+        images: ['https://www.casinospesos.com/logo.png'],
+      }
+    };
+  }
+}
+
+export default async function CookiesPage({ params }: PageProps) {
+  const { locale } = await params;
+  const isSpanish = locale === 'es';
   return (
     <div className="min-h-screen bg-neutral-900 py-16">
       <div className="container mx-auto px-4 max-w-4xl">
@@ -16,9 +90,11 @@ export default function CookiesPage() {
           <div className="inline-flex items-center justify-center w-20 h-20 bg-primary/20 rounded-full mb-6">
             <Cookie className="w-10 h-10 text-primary" />
           </div>
-          <h1 className="text-4xl font-bold text-white mb-4">Política de Cookies</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">
+            {isSpanish ? 'Política de Cookies' : 'Cookie Policy'}
+          </h1>
           <p className="text-neutral-400 text-lg">
-            Última actualización: {new Date().toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' })}
+            {isSpanish ? 'Última actualización:' : 'Last updated:'} {new Date().toLocaleDateString(isSpanish ? 'es-MX' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
         </div>
 

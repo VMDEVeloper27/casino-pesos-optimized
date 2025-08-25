@@ -10,7 +10,7 @@
     /* Trustworthy Design Language - Professional Color Palette */
     
     /* Primary - Deep Navy (Trust & Authority) */
-    --primary: 214 88% 27%; /* #1e3a8a */
+    --primary: 214 88% 22%; /* #0f2557 - Darker for better contrast */
     --primary-foreground: 0 0% 100%; /* #ffffff */
     
     /* Secondary - Slate Blue */
@@ -18,7 +18,7 @@
     --secondary-foreground: 0 0% 100%; /* #ffffff */
     
     /* Accent - Ocean Blue (Interactive Elements) */
-    --accent: 214 95% 59%; /* #3b82f6 */
+    --accent: 214 95% 49%; /* #1d4ed8 - Darker for AA compliance */
     --accent-foreground: 0 0% 100%; /* #ffffff */
     
     /* Base Colors */
@@ -35,7 +35,7 @@
     
     /* Muted */
     --muted: 210 40% 98%; /* #f8fafc */
-    --muted-foreground: 215 16% 47%; /* #64748b */
+    --muted-foreground: 215 16% 35%; /* #475569 - Improved contrast */
     
     /* Borders */
     --border: 214 32% 91%; /* #e2e8f0 */
@@ -95,58 +95,62 @@
 @layer components {
   /* Professional Button System */
   .btn-primary {
-    background-color: #1e3a8a;
+    background-color: #0f2557; /* Darker for better contrast */
     color: #ffffff;
     font-weight: 600;
     transition: all 0.15s ease;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border: 1px solid transparent;
   }
   
   .btn-primary:hover {
-    background-color: #1e40af;
-    opacity: 0.95;
+    background-color: #1e3a8a;
+    opacity: 1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
   }
   
   /* Secondary Button */
   .btn-secondary {
     background-color: #ffffff;
-    color: #1e3a8a;
-    border: 1px solid #e2e8f0;
+    color: #0f2557; /* Darker text for better contrast */
+    border: 2px solid #cbd5e1; /* Thicker border for better visibility */
     font-weight: 600;
     transition: all 0.15s ease;
   }
   
   .btn-secondary:hover {
-    background-color: #f8fafc;
-    border-color: #1e3a8a;
+    background-color: #f1f5f9;
+    border-color: #0f2557;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   /* Outline Button */
   .btn-outline {
     background-color: transparent;
-    color: #3b82f6;
-    border: 1px solid #3b82f6;
+    color: #1d4ed8; /* Darker blue for better contrast */
+    border: 2px solid #1d4ed8; /* Thicker border */
     font-weight: 600;
     transition: all 0.15s ease;
   }
   
   .btn-outline:hover {
-    background-color: #3b82f6;
+    background-color: #1d4ed8;
     color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   /* Ghost Button */
   .btn-ghost {
     background-color: transparent;
-    color: #64748b;
+    color: #334155; /* Darker for better contrast */
     font-weight: 500;
     transition: all 0.15s ease;
   }
   
   .btn-ghost:hover {
-    color: #1e3a8a;
-    background-color: #f8fafc;
+    color: #0f2557;
+    background-color: #f1f5f9;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   }
   
   /* Trust Card Component */
@@ -253,7 +257,7 @@
   }
   
   .text-muted {
-    color: #64748b;
+    color: #475569; /* Improved contrast for better readability */
   }
   
   .text-accent {
@@ -404,14 +408,16 @@ button:focus-visible {
 
 /* Link Styles */
 a {
-  color: #3b5998;
+  color: #1e3a8a; /* Darker blue for better contrast */
   text-decoration: none;
   transition: color 0.2s ease;
+  font-weight: 500;
 }
 
 a:hover {
-  color: #2d4373;
+  color: #0f2557;
   text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
 /* Selection */

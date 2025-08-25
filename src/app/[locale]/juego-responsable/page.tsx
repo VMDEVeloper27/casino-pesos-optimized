@@ -9,15 +9,15 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const isSpanish = locale === 'es';
-  const baseUrl = 'https://casinospesos.com';
+  const baseUrl = 'https://www.casinospesos.com';
   const pageUrl = `${baseUrl}/${locale}/juego-responsable`;
   
   const title = isSpanish 
-    ? 'Juego Responsable - Guía Completa y Recursos de Ayuda'
-    : 'Responsible Gambling - Complete Guide and Help Resources';
+    ? 'Juego Responsable en México 2025 | Guía y Recursos de Ayuda | CasinosPesos'
+    : 'Responsible Gambling Mexico 2025 | Guide and Help Resources | CasinosPesos';
     
   const description = isSpanish
-    ? 'Guía completa sobre juego responsable. Herramientas de autoexclusión, límites de depósito, señales de adicción y recursos de ayuda profesional en México.'
+    ? 'Guía completa sobre juego responsable en México. Herramientas de autoexclusión, límites de depósito, señales de ludopatía y recursos de ayuda profesional gratuita.'
     : 'Complete guide on responsible gambling. Self-exclusion tools, deposit limits, addiction signs and professional help resources in Mexico.';
   
   if (isSpanish) {

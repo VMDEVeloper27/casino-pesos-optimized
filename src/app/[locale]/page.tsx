@@ -101,6 +101,17 @@ interface HomePageProps {
   params: PageParams;
 }
 
+// Generate static params for locales
+export async function generateStaticParams() {
+  return [
+    { locale: 'es' },
+    { locale: 'en' },
+  ];
+}
+
+// Revalidate every hour
+export const revalidate = 3600;
+
 export default async function HomePage({ params }: HomePageProps) {
   const { locale } = await params;
   

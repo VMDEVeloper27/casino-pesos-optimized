@@ -2,12 +2,86 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { FileText, Scale, AlertCircle, CheckCircle, Users, Shield, Ban, Mail } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'Términos y Condiciones | CasinosPesos',
-  description: 'Términos y condiciones de uso del sitio web CasinosPesos. Lee nuestros términos antes de usar nuestros servicios.',
-};
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
 
-export default function TermsPage() {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const isSpanish = locale === 'es';
+  
+  if (isSpanish) {
+    return {
+      title: 'Términos y Condiciones | CasinosPesos | Uso Sitio Web 2025',
+      description: 'Términos y condiciones de uso del sitio web CasinosPesos. Normas, responsabilidades y derechos de usuarios. Lee antes de usar nuestros servicios de comparación de casinos.',
+      keywords: 'terminos condiciones casinospesos, uso sitio web casinos, responsabilidades usuario, derechos casinos online, politicas uso mexico',
+      alternates: {
+        canonical: 'https://www.casinospesos.com/es/terms',
+        languages: {
+          'es-MX': 'https://www.casinospesos.com/es/terms',
+          'en-US': 'https://www.casinospesos.com/en/terms',
+        }
+      },
+      openGraph: {
+        title: 'Términos y Condiciones | CasinosPesos México',
+        description: 'Conoce los términos de uso de CasinosPesos. Normas para usuarios, responsabilidades y políticas de nuestra plataforma de comparación de casinos.',
+        url: 'https://www.casinospesos.com/es/terms',
+        siteName: 'CasinosPesos',
+        locale: 'es_MX',
+        type: 'website',
+        images: [{
+          url: 'https://www.casinospesos.com/logo.png',
+          width: 1200,
+          height: 630,
+          alt: 'Términos y Condiciones CasinosPesos México'
+        }]
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Términos y Condiciones CasinosPesos',
+        description: 'Normas de uso y responsabilidades en nuestra plataforma de casinos.',
+        images: ['https://www.casinospesos.com/logo.png'],
+      }
+    };
+  } else {
+    return {
+      title: 'Terms and Conditions | CasinosPesos | Website Usage 2025',
+      description: 'Terms and conditions for using the CasinosPesos website. Rules, responsibilities and user rights. Read before using our casino comparison services.',
+      keywords: 'terms conditions casinospesos, casino website usage, user responsibilities, online casino rights, usage policies mexico',
+      alternates: {
+        canonical: 'https://www.casinospesos.com/en/terms',
+        languages: {
+          'es-MX': 'https://www.casinospesos.com/es/terms',
+          'en-US': 'https://www.casinospesos.com/en/terms',
+        }
+      },
+      openGraph: {
+        title: 'Terms and Conditions | CasinosPesos Mexico',
+        description: 'Learn about CasinosPesos terms of use. User rules, responsibilities and policies of our casino comparison platform.',
+        url: 'https://www.casinospesos.com/en/terms',
+        siteName: 'CasinosPesos',
+        locale: 'en_US',
+        type: 'website',
+        images: [{
+          url: 'https://www.casinospesos.com/logo.png',
+          width: 1200,
+          height: 630,
+          alt: 'Terms and Conditions CasinosPesos Mexico'
+        }]
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Terms and Conditions CasinosPesos',
+        description: 'Usage rules and responsibilities on our casino platform.',
+        images: ['https://www.casinospesos.com/logo.png'],
+      }
+    };
+  }
+}
+
+export default async function TermsPage({ params }: PageProps) {
+  const { locale } = await params;
+  const isSpanish = locale === 'es';
   return (
     <div className="min-h-screen bg-neutral-900 py-16">
       <div className="container mx-auto px-4 max-w-4xl">
@@ -16,9 +90,11 @@ export default function TermsPage() {
           <div className="inline-flex items-center justify-center w-20 h-20 bg-primary/20 rounded-full mb-6">
             <Scale className="w-10 h-10 text-primary" />
           </div>
-          <h1 className="text-4xl font-bold text-white mb-4">Términos y Condiciones</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">
+            {isSpanish ? 'Términos y Condiciones' : 'Terms and Conditions'}
+          </h1>
           <p className="text-neutral-400 text-lg">
-            Última actualización: {new Date().toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' })}
+            {isSpanish ? 'Última actualización:' : 'Last updated:'} {new Date().toLocaleDateString(isSpanish ? 'es-MX' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
         </div>
 

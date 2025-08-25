@@ -330,7 +330,11 @@ export default function GameBrowser({
                       <h3 className="font-bold text-gray-900 group-hover:text-green-600 transition-colors">
                         {game.name}
                       </h3>
-                      <p className="text-sm text-gray-600">{game.provider}</p>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="text-sm font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">
+                          {game.provider}
+                        </span>
+                      </div>
                     </div>
 
                     {/* Game Type & Features */}
@@ -346,20 +350,32 @@ export default function GameBrowser({
                       )}
                     </div>
 
-                    {/* Stats */}
-                    <div className="grid grid-cols-2 gap-2 text-sm mb-3">
-                      {game.rtp && (
-                        <div>
-                          <span className="text-gray-500">RTP:</span>
-                          <span className="ml-1 font-semibold text-gray-900">{game.rtp}%</span>
-                        </div>
-                      )}
-                      {game.maxWin && (
-                        <div>
-                          <span className="text-gray-500">Max:</span>
-                          <span className="ml-1 font-semibold text-gray-900">{game.maxWin.toLocaleString()}x</span>
-                        </div>
-                      )}
+                    {/* Enhanced Stats with Icons */}
+                    <div className="bg-gray-50 rounded-lg p-2 mb-3">
+                      <div className="grid grid-cols-2 gap-2 text-sm">
+                        {game.rtp && (
+                          <div className="flex items-center gap-1">
+                            <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                              <span className="text-xs font-bold text-green-700">%</span>
+                            </div>
+                            <div>
+                              <span className="text-xs text-gray-500 block">RTP</span>
+                              <span className="font-bold text-gray-900">{game.rtp}%</span>
+                            </div>
+                          </div>
+                        )}
+                        {game.maxWin && (
+                          <div className="flex items-center gap-1">
+                            <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
+                              <Trophy className="w-4 h-4 text-yellow-700" />
+                            </div>
+                            <div>
+                              <span className="text-xs text-gray-500 block">Max Win</span>
+                              <span className="font-bold text-gray-900">{game.maxWin.toLocaleString()}x</span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     </div>
 
                     {/* Features */}

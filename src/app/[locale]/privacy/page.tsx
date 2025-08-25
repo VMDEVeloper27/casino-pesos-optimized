@@ -2,12 +2,86 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { Shield, Lock, Eye, FileText, Users, Mail } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'Política de Privacidad | CasinosPesos',
-  description: 'Conoce cómo protegemos tu información personal y respetamos tu privacidad en CasinosPesos.',
-};
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
 
-export default function PrivacyPolicyPage() {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const isSpanish = locale === 'es';
+  
+  if (isSpanish) {
+    return {
+      title: 'Política de Privacidad | CasinosPesos | Protección Datos 2025',
+      description: 'Conoce cómo protegemos tu información personal y respetamos tu privacidad en CasinosPesos. GDPR, cookies, derechos usuario y seguridad de datos.',
+      keywords: 'politica privacidad casinospesos, proteccion datos personales, privacidad usuario casinos, gdpr mexico, seguridad informacion, derechos usuario',
+      alternates: {
+        canonical: 'https://www.casinospesos.com/es/privacy',
+        languages: {
+          'es-MX': 'https://www.casinospesos.com/es/privacy',
+          'en-US': 'https://www.casinospesos.com/en/privacy',
+        }
+      },
+      openGraph: {
+        title: 'Política de Privacidad | CasinosPesos México',
+        description: 'Descubre cómo protegemos tus datos personales. Cumplimos con GDPR y leyes mexicanas de protección de datos.',
+        url: 'https://www.casinospesos.com/es/privacy',
+        siteName: 'CasinosPesos',
+        locale: 'es_MX',
+        type: 'website',
+        images: [{
+          url: 'https://www.casinospesos.com/logo.png',
+          width: 1200,
+          height: 630,
+          alt: 'Política de Privacidad CasinosPesos - Protección de Datos'
+        }]
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Política de Privacidad CasinosPesos',
+        description: 'Protegemos tu información personal. GDPR compliant.',
+        images: ['https://www.casinospesos.com/logo.png'],
+      }
+    };
+  } else {
+    return {
+      title: 'Privacy Policy | CasinosPesos | Data Protection 2025',
+      description: 'Learn how we protect your personal information and respect your privacy at CasinosPesos. GDPR, cookies, user rights and data security.',
+      keywords: 'privacy policy casinospesos, personal data protection, casino user privacy, gdpr mexico, information security, user rights',
+      alternates: {
+        canonical: 'https://www.casinospesos.com/en/privacy',
+        languages: {
+          'es-MX': 'https://www.casinospesos.com/es/privacy',
+          'en-US': 'https://www.casinospesos.com/en/privacy',
+        }
+      },
+      openGraph: {
+        title: 'Privacy Policy | CasinosPesos Mexico',
+        description: 'Discover how we protect your personal data. We comply with GDPR and Mexican data protection laws.',
+        url: 'https://www.casinospesos.com/en/privacy',
+        siteName: 'CasinosPesos',
+        locale: 'en_US',
+        type: 'website',
+        images: [{
+          url: 'https://www.casinospesos.com/logo.png',
+          width: 1200,
+          height: 630,
+          alt: 'Privacy Policy CasinosPesos - Data Protection'
+        }]
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Privacy Policy CasinosPesos',
+        description: 'We protect your personal information. GDPR compliant.',
+        images: ['https://www.casinospesos.com/logo.png'],
+      }
+    };
+  }
+}
+
+export default async function PrivacyPolicyPage({ params }: PageProps) {
+  const { locale } = await params;
+  const isSpanish = locale === 'es';
   return (
     <div className="min-h-screen bg-neutral-900 py-16">
       <div className="container mx-auto px-4 max-w-4xl">
@@ -16,9 +90,11 @@ export default function PrivacyPolicyPage() {
           <div className="inline-flex items-center justify-center w-20 h-20 bg-primary/20 rounded-full mb-6">
             <Shield className="w-10 h-10 text-primary" />
           </div>
-          <h1 className="text-4xl font-bold text-white mb-4">Política de Privacidad</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">
+            {isSpanish ? 'Política de Privacidad' : 'Privacy Policy'}
+          </h1>
           <p className="text-neutral-400 text-lg">
-            Última actualización: {new Date().toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' })}
+            {isSpanish ? 'Última actualización:' : 'Last updated:'} {new Date().toLocaleDateString(isSpanish ? 'es-MX' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
         </div>
 

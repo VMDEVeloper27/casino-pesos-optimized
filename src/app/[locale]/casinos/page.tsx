@@ -3,6 +3,7 @@ import { getAllCasinos } from '@/lib/casino-database';
 import { Suspense } from 'react';
 import CasinosLoading from './loading';
 import type { Metadata } from 'next';
+import { SchemaOrg } from '@/components/SchemaOrg';
 
 export const revalidate = 300; // Revalidate every 5 minutes
 
@@ -78,12 +79,28 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default async function CasinosPage() {
+export default async function CasinosPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const casinos = await getAllCasinos();
   
+  // Generate Schema.org data for the casino list
+  const schemaData = {
+    headline: locale === 'es' ? 'Lista Completa de Casinos Online en México 2025' : 'Complete List of Online Casinos in Mexico 2025',
+    description: locale === 'es' 
+      ? 'Explora más de 50 casinos online confiables que aceptan pesos mexicanos'
+      : 'Explore over 50 trusted online casinos that accept Mexican pesos',
+    url: `https://www.casinospesos.com/${locale}/casinos`,
+    datePublished: '2024-01-01T00:00:00Z',
+    dateModified: new Date().toISOString()
+  };
+  
   return (
-    <Suspense fallback={<CasinosLoading />}>
-      <CasinosClientWithFilters casinos={casinos} />
-    </Suspense>
+    <>
+      <SchemaOrg type="Article" data={schemaData} />
+      <SchemaOrg type="WebSite" data={{}} />
+      <Suspense fallback={<CasinosLoading />}>
+        <CasinosClientWithFilters casinos={casinos} />
+      </Suspense>
+    </>
   );
 }

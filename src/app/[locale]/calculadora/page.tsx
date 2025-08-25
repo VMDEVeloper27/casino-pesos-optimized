@@ -12,15 +12,69 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   
   if (isSpanish) {
     return {
-      title: 'Calculadora de Bonos de Casino | Calcula tu Rollover | CasinosPesos',
-      description: 'Calcula cuánto necesitas apostar para liberar tu bono de casino. Herramienta gratuita para calcular requisitos de rollover.',
-      keywords: 'calculadora bonos casino, rollover calculator, requisitos apuesta, wagering requirements, calculadora casino',
+      title: 'Calculadora de Bonos de Casino 2025 | Rollover y Requisitos | CasinosPesos',
+      description: 'Calcula exactamente cuánto apostar para liberar bonos de casino. Herramienta gratuita para calcular requisitos de rollover 30x, 35x, 40x y más.',
+      keywords: 'calculadora bonos casino, rollover mexico, requisitos apuesta, wagering requirements, calculadora rollover, liberar bono casino',
+      alternates: {
+        canonical: 'https://www.casinospesos.com/es/calculadora',
+        languages: {
+          'es-MX': 'https://www.casinospesos.com/es/calculadora',
+          'en-US': 'https://www.casinospesos.com/en/calculator',
+        }
+      },
+      openGraph: {
+        title: 'Calculadora de Bonos de Casino | Rollover Gratis',
+        description: 'Calcula los requisitos de apuesta de cualquier bono. Descubre cuánto apostar para retirar tus ganancias.',
+        url: 'https://www.casinospesos.com/es/calculadora',
+        siteName: 'CasinosPesos',
+        locale: 'es_MX',
+        type: 'website',
+        images: [{
+          url: 'https://www.casinospesos.com/logo.png',
+          width: 1200,
+          height: 630,
+          alt: 'Calculadora de Bonos de Casino'
+        }]
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Calculadora de Bonos de Casino Gratis',
+        description: 'Calcula requisitos de rollover 30x, 35x, 40x. Herramienta gratuita.',
+        images: ['https://www.casinospesos.com/logo.png'],
+      }
     };
   } else {
     return {
-      title: 'Casino Bonus Calculator | Calculate Your Wagering | CasinosPesos',
-      description: 'Calculate how much you need to wager to clear your casino bonus. Free tool for calculating rollover requirements.',
-      keywords: 'casino bonus calculator, rollover calculator, wagering requirements, bonus calculator, casino calculator',
+      title: 'Casino Bonus Calculator 2025 | Rollover & Requirements | CasinosPesos',
+      description: 'Calculate exactly how much to wager to clear casino bonuses. Free tool to calculate 30x, 35x, 40x rollover requirements and more.',
+      keywords: 'casino bonus calculator, rollover mexico, wagering requirements, rollover calculator, clear casino bonus',
+      alternates: {
+        canonical: 'https://www.casinospesos.com/en/calculator',
+        languages: {
+          'es-MX': 'https://www.casinospesos.com/es/calculadora',
+          'en-US': 'https://www.casinospesos.com/en/calculator',
+        }
+      },
+      openGraph: {
+        title: 'Casino Bonus Calculator | Free Rollover Tool',
+        description: 'Calculate wagering requirements for any bonus. Find out how much to bet to withdraw your winnings.',
+        url: 'https://www.casinospesos.com/en/calculator',
+        siteName: 'CasinosPesos',
+        locale: 'en_US',
+        type: 'website',
+        images: [{
+          url: 'https://www.casinospesos.com/logo.png',
+          width: 1200,
+          height: 630,
+          alt: 'Casino Bonus Calculator'
+        }]
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Free Casino Bonus Calculator',
+        description: 'Calculate 30x, 35x, 40x rollover requirements. Free tool.',
+        images: ['https://www.casinospesos.com/logo.png'],
+      }
     };
   }
 }

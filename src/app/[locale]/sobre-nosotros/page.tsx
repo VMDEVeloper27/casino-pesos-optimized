@@ -9,37 +9,74 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const isSpanish = locale === 'es';
-  const baseUrl = 'https://casinospesos.com';
-  const pageUrl = `${baseUrl}/${locale}/sobre-nosotros`;
   
-  const title = isSpanish 
-    ? 'Sobre Nosotros - CasinosPesos | Tu Guía de Casinos en México'
-    : 'About Us - CasinosPesos | Your Casino Guide in Mexico';
-    
-  const description = isSpanish
-    ? 'Conoce a CasinosPesos, la plataforma líder de comparación de casinos online en México. Nuestra misión, valores y compromiso con el juego responsable.'
-    : 'Meet CasinosPesos, the leading online casino comparison platform in Mexico. Our mission, values and commitment to responsible gambling.';
-  
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      url: pageUrl,
-      siteName: 'CasinosPesos',
-      locale: isSpanish ? 'es_MX' : 'en_US',
-      type: 'website',
-    },
-    alternates: {
-      canonical: pageUrl,
-      languages: {
-        'es-MX': `${baseUrl}/es/sobre-nosotros`,
-        'en-US': `${baseUrl}/en/about-us`,
-        'x-default': `${baseUrl}/es/sobre-nosotros`
+  if (isSpanish) {
+    return {
+      title: 'Sobre Nosotros - CasinosPesos | Expertos en Casinos Online México 2025',
+      description: 'Conoce a CasinosPesos, la plataforma líder de comparación de casinos online en México. Nuestro equipo experto, misión, valores y compromiso con el juego responsable.',
+      keywords: 'sobre casinospesos, equipo expertos casinos, comparador casinos mexico, reseñas casinos confiables, juego responsable, casinos seguros mexico',
+      alternates: {
+        canonical: 'https://www.casinospesos.com/es/sobre-nosotros',
+        languages: {
+          'es-MX': 'https://www.casinospesos.com/es/sobre-nosotros',
+          'en-US': 'https://www.casinospesos.com/en/about-us',
+        }
+      },
+      openGraph: {
+        title: 'Sobre CasinosPesos | Expertos en Casinos Online México',
+        description: 'Conoce nuestro equipo de expertos en casinos online. Más de 50K usuarios confían en nuestras reseñas imparciales y análisis profesionales.',
+        url: 'https://www.casinospesos.com/es/sobre-nosotros',
+        siteName: 'CasinosPesos',
+        locale: 'es_MX',
+        type: 'website',
+        images: [{
+          url: 'https://www.casinospesos.com/logo.png',
+          width: 1200,
+          height: 630,
+          alt: 'Equipo CasinosPesos - Expertos en Casinos Online México'
+        }]
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Sobre CasinosPesos - Expertos en Casinos México',
+        description: 'Equipo experto en casinos online. 50K+ usuarios activos, 38+ casinos verificados.',
+        images: ['https://www.casinospesos.com/logo.png'],
       }
-    }
-  };
+    };
+  } else {
+    return {
+      title: 'About Us - CasinosPesos | Online Casino Experts Mexico 2025',
+      description: 'Meet CasinosPesos, the leading online casino comparison platform in Mexico. Our expert team, mission, values and commitment to responsible gambling.',
+      keywords: 'about casinospesos, casino experts team, mexico casino comparison, trusted casino reviews, responsible gambling, safe casinos mexico',
+      alternates: {
+        canonical: 'https://www.casinospesos.com/en/about-us',
+        languages: {
+          'es-MX': 'https://www.casinospesos.com/es/sobre-nosotros',
+          'en-US': 'https://www.casinospesos.com/en/about-us',
+        }
+      },
+      openGraph: {
+        title: 'About CasinosPesos | Online Casino Experts Mexico',
+        description: 'Meet our team of online casino experts. Over 50K users trust our unbiased reviews and professional analysis.',
+        url: 'https://www.casinospesos.com/en/about-us',
+        siteName: 'CasinosPesos',
+        locale: 'en_US',
+        type: 'website',
+        images: [{
+          url: 'https://www.casinospesos.com/logo.png',
+          width: 1200,
+          height: 630,
+          alt: 'CasinosPesos Team - Online Casino Experts Mexico'
+        }]
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'About CasinosPesos - Casino Experts Mexico',
+        description: 'Expert team in online casinos. 50K+ active users, 38+ verified casinos.',
+        images: ['https://www.casinospesos.com/logo.png'],
+      }
+    };
+  }
 }
 
 export default async function SobreNosotrosPage({ params }: PageProps) {

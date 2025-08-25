@@ -13,15 +13,69 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   
   if (isSpanish) {
     return {
-      title: 'Explorador de Juegos de Casino | +1000 Juegos | CasinosPesos',
-      description: 'Descubre más de 1000 juegos de casino: tragamonedas, casino en vivo, crash games y más. Encuentra dónde jugar tus favoritos.',
-      keywords: 'juegos casino, tragamonedas, slots, casino en vivo, crash games, aviator, crazy time',
+      title: 'Juegos de Casino Online Gratis y con Dinero Real 2025 | CasinosPesos',
+      description: 'Juega +1000 juegos de casino online: tragamonedas, ruleta, blackjack, póker y casino en vivo. Prueba gratis o juega con dinero real en México.',
+      keywords: 'juegos casino mexico, tragamonedas gratis, slots online, casino en vivo, ruleta online, blackjack mexico, crash games, aviator',
+      alternates: {
+        canonical: 'https://www.casinospesos.com/es/juegos',
+        languages: {
+          'es-MX': 'https://www.casinospesos.com/es/juegos',
+          'en-US': 'https://www.casinospesos.com/en/games',
+        }
+      },
+      openGraph: {
+        title: 'Juegos de Casino Online | +1000 Juegos Gratis',
+        description: 'Explora más de 1000 juegos de casino. Juega gratis o con dinero real en los mejores casinos de México.',
+        url: 'https://www.casinospesos.com/es/juegos',
+        siteName: 'CasinosPesos',
+        locale: 'es_MX',
+        type: 'website',
+        images: [{
+          url: 'https://www.casinospesos.com/logo.png',
+          width: 1200,
+          height: 630,
+          alt: 'Juegos de Casino Online México'
+        }]
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Juegos de Casino Online Gratis | CasinosPesos',
+        description: 'Juega +1000 juegos de casino: slots, ruleta, blackjack y más.',
+        images: ['https://www.casinospesos.com/logo.png'],
+      }
     };
   } else {
     return {
-      title: 'Casino Game Browser | 1000+ Games | CasinosPesos',
-      description: 'Discover over 1000 casino games: slots, live casino, crash games and more. Find where to play your favorites.',
-      keywords: 'casino games, slots, live casino, crash games, aviator, crazy time',
+      title: 'Online Casino Games Free and Real Money 2025 | CasinosPesos',
+      description: 'Play 1000+ online casino games: slots, roulette, blackjack, poker and live casino. Try for free or play with real money in Mexico.',
+      keywords: 'casino games mexico, free slots, online slots, live casino, online roulette, blackjack mexico, crash games, aviator',
+      alternates: {
+        canonical: 'https://www.casinospesos.com/en/games',
+        languages: {
+          'es-MX': 'https://www.casinospesos.com/es/juegos',
+          'en-US': 'https://www.casinospesos.com/en/games',
+        }
+      },
+      openGraph: {
+        title: 'Online Casino Games | 1000+ Free Games',
+        description: 'Explore over 1000 casino games. Play for free or real money at the best casinos in Mexico.',
+        url: 'https://www.casinospesos.com/en/games',
+        siteName: 'CasinosPesos',
+        locale: 'en_US',
+        type: 'website',
+        images: [{
+          url: 'https://www.casinospesos.com/logo.png',
+          width: 1200,
+          height: 630,
+          alt: 'Online Casino Games Mexico'
+        }]
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Online Casino Games Free | CasinosPesos',
+        description: 'Play 1000+ casino games: slots, roulette, blackjack and more.',
+        images: ['https://www.casinospesos.com/logo.png'],
+      }
     };
   }
 }
