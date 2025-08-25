@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Shield, AlertCircle, FileText, Lock, Mail, Phone, Rss } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
+import { contactInfo } from '@/lib/contact-info';
 
 const NewsletterForm = dynamic(() => import('@/components/NewsletterForm'), {
   ssr: false,
@@ -115,21 +116,25 @@ export default function Footer() {
             <h3 className="font-bold text-gray-900 mb-4">Contacto</h3>
             <ul className="space-y-3">
               <li>
-                <a href="mailto:info@casinospesos.com" className="text-gray-600 hover:text-green-600 text-sm flex items-center gap-2">
+                <a href={`mailto:${contactInfo.email}`} className="text-gray-600 hover:text-green-600 text-sm flex items-center gap-2">
                   <Mail className="w-4 h-4" />
-                  info@casinospesos.com
+                  {contactInfo.email}
                 </a>
               </li>
               <li>
-                <a href="tel:+525555555555" className="text-gray-600 hover:text-green-600 text-sm flex items-center gap-2">
+                <a href={`tel:${contactInfo.phoneClean}`} className="text-gray-600 hover:text-green-600 text-sm flex items-center gap-2">
                   <Phone className="w-4 h-4" />
-                  +52 55 5555 5555
+                  {contactInfo.phoneDisplay}
                 </a>
               </li>
               <li className="pt-2">
                 <p className="text-xs text-gray-500">
-                  Lun - Vie: 9:00 - 18:00<br />
-                  Sáb - Dom: 10:00 - 16:00
+                  {contactInfo.businessHours.es}
+                </p>
+              </li>
+              <li>
+                <p className="text-xs text-gray-500">
+                  {contactInfo.address.city}, {contactInfo.address.country}
                 </p>
               </li>
             </ul>

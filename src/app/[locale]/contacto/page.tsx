@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Clock, Mail, MapPin, MessageSquare, Phone, Send } from 'lucide-react';
+import { contactInfo } from '@/lib/contact-info';
 
 export default function ContactoPage() {
   const [formData, setFormData] = useState({
@@ -65,29 +66,29 @@ export default function ContactoPage() {
     });
   };
 
-  const contactInfo = [
+  const contactItems = [
     {
       icon: <Mail className="w-6 h-6 text-primary" />,
       title: 'Email',
-      content: 'soporte@casinospesos.com',
-      link: 'mailto:soporte@casinospesos.com'
+      content: contactInfo.supportEmail,
+      link: `mailto:${contactInfo.supportEmail}`
     },
     {
       icon: <Phone className="w-6 h-6 text-accent" />,
       title: 'Teléfono',
-      content: '+52 55 1234 5678',
-      link: 'tel:+5255123456789'
+      content: contactInfo.phoneDisplay,
+      link: `tel:${contactInfo.phoneClean}`
     },
     {
       icon: <Clock className="w-6 h-6 text-primary" />,
       title: 'Horario',
-      content: '24/7 - Siempre disponibles',
+      content: contactInfo.businessHours.es,
       link: null
     },
     {
       icon: <MapPin className="w-6 h-6 text-accent" />,
       title: 'Ubicación',
-      content: 'Ciudad de México, México',
+      content: contactInfo.address.city + ', ' + contactInfo.address.country,
       link: null
     }
   ];
@@ -236,7 +237,7 @@ export default function ContactoPage() {
             <div className="bg-white rounded-xl p-6">
               <h3 className="text-xl font-bold text-gray-900 mb-6">Información de contacto</h3>
               <div className="space-y-4">
-                {contactInfo.map((info, index) => (
+                {contactItems.map((info, index) => (
                   <div key={index} className="flex items-start gap-4">
                     <div className="flex-shrink-0">{info.icon}</div>
                     <div>

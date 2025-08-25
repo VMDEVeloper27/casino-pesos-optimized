@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { Shield, Lock, Eye, FileText, Users, Mail } from 'lucide-react';
+import { contactInfo } from '@/lib/contact-info';
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -235,8 +236,10 @@ export default async function PrivacyPolicyPage({ params }: PageProps) {
               Si tiene preguntas sobre esta Política de Privacidad o desea ejercer sus derechos, contáctenos:
             </p>
             <div className="bg-neutral-700 rounded-lg p-4">
-              <p>Email: privacy@casinospesos.com</p>
-              <p>Dirección: México City, México</p>
+              <p>Email: {contactInfo.privacyEmail}</p>
+              <p>Teléfono: {contactInfo.phoneDisplay}</p>
+              <p>Dirección: {contactInfo.address.fullAddress}</p>
+              <p className="mt-2 text-sm">{contactInfo.businessHours.es}</p>
             </div>
           </section>
 
