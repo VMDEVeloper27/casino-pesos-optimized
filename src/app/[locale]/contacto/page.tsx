@@ -283,33 +283,6 @@ export default function ContactoPage() {
               </div>
             </div>
 
-            {/* Social Media */}
-            <div className="bg-white rounded-xl p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Síguenos</h3>
-              <p className="text-sm text-gray-600 mb-4">
-                Mantente actualizado con las últimas noticias y promociones.
-              </p>
-              <div className="flex gap-4">
-                <a 
-                  href="#"
-                  className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary transition-colors"
-                >
-                  <span className="text-gray-900">f</span>
-                </a>
-                <a 
-                  href="#"
-                  className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary transition-colors"
-                >
-                  <span className="text-gray-900">X</span>
-                </a>
-                <a 
-                  href="#"
-                  className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary transition-colors"
-                >
-                  <span className="text-gray-900">in</span>
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </div>
