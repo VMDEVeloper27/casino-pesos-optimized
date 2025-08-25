@@ -1,0 +1,123 @@
+/* Accessibility Improvements */
+
+/* Focus visible for keyboard navigation */
+:focus-visible {
+  outline: 3px solid #1d4ed8 !important;
+  outline-offset: 2px !important;
+  border-radius: 4px;
+}
+
+/* Skip to main content link */
+.skip-to-main {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+  padding: 1rem;
+  background-color: #0f2557;
+  color: white;
+  text-decoration: none;
+  border-radius: 0 0 4px 0;
+}
+
+.skip-to-main:focus {
+  left: 0;
+  top: 0;
+}
+
+/* Improve button focus */
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #1d4ed8 !important;
+  outline-offset: 2px !important;
+}
+
+/* Better text contrast */
+.text-improved-contrast {
+  color: #1f2937 !important; /* Darker gray for better contrast */
+}
+
+/* Ensure interactive elements are large enough */
+button, 
+a,
+input,
+select,
+textarea {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .bg-white {
+    background-color: #ffffff !important;
+  }
+  
+  .text-gray-600 {
+    color: #111827 !important;
+  }
+  
+  .border {
+    border-width: 2px !important;
+  }
+}
+
+/* Screen reader only text */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Ensure links are distinguishable */
+a:not(.btn):not(.button) {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+a:not(.btn):not(.button):hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Improve form labels */
+label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+/* Error states with icons for colorblind users */
+.error,
+.text-error {
+  position: relative;
+}
+
+.error::before {
+  content: "⚠️";
+  margin-right: 0.25rem;
+}
+
+/* Success states with icons */
+.success::before {
+  content: "✓";
+  margin-right: 0.25rem;
+  color: #10b981;
+}

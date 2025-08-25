@@ -4,6 +4,8 @@
 
 /* Import mobile-specific fixes */
 @import './mobile-fixes.css';
+/* Import accessibility improvements */
+@import './accessibility.css';
 
 @layer base {
   :root {

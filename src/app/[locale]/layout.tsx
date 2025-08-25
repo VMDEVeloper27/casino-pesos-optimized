@@ -16,12 +16,16 @@ import '@/styles/globals.css';
 const inter = Inter({ 
   subsets: ['latin'],
   variable: '--font-inter',
+  display: 'swap', // Prevent font blocking
+  preload: true,
 });
 
 const poppins = Poppins({ 
   weight: ['400', '500', '600', '700', '800'],
   subsets: ['latin'],
   variable: '--font-poppins',
+  display: 'swap', // Prevent font blocking
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -68,16 +72,18 @@ export default async function LocaleLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#059669" />
         
-        {/* Resource Hints for Performance */}
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        {/* Resource Hints for Performance - Optimized Order */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        <link rel="preconnect" href="https://connect.facebook.net" />
         
-        {/* Preload Critical Resources */}
-        <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        {/* Critical CSS - Inline for faster rendering */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
+          .skip-to-main { position: absolute; left: -9999px; }
+          .skip-to-main:focus { left: 0; top: 0; z-index: 999; }
+        `}} />
         
         {/* SEO Meta Tags */}
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -98,6 +104,11 @@ export default async function LocaleLayout({
         <link rel="alternate" hrefLang="x-default" href="https://casinospesos.com/es" />
       </head>
       <body className="bg-background text-foreground font-sans antialiased">
+        {/* Skip to main content link for screen readers */}
+        <a href="#main-content" className="skip-to-main">
+          {locale === 'es' ? 'Saltar al contenido principal' : 'Skip to main content'}
+        </a>
+        
         {/* Google Analytics */}
         <GoogleAnalyticsScript />
         
@@ -125,9 +136,9 @@ export default async function LocaleLayout({
               <Breadcrumbs />
 
               {/* Main Content */}
-              <div className="min-h-screen">
+              <main id="main-content" className="min-h-screen" role="main">
                 {children}
-              </div>
+              </main>
 
               {/* Footer */}
               <Footer />
