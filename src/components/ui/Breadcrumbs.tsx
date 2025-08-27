@@ -86,7 +86,7 @@ export function Breadcrumbs({ items, className = '' }: BreadcrumbsProps) {
       >
         <div className="container mx-auto px-4 py-3">
           <ol 
-            className="flex items-center space-x-2 text-sm flex-wrap"
+            className="flex items-center space-x-2 text-sm overflow-x-auto whitespace-nowrap"
             itemScope 
             itemType="https://schema.org/BreadcrumbList"
           >

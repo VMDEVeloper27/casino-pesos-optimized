@@ -316,6 +316,8 @@ export function PremiumHeader({ locale }: PremiumHeaderProps) {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="relative w-10 h-10 flex items-center justify-center bg-gradient-to-r from-slate-800 to-purple-800 rounded-lg border border-yellow-500/30"
+              aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-expanded={isMobileMenuOpen}
             >
               <AnimatePresence mode="wait">
                 {isMobileMenuOpen ? (
