@@ -6,7 +6,8 @@ import Image from 'next/image';
 import { Heart, Star, PlayCircle, Trash2, Loader2, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getAllCasinosSync } from '@/lib/casino-database';
-import { getAllGamesSync } from '@/lib/game-database';
+import { getAllGames } from '@/lib/game-database';
+import type { Game } from '@/lib/game-database';
 
 interface FavoritesClientProps {
   userEmail: string;
@@ -43,11 +44,17 @@ export default function FavoritesClientDB({ userEmail }: FavoritesClientProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'casinos' | 'games'>('casinos');
   const [searchQuery, setSearchQuery] = useState('');
+  const [allGames, setAllGames] = useState<Game[]>([]);
 
   const allCasinos = getAllCasinosSync();
-  const allGames = getAllGamesSync();
 
   useEffect(() => {
+    // Load games from database
+    const loadGames = async () => {
+      const games = await getAllGames();
+      setAllGames(games);
+    };
+    loadGames();
     fetchFavorites();
   }, []);
 
