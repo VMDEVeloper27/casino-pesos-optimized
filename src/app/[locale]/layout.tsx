@@ -79,6 +79,11 @@ export default async function LocaleLayout({
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         
+        {/* Preload critical resources */}
+        <link rel="preload" as="script" href="/_next/static/chunks/webpack.js" />
+        <link rel="preload" as="script" href="/_next/static/chunks/framework.js" />
+        <link rel="preload" as="script" href="/_next/static/chunks/main.js" />
+        
         {/* DNS Prefetch for secondary resources */}
         <link rel="dns-prefetch" href="https://www.facebook.com" />
         <link rel="dns-prefetch" href="https://connect.facebook.net" />
@@ -97,24 +102,29 @@ export default async function LocaleLayout({
           onLoad="this.onload=null;this.rel='stylesheet'"
         />
         
-        {/* Aggressive Cloudflare email-decode blocking */}
-        <meta httpEquiv="cf-email-decode" content="false" />
-        <meta name="cf-no-email-decode" content="true" />
+        {/* Defer Cloudflare email-decode to improve performance */}
         <script dangerouslySetInnerHTML={{ __html: `
-          // Block Cloudflare email decode immediately
+          // Defer email-decode script to not block critical path
           if (typeof window !== 'undefined') {
-            Object.defineProperty(window, 'CloudFlare', {
-              value: undefined,
-              writable: false,
-              configurable: false
-            });
-            // Prevent script injection
+            // Allow Cloudflare to work but defer its loading
             const originalAppendChild = Node.prototype.appendChild;
             Node.prototype.appendChild = function(child) {
-              if (child && child.src && child.src.includes('email-decode')) {
-                return child;
+              // If it's the email-decode script, make it async
+              if (child && child.tagName === 'SCRIPT' && child.src && child.src.includes('email-decode')) {
+                child.async = true;
+                child.defer = true;
               }
               return originalAppendChild.call(this, child);
+            };
+            
+            // Also handle insertBefore
+            const originalInsertBefore = Node.prototype.insertBefore;
+            Node.prototype.insertBefore = function(child, ref) {
+              if (child && child.tagName === 'SCRIPT' && child.src && child.src.includes('email-decode')) {
+                child.async = true;
+                child.defer = true;
+              }
+              return originalInsertBefore.call(this, child, ref);
             };
           }
         `}} />
