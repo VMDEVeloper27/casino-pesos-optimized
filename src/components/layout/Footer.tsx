@@ -116,7 +116,7 @@ export default function Footer() {
             <h3 className="font-bold text-gray-900 mb-4">Contacto</h3>
             <ul className="space-y-3">
               <li>
-                <a href={`mailto:${contactInfo.email}`} className="text-gray-600 hover:text-green-600 text-sm flex items-center gap-2">
+                <a data-cfasync="false" href={`mailto:${contactInfo.email}`} className="text-gray-600 hover:text-green-600 text-sm flex items-center gap-2">
                   <Mail className="w-4 h-4" />
                   {contactInfo.email}
                 </a>
