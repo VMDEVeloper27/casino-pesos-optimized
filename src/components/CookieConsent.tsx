@@ -130,7 +130,7 @@ export default function CookieConsent() {
                 </button>
                 <button
                   onClick={() => setShowDetails(true)}
-                  className="px-6 py-3 bg-white border-2 border-green-600 text-green-600 rounded-lg font-semibold hover:bg-green-50 transition-colors"
+                  className="px-6 py-3 bg-green-50 border-2 border-green-600 text-green-700 rounded-lg font-semibold hover:bg-green-100 transition-colors"
                 >
                   Personalizar
                 </button>

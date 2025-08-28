@@ -178,7 +178,7 @@ export default async function BonosPage({ params }: PageProps) {
               <div className="flex flex-wrap gap-4">
                 <Link 
                   href={`/${locale}/casinos/${featuredBonus.slug}`}
-                  className="bg-white text-green-600 px-6 py-3 rounded-xl font-bold hover:bg-gray-50 transition-colors shadow-lg"
+                  className="bg-white text-green-700 px-6 py-3 rounded-xl font-bold hover:bg-green-50 transition-colors shadow-lg border border-green-200"
                 >
                   Reclamar Bono
                 </Link>

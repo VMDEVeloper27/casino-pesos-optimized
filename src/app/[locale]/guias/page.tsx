@@ -370,7 +370,7 @@ export default function GuiasPage() {
             <div className="flex flex-wrap gap-4 items-center">
               <Link 
                 href="/es/guias/guia-principiantes-2025" 
-                className="bg-white text-green-600 hover:bg-green-50 px-6 py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl inline-flex items-center gap-2"
+                className="bg-green-600 text-white hover:bg-green-700 px-6 py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl inline-flex items-center gap-2"
               >
                 <BookOpen className="w-5 h-5" />
                 Leer Guía Completa

@@ -105,7 +105,7 @@ export default function NewsletterForm({ locale = 'es' }: NewsletterFormProps) {
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="w-full lg:w-auto px-4 md:px-6 py-2.5 md:py-3 bg-white text-green-600 font-semibold rounded-lg hover:bg-green-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm md:text-base whitespace-nowrap"
+            className="w-full lg:w-auto px-4 md:px-6 py-2.5 md:py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm md:text-base whitespace-nowrap shadow-md hover:shadow-lg"
           >
             {status === 'loading' ? (
               <Loader2 className="w-4 h-4 md:w-5 md:h-5 animate-spin" />
