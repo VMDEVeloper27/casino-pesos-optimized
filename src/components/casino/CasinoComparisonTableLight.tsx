@@ -389,11 +389,11 @@ export function CasinoComparisonTableLight({ casinos, locale = 'es' }: Compariso
                 {/* Bonus */}
                 <td className="p-4">
                   <div>
-                    <div className="font-semibold text-green-600">
+                    <div className="font-semibold text-green-700">
                       {casino.bonus.percentage}% hasta ${casino.bonus.amount.toLocaleString()}
                     </div>
                     {casino.bonus.freeSpins && (
-                      <div className="text-xs text-orange-600">
+                      <div className="text-xs text-orange-700">
                         +{casino.bonus.freeSpins} giros
                       </div>
                     )}
@@ -515,7 +515,7 @@ export function CasinoComparisonTableLight({ casinos, locale = 'es' }: Compariso
                 {casino.bonus.percentage}% hasta ${casino.bonus.amount.toLocaleString()}
               </div>
               {casino.bonus.freeSpins && (
-                <div className="text-xs text-green-600">
+                <div className="text-xs text-green-700">
                   +{casino.bonus.freeSpins} giros gratis
                 </div>
               )}

@@ -101,7 +101,7 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
         {/* Bonus Section */}
         <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-3 sm:p-4 mb-4 border border-green-200">
           <div className="flex items-center gap-2 mb-2">
-            <Gift className="w-5 h-5 text-green-600" />
+            <Gift className="w-5 h-5 text-green-700" />
             <span className="text-sm font-semibold text-green-700">
               {locale === 'es' ? 'Bono de Bienvenida' : 'Welcome Bonus'}
             </span>
@@ -111,7 +111,7 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
           </div>
           <div className="h-6 flex items-center">
             {casino.bonus.freeSpins ? (
-              <div className="text-sm text-green-600 font-medium">
+              <div className="text-sm text-green-700 font-medium">
                 + {casino.bonus.freeSpins} Giros Gratis
               </div>
             ) : (

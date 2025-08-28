@@ -387,7 +387,7 @@ export default function CasinosClientWithFilters({ casinos }: CasinosClientWithF
                                   {casino.bonus.percentage}% hasta ${casino.bonus.amount.toLocaleString()} MXN
                                 </p>
                                 {casino.bonus.freeSpins && (
-                                  <p className="text-sm text-green-600 mt-1">+ {casino.bonus.freeSpins} Giros Gratis</p>
+                                  <p className="text-sm text-green-700 mt-1">+ {casino.bonus.freeSpins} Giros Gratis</p>
                                 )}
                               </div>
                               <div className="text-right">
@@ -470,7 +470,7 @@ export default function CasinosClientWithFilters({ casinos }: CasinosClientWithF
                         {/* Pros & Cons Summary */}
                         <div className="space-y-2 text-xs">
                           <div>
-                            <p className="text-green-600 font-semibold mb-1">Ventajas</p>
+                            <p className="text-green-700 font-semibold mb-1">Ventajas</p>
                             {casino.pros.slice(0, 2).map(pro => (
                               <p key={pro} className="text-gray-600">• {pro}</p>
                             ))}

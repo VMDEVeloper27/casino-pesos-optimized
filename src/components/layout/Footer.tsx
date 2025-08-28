@@ -42,9 +42,9 @@ export default function Footer() {
             <p className="text-gray-600 text-sm mb-4">
               Tu guía confiable de casinos online en México. Comparamos y analizamos los mejores casinos con licencia SEGOB.
             </p>
-            <div className="flex items-center gap-2 text-green-600">
+            <div className="flex items-center gap-2 text-green-700">
               <Shield className="w-5 h-5" />
-              <span className="text-sm font-medium">100% Seguro y Legal</span>
+              <span className="text-sm font-semibold">100% Seguro y Legal</span>
             </div>
           </div>
 
