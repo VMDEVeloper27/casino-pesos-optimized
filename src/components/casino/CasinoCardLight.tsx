@@ -90,7 +90,7 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
             <div className="flex items-center gap-1 bg-gradient-to-r from-yellow-50 to-yellow-100 px-3 py-1.5 rounded-full border border-yellow-300">
               <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
               <span className="text-lg font-bold text-gray-900">{casino.rating}</span>
-              <span className="text-sm text-gray-500">/5</span>
+              <span className="text-sm text-gray-600">/5</span>
             </div>
           </div>
         </div>
@@ -115,7 +115,7 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
                 + {casino.bonus.freeSpins} Giros Gratis
               </div>
             ) : (
-              <div className="text-sm text-gray-500">
+              <div className="text-sm text-gray-600">
                 Sin giros incluidos
               </div>
             )}
@@ -128,7 +128,7 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
                 {casino.bonus.code}
               </span>
             ) : (
-              <span className="text-gray-500">Sin código</span>
+              <span className="text-gray-600">Sin código</span>
             )}
           </div>
         </div>
@@ -203,7 +203,7 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
               </div>
             ))}
             {casino.paymentMethods.length > 4 && (
-              <div className="flex-shrink-0 text-xs text-gray-500">
+              <div className="flex-shrink-0 text-xs text-gray-600">
                 +{casino.paymentMethods.length - 4} más
               </div>
             )}
@@ -232,15 +232,15 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
 
         {/* Trust Indicators */}
         <div className="flex items-center justify-center gap-4 mt-4 pt-4 border-t border-gray-200">
-          <div className="flex items-center gap-1 text-xs text-gray-500">
+          <div className="flex items-center gap-1 text-xs text-gray-600">
             <Shield className="w-3 h-3 text-green-500" />
             <span>Licenciado</span>
           </div>
-          <div className="flex items-center gap-1 text-xs text-gray-500">
+          <div className="flex items-center gap-1 text-xs text-gray-600">
             <span className="text-green-500">✓</span>
             <span>SSL Seguro</span>
           </div>
-          <div className="flex items-center gap-1 text-xs text-gray-500">
+          <div className="flex items-center gap-1 text-xs text-gray-600">
             <span className="text-green-500">✓</span>
             <span>24/7 Soporte</span>
           </div>
