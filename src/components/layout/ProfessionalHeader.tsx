@@ -355,6 +355,8 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="w-10 h-10 flex items-center justify-center bg-gray-100 border border-gray-200 rounded-lg text-gray-700 hover:bg-gray-200 transition-colors"
+              aria-label={isMobileMenuOpen ? (locale === 'es' ? 'Cerrar menú' : 'Close menu') : (locale === 'es' ? 'Abrir menú' : 'Open menu')}
+              aria-expanded={isMobileMenuOpen}
             >
               <AnimatePresence mode="wait">
                 {isMobileMenuOpen ? (
@@ -414,6 +416,7 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-lg text-gray-700 hover:bg-gray-200 transition-colors"
+                    aria-label={locale === 'es' ? 'Cerrar menú' : 'Close menu'}
                   >
                     <X className="w-5 h-5" />
                   </button>
