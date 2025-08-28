@@ -19,7 +19,7 @@ export function Hero() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-primary-50 via-white to-gray-50">
+    <section className="relative overflow-hidden bg-gradient-to-b from-primary-50 via-white to-gray-50 min-h-[600px] lg:min-h-[700px]">
       {/* Background Pattern */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb1a_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb1a_1px,transparent_1px)] bg-[size:64px_64px]" />
@@ -35,7 +35,7 @@ export function Hero() {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex justify-center mb-8"
+            className="flex justify-center mb-8 h-[44px]"
           >
             <div className="inline-flex items-center gap-2 bg-white border border-primary-200 text-primary-700 px-4 py-2 rounded-full text-sm font-semibold shadow-sm">
               <Trophy className="w-4 h-4" />
@@ -53,7 +53,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-6 min-h-[180px] sm:min-h-[200px] lg:min-h-[280px]"
           >
             <span className="text-gray-900">Encuentra el</span>
             <br />
@@ -69,7 +69,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-lg sm:text-xl md:text-2xl text-gray-600 text-center mb-10 max-w-3xl mx-auto"
+            className="text-lg sm:text-xl md:text-2xl text-gray-600 text-center mb-10 max-w-3xl mx-auto min-h-[72px] sm:min-h-[84px]"
           >
             Compara bonos exclusivos, métodos de pago locales y 
             encuentra casinos seguros con licencia. Tu guía confiable 

@@ -73,11 +73,15 @@ export default async function LocaleLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#059669" />
         
-        {/* Resource Hints for Performance - Critical Path Optimization */}
+        {/* Critical Preconnect Hints - Desktop Performance Optimization */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
+        
+        {/* DNS Prefetch for secondary resources */}
+        <link rel="dns-prefetch" href="https://www.facebook.com" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
         
         {/* Preload critical fonts immediately */}
         <link
@@ -93,8 +97,27 @@ export default async function LocaleLayout({
           onLoad="this.onload=null;this.rel='stylesheet'"
         />
         
-        {/* Disable Cloudflare email obfuscation to prevent email-decode.min.js */}
+        {/* Aggressive Cloudflare email-decode blocking */}
         <meta httpEquiv="cf-email-decode" content="false" />
+        <meta name="cf-no-email-decode" content="true" />
+        <script dangerouslySetInnerHTML={{ __html: `
+          // Block Cloudflare email decode immediately
+          if (typeof window !== 'undefined') {
+            Object.defineProperty(window, 'CloudFlare', {
+              value: undefined,
+              writable: false,
+              configurable: false
+            });
+            // Prevent script injection
+            const originalAppendChild = Node.prototype.appendChild;
+            Node.prototype.appendChild = function(child) {
+              if (child && child.src && child.src.includes('email-decode')) {
+                return child;
+              }
+              return originalAppendChild.call(this, child);
+            };
+          }
+        `}} />
         
         {/* Critical CSS - Inline for faster rendering */}
         <style dangerouslySetInnerHTML={{ __html: `
