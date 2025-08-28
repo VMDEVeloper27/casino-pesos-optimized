@@ -89,11 +89,8 @@ export default function CookieConsent() {
 
   return (
     <>
-      {/* Overlay */}
-      <div className="fixed inset-0 bg-black/50 z-[9998] backdrop-blur-sm" />
-      
-      {/* Banner */}
-      <div className="fixed bottom-0 left-0 right-0 z-[9999] p-4 md:p-6">
+      {/* Banner without blocking overlay */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6">
         <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-2xl border-2 border-green-100">
           <div className="p-6 md:p-8">
             {/* Header */}
