@@ -128,12 +128,12 @@ export default function Footer() {
                 </a>
               </li>
               <li className="pt-2">
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-gray-700">
                   {contactInfo.businessHours.es}
                 </p>
               </li>
               <li>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-gray-700">
                   {contactInfo.address.city}, {contactInfo.address.country}
                 </p>
               </li>
@@ -173,14 +173,14 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="bg-gray-50 border-t border-gray-200 py-4">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-700">
             <p>© {currentYear} CasinosPesos. Todos los derechos reservados.</p>
             <div className="flex items-center gap-4">
-              <Link href="/sitemap.xml" className="hover:text-gray-700">
+              <Link href="/sitemap.xml" className="hover:text-gray-900">
                 Mapa del Sitio
               </Link>
               <span>•</span>
-              <Link href="/rss" className="hover:text-gray-700">
+              <Link href="/rss" className="hover:text-gray-900">
                 RSS
               </Link>
               <span>•</span>

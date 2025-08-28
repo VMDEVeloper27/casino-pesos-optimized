@@ -131,7 +131,7 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
                   <span className="font-bold text-xl text-gray-900 group-hover:text-green-700 transition-colors">
                     CasinosPesos
                   </span>
-                  <div className="text-xs text-gray-500 -mt-1">
+                  <div className="text-xs text-gray-700 -mt-1">
                     {locale === 'es' ? 'Análisis Profesional' : 'Professional Analysis'}
                   </div>
                 </div>
@@ -227,7 +227,7 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
                         {session.user?.name || session.user?.email?.split('@')[0]}
                       </span>
                       <ChevronDown className={cn(
-                        "w-4 h-4 text-gray-500 transition-transform",
+                        "w-4 h-4 text-gray-700 transition-transform",
                         isUserDropdownOpen && "rotate-180"
                       )} />
                     </button>
@@ -251,7 +251,7 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
                           >
                             <div className="p-3 border-b border-gray-100">
                               <p className="text-sm font-medium text-gray-900">{session.user?.name || session.user?.email?.split('@')[0]}</p>
-                              <p className="text-xs text-gray-500 mt-0.5">{session.user?.email}</p>
+                              <p className="text-xs text-gray-700 mt-0.5">{session.user?.email}</p>
                               {session.user?.role && (
                                 <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 mt-2">
                                   {session.user.role === 'admin' ? 'Administrador' : session.user.role === 'editor' ? 'Editor' : 'Usuario'}
@@ -345,7 +345,7 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
               </div>
               <div className="min-w-0">
                 <span className="font-bold text-base sm:text-lg text-gray-900 truncate block">CasinosPesos</span>
-                <div className="text-xs text-gray-500 -mt-1 hidden sm:block">
+                <div className="text-xs text-gray-700 -mt-1 hidden sm:block">
                   {locale === 'es' ? 'Análisis Profesional' : 'Professional Analysis'}
                 </div>
               </div>
@@ -524,7 +524,7 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
                           </div>
                           <div>
                             <p className="font-medium text-gray-900">{session.user?.name || session.user?.email?.split('@')[0]}</p>
-                            <p className="text-xs text-gray-500">{session.user?.email}</p>
+                            <p className="text-xs text-gray-700">{session.user?.email}</p>
                           </div>
                         </div>
                       </div>

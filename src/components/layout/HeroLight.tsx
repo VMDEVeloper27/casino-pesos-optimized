@@ -104,7 +104,7 @@ export function Hero() {
             
             {/* Quick search tags */}
             <div className="flex flex-wrap gap-2 justify-center mt-4">
-              <span className="text-xs text-gray-500">Búsquedas populares:</span>
+              <span className="text-xs text-gray-700">Búsquedas populares:</span>
               {['Bet365', 'Bonos sin depósito', 'PayPal', 'Tragamonedas', 'Blackjack'].map(tag => (
                 <button
                   key={tag}
@@ -179,20 +179,20 @@ export function Hero() {
             transition={{ delay: 0.6 }}
             className="flex flex-wrap items-center justify-center gap-6 mt-12 pt-8 border-t border-gray-200"
           >
-            <div className="flex items-center gap-2 text-gray-500 text-sm">
+            <div className="flex items-center gap-2 text-gray-700 text-sm">
               <Shield className="w-4 h-4" />
               SSL Seguro
             </div>
-            <div className="flex items-center gap-2 text-gray-500 text-sm">
+            <div className="flex items-center gap-2 text-gray-700 text-sm">
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
               </svg>
               Datos Protegidos
             </div>
-            <div className="flex items-center gap-2 text-gray-500 text-sm">
+            <div className="flex items-center gap-2 text-gray-700 text-sm">
               ✓ GDPR Compliant
             </div>
-            <div className="flex items-center gap-2 text-gray-500 text-sm">
+            <div className="flex items-center gap-2 text-gray-700 text-sm">
               18+ Juego Responsable
             </div>
           </motion.div>

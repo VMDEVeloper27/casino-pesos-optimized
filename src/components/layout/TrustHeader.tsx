@@ -240,7 +240,7 @@ export function TrustHeader({ locale }: TrustHeaderProps) {
                             <span>{country.flag}</span>
                             <div>
                               <div className="font-medium">{country.name}</div>
-                              <div className="text-xs text-gray-500">{country.currency}</div>
+                              <div className="text-xs text-gray-700">{country.currency}</div>
                             </div>
                           </button>
                         ))}
@@ -388,7 +388,7 @@ export function TrustHeader({ locale }: TrustHeaderProps) {
                         <span>{country.flag}</span>
                         <div>
                           <div className="font-medium text-sm">{country.name}</div>
-                          <div className="text-xs text-gray-500">{country.currency}</div>
+                          <div className="text-xs text-gray-700">{country.currency}</div>
                         </div>
                       </button>
                     ))}
@@ -448,7 +448,7 @@ export function TrustHeader({ locale }: TrustHeaderProps) {
                     <span>{country.flag}</span>
                     <div>
                       <div className="font-medium text-sm">{country.name}</div>
-                      <div className="text-xs text-gray-500">{country.currency}</div>
+                      <div className="text-xs text-gray-700">{country.currency}</div>
                     </div>
                   </button>
                 ))}

@@ -106,7 +106,7 @@ export default function CookieConsent() {
               </div>
               <button
                 onClick={() => setShowBanner(false)}
-                className="text-gray-500 hover:text-gray-700 transition-colors"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
                 aria-label="Cerrar"
               >
                 <X className="w-6 h-6" />
@@ -271,13 +271,13 @@ export default function CookieConsent() {
             {/* Footer Links */}
             <div className="mt-6 pt-4 border-t border-gray-200">
               <div className="flex flex-wrap gap-4 text-sm">
-                <Link href="/privacy" className="text-gray-500 hover:text-green-600 transition-colors">
+                <Link href="/privacy" className="text-gray-700 hover:text-green-600 transition-colors">
                   Política de Privacidad
                 </Link>
-                <Link href="/cookies" className="text-gray-500 hover:text-green-600 transition-colors">
+                <Link href="/cookies" className="text-gray-700 hover:text-green-600 transition-colors">
                   Política de Cookies
                 </Link>
-                <Link href="/terms" className="text-gray-500 hover:text-green-600 transition-colors">
+                <Link href="/terms" className="text-gray-700 hover:text-green-600 transition-colors">
                   Términos y Condiciones
                 </Link>
               </div>
