@@ -35,41 +35,31 @@ export function ClientOptimizations() {
         removePolyfill(String.prototype, 'trimRight');
       }
       
-      // Optimize third-party scripts loading
-      const optimizeScripts = () => {
-        // Find all script tags and make them non-blocking
-        const scripts = document.querySelectorAll('script[src]');
-        scripts.forEach(script => {
-          const src = script.getAttribute('src');
-          
-          // Make email-decode async/defer to not block critical path
-          if (src && src.includes('email-decode')) {
-            script.setAttribute('async', 'true');
-            script.setAttribute('defer', 'true');
-            // Move to end of body if it's in head
-            if (script.parentNode === document.head) {
-              document.body.appendChild(script);
+      // Disable Cloudflare email obfuscation immediately
+      if ((window as any).CloudFlare) {
+        try {
+          (window as any).CloudFlare.push(function() {
+            if (typeof (window as any).CloudFlare !== 'undefined' && (window as any).CloudFlare.email_decode) {
+              (window as any).CloudFlare.email_decode = function() {};
             }
-          }
-          
-          // Defer other non-critical scripts
-          if (src && !script.hasAttribute('defer') && !script.hasAttribute('async')) {
-            if (!src.includes('critical') && !src.includes('_next')) {
-              script.setAttribute('defer', 'true');
-            }
-          }
-        });
+          });
+        } catch (e) {
+          // Silently handle any CloudFlare errors
+        }
+      }
+      
+      // Prevent CloudFlare email decode script from loading
+      const preventCloudFlareEmailDecode = () => {
+        const scripts = document.querySelectorAll('script[src*="email-decode"]');
+        scripts.forEach(script => script.remove());
         
-        // Monitor for new scripts and make them async
+        // Block future loads
         const observer = new MutationObserver(mutations => {
           mutations.forEach(mutation => {
             mutation.addedNodes.forEach(node => {
-              if (node.nodeName === 'SCRIPT') {
-                const script = node as HTMLScriptElement;
-                if (script.src && script.src.includes('email-decode')) {
-                  script.async = true;
-                  script.defer = true;
-                }
+              if (node.nodeName === 'SCRIPT' && 
+                  (node as HTMLScriptElement).src?.includes('email-decode')) {
+                node.remove();
               }
             });
           });
@@ -77,6 +67,25 @@ export function ClientOptimizations() {
         
         observer.observe(document.head, { childList: true });
         observer.observe(document.body, { childList: true });
+      };
+      
+      // Optimize third-party scripts loading
+      const optimizeScripts = () => {
+        preventCloudFlareEmailDecode();
+        
+        // Find all script tags
+        const scripts = document.querySelectorAll('script[src]');
+        scripts.forEach(script => {
+          const src = script.getAttribute('src');
+          if (src && (src.includes('googletagmanager') || src.includes('google-analytics'))) {
+            // Already handled by GoogleAnalyticsScript component
+            return;
+          }
+          // Defer non-critical scripts
+          if (src && !script.hasAttribute('defer') && !script.hasAttribute('async')) {
+            script.setAttribute('defer', 'true');
+          }
+        });
       };
       
       // Run optimizations after page load
