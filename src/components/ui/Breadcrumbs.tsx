@@ -86,7 +86,7 @@ export function Breadcrumbs({ items, className = '' }: BreadcrumbsProps) {
       >
         <div className="container mx-auto px-4 py-3">
           <ol 
-            className="flex items-center space-x-2 text-sm overflow-x-auto whitespace-nowrap"
+            className="flex items-center flex-wrap gap-2 text-sm"
             itemScope 
             itemType="https://schema.org/BreadcrumbList"
           >
@@ -104,17 +104,17 @@ export function Breadcrumbs({ items, className = '' }: BreadcrumbsProps) {
                   {index === 0 ? (
                     <Link
                       href={item.url}
-                      className="flex items-center gap-1 text-gray-600 hover:text-primary-600 transition-colors"
+                      className="flex items-center gap-1 text-gray-600 hover:text-primary-600 transition-colors min-h-[24px]"
                       itemProp="item"
                     >
-                      <Home className="w-4 h-4" />
+                      <Home className="w-4 h-4 flex-shrink-0" />
                       <span itemProp="name" className="sr-only sm:inline">
                         {item.name}
                       </span>
                     </Link>
                   ) : isLast ? (
                     <span 
-                      className="text-gray-900 font-medium"
+                      className="flex items-center text-gray-900 font-medium min-h-[24px]"
                       itemProp="name"
                     >
                       {item.name}
@@ -122,7 +122,7 @@ export function Breadcrumbs({ items, className = '' }: BreadcrumbsProps) {
                   ) : (
                     <Link
                       href={item.url}
-                      className="text-gray-600 hover:text-primary-600 transition-colors"
+                      className="flex items-center text-gray-600 hover:text-primary-600 transition-colors min-h-[24px]"
                       itemProp="item"
                     >
                       <span itemProp="name">{item.name}</span>
@@ -132,7 +132,7 @@ export function Breadcrumbs({ items, className = '' }: BreadcrumbsProps) {
                   <meta itemProp="position" content={String(index + 1)} />
                   
                   {!isLast && (
-                    <ChevronRight className="w-4 h-4 text-gray-400 mx-2" />
+                    <ChevronRight className="w-4 h-4 text-gray-400 mx-2 flex-shrink-0" />
                   )}
                 </li>
               );

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import crypto from 'crypto';
+import { sendEmail } from '@/lib/gmail';
 
 export async function POST(request: Request) {
   try {
@@ -49,14 +50,59 @@ export async function POST(request: Request) {
       );
     }
 
-    // Here you would send an email with the reset link
-    // For now, we'll just return success
-    const resetLink = `${process.env.NEXT_PUBLIC_SITE_URL}/es/auth/reset-password?token=${resetToken}`;
+    // Send email with reset link
+    const resetLink = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.casinospesos.com'}/es/auth/reset-password?token=${resetToken}`;
     
-    console.log('Reset link for', email, ':', resetLink);
+    console.log('Sending reset link to', email, ':', resetLink);
     
-    // TODO: Implement email sending with Gmail
-    // await sendResetEmail(email, resetLink);
+    // Send email via Gmail
+    const emailHtml = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8">
+          <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+            .content { background: white; padding: 30px; border: 1px solid #e5e5e5; border-radius: 0 0 10px 10px; }
+            .button { display: inline-block; padding: 15px 30px; background: #10b981; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; font-weight: bold; }
+            .button:hover { background: #059669; }
+            .footer { text-align: center; margin-top: 30px; font-size: 12px; color: #666; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1>CasinosPesos</h1>
+              <p>Restablecimiento de Contraseña</p>
+            </div>
+            <div class="content">
+              <h2>Hola!</h2>
+              <p>Hemos recibido una solicitud para restablecer tu contraseña en CasinosPesos.</p>
+              <p>Si solicitaste este cambio, haz clic en el siguiente botón para crear una nueva contraseña:</p>
+              <div style="text-align: center;">
+                <a href="${resetLink}" class="button">Restablecer Contraseña</a>
+              </div>
+              <p style="font-size: 14px; color: #666;">O copia y pega este enlace en tu navegador:</p>
+              <p style="font-size: 12px; word-break: break-all; background: #f5f5f5; padding: 10px; border-radius: 5px;">${resetLink}</p>
+              <p><strong>Este enlace expirará en 1 hora por seguridad.</strong></p>
+              <p>Si no solicitaste este cambio, puedes ignorar este correo y tu contraseña permanecerá sin cambios.</p>
+              <div class="footer">
+                <p>© 2024 CasinosPesos. Todos los derechos reservados.</p>
+                <p>Este es un correo automático, por favor no respondas.</p>
+              </div>
+            </div>
+          </div>
+        </body>
+      </html>
+    `;
+
+    await sendEmail({
+      to: email,
+      subject: '🔐 Restablecer tu contraseña - CasinosPesos',
+      html: emailHtml,
+    });
 
     return NextResponse.json(
       { message: 'Si el correo existe, recibirás instrucciones para restablecer tu contraseña.' },
