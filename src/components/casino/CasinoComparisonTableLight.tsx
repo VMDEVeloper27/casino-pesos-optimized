@@ -355,6 +355,7 @@ export function CasinoComparisonTableLight({ casinos, locale = 'es' }: Compariso
                     className="w-5 h-5 rounded accent-primary-600 cursor-pointer"
                     disabled={!selectedCasinos.includes(casino.id) && selectedCasinos.length >= 4}
                     title={!selectedCasinos.includes(casino.id) && selectedCasinos.length >= 4 ? (locale === 'es' ? 'Máximo 4 casinos para comparar' : 'Maximum 4 casinos to compare') : ''}
+                    aria-label={`${locale === 'es' ? 'Seleccionar' : 'Select'} ${casino.name} ${locale === 'es' ? 'para comparar' : 'for comparison'}`}
                   />
                 </td>
 
@@ -488,6 +489,7 @@ export function CasinoComparisonTableLight({ casinos, locale = 'es' }: Compariso
                   className="w-5 h-5 rounded accent-primary-600 cursor-pointer"
                   disabled={!selectedCasinos.includes(casino.id) && selectedCasinos.length >= 4}
                   title={!selectedCasinos.includes(casino.id) && selectedCasinos.length >= 4 ? (locale === 'es' ? 'Máximo 4 casinos para comparar' : 'Maximum 4 casinos to compare') : ''}
+                  aria-label={`${locale === 'es' ? 'Seleccionar' : 'Select'} ${casino.name} ${locale === 'es' ? 'para comparar' : 'for comparison'}`}
                 />
                 <CasinoLogo 
                   name={casino.name} 

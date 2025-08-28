@@ -283,6 +283,8 @@ export function TrustHeader({ locale }: TrustHeaderProps) {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="w-10 h-10 flex items-center justify-center bg-gray-50 rounded-lg border border-gray-200"
+              aria-label={isMobileMenuOpen ? (locale === 'es' ? 'Cerrar menú' : 'Close menu') : (locale === 'es' ? 'Abrir menú' : 'Open menu')}
+              aria-expanded={isMobileMenuOpen}
             >
               <AnimatePresence mode="wait">
                 {isMobileMenuOpen ? (
@@ -341,6 +343,7 @@ export function TrustHeader({ locale }: TrustHeaderProps) {
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-lg"
+                    aria-label={locale === 'es' ? 'Cerrar menú' : 'Close menu'}
                   >
                     <X className="w-5 h-5 text-gray-700" />
                   </button>
