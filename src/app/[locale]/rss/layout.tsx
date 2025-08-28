@@ -1,16 +1,23 @@
 import { Metadata } from 'next';
-import { getCanonicalUrl } from '@/lib/canonical';
+import { generatePageMetadata } from '@/lib/metadata-helpers';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   
-  return {
-    title: 'RSS Feed | CasinosPesos',
-    description: locale === 'es' ? 'Feed RSS de CasinosPesos' : 'CasinosPesos RSS Feed',
-    alternates: {
-      canonical: getCanonicalUrl('/rss', locale),
-    },
-  };
+  return generatePageMetadata(
+    locale,
+    '/rss',
+    'RSS Feed | Noticias de Casinos | CasinosPesos',
+    'RSS Feed | Casino News | CasinosPesos',
+    'Suscríbete al feed RSS de CasinosPesos. Últimas noticias, bonos y actualizaciones de casinos online en México',
+    'Subscribe to CasinosPesos RSS feed. Latest news, bonuses and updates from online casinos in Mexico',
+    {
+      keywords: {
+        es: 'rss feed casino, noticias casino mexico, actualizaciones casino, feed casinospesos',
+        en: 'casino rss feed, mexico casino news, casino updates, casinospesos feed'
+      }
+    }
+  );
 }
 
 export default function RSSLayout({

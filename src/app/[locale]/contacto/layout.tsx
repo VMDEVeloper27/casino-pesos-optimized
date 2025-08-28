@@ -1,16 +1,23 @@
 import { Metadata } from 'next';
-import { getCanonicalUrl } from '@/lib/canonical';
+import { generatePageMetadata } from '@/lib/metadata-helpers';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   
-  return {
-    title: locale === 'es' ? 'Contacto | CasinosPesos' : 'Contact | CasinosPesos',
-    description: locale === 'es' ? 'Contáctanos para cualquier consulta' : 'Contact us for any inquiry',
-    alternates: {
-      canonical: getCanonicalUrl('/contacto', locale),
-    },
-  };
+  return generatePageMetadata(
+    locale,
+    '/contacto',
+    'Contacto | CasinosPesos',
+    'Contact | CasinosPesos',
+    'Contáctanos para cualquier consulta sobre casinos online. Equipo experto disponible para ayudarte.',
+    'Contact us for any inquiry about online casinos. Expert team available to help you.',
+    {
+      keywords: {
+        es: 'contacto casinospesos, soporte casino, ayuda casino online',
+        en: 'contact casinospesos, casino support, online casino help'
+      }
+    }
+  );
 }
 
 export default function ContactoLayout({

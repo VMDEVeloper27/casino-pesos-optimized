@@ -2,6 +2,7 @@ import { ArrowLeft, Check, ChevronRight, CreditCard, Gamepad2, Gift, Star, Users
 import Link from 'next/link';
 import Image from 'next/image';
 import { BreadcrumbStructuredData, CasinoStructuredData } from '@/components/StructuredData';
+import { SchemaOrg, generateCasinoBonusSchema } from '@/components/SchemaOrg';
 import ReviewSystem from '@/components/ReviewSystem';
 import CopyButton from '@/components/CopyButton';
 import BonusCalculator from '@/components/BonusCalculator';
@@ -492,6 +493,34 @@ export default async function CasinoDetailPage({ params }: PageProps) {
           bonus: `${casino.bonus.percentage}% hasta $${casino.bonus.amount.toLocaleString()} MXN`,
           minDeposit: casino.bonus.minDeposit,
           paymentMethods: casino.paymentMethods
+        }}
+      />
+      <SchemaOrg 
+        type="Review"
+        data={{
+          casinoName: casino.name,
+          casinoLogo: casino.logo,
+          casinoDescription: `${casino.name} - Casino online confiable en México`,
+          bonusName: 'Bono de Bienvenida',
+          bonusDescription: `${casino.bonus.percentage}% hasta $${casino.bonus.amount.toLocaleString()} MXN`,
+          rating: casino.rating,
+          reviewBody: `${casino.name} ofrece una excelente experiencia de juego con ${casino.slots}+ slots, retiros en ${casino.withdrawalTime} y soporte 24/7.`,
+          datePublished: '2024-01-01T00:00:00Z',
+          ratingCount: 250
+        }}
+      />
+      <SchemaOrg 
+        type="Product"
+        data={{
+          name: casino.name,
+          image: casino.logo,
+          description: `Casino online ${casino.name} - Bono ${casino.bonus.percentage}% hasta $${casino.bonus.amount.toLocaleString()} MXN`,
+          brand: casino.name,
+          rating: casino.rating,
+          ratingCount: 250,
+          bonus: true,
+          url: casino.affiliateLink,
+          validUntil: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString()
         }}
       />
     </main>
