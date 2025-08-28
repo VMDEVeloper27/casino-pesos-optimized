@@ -8,6 +8,7 @@ import BonusCalculator from '@/components/BonusCalculator';
 import FavoriteButtonAuth from '@/components/FavoriteButtonAuth';
 import { getCasinoBySlug } from '@/lib/casino-database';
 import type { Metadata } from 'next';
+import { getCanonicalUrl } from '@/lib/canonical';
 
 interface PageProps {
   params: Promise<{ locale: string; id: string }>;
@@ -25,8 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   
   const isSpanish = locale === 'es';
-  const baseUrl = 'https://casinospesos.com';
-  const pageUrl = `${baseUrl}/${locale}/casinos/${id}`;
+  const pageUrl = getCanonicalUrl(`/casinos/${id}`, locale);
   const bonusText = `${casino.bonus.percentage}% hasta $${casino.bonus.amount.toLocaleString()} MXN`;
   
   if (isSpanish) {
@@ -56,9 +56,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       alternates: {
         canonical: pageUrl,
         languages: {
-          'es-MX': `${baseUrl}/es/casinos/${id}`,
-          'en-US': `${baseUrl}/en/casinos/${id}`,
-          'x-default': `${baseUrl}/es/casinos/${id}`
+          'es-MX': getCanonicalUrl(`/casinos/${id}`, 'es'),
+          'en-US': getCanonicalUrl(`/casinos/${id}`, 'en'),
+          'x-default': getCanonicalUrl(`/casinos/${id}`, 'es')
         }
       },
       robots: {
@@ -100,9 +100,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       alternates: {
         canonical: pageUrl,
         languages: {
-          'es-MX': `${baseUrl}/es/casinos/${id}`,
-          'en-US': `${baseUrl}/en/casinos/${id}`,
-          'x-default': `${baseUrl}/es/casinos/${id}`
+          'es-MX': getCanonicalUrl(`/casinos/${id}`, 'es'),
+          'en-US': getCanonicalUrl(`/casinos/${id}`, 'en'),
+          'x-default': getCanonicalUrl(`/casinos/${id}`, 'es')
         }
       }
     };

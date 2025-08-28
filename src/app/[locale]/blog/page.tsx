@@ -1,40 +1,16 @@
-'use client';
-
-import { useState, useEffect, use } from 'react';
-import { ArrowRight, Calendar, ChevronRight, Clock, User, Eye, Heart, Tag, Search, BookOpen, Newspaper, BookOpenCheck, Gift, Gamepad2, Scale } from 'lucide-react';
-import Link from 'next/link';
-import { BreadcrumbStructuredData } from '@/components/StructuredData';
-
-interface BlogPost {
-  id: string;
-  slug: string;
-  title: string;
-  excerpt: string;
-  author: string;
-  authorRole?: string;
-  author_role?: string;
-  category: string;
-  tags: string[];
-  featuredImage?: string;
-  featured_image?: string;
-  publishedAt?: string;
-  published_at?: string;
-  readTime?: number;
-  read_time?: number;
-  views: number;
-  likes: number;
-}
+import type { Metadata } from 'next';
+import BlogClient from './BlogClient';
+import { getCanonicalUrl } from '@/lib/canonical';
 
 interface PageProps {
   params: Promise<{ locale: string }>;
 }
 
-/* export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   
   const isSpanish = locale === 'es';
-  const baseUrl = 'https://casinospesos.com';
-  const pageUrl = `${baseUrl}/${locale}/blog`;
+  const pageUrl = getCanonicalUrl('/blog', locale);
   
   if (isSpanish) {
     return {
@@ -49,7 +25,7 @@ interface PageProps {
         locale: 'es_MX',
         type: 'website',
         images: [{
-          url: `${baseUrl}/images/blog-og.jpg`,
+          url: 'https://www.casinospesos.com/logo.png',
           width: 1200,
           height: 630,
           alt: 'Blog CasinosPesos'
@@ -58,9 +34,9 @@ interface PageProps {
       alternates: {
         canonical: pageUrl,
         languages: {
-          'es-MX': `${baseUrl}/es/blog`,
-          'en-US': `${baseUrl}/en/blog`,
-          'x-default': `${baseUrl}/es/blog`
+          'es-MX': getCanonicalUrl('/blog', 'es'),
+          'en-US': getCanonicalUrl('/blog', 'en'),
+          'x-default': getCanonicalUrl('/blog', 'es')
         }
       },
       robots: {
@@ -88,386 +64,116 @@ interface PageProps {
       siteName: 'CasinosPesos',
       locale: 'en_US',
       type: 'website',
+      images: [{
+        url: 'https://www.casinospesos.com/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'CasinosPesos Blog'
+      }]
     },
     alternates: {
       canonical: pageUrl,
       languages: {
-        'es-MX': `${baseUrl}/es/blog`,
-        'en-US': `${baseUrl}/en/blog`,
-        'x-default': `${baseUrl}/es/blog`
+        'es-MX': getCanonicalUrl('/blog', 'es'),
+        'en-US': getCanonicalUrl('/blog', 'en'),
+        'x-default': getCanonicalUrl('/blog', 'es')
       }
     }
   };
-} */
+}
 
+// Mock blog posts data - In production, this would come from a CMS or database
 const blogPosts = [
   {
-    slug: 'nuevos-casinos-mexico-enero-2025',
-    title: 'Los 5 Nuevos Casinos Online que Llegan a México en Enero 2025',
-    excerpt: 'Descubre las últimas plataformas de casino que han llegado al mercado mexicano con licencias internacionales, bonos exclusivos y métodos de pago locales como OXXO y SPEI.',
-    content: 'El mercado de casinos online en México continúa expandiéndose...',
+    id: '1',
+    slug: 'regulacion-casinos-online-mexico-2025',
+    title: 'Nueva Regulación de Casinos Online en México: Lo Que Necesitas Saber en 2025',
+    excerpt: 'Análisis completo de los cambios en la legislación mexicana sobre juegos de azar online. Descubre cómo afectará a jugadores y operadores.',
     author: 'Carlos Mendoza',
-    publishDate: '2025-01-15',
-    readTime: '5 min',
+    authorRole: 'Editor Principal',
     category: 'Noticias',
-    tags: ['nuevos casinos', 'méxico', '2025', 'licencias'],
-    featured: true,
-    image: '/images/blog/nuevos-casinos-2025.jpg'
+    tags: ['regulación', 'legal', 'méxico', '2025'],
+    publishedAt: '2025-01-15',
+    readTime: 5,
+    views: 1250,
+    likes: 89,
+    featured_image: '/images/blog/regulacion-mexico.jpg'
   },
   {
+    id: '2',
     slug: 'estrategias-blackjack-mexico',
     title: 'Estrategias de Blackjack para Jugadores Mexicanos: Guía Completa 2025',
     excerpt: 'Aprende las mejores estrategias básicas de blackjack adaptadas al mercado mexicano. Incluye tablas de probabilidades y consejos para maximizar tus ganancias.',
-    content: 'El blackjack es uno de los juegos más populares...',
     author: 'Ana Rodríguez',
-    publishDate: '2025-01-12',
-    readTime: '8 min',
+    authorRole: 'Experta en Juegos',
     category: 'Guías',
     tags: ['blackjack', 'estrategias', 'guía', 'méxico'],
-    featured: false,
-    image: '/images/blog/blackjack-estrategias.jpg'
+    publishedAt: '2025-01-12',
+    readTime: 8,
+    views: 890,
+    likes: 67
   },
   {
+    id: '3',
     slug: 'depositar-oxxo-casinos-online',
     title: 'Cómo Depositar en Casinos Online usando OXXO: Guía Paso a Paso',
     excerpt: 'Tutorial completo para depositar dinero en casinos online mexicanos usando OXXO. Ventajas, límites, tiempos de procesamiento y casinos recomendados.',
-    content: 'OXXO se ha convertido en el método de pago favorito...',
     author: 'Miguel Torres',
-    publishDate: '2025-01-10',
-    readTime: '6 min',
+    authorRole: 'Analista de Pagos',
     category: 'Guías',
     tags: ['OXXO', 'depósitos', 'métodos pago', 'tutorial'],
-    featured: true,
-    image: '/images/blog/depositar-oxxo.jpg'
+    publishedAt: '2025-01-10',
+    readTime: 6,
+    views: 2100,
+    likes: 145,
+    featured_image: '/images/blog/depositar-oxxo.jpg'
   },
   {
+    id: '4',
     slug: 'bonos-sin-deposito-febrero-2025',
     title: 'Mejores Bonos Sin Depósito de Febrero 2025 en México',
     excerpt: 'Recopilación actualizada de los mejores bonos sin depósito disponibles para jugadores mexicanos. Códigos promocionales exclusivos y términos claros.',
-    content: 'Los bonos sin depósito son perfectos para probar casinos...',
     author: 'Laura García',
-    publishDate: '2025-01-08',
-    readTime: '4 min',
+    authorRole: 'Especialista en Bonos',
     category: 'Bonos',
     tags: ['bonos sin depósito', 'febrero 2025', 'códigos promocionales'],
-    featured: false,
-    image: '/images/blog/bonos-sin-deposito.jpg'
+    publishedAt: '2025-01-08',
+    readTime: 4,
+    views: 3450,
+    likes: 234
   },
   {
+    id: '5',
     slug: 'slots-mas-populares-mexico-2025',
     title: 'Top 10: Las Tragamonedas Más Populares en México Durante 2025',
     excerpt: 'Ranking de las slots online más jugadas por mexicanos. Incluye RTP, volatilidad, temática y dónde encontrarlas con los mejores bonos.',
-    content: 'Las tragamonedas siguen siendo el juego favorito...',
     author: 'Diego Ramírez',
-    publishDate: '2025-01-05',
-    readTime: '7 min',
+    authorRole: 'Revisor de Juegos',
     category: 'Juegos',
     tags: ['slots', 'tragamonedas', 'populares', 'ranking'],
-    featured: false,
-    image: '/images/blog/slots-populares.jpg'
+    publishedAt: '2025-01-05',
+    readTime: 7,
+    views: 1890,
+    likes: 156
   },
   {
-    slug: 'regulacion-casinos-online-mexico-2025',
-    title: 'Estado de la Regulación de Casinos Online en México: Actualización 2025',
-    excerpt: 'Análisis completo del marco legal de los casinos online en México. SEGOB, licencias internacionales y qué esperar en 2025.',
-    content: 'La regulación de casinos online en México...',
-    author: 'Carla Vázquez',
-    publishDate: '2025-01-03',
-    readTime: '10 min',
+    id: '6',
+    slug: 'responsable-gambling-mexico',
+    title: 'Juego Responsable: Herramientas y Recursos para Jugadores Mexicanos',
+    excerpt: 'Guía completa sobre juego responsable, límites de depósito, autoexclusión y recursos de ayuda disponibles en México.',
+    author: 'Patricia Hernández',
+    authorRole: 'Psicóloga Especializada',
     category: 'Legal',
-    tags: ['regulación', 'SEGOB', 'legal', 'licencias'],
-    featured: true,
-    image: '/images/blog/regulacion-mexico.jpg'
+    tags: ['juego responsable', 'autoexclusión', 'límites', 'ayuda'],
+    publishedAt: '2025-01-03',
+    readTime: 10,
+    views: 670,
+    likes: 89
   }
 ];
 
-const categories = [
-  { name: 'Todos', value: '', icon: BookOpen },
-  { name: 'Noticias', value: 'Noticias', icon: Newspaper },
-  { name: 'Guías', value: 'Guías', icon: BookOpenCheck },
-  { name: 'Bonos', value: 'Bonos', icon: Gift },
-  { name: 'Juegos', value: 'Juegos', icon: Gamepad2 },
-  { name: 'Legal', value: 'Legal', icon: Scale }
-];
-
-export default function BlogPage({ params }: PageProps) {
-  const resolvedParams = use(params);
-  const locale = resolvedParams.locale;
+export default async function BlogPage({ params }: PageProps) {
+  const { locale } = await params;
   
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [mounted, setMounted] = useState(false);
-  
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-  
-  useEffect(() => {
-    if (mounted) {
-      fetchPosts();
-    }
-  }, [selectedCategory, page, mounted]);
-  
-  useEffect(() => {
-    if (mounted) {
-      filterPosts();
-    }
-  }, [posts, searchQuery, mounted]);
-  
-  const fetchPosts = async () => {
-    try {
-      setLoading(true);
-      const params = new URLSearchParams({
-        page: page.toString(),
-        limit: '6'
-      });
-      
-      if (selectedCategory) {
-        params.append('category', selectedCategory);
-      }
-      
-      const response = await fetch(`/api/public/blog?${params}`);
-      if (response.ok) {
-        const data = await response.json();
-        setPosts(data.posts);
-        setTotalPages(data.totalPages);
-      }
-    } catch (error) {
-      console.error('Error fetching posts:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  
-  const filterPosts = () => {
-    if (!searchQuery) {
-      setFilteredPosts(posts);
-      return;
-    }
-    
-    const filtered = posts.filter(post =>
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-    );
-    
-    setFilteredPosts(filtered);
-  };
-  
-  const handleCategoryChange = (category: string) => {
-    setSelectedCategory(category);
-    setPage(1);
-    setSearchQuery('');
-  };
-
-  // Все посты показываем одинаково
-  const regularPosts = filteredPosts;
-  
-  // Prevent hydration errors by not rendering dynamic content until mounted
-  if (!mounted) {
-    return (
-      <main className="min-h-screen bg-gray-50 pt-8 pb-16">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center py-12">
-            <div className="text-gray-900">Loading...</div>
-          </div>
-        </div>
-      </main>
-    );
-  }
-  
-  return (
-    <main className="min-h-screen bg-gray-50 pt-8 pb-16">
-      <div className="container mx-auto px-4">
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm text-gray-500 mb-8">
-          <Link href={`/${locale}`} className="hover:text-gray-900 transition-colors">
-            Inicio
-          </Link>
-          <ChevronRight className="w-4 h-4" />
-          <span className="text-gray-900">Blog</span>
-        </div>
-
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Newspaper className="w-10 h-10 text-green-600" />
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Blog de Casino
-            </h1>
-          </div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Guías, estrategias y las últimas noticias del mundo de los casinos en línea
-          </p>
-        </div>
-
-        {/* Search Bar */}
-        <div className="max-w-2xl mx-auto mb-8">
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Buscar artículos..."
-              className="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
-            />
-          </div>
-        </div>
-
-        {/* Categories Filter */}
-        <div className="mb-12">
-          <div className="flex flex-wrap justify-center gap-3">
-            {categories.map((category) => (
-              <button
-                key={category.value}
-                onClick={() => handleCategoryChange(category.value)}
-                className={`px-4 py-2 rounded-xl transition-all duration-300 ${
-                  selectedCategory === category.value
-                    ? 'bg-gradient-to-r from-green-500 to-green-600 text-white scale-105'
-                    : 'bg-white hover:bg-gray-100 text-gray-600'
-                }`}
-              >
-                <span className="flex items-center gap-2">
-                  <category.icon className="w-5 h-5" />
-                  <span className="font-semibold">{category.name}</span>
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Loading State */}
-        {loading ? (
-          <div className="flex items-center justify-center py-12">
-            <div className="text-gray-900">Cargando artículos...</div>
-          </div>
-        ) : (
-          <>
-            {/* Posts Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-              {regularPosts.map((post) => (
-                <article
-                  key={post.id}
-                  className="bg-white rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col h-full"
-                >
-                  <Link href={`/${locale}/blog/${post.slug}`} className="flex flex-col h-full">
-                    <div className="aspect-video bg-gray-100 relative overflow-hidden">
-                      {post.featuredImage || post.featured_image ? (
-                        <img 
-                          src={post.featuredImage || post.featured_image} 
-                          alt={post.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                        />
-                      ) : (
-                        <>
-                          <div className="absolute inset-0 bg-gradient-to-br from-green-100 to-emerald-100"></div>
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <BookOpen className="w-12 h-12 text-green-600/50" />
-                          </div>
-                        </>
-                      )}
-                      <div className="absolute top-4 left-4">
-                        <span className="px-3 py-1 bg-green-600 text-white backdrop-blur-sm rounded-lg text-xs font-semibold">
-                          {post.category}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="p-6 flex flex-col flex-grow">
-                      <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors line-clamp-2 h-[56px]">
-                        {post.title}
-                      </h3>
-                      <p className="text-gray-500 mb-4 line-clamp-3 h-[72px] text-sm">
-                        {post.excerpt}
-                      </p>
-                      <div className="mt-auto">
-                        <div className="flex items-center justify-between text-xs text-gray-400 pb-3 border-b border-gray-100">
-                          <div className="flex items-center gap-2">
-                            <Calendar className="w-3 h-3" />
-                            <span>{(post.publishedAt || post.published_at || '').split('T')[0]}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Clock className="w-3 h-3" />
-                            <span>{post.readTime || post.read_time || 5} min</span>
-                          </div>
-                        </div>
-                        <div className="flex items-center justify-between text-xs text-gray-400 pt-3">
-                          <div className="flex items-center gap-1">
-                            <Eye className="w-3 h-3" />
-                            <span>{post.views || 0} vistas</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Heart className="w-3 h-3" />
-                            <span>{post.likes || 0} likes</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                </article>
-              ))}
-            </div>
-
-            {/* Pagination */}
-            {totalPages > 1 && (
-              <div className="flex justify-center gap-2">
-                <button
-                  onClick={() => setPage(Math.max(1, page - 1))}
-                  disabled={page === 1}
-                  className="px-4 py-2 bg-white text-gray-900 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition-colors"
-                >
-                  Anterior
-                </button>
-                <div className="flex items-center gap-2">
-                  {[...Array(Math.min(5, totalPages))].map((_, i) => {
-                    const pageNum = i + 1;
-                    return (
-                      <button
-                        key={pageNum}
-                        onClick={() => setPage(pageNum)}
-                        className={`w-10 h-10 rounded-lg transition-colors ${
-                          page === pageNum
-                            ? 'bg-gradient-to-r from-green-500 to-green-600 text-white'
-                            : 'bg-white text-gray-500 hover:bg-gray-100'
-                        }`}
-                      >
-                        {pageNum}
-                      </button>
-                    );
-                  })}
-                </div>
-                <button
-                  onClick={() => setPage(Math.min(totalPages, page + 1))}
-                  disabled={page === totalPages}
-                  className="px-4 py-2 bg-white text-gray-900 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition-colors"
-                >
-                  Siguiente
-                </button>
-              </div>
-            )}
-          </>
-        )}
-
-        {/* No results */}
-        {!loading && filteredPosts.length === 0 && (
-          <div className="text-center py-12">
-            <BookOpen className="w-12 h-12 text-gray-500 mx-auto mb-4" />
-            <p className="text-gray-500">No se encontraron artículos</p>
-          </div>
-        )}
-
-      </div>
-      
-      {/* Structured Data */}
-      <BreadcrumbStructuredData items={[
-        { name: 'Inicio', url: `https://casinospesos.com/${locale}` },
-        { name: 'Blog', url: `https://casinospesos.com/${locale}/blog` }
-      ]} />
-    </main>
-  );
+  return <BlogClient locale={locale} initialPosts={blogPosts} />;
 }

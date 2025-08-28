@@ -4,6 +4,7 @@ import { BreadcrumbStructuredData } from '@/components/StructuredData';
 import SocialSharing from '@/components/blog/SocialSharing';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { getCanonicalUrl } from '@/lib/canonical';
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -155,8 +156,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   
   const isSpanish = locale === 'es';
-  const baseUrl = 'https://casinospesos.com';
-  const pageUrl = `${baseUrl}/${locale}/blog/${slug}`;
+  const pageUrl = getCanonicalUrl(`/blog/${slug}`, locale);
   
   return {
     title: `${post.title} | CasinosPesos Blog`,
@@ -174,7 +174,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       authors: [post.author],
       tags: post.tags,
       images: post.featuredImage ? [{
-        url: `${baseUrl}${post.featuredImage}`,
+        url: `https://casinospesos.com${post.featuredImage}`,
         width: 1200,
         height: 630,
         alt: post.title
@@ -183,9 +183,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: {
       canonical: pageUrl,
       languages: {
-        'es-MX': `${baseUrl}/es/blog/${slug}`,
-        'en-US': `${baseUrl}/en/blog/${slug}`,
-        'x-default': `${baseUrl}/es/blog/${slug}`
+        'es-MX': getCanonicalUrl(`/blog/${slug}`, 'es'),
+        'en-US': getCanonicalUrl(`/blog/${slug}`, 'en'),
+        'x-default': getCanonicalUrl(`/blog/${slug}`, 'es')
       }
     },
     robots: {

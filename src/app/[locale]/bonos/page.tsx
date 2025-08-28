@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getAllCasinos } from '@/lib/casino-database';
 import type { Metadata } from 'next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { getCanonicalUrl } from '@/lib/canonical';
 import { 
   faGift, 
   faCoins, 
@@ -29,12 +30,26 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: 'Mejores Bonos de Casino 2025 - Ofertas Exclusivas | CasinosPesos',
       description: 'Bonos de casino verificados diariamente. Sin depósito, bienvenida, giros gratis y más. Códigos promocionales exclusivos para México.',
       keywords: 'bonos casino, bonos sin depósito, giros gratis, códigos promocionales casino, ofertas casino méxico',
+      alternates: {
+        canonical: getCanonicalUrl('/bonos', locale),
+        languages: {
+          'es-MX': getCanonicalUrl('/bonos', 'es'),
+          'en-US': getCanonicalUrl('/bonuses', 'en'),
+        }
+      },
     };
   } else {
     return {
       title: 'Best Casino Bonuses 2025 - Exclusive Offers | CasinosPesos',
       description: 'Daily verified casino bonuses. No deposit, welcome, free spins and more. Exclusive promo codes for Mexico.',
       keywords: 'casino bonuses, no deposit bonuses, free spins, casino promo codes, mexico casino offers',
+      alternates: {
+        canonical: getCanonicalUrl('/bonuses', locale),
+        languages: {
+          'es-MX': getCanonicalUrl('/bonos', 'es'),
+          'en-US': getCanonicalUrl('/bonuses', 'en'),
+        }
+      },
     };
   }
 }

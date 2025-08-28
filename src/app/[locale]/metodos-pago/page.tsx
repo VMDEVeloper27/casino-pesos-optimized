@@ -1,6 +1,7 @@
 import { ArrowRight, CheckCircle, Clock, CreditCard, Shield, Star, TrendingUp, Users, Zap } from 'lucide-react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { getCanonicalUrl } from '@/lib/canonical';
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -156,8 +157,7 @@ const paymentMethods = [
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const isSpanish = locale === 'es';
-  const baseUrl = 'https://casinospesos.com';
-  const pageUrl = `${baseUrl}/${locale}/metodos-pago`;
+  const pageUrl = getCanonicalUrl('/metodos-pago', locale);
   
   const title = isSpanish 
     ? 'Métodos de Pago para Casinos Online en México 2025'
@@ -180,7 +180,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         locale: 'es_MX',
         type: 'website',
         images: [{
-          url: `${baseUrl}/images/og-metodos-pago.jpg`,
+          url: 'https://casinospesos.com/images/og-metodos-pago.jpg',
           width: 1200,
           height: 630,
           alt: 'Métodos de Pago Casinos Online'
@@ -194,9 +194,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       alternates: {
         canonical: pageUrl,
         languages: {
-          'es-MX': `${baseUrl}/es/metodos-pago`,
-          'en-US': `${baseUrl}/en/payment-methods`,
-          'x-default': `${baseUrl}/es/metodos-pago`
+          'es-MX': getCanonicalUrl('/metodos-pago', 'es'),
+          'en-US': getCanonicalUrl('/payment-methods', 'en'),
+          'x-default': getCanonicalUrl('/metodos-pago', 'es')
         }
       },
       robots: {
@@ -228,9 +228,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: {
       canonical: pageUrl,
       languages: {
-        'es-MX': `${baseUrl}/es/metodos-pago`,
-        'en-US': `${baseUrl}/en/payment-methods`,
-        'x-default': `${baseUrl}/es/metodos-pago`
+        'es-MX': getCanonicalUrl('/metodos-pago', 'es'),
+        'en-US': getCanonicalUrl('/payment-methods', 'en'),
+        'x-default': getCanonicalUrl('/metodos-pago', 'es')
       }
     }
   };

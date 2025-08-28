@@ -9,6 +9,7 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
+  const baseUrl = 'https://www.casinospesos.com';
   
   // Try to fetch from game_details table first
   const gameDetails = await getGameDetailsBySlug(slug);
@@ -21,12 +22,26 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         title: gameDetails.meta_title || `${gameDetails.name} - Juega Gratis | Demo ${gameDetails.provider} | CasinosPesos`,
         description: gameDetails.meta_description || gameDetails.description || `Juega ${gameDetails.name} gratis. RTP ${gameDetails.rtp}%, Volatilidad ${gameDetails.volatility}, Max Win ${gameDetails.max_win}x. Demo sin registro.`,
         keywords: gameDetails.meta_keywords || [`${gameDetails.name.toLowerCase()}`, `${gameDetails.name.toLowerCase()} demo`, `${gameDetails.name.toLowerCase()} gratis`, `${gameDetails.provider.toLowerCase()}`, 'juegos casino'],
+        alternates: {
+          canonical: `${baseUrl}/es/juegos/${slug}`,
+          languages: {
+            'es-MX': `${baseUrl}/es/juegos/${slug}`,
+            'en-US': `${baseUrl}/en/games/${slug}`,
+          }
+        }
       };
     } else {
       return {
         title: gameDetails.meta_title || `${gameDetails.name} - Play Free | ${gameDetails.provider} Demo | CasinosPesos`,
         description: gameDetails.meta_description || gameDetails.description || `Play ${gameDetails.name} for free. RTP ${gameDetails.rtp}%, Volatility ${gameDetails.volatility}, Max Win ${gameDetails.max_win}x. No registration demo.`,
         keywords: gameDetails.meta_keywords || [`${gameDetails.name.toLowerCase()}`, `${gameDetails.name.toLowerCase()} demo`, `${gameDetails.name.toLowerCase()} free`, `${gameDetails.provider.toLowerCase()}`, 'casino games'],
+        alternates: {
+          canonical: `${baseUrl}/en/games/${slug}`,
+          languages: {
+            'es-MX': `${baseUrl}/es/juegos/${slug}`,
+            'en-US': `${baseUrl}/en/games/${slug}`,
+          }
+        }
       };
     }
   }
@@ -49,12 +64,26 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: `${game.name} - Juega Gratis | Demo ${game.provider} | CasinosPesos`,
       description: game.description || `Juega ${game.name} gratis. RTP ${game.rtp}%, Volatilidad ${game.volatility}, Max Win ${game.maxWin}x. Demo sin registro.`,
       keywords: `${game.name.toLowerCase()}, ${game.name.toLowerCase()} demo, ${game.name.toLowerCase()} gratis, ${game.provider.toLowerCase()}, juegos casino`,
+      alternates: {
+        canonical: `${baseUrl}/es/juegos/${slug}`,
+        languages: {
+          'es-MX': `${baseUrl}/es/juegos/${slug}`,
+          'en-US': `${baseUrl}/en/games/${slug}`,
+        }
+      }
     };
   } else {
     return {
       title: `${game.name} - Play Free | ${game.provider} Demo | CasinosPesos`,
       description: game.description || `Play ${game.name} for free. RTP ${game.rtp}%, Volatility ${game.volatility}, Max Win ${game.maxWin}x. No registration demo.`,
       keywords: `${game.name.toLowerCase()}, ${game.name.toLowerCase()} demo, ${game.name.toLowerCase()} free, ${game.provider.toLowerCase()}, casino games`,
+      alternates: {
+        canonical: `${baseUrl}/en/games/${slug}`,
+        languages: {
+          'es-MX': `${baseUrl}/es/juegos/${slug}`,
+          'en-US': `${baseUrl}/en/games/${slug}`,
+        }
+      }
     };
   }
 }

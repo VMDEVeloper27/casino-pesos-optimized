@@ -4,6 +4,7 @@ import { BreadcrumbStructuredData, FAQStructuredData } from '@/components/Struct
 import type { Metadata } from 'next';
 import { getAllCasinos } from '@/lib/casino-database';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { getCanonicalUrl } from '@/lib/canonical';
 import { 
   faGift, 
   faPercent,
@@ -28,8 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const data = categoryData[category] || categoryData['bienvenida'];
   
   const isSpanish = locale === 'es';
-  const baseUrl = 'https://casinospesos.com';
-  const pageUrl = `${baseUrl}/${locale}/bonos/${category}`;
+  const pageUrl = getCanonicalUrl(`/bonos/${category}`, locale);
   
   if (isSpanish) {
     return {
@@ -58,9 +58,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       alternates: {
         canonical: pageUrl,
         languages: {
-          'es-MX': `${baseUrl}/es/bonos/${category}`,
-          'en-US': `${baseUrl}/en/bonuses/${category}`,
-          'x-default': `${baseUrl}/es/bonos/${category}`
+          'es-MX': getCanonicalUrl(`/bonos/${category}`, 'es'),
+          'en-US': getCanonicalUrl(`/bonuses/${category}`, 'en'),
+          'x-default': getCanonicalUrl(`/bonos/${category}`, 'es')
         }
       },
       robots: {
@@ -92,9 +92,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: {
       canonical: pageUrl,
       languages: {
-        'es-MX': `${baseUrl}/es/bonos/${category}`,
-        'en-US': `${baseUrl}/en/bonuses/${category}`,
-        'x-default': `${baseUrl}/es/bonos/${category}`
+        'es-MX': getCanonicalUrl(`/bonos/${category}`, 'es'),
+        'en-US': getCanonicalUrl(`/bonuses/${category}`, 'en'),
+        'x-default': getCanonicalUrl(`/bonos/${category}`, 'es')
       }
     }
   };

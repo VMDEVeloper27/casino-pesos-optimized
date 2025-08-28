@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import CasinosLoading from './loading';
 import type { Metadata } from 'next';
 import { SchemaOrg } from '@/components/SchemaOrg';
+import { getCanonicalUrl } from '@/lib/canonical';
 
 export const revalidate = 300; // Revalidate every 5 minutes
 
@@ -16,10 +17,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       description: 'Lista completa de +50 casinos online en México. Compara bonos, métodos de pago, juegos y licencias. Encuentra el casino perfecto para ti.',
       keywords: 'lista casinos mexico, todos los casinos online, comparar casinos mexico, casinos pesos mexicanos, mejores casinos 2025',
       alternates: {
-        canonical: 'https://www.casinospesos.com/es/casinos',
+        canonical: getCanonicalUrl('/casinos', locale),
         languages: {
-          'es-MX': 'https://www.casinospesos.com/es/casinos',
-          'en-US': 'https://www.casinospesos.com/en/casinos',
+          'es-MX': getCanonicalUrl('/casinos', 'es'),
+          'en-US': getCanonicalUrl('/casinos', 'en'),
         }
       },
       openGraph: {
@@ -50,10 +51,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: 'Complete list of 50+ online casinos in Mexico. Compare bonuses, payment methods, games and licenses. Find the perfect casino for you.',
     keywords: 'mexico casino list, all online casinos, compare casinos mexico, mexican peso casinos, best casinos 2025',
     alternates: {
-      canonical: 'https://www.casinospesos.com/en/casinos',
+      canonical: getCanonicalUrl('/casinos', locale),
       languages: {
-        'es-MX': 'https://www.casinospesos.com/es/casinos',
-        'en-US': 'https://www.casinospesos.com/en/casinos',
+        'es-MX': getCanonicalUrl('/casinos', 'es'),
+        'en-US': getCanonicalUrl('/casinos', 'en'),
       }
     },
     openGraph: {

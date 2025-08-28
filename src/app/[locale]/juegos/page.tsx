@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import GameBrowser from './GameBrowser';
 import { getAllGames } from '@/lib/game-database';
+import { getCanonicalUrl } from '@/lib/canonical';
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -17,10 +18,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: 'Juega +1000 juegos de casino online: tragamonedas, ruleta, blackjack, póker y casino en vivo. Prueba gratis o juega con dinero real en México.',
       keywords: 'juegos casino mexico, tragamonedas gratis, slots online, casino en vivo, ruleta online, blackjack mexico, crash games, aviator',
       alternates: {
-        canonical: 'https://www.casinospesos.com/es/juegos',
+        canonical: getCanonicalUrl('/juegos', locale),
         languages: {
-          'es-MX': 'https://www.casinospesos.com/es/juegos',
-          'en-US': 'https://www.casinospesos.com/en/games',
+          'es-MX': getCanonicalUrl('/juegos', 'es'),
+          'en-US': getCanonicalUrl('/games', 'en'),
         }
       },
       openGraph: {
@@ -50,10 +51,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: 'Play 1000+ online casino games: slots, roulette, blackjack, poker and live casino. Try for free or play with real money in Mexico.',
       keywords: 'casino games mexico, free slots, online slots, live casino, online roulette, blackjack mexico, crash games, aviator',
       alternates: {
-        canonical: 'https://www.casinospesos.com/en/games',
+        canonical: getCanonicalUrl('/games', locale),
         languages: {
-          'es-MX': 'https://www.casinospesos.com/es/juegos',
-          'en-US': 'https://www.casinospesos.com/en/games',
+          'es-MX': getCanonicalUrl('/juegos', 'es'),
+          'en-US': getCanonicalUrl('/games', 'en'),
         }
       },
       openGraph: {

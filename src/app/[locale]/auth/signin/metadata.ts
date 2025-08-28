@@ -1,6 +1,5 @@
 import { getCanonicalUrl } from '@/lib/canonical';
 import { Metadata } from 'next';
-import SignInClient from './SignInClient';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -30,9 +29,4 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       follow: false,
     },
   };
-}
-
-export default async function SignInPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  return <SignInClient locale={locale} />;
 }

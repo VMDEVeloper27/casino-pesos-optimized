@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 import createIntlMiddleware from 'next-intl/middleware';
-import { authRateLimit, apiRateLimit, registrationRateLimit } from '@/lib/rate-limit';
 
 // Create the internationalization middleware
 const intlMiddleware = createIntlMiddleware({
