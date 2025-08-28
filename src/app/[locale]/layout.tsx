@@ -161,8 +161,6 @@ export default async function LocaleLayout({
           
           /* Performance optimizations */
           img, picture, video, canvas, svg { max-width: 100%; height: auto; display: block; }
-          img[loading="lazy"] { opacity: 0; transition: opacity 0.3s; }
-          img[loading="lazy"].loaded { opacity: 1; }
           
           /* Loading states */
           .loading { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
