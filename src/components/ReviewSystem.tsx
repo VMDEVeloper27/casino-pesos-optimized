@@ -188,7 +188,7 @@ export default function ReviewSystem({
   });
 
   const getRatingColor = (rating: number) => {
-    if (rating >= 4) return 'text-green-600';
+    if (rating >= 4) return 'text-green-700';
     if (rating >= 3) return 'text-yellow-600';
     return 'text-red-600';
   };
@@ -204,7 +204,7 @@ export default function ReviewSystem({
   if (loading && reviews.length === 0) {
     return (
       <div className="flex justify-center items-center py-12">
-        <Loader2 className="w-8 h-8 animate-spin text-green-600" />
+        <Loader2 className="w-8 h-8 animate-spin text-green-700" />
       </div>
     );
   }
@@ -214,7 +214,7 @@ export default function ReviewSystem({
       {/* Review Summary */}
       <div className="bg-white rounded-xl p-6 border border-gray-200">
         <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-          <MessageSquare className="w-6 h-6 text-green-600" />
+          <MessageSquare className="w-6 h-6 text-green-700" />
           {isSpanish ? 'Reseñas de Usuarios' : 'User Reviews'}
         </h2>
 
@@ -283,7 +283,7 @@ export default function ReviewSystem({
                 router.push(`/${locale}/auth/signin?callbackUrl=${encodeURIComponent(window.location.pathname)}`);
               }
             }}
-            className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-colors"
+            className="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-2 rounded-lg font-semibold hover:from-green-700 hover:to-green-800 transition-colors"
           >
             {isSpanish ? 'Escribir Reseña' : 'Write Review'}
           </button>
@@ -303,7 +303,7 @@ export default function ReviewSystem({
       {/* Success Message */}
       {submitSuccess && (
         <div className="bg-green-50 border border-green-200 rounded-lg p-4 flex items-start gap-3">
-          <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
+          <CheckCircle className="w-5 h-5 text-green-700 mt-0.5" />
           <div>
             <h4 className="font-semibold text-green-900">
               {isSpanish ? 'Reseña enviada exitosamente' : 'Review submitted successfully'}
@@ -416,7 +416,7 @@ export default function ReviewSystem({
               <button
                 type="submit"
                 disabled={submitting}
-                className="bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                className="bg-green-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
               >
                 {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
                 {isSpanish ? 'Enviar reseña' : 'Submit review'}
@@ -448,7 +448,7 @@ export default function ReviewSystem({
                     <div className="flex items-center gap-2">
                       <h4 className="font-semibold text-gray-900">{review.user_name}</h4>
                       {review.verified && (
-                        <span className="flex items-center gap-1 text-xs bg-green-500/20 text-green-600 px-2 py-1 rounded-full">
+                        <span className="flex items-center gap-1 text-xs bg-green-500/20 text-green-700 px-2 py-1 rounded-full">
                           <CheckCircle className="w-3 h-3" />
                           {isSpanish ? 'Verificado' : 'Verified'}
                         </span>
@@ -485,13 +485,13 @@ export default function ReviewSystem({
                 <div className="grid md:grid-cols-2 gap-4 mb-4">
                   {review.pros.length > 0 && (
                     <div>
-                      <h6 className="text-sm font-semibold text-green-600 mb-2">
+                      <h6 className="text-sm font-semibold text-green-700 mb-2">
                         {isSpanish ? 'Ventajas' : 'Pros'}
                       </h6>
                       <ul className="space-y-1">
                         {review.pros.map((pro, i) => (
                           <li key={i} className="text-sm text-gray-700 flex items-start gap-2">
-                            <span className="text-green-600 mt-0.5">+</span>
+                            <span className="text-green-700 mt-0.5">+</span>
                             {pro}
                           </li>
                         ))}
@@ -521,7 +521,7 @@ export default function ReviewSystem({
               {review.review_responses && review.review_responses.length > 0 && (
                 <div className="bg-gray-100 rounded-lg p-4 mb-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <Award className="w-4 h-4 text-green-600" />
+                    <Award className="w-4 h-4 text-green-700" />
                     <span className="font-semibold text-sm text-gray-900">
                       {isSpanish ? 'Respuesta del Casino' : 'Casino Response'}
                     </span>
@@ -565,7 +565,7 @@ export default function ReviewSystem({
                   onClick={() => setCurrentPage(i + 1)}
                   className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                     currentPage === i + 1
-                      ? 'bg-green-600 text-white'
+                      ? 'bg-green-700 text-white'
                       : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                   }`}
                 >
@@ -596,7 +596,7 @@ export default function ReviewSystem({
                 router.push(`/${locale}/auth/signin?callbackUrl=${encodeURIComponent(window.location.pathname)}`);
               }
             }}
-            className="bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+            className="bg-green-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-800 transition-colors"
           >
             {isSpanish ? 'Escribir la primera reseña' : 'Write the first review'}
           </button>

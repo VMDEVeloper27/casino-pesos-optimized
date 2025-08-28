@@ -143,10 +143,10 @@ export default function CasinoFilters({
       <div className="p-4 border-b border-gray-200">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Filter className="w-5 h-5 text-green-600" />
+            <Filter className="w-5 h-5 text-green-700" />
             <h3 className="font-bold text-gray-900">Filtros</h3>
             {activeFilterCount > 0 && (
-              <span className="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded-full font-medium">
+              <span className="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full font-medium">
                 {activeFilterCount}
               </span>
             )}
@@ -179,7 +179,7 @@ export default function CasinoFilters({
                 type="checkbox"
                 checked={filters.paymentMethods.includes(option.value)}
                 onChange={() => handlePaymentToggle(option.value)}
-                className="w-4 h-4 text-green-600 rounded border-gray-300 focus:ring-green-500"
+                className="w-4 h-4 text-green-700 rounded border-gray-300 focus:ring-green-500"
               />
               <span className="text-lg">{option.icon}</span>
               <span className="text-sm text-gray-700">{option.label}</span>
@@ -230,7 +230,7 @@ export default function CasinoFilters({
                 type="checkbox"
                 checked={filters.gameTypes.includes(option.value)}
                 onChange={() => handleGameTypeToggle(option.value)}
-                className="w-4 h-4 text-green-600 rounded border-gray-300 focus:ring-green-500"
+                className="w-4 h-4 text-green-700 rounded border-gray-300 focus:ring-green-500"
               />
               <span className="text-lg">{option.icon}</span>
               <span className="text-sm text-gray-700">{option.label}</span>

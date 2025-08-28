@@ -73,26 +73,83 @@ export default async function LocaleLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#059669" />
         
-        {/* Resource Hints for Performance - Optimized Order */}
+        {/* Resource Hints for Performance - Critical Path Optimization */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         
+        {/* Preload critical fonts immediately */}
+        <link
+          rel="preload"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+          as="style"
+          onLoad="this.onload=null;this.rel='stylesheet'"
+        />
+        <link
+          rel="preload"
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+          as="style"
+          onLoad="this.onload=null;this.rel='stylesheet'"
+        />
+        
+        {/* Disable Cloudflare email obfuscation to prevent email-decode.min.js */}
+        <meta httpEquiv="cf-email-decode" content="false" />
+        
         {/* Critical CSS - Inline for faster rendering */}
         <style dangerouslySetInnerHTML={{ __html: `
-          body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
-          .skip-to-main { position: absolute; left: -9999px; }
-          .skip-to-main:focus { left: 0; top: 0; z-index: 999; }
-          /* Prevent layout shift for header */
+          /* Reset and base styles */
+          * { box-sizing: border-box; margin: 0; padding: 0; }
+          body { 
+            margin: 0; 
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale;
+          }
+          
+          /* Skip link for accessibility */
+          .skip-to-main { 
+            position: absolute; 
+            left: -10000px; 
+            top: auto; 
+            width: 1px; 
+            height: 1px; 
+            overflow: hidden; 
+          }
+          .skip-to-main:focus { 
+            position: static; 
+            width: auto; 
+            height: auto; 
+            padding: 8px 16px;
+            background: #059669; 
+            color: white; 
+            text-decoration: none;
+            z-index: 1000; 
+          }
+          
+          /* Prevent layout shift */
           header { min-height: 64px; }
-          /* Optimize font loading */
-          .font-inter { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
-          .font-poppins { font-family: 'Poppins', system-ui, -apple-system, sans-serif; }
-          /* Reduce CLS for images */
-          img { max-width: 100%; height: auto; }
-          /* Smooth loading transitions */
-          * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+          main { min-height: 70vh; }
+          
+          /* Font optimization */
+          .font-inter { font-family: 'Inter', system-ui, sans-serif; }
+          .font-poppins { font-family: 'Poppins', system-ui, sans-serif; }
+          
+          /* Performance optimizations */
+          img, picture, video, canvas, svg { max-width: 100%; height: auto; display: block; }
+          img[loading="lazy"] { opacity: 0; transition: opacity 0.3s; }
+          img[loading="lazy"].loaded { opacity: 1; }
+          
+          /* Loading states */
+          .loading { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+          @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+          
+          /* Critical color utilities for immediate paint */
+          .text-green-700 { color: rgb(21 128 61); }
+          .text-green-600 { color: rgb(22 163 74); }
+          .bg-green-700 { background-color: rgb(21 128 61); }
+          .bg-green-600 { background-color: rgb(22 163 74); }
         `}} />
         
         {/* SEO Meta Tags */}

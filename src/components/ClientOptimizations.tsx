@@ -35,8 +35,44 @@ export function ClientOptimizations() {
         removePolyfill(String.prototype, 'trimRight');
       }
       
+      // Disable Cloudflare email obfuscation immediately
+      if ((window as any).CloudFlare) {
+        try {
+          (window as any).CloudFlare.push(function() {
+            if (typeof (window as any).CloudFlare !== 'undefined' && (window as any).CloudFlare.email_decode) {
+              (window as any).CloudFlare.email_decode = function() {};
+            }
+          });
+        } catch (e) {
+          // Silently handle any CloudFlare errors
+        }
+      }
+      
+      // Prevent CloudFlare email decode script from loading
+      const preventCloudFlareEmailDecode = () => {
+        const scripts = document.querySelectorAll('script[src*="email-decode"]');
+        scripts.forEach(script => script.remove());
+        
+        // Block future loads
+        const observer = new MutationObserver(mutations => {
+          mutations.forEach(mutation => {
+            mutation.addedNodes.forEach(node => {
+              if (node.nodeName === 'SCRIPT' && 
+                  (node as HTMLScriptElement).src?.includes('email-decode')) {
+                node.remove();
+              }
+            });
+          });
+        });
+        
+        observer.observe(document.head, { childList: true });
+        observer.observe(document.body, { childList: true });
+      };
+      
       // Optimize third-party scripts loading
       const optimizeScripts = () => {
+        preventCloudFlareEmailDecode();
+        
         // Find all script tags
         const scripts = document.querySelectorAll('script[src]');
         scripts.forEach(script => {
@@ -44,6 +80,10 @@ export function ClientOptimizations() {
           if (src && (src.includes('googletagmanager') || src.includes('google-analytics'))) {
             // Already handled by GoogleAnalyticsScript component
             return;
+          }
+          // Defer non-critical scripts
+          if (src && !script.hasAttribute('defer') && !script.hasAttribute('async')) {
+            script.setAttribute('defer', 'true');
           }
         });
       };
