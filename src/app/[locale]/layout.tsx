@@ -100,64 +100,23 @@ export default async function LocaleLayout({
         {/* Aggressive Cloudflare email-decode blocking */}
         <meta httpEquiv="cf-email-decode" content="false" />
         <meta name="cf-no-email-decode" content="true" />
-        <script data-cfasync="false" dangerouslySetInnerHTML={{ __html: `
-          // Completely block Cloudflare email decode
-          (function() {
-            // Method 1: Block CloudFlare object
+        <script dangerouslySetInnerHTML={{ __html: `
+          // Block Cloudflare email decode immediately
+          if (typeof window !== 'undefined') {
             Object.defineProperty(window, 'CloudFlare', {
-              get: function() { return undefined; },
-              set: function() { return false; },
+              value: undefined,
+              writable: false,
               configurable: false
             });
-            
-            // Method 2: Override document.write to block email-decode
-            var originalWrite = document.write;
-            document.write = function(content) {
-              if (content && content.includes('email-decode')) {
-                return;
+            // Prevent script injection
+            const originalAppendChild = Node.prototype.appendChild;
+            Node.prototype.appendChild = function(child) {
+              if (child && child.src && child.src.includes('email-decode')) {
+                return child;
               }
-              return originalWrite.apply(document, arguments);
+              return originalAppendChild.call(this, child);
             };
-            
-            // Method 3: Block script injection
-            var originalCreateElement = document.createElement;
-            document.createElement = function(tagName) {
-              var element = originalCreateElement.call(document, tagName);
-              if (tagName.toLowerCase() === 'script') {
-                var originalSetAttribute = element.setAttribute;
-                element.setAttribute = function(name, value) {
-                  if (name === 'src' && value && value.includes('email-decode')) {
-                    return;
-                  }
-                  return originalSetAttribute.call(element, name, value);
-                };
-                
-                Object.defineProperty(element, 'src', {
-                  set: function(value) {
-                    if (value && value.includes('email-decode')) {
-                      return;
-                    }
-                    element._src = value;
-                  },
-                  get: function() {
-                    return element._src;
-                  }
-                });
-              }
-              return element;
-            };
-            
-            // Method 4: Block appendChild and insertBefore for scripts
-            ['appendChild', 'insertBefore'].forEach(function(method) {
-              var original = Node.prototype[method];
-              Node.prototype[method] = function(child) {
-                if (child && child.tagName === 'SCRIPT' && child.src && child.src.includes('email-decode')) {
-                  return child;
-                }
-                return original.apply(this, arguments);
-              };
-            });
-          })();
+          }
         `}} />
         
         {/* Critical CSS - Inline for faster rendering */}
