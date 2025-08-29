@@ -17,16 +17,18 @@ import '@/styles/globals.css';
 const inter = Inter({ 
   subsets: ['latin'],
   variable: '--font-inter',
-  display: 'swap', // Prevent font blocking
+  display: 'swap',
   preload: true,
+  adjustFontFallback: true, // Prevent CLS with fallback metrics
 });
 
 const poppins = Poppins({ 
   weight: ['400', '500', '600', '700', '800'],
   subsets: ['latin'],
   variable: '--font-poppins',
-  display: 'swap', // Prevent font blocking
+  display: 'swap',
   preload: true,
+  adjustFontFallback: true, // Prevent CLS with fallback metrics
 });
 
 export const metadata: Metadata = {
