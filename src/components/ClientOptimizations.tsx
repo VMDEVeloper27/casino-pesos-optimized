@@ -35,31 +35,26 @@ export function ClientOptimizations() {
         removePolyfill(String.prototype, 'trimRight');
       }
       
-      // Disable Cloudflare email obfuscation immediately
-      if ((window as any).CloudFlare) {
-        try {
-          (window as any).CloudFlare.push(function() {
-            if (typeof (window as any).CloudFlare !== 'undefined' && (window as any).CloudFlare.email_decode) {
-              (window as any).CloudFlare.email_decode = function() {};
-            }
-          });
-        } catch (e) {
-          // Silently handle any CloudFlare errors
-        }
-      }
-      
-      // Prevent CloudFlare email decode script from loading
-      const preventCloudFlareEmailDecode = () => {
+      // Handle Cloudflare email decode - defer instead of blocking
+      const handleCloudFlareEmailDecode = () => {
+        // Find existing email-decode scripts and make them async
         const scripts = document.querySelectorAll('script[src*="email-decode"]');
-        scripts.forEach(script => script.remove());
+        scripts.forEach(script => {
+          if (!script.hasAttribute('async') && !script.hasAttribute('defer')) {
+            script.setAttribute('async', 'true');
+            script.setAttribute('defer', 'true');
+          }
+        });
         
-        // Block future loads
+        // Monitor for new scripts and defer them
         const observer = new MutationObserver(mutations => {
           mutations.forEach(mutation => {
             mutation.addedNodes.forEach(node => {
               if (node.nodeName === 'SCRIPT' && 
                   (node as HTMLScriptElement).src?.includes('email-decode')) {
-                node.remove();
+                // Make the script async/defer instead of removing
+                (node as HTMLScriptElement).async = true;
+                (node as HTMLScriptElement).defer = true;
               }
             });
           });
@@ -71,7 +66,7 @@ export function ClientOptimizations() {
       
       // Optimize third-party scripts loading
       const optimizeScripts = () => {
-        preventCloudFlareEmailDecode();
+        handleCloudFlareEmailDecode();
         
         // Find all script tags
         const scripts = document.querySelectorAll('script[src]');
