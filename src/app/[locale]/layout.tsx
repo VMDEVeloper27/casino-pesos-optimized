@@ -86,38 +86,24 @@ export default async function LocaleLayout({
         
         {/* Fonts are now loaded locally via next/font/google - no external requests needed */}
         
-        {/* Defer Cloudflare email-decode to avoid blocking critical path */}
+        {/* Aggressive Cloudflare email-decode blocking */}
+        <meta httpEquiv="cf-email-decode" content="false" />
+        <meta name="cf-no-email-decode" content="true" />
         <script dangerouslySetInnerHTML={{ __html: `
-          // Defer Cloudflare email decode script to improve LCP
+          // Block Cloudflare email decode immediately
           if (typeof window !== 'undefined') {
-            // Intercept and defer email-decode script
+            Object.defineProperty(window, 'CloudFlare', {
+              value: undefined,
+              writable: false,
+              configurable: false
+            });
+            // Prevent script injection
             const originalAppendChild = Node.prototype.appendChild;
-            const originalInsertBefore = Node.prototype.insertBefore;
-            
-            function deferScript(child, originalMethod, context, args) {
-              if (child && child.src && child.src.includes('email-decode')) {
-                // Defer the script to load after window.onload
-                window.addEventListener('load', function() {
-                  setTimeout(function() {
-                    // Create a new script element with async attribute
-                    const newScript = document.createElement('script');
-                    newScript.src = child.src;
-                    newScript.async = true;
-                    newScript.defer = true;
-                    document.body.appendChild(newScript);
-                  }, 100);
-                });
-                return child; // Return the original to prevent errors
-              }
-              return originalMethod.apply(context, args);
-            }
-            
             Node.prototype.appendChild = function(child) {
-              return deferScript(child, originalAppendChild, this, arguments);
-            };
-            
-            Node.prototype.insertBefore = function(child, ref) {
-              return deferScript(child, originalInsertBefore, this, arguments);
+              if (child && child.src && child.src.includes('email-decode')) {
+                return child;
+              }
+              return originalAppendChild.call(this, child);
             };
           }
         `}} />
