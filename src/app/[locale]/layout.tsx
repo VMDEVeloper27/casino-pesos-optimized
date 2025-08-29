@@ -83,18 +83,14 @@ export default async function LocaleLayout({
         <link rel="dns-prefetch" href="https://www.facebook.com" />
         <link rel="dns-prefetch" href="https://connect.facebook.net" />
         
-        {/* Preload critical fonts immediately */}
+        {/* Load critical fonts */}
         <link
-          rel="preload"
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-          as="style"
-          onLoad="this.onload=null;this.rel='stylesheet'"
+          rel="stylesheet"
         />
         <link
-          rel="preload"
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-          as="style"
-          onLoad="this.onload=null;this.rel='stylesheet'"
+          rel="stylesheet"
         />
         
         {/* Aggressive Cloudflare email-decode blocking */}

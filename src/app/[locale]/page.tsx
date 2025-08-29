@@ -25,6 +25,37 @@ const WebsiteStructuredData = dynamic(
   { ssr: true }
 );
 
+// Lazy load sections below the fold for better performance
+const TrustSection = dynamic(
+  () => import('@/components/sections/TrustSection'),
+  { 
+    loading: () => <div className="animate-pulse bg-gray-50 h-64" />,
+    ssr: true 
+  }
+);
+
+const FAQSection = dynamic(
+  () => import('@/components/sections/FAQSection'),
+  { 
+    loading: () => <div className="animate-pulse bg-white h-96" />,
+    ssr: true 
+  }
+);
+
+// Lazy load additional casino cards
+const LazyLoadedCasinos = dynamic(
+  () => import('@/components/casino/LazyLoadedCasinos'),
+  { 
+    loading: () => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[1, 2, 3].map(i => (
+          <div key={i} className="animate-pulse bg-gray-100 rounded-2xl h-[500px]" />
+        ))}
+      </div>
+    )
+  }
+);
+
 import { getCanonicalUrl } from '@/lib/canonical';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -225,46 +256,8 @@ export default async function HomePage({ params }: HomePageProps) {
         </div>
       </section>
 
-      {/* Trust Section */}
-      <section className="bg-gray-50 border-y border-gray-200 py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              ¿Por Qué Confiar en CasinosPesos?
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🔒</span>
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">100% Seguros</h3>
-              <p className="text-sm text-gray-600">Solo casinos con licencias válidas</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">💰</span>
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Bonos Exclusivos</h3>
-              <p className="text-sm text-gray-600">Ofertas negociadas para ti</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">⚡</span>
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Pagos Rápidos</h3>
-              <p className="text-sm text-gray-600">Retiros en 24-48 horas</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🎯</span>
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Expertos Locales</h3>
-              <p className="text-sm text-gray-600">Conocemos tu mercado</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Trust Section - Lazy Loaded */}
+      <TrustSection />
 
       {/* FAQ Section for SEO */}
       <section className="py-16">
