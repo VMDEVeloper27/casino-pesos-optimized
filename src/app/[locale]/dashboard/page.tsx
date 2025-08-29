@@ -143,7 +143,7 @@ export default function DashboardPage({ params }: { params: Promise<{ locale: st
             {locale === 'es' ? 'Bienvenido de vuelta' : 'Welcome back'}, {session?.user?.name || session?.user?.email?.split('@')[0]}!
           </h1>
           <p className="text-gray-600">
-            {locale === 'es' ? 'Aquí está tu resumen de actividad y ofertas exclusivas' : 'Here\'s your activity summary and exclusive offers'}
+            {locale === 'es' ? 'Aquí está tu resumen de actividad y ofertas exclusivas' : "Here's your activity summary and exclusive offers"}
           </p>
         </motion.div>
 
