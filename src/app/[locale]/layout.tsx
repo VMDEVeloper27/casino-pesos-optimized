@@ -74,8 +74,7 @@ export default async function LocaleLayout({
         <meta name="theme-color" content="#059669" />
         
         {/* Critical Preconnect Hints - Desktop Performance Optimization */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Fonts now loaded locally, no need for Google Fonts preconnect */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         
@@ -83,19 +82,7 @@ export default async function LocaleLayout({
         <link rel="dns-prefetch" href="https://www.facebook.com" />
         <link rel="dns-prefetch" href="https://connect.facebook.net" />
         
-        {/* Preload critical fonts immediately */}
-        <link
-          rel="preload"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-          as="style"
-          onLoad="this.onload=null;this.rel='stylesheet'"
-        />
-        <link
-          rel="preload"
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-          as="style"
-          onLoad="this.onload=null;this.rel='stylesheet'"
-        />
+        {/* Fonts are now loaded locally via next/font/google - no external requests needed */}
         
         {/* Aggressive Cloudflare email-decode blocking */}
         <meta httpEquiv="cf-email-decode" content="false" />
