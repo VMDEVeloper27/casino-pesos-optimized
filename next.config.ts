@@ -35,7 +35,11 @@ const nextConfig: NextConfig = {
       '@radix-ui/react-slot',
       'class-variance-authority',
       'clsx',
-      'tailwind-merge'
+      'tailwind-merge',
+      'framer-motion',
+      'next-auth',
+      '@supabase/supabase-js',
+      '@prisma/client'
     ],
   },
   
@@ -108,8 +112,9 @@ const nextConfig: NextConfig = {
               commons: {
                 name: 'commons',
                 chunks: 'all',
-                minChunks: 2,
+                minChunks: 3, // Increase to reduce commons size
                 priority: 20,
+                maxSize: 50000, // Split if larger than 50KB
               },
               shared: {
                 name(module, chunks) {
