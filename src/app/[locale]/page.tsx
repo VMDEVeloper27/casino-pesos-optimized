@@ -1,6 +1,6 @@
 import { Hero } from '@/components/layout/HeroLight';
 import { CasinoCard } from '@/components/casino/CasinoCardLight';
-import { getStaticCasinos } from '@/lib/static-casinos';
+import { getAllCasinos } from '@/lib/casino-database';
 import { ChevronRight, Gift } from 'lucide-react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
@@ -132,15 +132,14 @@ export async function generateStaticParams() {
   ];
 }
 
-// Force static generation at build time
-export const dynamic = 'force-static';
-export const revalidate = 86400; // Revalidate once per day instead of every hour
+// Revalidate every hour
+export const revalidate = 3600;
 
 export default async function HomePage({ params }: HomePageProps) {
   const { locale } = await params;
   
-  // Use static casino data for instant loading (no DB call)
-  const casinos = getStaticCasinos();
+  // Fetch casinos from database
+  const casinos = await getAllCasinos();
   
   return (
     <main className="min-h-screen bg-background">
