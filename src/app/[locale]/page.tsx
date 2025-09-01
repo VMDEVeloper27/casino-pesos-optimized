@@ -1,4 +1,4 @@
-import { Hero } from '@/components/layout/HeroLight';
+import { Hero } from '@/components/layout/HeroNoAnimations';
 import { CasinoCard } from '@/components/casino/CasinoCardLight';
 import { getAllCasinos } from '@/lib/casino-database';
 import { ChevronRight, Gift } from 'lucide-react';
