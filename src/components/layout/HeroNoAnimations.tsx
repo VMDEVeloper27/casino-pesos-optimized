@@ -20,9 +20,7 @@ export function Hero() {
     <section 
       className="relative overflow-hidden bg-gradient-to-b from-primary-50 via-white to-gray-50"
       style={{ 
-        height: '700px',
-        minHeight: '700px',
-        maxHeight: '700px'
+        minHeight: '900px'
       }}
     >
       {/* Background Pattern */}
@@ -81,10 +79,7 @@ export function Hero() {
           </p>
 
           {/* Search Bar - Fixed container without animation */}
-          <div 
-            className="max-w-2xl mx-auto mb-10"
-            style={{ minHeight: '120px' }}
-          >
+          <div className="max-w-2xl mx-auto mb-6">
             <form onSubmit={handleSearch} className="relative">
               <input
                 type="text"
@@ -103,22 +98,31 @@ export function Hero() {
                 Buscar
               </button>
             </form>
-            
-            {/* Quick search tags */}
-            <div className="flex flex-wrap gap-2 justify-center mt-4">
-              <span className="text-xs text-gray-700">Búsquedas populares:</span>
-              {['Bet365', 'Bonos sin depósito', 'PayPal', 'Tragamonedas', 'Blackjack'].map(tag => (
-                <button
-                  key={tag}
-                  onClick={() => {
-                    setSearchQuery(tag);
-                    router.push(`/es/casinos?search=${encodeURIComponent(tag)}`);
-                  }}
-                  className="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs text-gray-600 hover:border-primary-300 hover:text-primary-600 transition-colors"
-                >
-                  {tag}
-                </button>
-              ))}
+          </div>
+
+          {/* Quick search tags - Beautiful responsive design - SEPARATE SECTION */}
+          <div className="max-w-3xl mx-auto mb-12">
+            <div className="bg-transparent p-3">
+              <div className="flex flex-wrap lg:flex-nowrap gap-2 items-center justify-center">
+                <span className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-700 to-gray-900 whitespace-nowrap mr-2">
+                  🔥 Búsquedas populares:
+                </span>
+                <div className="flex flex-wrap lg:flex-nowrap gap-2 justify-center lg:justify-start">
+                  {['Bet365', 'Bonos sin depósito', 'PayPal', 'Tragamonedas', 'Blackjack'].map((tag, index) => (
+                    <button
+                      key={tag}
+                      onClick={() => {
+                        setSearchQuery(tag);
+                        router.push(`/es/casinos?search=${encodeURIComponent(tag)}`);
+                      }}
+                      className="group relative px-4 py-1.5 bg-gradient-to-r from-white to-gray-50 hover:from-primary-50 hover:to-primary-100 rounded-full text-sm font-medium text-gray-700 hover:text-primary-700 transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 whitespace-nowrap"
+                    >
+                      <span className="relative z-10">{tag}</span>
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary-400 to-primary-600 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 

@@ -12,6 +12,7 @@ import ClientSessionProvider from '@/components/providers/ClientSessionProvider'
 import CookieConsent from '@/components/CookieConsent';
 import GoogleAnalyticsScript from '@/components/GoogleAnalyticsScript';
 import { ClientOptimizations } from '@/components/ClientOptimizations';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import '@/styles/globals.css';
 
 const inter = Inter({ 
@@ -225,6 +226,9 @@ export default async function LocaleLayout({
               
               {/* Cookie Consent Banner */}
               <CookieConsent />
+              
+              {/* Vercel Speed Insights */}
+              <SpeedInsights />
             </NextIntlClientProvider>
           </CountryProvider>
         </ClientSessionProvider>
