@@ -30,25 +30,44 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const isSpanish = locale === 'es';
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://casinospesos.com';
   const pageUrl = getCanonicalUrl(`/casinos/${id}`, locale);
-  const bonusText = `${casino.bonus.percentage}% hasta $${casino.bonus.amount.toLocaleString()} MXN`;
+  const bonusAmount = casino.bonus.amount.toLocaleString('es-MX');
+  const bonusText = `${casino.bonus.percentage}% hasta $${bonusAmount} MXN`;
+  
+  // Unique selling points for each casino
+  const uspMap: { [key: string]: string } = {
+    'bet365': 'Líder Mundial en Apuestas',
+    'codere': 'Casa de Apuestas Española',
+    'leovegas-new': 'Rey del Casino Móvil',
+    'caliente': '100% Mexicano desde 1916',
+    'betano': 'Super Cuotas Mejoradas',
+    'betway-new': 'Especialista en eSports',
+    'novibet': 'Boost en Apuestas Múltiples',
+    'bovada-2025': 'Acepta Criptomonedas',
+    'betano-2025': 'Plataforma Renovada 2025',
+    '888casino-new': 'Veterano desde 1997',
+    'betonline-2025': 'Bonos Crypto Exclusivos',
+    'winpot': 'Casino 100% Mexicano'
+  };
+  
+  const usp = uspMap[id] || casino.features[0];
   
   if (isSpanish) {
     return {
-      title: `${casino.name} Reseña 2025 - Bono ${bonusText} | CasinosPesos`,
-      description: `Reseña completa de ${casino.name} ✅ Bono ${bonusText} ✅ Retiros ${casino.withdrawalTime} ✅ ${casino.paymentMethods.join(', ')}.`,
-      keywords: `${casino.name.toLowerCase()}, ${casino.name.toLowerCase()} casino, ${casino.name.toLowerCase()} reseña, ${casino.name.toLowerCase()} bono, casino online méxico`,
+      title: `${casino.name} Casino México | Bono $${bonusAmount} | CasinosPesos`,
+      description: `${casino.name} México ⭐ Bono hasta $${bonusAmount} ✅ ${usp} ✅ Reseña 2025`,
+      keywords: `${casino.name.toLowerCase()}, ${casino.name.toLowerCase()} casino, ${casino.name.toLowerCase()} méxico, ${casino.name.toLowerCase()} bono, ${casino.name.toLowerCase()} reseña, casino online méxico`,
       openGraph: {
-        title: `${casino.name} - Bono ${bonusText} | Reseña 2025`,
-        description: `Calificación ${casino.rating}/5 ⭐ Retiros en ${casino.withdrawalTime} 🚀`,
+        title: `${casino.name} Casino México | Bono $${bonusAmount} | CasinosPesos`,
+        description: `${casino.name} México ⭐ Bono hasta $${bonusAmount} ✅ ${usp} ✅ Reseña 2025`,
         url: pageUrl,
         siteName: 'CasinosPesos',
         locale: 'es_MX',
         type: 'article',
         images: [{
-          url: `${baseUrl}/images/casinos/${id}-review.jpg`,
+          url: casino.logo && casino.logo.startsWith('http') ? casino.logo : `${baseUrl}${casino.logo || `/images/${id}-og.jpg`}`,
           width: 1200,
           height: 630,
-          alt: `${casino.name} Reseña`
+          alt: `${casino.name} Casino México`
         }]
       },
       twitter: {
