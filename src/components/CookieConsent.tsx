@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { X, Cookie, Shield, ChartBar, Target, Settings } from 'lucide-react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
 
 interface CookiePreferences {
   necessary: boolean;
@@ -25,13 +24,7 @@ export default function CookieConsent() {
   useEffect(() => {
     const consent = localStorage.getItem('cookieConsent');
     if (!consent) {
-      // Добавляем задержку в 2 секунды перед показом баннера
-      const timer = setTimeout(() => {
-        setShowBanner(true);
-      }, 2000);
-      
-      // Очищаем таймер при размонтировании компонента
-      return () => clearTimeout(timer);
+      setShowBanner(true);
     } else {
       const savedPreferences = JSON.parse(consent);
       setPreferences(savedPreferences);
@@ -92,22 +85,13 @@ export default function CookieConsent() {
     setShowBanner(false);
   };
 
+  if (!showBanner) return null;
+
   return (
-    <AnimatePresence>
-      {showBanner && (
-        <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 100 }}
-          transition={{ 
-            type: "spring", 
-            stiffness: 100, 
-            damping: 20,
-            duration: 0.5 
-          }}
-          className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6"
-        >
-          <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-2xl border-2 border-green-100">
+    <>
+      {/* Banner without blocking overlay */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6">
+        <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-2xl border-2 border-green-100">
           <div className="p-6 md:p-8">
             {/* Header */}
             <div className="flex items-start justify-between mb-4">
@@ -296,8 +280,8 @@ export default function CookieConsent() {
               </div>
             </div>
           </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+        </div>
+      </div>
+    </>
   );
 }
