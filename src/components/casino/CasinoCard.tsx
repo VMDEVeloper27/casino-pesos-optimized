@@ -6,7 +6,7 @@ import { Check, ChevronRight, Star, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { CasinoLogo } from '@/components/ui/CasinoLogo';
 import FavoriteButtonAuth from '@/components/FavoriteButtonAuth';
-import { getCTAByIndex, getCTAByType } from '@/lib/cta-texts';
+import { getCTAByName, getCTAByType } from '@/lib/cta-texts';
 
 interface CasinoCardProps {
   casino: {
@@ -41,10 +41,10 @@ interface CasinoCardProps {
 }
 
 export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCardProps) {
-  // Get unique CTA text based on casino ID
+  // Get unique CTA text based on casino name for variety
   const ctaText = casino.bonus?.type 
     ? getCTAByType(casino.bonus.type, locale as 'es' | 'en')
-    : getCTAByIndex(casino.id.length, locale as 'es' | 'en');
+    : getCTAByName(casino.name, locale as 'es' | 'en');
   
   const handleVisitCasino = () => {
     // Track click event

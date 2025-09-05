@@ -12,6 +12,7 @@ import CasinoFilters, { FilterState } from '@/components/CasinoFilters';
 import ActiveFilterChips from '@/components/ActiveFilterChips';
 import FavoriteButtonAuth from '@/components/FavoriteButtonAuth';
 import { CasinoLogo } from '@/components/ui/CasinoLogo';
+import { getCTAByPosition } from '@/lib/cta-texts';
 
 interface CasinosClientWithFiltersProps {
   casinos: Casino[];
@@ -458,7 +459,7 @@ export default function CasinosClientWithFilters({ casinos }: CasinosClientWithF
                           rel="noopener noreferrer"
                           className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-6 py-3 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 text-center shadow-lg hover:shadow-xl"
                         >
-                          Jugar Ahora
+                          {getCTAByPosition(index, 'es')}
                         </a>
                         <Link 
                           href={`/es/casinos/${casino.slug}`}

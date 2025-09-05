@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Casino } from '@/lib/casino-database';
 import CopyButton from '@/components/CopyButton';
+import { getCTAByPosition } from '@/lib/cta-texts';
 
 interface CasinosClientProps {
   casinos: Casino[];
@@ -228,7 +229,7 @@ export default function CasinosClient({ casinos }: CasinosClientProps) {
                         rel="noopener noreferrer"
                         className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 text-center shadow-lg hover:shadow-xl"
                       >
-                        Jugar Ahora
+                        {getCTAByPosition(index, 'es')}
                       </a>
                       <Link 
                         href={`/es/casinos/${casino.slug}`}
