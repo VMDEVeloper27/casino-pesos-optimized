@@ -12,6 +12,7 @@ import ClientSessionProvider from '@/components/providers/ClientSessionProvider'
 import CookieConsent from '@/components/CookieConsent';
 import GoogleAnalyticsScript from '@/components/GoogleAnalyticsScript';
 import { ClientOptimizations } from '@/components/ClientOptimizations';
+import { GoogleMobileOptimization } from '@/components/GoogleMobileOptimization';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import '@/styles/globals.css';
 
@@ -68,6 +69,9 @@ export default async function LocaleLayout({
       <head>
         {/* Google Search Console Verification */}
         <meta name="google-site-verification" content="c16NUc0-PNfYe9xdpmPcsxHyw_Csh9OyYxBBGFJy2KI" />
+        
+        {/* Google Mobile Optimization */}
+        <GoogleMobileOptimization locale={locale} />
         
         {/* Favicons and Web App */}
         <link rel="icon" href="/favicon.ico" sizes="any" />

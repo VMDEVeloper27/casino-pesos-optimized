@@ -217,8 +217,13 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="lg:hidden fixed inset-0 bg-black/50 z-40"
+              className="lg:hidden fixed inset-0 bg-black/50 z-40 mobile-menu-backdrop"
               onClick={() => setIsOpen(false)}
+              onTouchMove={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+              }}
+              style={{ touchAction: 'none' }}
             />
 
             {/* Menu Panel */}
@@ -227,7 +232,8 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="lg:hidden fixed top-0 left-0 bottom-0 w-80 bg-neutral-900 z-50 overflow-y-auto"
+              className="lg:hidden fixed top-0 left-0 bottom-0 w-80 bg-neutral-900 z-50 overflow-y-auto mobile-menu-panel"
+              onTouchMove={(e) => e.stopPropagation()}
             >
               {/* Menu Header */}
               <div className="p-4 border-b border-neutral-800">

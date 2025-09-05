@@ -23,11 +23,40 @@ html, body {
 }
 
 /* Body scroll lock when mobile menu is open */
-body.menu-open {
+html.menu-open,
+html.scroll-locked {
+  overflow: hidden !important;
+  height: 100% !important;
+  position: relative !important;
+}
+
+body.menu-open,
+body.scroll-locked {
   overflow: hidden !important;
   position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
   width: 100% !important;
-  height: 100vh !important;
+  height: 100% !important;
+  touch-action: none !important;
+  -webkit-overflow-scrolling: auto !important;
+  overscroll-behavior: none !important;
+}
+
+/* Prevent scroll on iOS Safari */
+body.menu-open::-webkit-scrollbar,
+body.scroll-locked::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* Ensure modal content is scrollable */
+.mobile-menu-panel {
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior-y: contain !important;
+  max-height: 100vh !important;
+  touch-action: pan-y !important;
 }
 
 /* All interactive elements minimum size */

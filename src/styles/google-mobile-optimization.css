@@ -1,0 +1,412 @@
+/* ========================================
+   GOOGLE MOBILE-FRIENDLY TEST OPTIMIZATION
+   ======================================== */
+
+/* 1. VIEWPORT AND TEXT SIZING */
+/* Ensure text is readable without zooming */
+html {
+  font-size: 16px; /* Base font size for better readability */
+  -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape */
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-size: 1rem; /* 16px minimum for body text */
+  line-height: 1.5; /* Improved readability */
+  word-wrap: break-word; /* Prevent horizontal scrolling */
+  overflow-wrap: break-word;
+}
+
+/* Minimum font sizes for Google's requirements */
+p, li, td, th, div, span {
+  font-size: max(14px, 0.875rem); /* Never smaller than 14px */
+}
+
+small {
+  font-size: max(12px, 0.75rem); /* Even small text stays readable */
+}
+
+/* 2. TAP TARGETS - GOOGLE REQUIRES 48x48px MINIMUM */
+a,
+button,
+input,
+select,
+textarea,
+[role="button"],
+[role="link"],
+.clickable {
+  min-height: 48px;
+  min-width: 48px;
+  padding: 12px;
+  margin: 2px; /* Space between tap targets */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  touch-action: manipulation; /* Disable double-tap zoom */
+}
+
+/* Form elements specific sizing */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+input[type="search"],
+input[type="url"],
+textarea,
+select {
+  font-size: 16px; /* Prevents zoom on iOS */
+  min-height: 48px;
+  padding: 12px;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Checkbox and radio buttons */
+input[type="checkbox"],
+input[type="radio"] {
+  min-width: 24px;
+  min-height: 24px;
+  margin: 12px; /* Total clickable area = 48x48px */
+}
+
+/* Labels for form elements */
+label {
+  display: block;
+  padding: 8px 0;
+  cursor: pointer;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+/* 3. CONTENT SIZING - NO HORIZONTAL SCROLLING */
+* {
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+
+img,
+video,
+iframe,
+embed,
+object {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Tables responsive */
+table {
+  max-width: 100%;
+  overflow-x: auto;
+  display: block;
+}
+
+/* Pre and code blocks */
+pre,
+code {
+  max-width: 100%;
+  overflow-x: auto;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+/* 4. MOBILE-SPECIFIC OPTIMIZATIONS */
+@media screen and (max-width: 767px) {
+  /* Remove horizontal margins that might cause scrolling */
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Container width control */
+  .container,
+  [class*="container"] {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow-x: hidden;
+  }
+
+  /* Navigation mobile-friendly */
+  nav ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  nav li {
+    display: block;
+    margin: 5px 0;
+  }
+
+  nav a {
+    display: block;
+    padding: 15px;
+    min-height: 48px;
+  }
+
+  /* Cards and content blocks */
+  .card,
+  [class*="card"] {
+    margin: 10px 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Buttons full width on mobile */
+  .btn,
+  button,
+  [type="button"],
+  [type="submit"] {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  /* Modal and popups */
+  .modal,
+  .popup,
+  [role="dialog"] {
+    width: 95%;
+    max-width: 95%;
+    margin: 2.5%;
+  }
+
+  /* Remove floats on mobile */
+  .float-left,
+  .float-right,
+  [style*="float"] {
+    float: none !important;
+    width: 100% !important;
+    margin: 10px 0 !important;
+  }
+
+  /* Grid to single column */
+  .grid,
+  [class*="grid"] {
+    display: block;
+  }
+
+  .grid > *,
+  [class*="col-"] {
+    width: 100% !important;
+    margin: 10px 0;
+  }
+
+  /* Flexbox responsive */
+  .flex,
+  [class*="flex"] {
+    flex-direction: column;
+  }
+
+  .flex > * {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  /* Remove fixed positioning that might interfere */
+  .fixed-sidebar,
+  .sticky-sidebar {
+    position: relative !important;
+    width: 100% !important;
+  }
+}
+
+/* 5. PERFORMANCE OPTIMIZATIONS */
+/* Reduce animations on mobile for better performance */
+@media screen and (max-width: 767px) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.3s !important;
+  }
+}
+
+/* Remove animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 6. FONT LOADING OPTIMIZATION */
+/* Use font-display to ensure text remains visible during font load */
+@font-face {
+  font-display: swap; /* Show fallback font immediately */
+}
+
+/* 7. Z-INDEX MANAGEMENT FOR MOBILE */
+/* Ensure interactive elements are always accessible */
+.mobile-menu,
+.modal,
+.popup,
+.dropdown {
+  z-index: 9999;
+}
+
+.overlay,
+.backdrop {
+  z-index: 9998;
+}
+
+/* 8. SPECIFIC GOOGLE REQUIREMENTS */
+/* Links must be clearly distinguishable */
+a {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+a:hover,
+a:focus {
+  color: #0044aa;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #663399;
+}
+
+/* Focus states for accessibility */
+:focus {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
+}
+
+/* Skip link for accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 100000;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* 9. LOADING STATES */
+/* Prevent layout shift during loading */
+.loading {
+  min-height: 100px;
+  background: #f0f0f0;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* 10. ERROR HANDLING */
+/* Ensure errors are visible and accessible */
+.error,
+.alert {
+  padding: 15px;
+  margin: 10px 0;
+  border: 2px solid #d00;
+  background: #fee;
+  color: #d00;
+  font-size: 16px;
+}
+
+/* 11. LANGUAGE AND DIRECTION SUPPORT */
+/* Support for RTL languages */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .container {
+  direction: rtl;
+}
+
+/* 12. PRINT STYLES */
+@media print {
+  /* Hide non-essential elements */
+  nav,
+  .mobile-menu,
+  .no-print,
+  button,
+  .btn {
+    display: none !important;
+  }
+
+  /* Ensure text is black on white */
+  body {
+    color: #000;
+    background: #fff;
+  }
+
+  /* Break pages appropriately */
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+
+  img {
+    page-break-inside: avoid;
+  }
+}
+
+/* 13. COMPATIBILITY FIXES */
+/* iOS specific fixes */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari specific styles */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    font-size: 16px; /* Prevent zoom */
+  }
+}
+
+/* Android specific fixes */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  /* Android browser specific styles */
+  select {
+    background-image: none;
+    padding-right: 30px;
+  }
+}
+
+/* 14. STRUCTURED DATA HELPERS */
+/* Ensure structured data elements don't interfere with layout */
+[itemscope],
+[itemtype],
+[itemprop] {
+  display: inherit;
+}
+
+/* 15. COOKIE CONSENT AND POPUPS */
+.cookie-consent {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  z-index: 10000;
+}
+
+@media screen and (max-width: 767px) {
+  .cookie-consent {
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .cookie-consent button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
