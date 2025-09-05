@@ -223,16 +223,16 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
         <div className="flex gap-3 mt-4">
           <Link
             href={`/${locale}/casinos/${casino.slug}`}
-            className="flex-1 bg-white hover:bg-gray-50 text-gray-700 border-2 border-gray-200 hover:border-primary-200 px-4 py-3 rounded-xl font-semibold text-center transition-all duration-200 flex items-center justify-center gap-2"
+            className="flex-1 bg-white hover:bg-gray-50 text-gray-700 border-2 border-gray-200 hover:border-primary-200 px-5 py-4 rounded-xl font-semibold text-center transition-all duration-200 flex items-center justify-center gap-2 min-h-[52px] text-base"
           >
             {locale === 'es' ? 'Leer Reseña' : 'Read Review'}
           </Link>
           <button
             onClick={handleVisitCasino}
-            className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-3 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg"
+            className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-5 py-4 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg min-h-[52px] text-base"
           >
             {ctaText}
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-5 h-5" />
           </button>
         </div>
 
