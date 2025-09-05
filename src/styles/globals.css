@@ -427,6 +427,30 @@
     overscroll-behavior: none !important;
   }
   
+  /* NUCLEAR OPTION: Block ALL scrolling when menu is open */
+  body.menu-open *:not(.mobile-menu-panel):not(.mobile-menu-panel *) {
+    overflow: hidden !important;
+    position: relative !important;
+    touch-action: none !important;
+    pointer-events: none !important;
+  }
+  
+  /* Re-enable pointer events for menu and backdrop */
+  .mobile-menu-backdrop,
+  .mobile-menu-panel,
+  .mobile-menu-panel * {
+    pointer-events: auto !important;
+  }
+  
+  /* Mobile menu panel - allow internal scrolling */
+  .mobile-menu-panel {
+    overflow-y: auto !important;
+    overscroll-behavior: contain !important;
+    -webkit-overflow-scrolling: touch !important;
+    max-height: 100vh !important;
+    max-height: -webkit-fill-available !important;
+  }
+  
   /* Hide scrollbars completely */
   body.menu-open::-webkit-scrollbar,
   body.scroll-locked::-webkit-scrollbar,

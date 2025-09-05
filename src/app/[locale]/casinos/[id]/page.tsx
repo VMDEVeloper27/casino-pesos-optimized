@@ -10,6 +10,7 @@ import FavoriteButtonAuth from '@/components/FavoriteButtonAuth';
 import { getCasinoBySlug } from '@/lib/casino-database';
 import type { Metadata } from 'next';
 import { getCanonicalUrl } from '@/lib/canonical';
+import { getCTAByName, getCTAByType } from '@/lib/cta-texts';
 
 interface PageProps {
   params: Promise<{ locale: string; id: string }>;
@@ -242,7 +243,7 @@ export default async function CasinoDetailPage({ params }: PageProps) {
                 rel="noopener noreferrer"
                 className="block w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-xl font-bold text-center transition-all duration-200 transform hover:scale-105"
               >
-                Obtener Bono
+                {getCTAByType(casino.bonus.type, locale as 'es' | 'en')}
               </a>
             </div>
           </div>
@@ -426,7 +427,7 @@ export default async function CasinoDetailPage({ params }: PageProps) {
                   rel="noopener noreferrer"
                   className="block w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-xl font-bold text-center transition-all duration-200"
                 >
-                  Jugar Ahora
+                  {getCTAByName(casino.name, locale as 'es' | 'en')}
                 </a>
                 <Link 
                   href={`/${locale}/casinos`}

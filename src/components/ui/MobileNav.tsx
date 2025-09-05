@@ -42,6 +42,61 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
   // Use scroll lock hook to prevent body scroll when menu is open
   useScrollLock(isOpen);
 
+  // Additional scroll prevention for iOS and problematic devices
+  useEffect(() => {
+    if (isOpen) {
+      // Save current scroll position
+      const scrollY = window.scrollY;
+      
+      // Prevent scroll on all elements
+      const preventScroll = (e: Event) => {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      };
+      
+      // Prevent touch scroll
+      const preventTouchMove = (e: TouchEvent) => {
+        // Allow scrolling inside menu panel
+        const menuPanel = document.querySelector('.mobile-menu-panel');
+        if (menuPanel && menuPanel.contains(e.target as Node)) {
+          return;
+        }
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      };
+      
+      // Block all scroll attempts
+      document.addEventListener('touchmove', preventTouchMove, { passive: false, capture: true });
+      document.addEventListener('scroll', preventScroll, { passive: false, capture: true });
+      document.addEventListener('wheel', preventScroll, { passive: false, capture: true });
+      window.addEventListener('scroll', preventScroll, { passive: false, capture: true });
+      
+      // iOS specific: Prevent bounce effect
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overscrollBehavior = 'none';
+      document.documentElement.style.overscrollBehavior = 'none';
+      
+      return () => {
+        document.removeEventListener('touchmove', preventTouchMove, { capture: true });
+        document.removeEventListener('scroll', preventScroll, { capture: true });
+        document.removeEventListener('wheel', preventScroll, { capture: true });
+        window.removeEventListener('scroll', preventScroll, { capture: true });
+        
+        // Restore scroll position
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overscrollBehavior = '';
+        document.documentElement.style.overscrollBehavior = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [isOpen]);
+
   const menuItems: Array<{
     id: string;
     label: string;
@@ -223,7 +278,18 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
                 e.preventDefault();
                 e.stopPropagation();
               }}
-              style={{ touchAction: 'none' }}
+              onTouchStart={(e) => {
+                e.stopPropagation();
+              }}
+              onWheel={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+              }}
+              style={{ 
+                touchAction: 'none',
+                overscrollBehavior: 'none',
+                WebkitOverflowScrolling: 'touch'
+              }}
             />
 
             {/* Menu Panel */}
@@ -234,6 +300,10 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               className="lg:hidden fixed top-0 left-0 bottom-0 w-80 bg-neutral-900 z-50 overflow-y-auto mobile-menu-panel"
               onTouchMove={(e) => e.stopPropagation()}
+              style={{
+                overscrollBehavior: 'contain',
+                WebkitOverflowScrolling: 'touch'
+              }}
             >
               {/* Menu Header */}
               <div className="p-4 border-b border-neutral-800">

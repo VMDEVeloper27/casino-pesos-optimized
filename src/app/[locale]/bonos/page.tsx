@@ -4,6 +4,7 @@ import { getAllCasinos } from '@/lib/casino-database';
 import type { Metadata } from 'next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getCanonicalUrl } from '@/lib/canonical';
+import { getCTAByType, getCTAByName } from '@/lib/cta-texts';
 import { 
   faGift, 
   faCoins, 
@@ -180,7 +181,7 @@ export default async function BonosPage({ params }: PageProps) {
                   href={`/${locale}/casinos/${featuredBonus.slug}`}
                   className="bg-white text-green-700 px-6 py-3 rounded-xl font-bold hover:bg-green-50 transition-colors shadow-lg border border-green-200"
                 >
-                  Reclamar Bono
+                  {getCTAByType(featuredBonus.bonus.type, locale as 'es' | 'en')}
                 </Link>
                 {featuredBonus.code !== 'AUTO' && (
                   <div className="bg-white/20 px-4 py-3 rounded-xl">
@@ -271,7 +272,7 @@ export default async function BonosPage({ params }: PageProps) {
                     href={`/${locale}/casinos/${bonus.slug}`}
                     className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
                   >
-                    Reclamar
+                    {getCTAByName(casino.name, locale as 'es' | 'en')}
                     <ChevronRight className="w-4 h-4" />
                   </Link>
                   <button className="text-gray-500 hover:text-gray-900 text-sm flex items-center justify-center gap-1 transition-colors">
