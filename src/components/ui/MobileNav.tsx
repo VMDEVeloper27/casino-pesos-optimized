@@ -73,12 +73,25 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
       document.addEventListener('wheel', preventScroll, { passive: false, capture: true });
       window.addEventListener('scroll', preventScroll, { passive: false, capture: true });
       
-      // iOS specific: Prevent bounce effect
+      // ULTRA AGGRESSIVE: Lock everything
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
       document.body.style.width = '100%';
+      document.body.style.height = '100vh';
+      document.body.style.overflow = 'hidden';
       document.body.style.overscrollBehavior = 'none';
+      document.body.style.touchAction = 'none';
+      document.body.style.userSelect = 'none';
+      document.body.style.WebkitOverflowScrolling = 'auto';
+      
+      document.documentElement.style.overflow = 'hidden';
       document.documentElement.style.overscrollBehavior = 'none';
+      document.documentElement.style.touchAction = 'none';
+      document.documentElement.style.position = 'fixed';
+      document.documentElement.style.width = '100%';
+      document.documentElement.style.height = '100%';
       
       return () => {
         document.removeEventListener('touchmove', preventTouchMove, { capture: true });
@@ -86,14 +99,52 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
         document.removeEventListener('wheel', preventScroll, { capture: true });
         window.removeEventListener('scroll', preventScroll, { capture: true });
         
-        // Restore scroll position
+        // Restore ALL styles properly
         document.body.style.position = '';
         document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
         document.body.style.width = '';
+        document.body.style.height = '';
+        document.body.style.overflow = '';
         document.body.style.overscrollBehavior = '';
+        document.body.style.touchAction = '';
+        document.body.style.userSelect = '';
+        document.body.style.WebkitOverflowScrolling = '';
+        
+        document.documentElement.style.overflow = '';
         document.documentElement.style.overscrollBehavior = '';
+        document.documentElement.style.touchAction = '';
+        document.documentElement.style.position = '';
+        document.documentElement.style.width = '';
+        document.documentElement.style.height = '';
+        
+        // Restore scroll position
         window.scrollTo(0, scrollY);
       };
+    }
+    
+    // Cleanup on unmount
+    return () => {
+      // Make sure everything is cleaned up if component unmounts while open
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      document.body.style.height = '';
+      document.body.style.overflow = '';
+      document.body.style.overscrollBehavior = '';
+      document.body.style.touchAction = '';
+      document.body.style.userSelect = '';
+      document.body.style.WebkitOverflowScrolling = '';
+      
+      document.documentElement.style.overflow = '';
+      document.documentElement.style.overscrollBehavior = '';
+      document.documentElement.style.touchAction = '';
+      document.documentElement.style.position = '';
+      document.documentElement.style.width = '';
+      document.documentElement.style.height = '';
     }
   }, [isOpen]);
 

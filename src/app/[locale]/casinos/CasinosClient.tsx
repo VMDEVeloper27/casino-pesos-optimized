@@ -233,7 +233,7 @@ export default function CasinosClient({ casinos }: CasinosClientProps) {
                       </a>
                       <Link 
                         href={`/es/casinos/${casino.slug}`}
-                        className="bg-white hover:bg-gray-50 border-2 border-gray-200 hover:border-primary-200 text-gray-900 px-6 py-3 rounded-xl font-semibold text-center transition-all"
+                        className="bg-white hover:bg-gray-50 border-2 border-gray-200 hover:border-primary-200 text-gray-900 px-6 py-4 rounded-xl font-bold text-center transition-all min-h-[52px] flex items-center justify-center text-base"
                       >
                         Ver Reseña Completa
                       </Link>
