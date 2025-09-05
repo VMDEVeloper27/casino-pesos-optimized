@@ -5,6 +5,7 @@ import { Check, ChevronRight, Star, X, Shield, Clock, CreditCard, Gift } from 'l
 import { cn } from '@/lib/utils';
 import { CasinoLogo } from '@/components/ui/CasinoLogo';
 import FavoriteButtonAuth from '@/components/FavoriteButtonAuth';
+import { getCTAByIndex, getCTAByType } from '@/lib/cta-texts';
 
 interface CasinoCardProps {
   casino: {
@@ -39,6 +40,11 @@ interface CasinoCardProps {
 }
 
 export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCardProps) {
+  // Get unique CTA text based on casino ID
+  const ctaText = casino.bonus?.type 
+    ? getCTAByType(casino.bonus.type, locale as 'es' | 'en')
+    : getCTAByIndex(casino.id.length + 1, locale as 'es' | 'en');
+  
   const handleVisitCasino = () => {
     // Track click event
     if (typeof window !== 'undefined' && window.gtag) {
@@ -225,7 +231,7 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
             onClick={handleVisitCasino}
             className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-3 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg"
           >
-            {locale === 'es' ? 'Jugar Ahora' : 'Play Now'}
+            {ctaText}
             <ChevronRight className="w-4 h-4" />
           </button>
         </div>

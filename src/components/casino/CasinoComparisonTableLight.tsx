@@ -16,6 +16,7 @@ import {
 import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { CasinoLogo } from '@/components/ui/CasinoLogo';
+import { getCTAByIndex, getCTAByType } from '@/lib/cta-texts';
 
 interface Casino {
   id: string;
@@ -554,7 +555,9 @@ export function CasinoComparisonTableLight({ casinos, locale = 'es' }: Compariso
                 rel="noopener noreferrer"
                 className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-center py-2 rounded-lg text-sm font-bold shadow-md hover:shadow-lg transition-all"
               >
-                {locale === 'es' ? 'Jugar Ahora' : 'Play Now'}
+                {casino.bonus?.type 
+                  ? getCTAByType(casino.bonus.type, locale as 'es' | 'en')
+                  : getCTAByIndex(casino.id.length + 3, locale as 'es' | 'en')}
               </a>
             </div>
           </motion.div>

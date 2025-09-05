@@ -285,10 +285,10 @@ export default async function CookiesPage({ params }: PageProps) {
                   Puede configurar su navegador para rechazar todas o algunas cookies, o para alertarle cuando se envían cookies.
                 </p>
                 <ul className="list-disc list-inside space-y-1 ml-4 text-sm">
-                  <li><a href="https://support.google.com/chrome/answer/95647" className="text-primary hover:underline">Chrome</a></li>
-                  <li><a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias" className="text-primary hover:underline">Firefox</a></li>
-                  <li><a href="https://support.apple.com/es-mx/guide/safari/sfri11471/mac" className="text-primary hover:underline">Safari</a></li>
-                  <li><a href="https://support.microsoft.com/es-es/microsoft-edge/eliminar-cookies-en-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" className="text-primary hover:underline">Edge</a></li>
+                  <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Chrome</a></li>
+                  <li><a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Firefox</a></li>
+                  <li><a href="https://support.apple.com/es-mx/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Safari</a></li>
+                  <li><a href="https://support.microsoft.com/es-es/microsoft-edge/eliminar-cookies-en-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Edge</a></li>
                 </ul>
               </div>
 
@@ -308,9 +308,9 @@ export default async function CookiesPage({ params }: PageProps) {
                   También puede optar por no participar en cookies de terceros visitando:
                 </p>
                 <ul className="list-disc list-inside space-y-1 ml-4 mt-2 text-sm">
-                  <li><a href="https://tools.google.com/dlpage/gaoptout" className="text-primary hover:underline">Google Analytics Opt-out</a></li>
-                  <li><a href="https://www.facebook.com/help/568137493302217" className="text-primary hover:underline">Facebook Ads Settings</a></li>
-                  <li><a href="https://youradchoices.com/" className="text-primary hover:underline">Your Ad Choices</a></li>
+                  <li><a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Google Analytics Opt-out</a></li>
+                  <li><a href="https://www.facebook.com/help/568137493302217" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Facebook Ads Settings</a></li>
+                  <li><a href="https://youradchoices.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Your Ad Choices</a></li>
                 </ul>
               </div>
             </div>
