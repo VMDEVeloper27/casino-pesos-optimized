@@ -96,13 +96,24 @@ export async function getAllCasinos(): Promise<Casino[]> {
 
     if (error) {
       console.error('Supabase error:', error);
-      throw error;
+      // Use fallback data instead of throwing
+      const fallbackData = getCasinoFallbackData();
+      if (typeof window !== 'undefined') {
+        cachedCasinos = fallbackData;
+        cacheTimestamp = Date.now();
+      }
+      return fallbackData;
     }
 
-    // Если данных нет, возвращаем пустой массив
+    // Если данных нет, используем fallback
     if (!data || data.length === 0) {
-      console.log('No casinos found in database');
-      return [];
+      console.log('No casinos found in database, using fallback');
+      const fallbackData = getCasinoFallbackData();
+      if (typeof window !== 'undefined') {
+        cachedCasinos = fallbackData;
+        cacheTimestamp = Date.now();
+      }
+      return fallbackData;
     }
 
     const casinos = data.map(transformSupabaseToCasino);
@@ -116,8 +127,13 @@ export async function getAllCasinos(): Promise<Casino[]> {
     return casinos;
   } catch (error) {
     console.error('Error getting casinos from Supabase:', error);
-    // Return empty array as fallback
-    return [];
+    // Return fallback data instead of empty array
+    const fallbackData = getCasinoFallbackData();
+    if (typeof window !== 'undefined') {
+      cachedCasinos = fallbackData;
+      cacheTimestamp = Date.now();
+    }
+    return fallbackData;
   }
 }
 
@@ -156,13 +172,19 @@ export async function getCasinoById(id: string): Promise<Casino | null> {
 // Get casino by slug
 export async function getCasinoBySlug(slug: string): Promise<Casino | null> {
   try {
+    // First try Supabase
     const { data, error } = await supabase
       .from('casinos')
       .select('*')
       .eq('slug', slug)
       .single();
 
-    if (error) throw error;
+    if (error) {
+      // If Supabase fails, fall back to local data
+      console.warn('Supabase error, falling back to local data:', error.message);
+      const localCasinos = await getAllCasinos();
+      return localCasinos.find(c => c.slug === slug) || null;
+    }
 
     return data ? transformSupabaseToCasino(data) : null;
   } catch (error) {

@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   
   const isSpanish = locale === 'es';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://casinospesos.com';
   const pageUrl = getCanonicalUrl(`/casinos/${id}`, locale);
   const bonusText = `${casino.bonus.percentage}% hasta $${casino.bonus.amount.toLocaleString()} MXN`;
   
