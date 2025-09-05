@@ -442,10 +442,10 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
 
                 {/* Actions */}
                 <td className="p-4">
-                  <div className="flex gap-2">
+                  <div className="flex gap-3 justify-center">
                     <a
                       href={`/${locale}/casinos/${casino.slug}`}
-                      className="text-sm text-slate-400 hover:text-white transition-colors"
+                      className="px-6 py-3 bg-slate-700 text-white rounded-xl text-base font-semibold hover:bg-slate-600 transition-colors min-h-[48px] flex items-center justify-center"
                     >
                       {locale === 'es' ? 'Reseña' : 'Review'}
                     </a>
@@ -453,10 +453,10 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
                       href={casino.affiliateLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-gradient-to-r from-primary to-accent text-black px-4 py-2 rounded-lg font-semibold text-sm hover:opacity-90 transition-opacity flex items-center gap-1"
+                      className="bg-gradient-to-r from-primary to-accent text-black px-6 py-3 rounded-xl font-bold text-base hover:opacity-90 transition-opacity flex items-center justify-center gap-2 min-h-[48px] shadow-lg"
                     >
                       {locale === 'es' ? 'Jugar' : 'Play'}
-                      <ChevronRight className="w-4 h-4" />
+                      <ChevronRight className="w-5 h-5" />
                     </a>
                   </div>
                 </td>
@@ -539,10 +539,10 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
             </div>
 
             {/* Actions */}
-            <div className="flex gap-2">
+            <div className="flex gap-3 justify-center items-center px-2">
               <a
                 href={`/${locale}/casinos/${casino.slug}`}
-                className="flex-1 bg-slate-700 text-white text-center py-2 rounded-lg text-sm font-medium"
+                className="flex-1 bg-slate-700 hover:bg-slate-600 text-white text-center py-4 px-6 rounded-xl text-base font-semibold transition-all min-h-[52px] flex items-center justify-center"
               >
                 {locale === 'es' ? 'Ver Reseña' : 'View Review'}
               </a>
@@ -550,7 +550,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
                 href={casino.affiliateLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 bg-gradient-to-r from-primary to-accent text-black text-center py-2 rounded-lg text-sm font-bold"
+                className="flex-1 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-black text-center py-4 px-6 rounded-xl text-base font-bold transition-all transform hover:scale-105 min-h-[52px] flex items-center justify-center shadow-lg"
               >
                 {getCTAByName(casino.name, locale as 'es' | 'en')}
               </a>

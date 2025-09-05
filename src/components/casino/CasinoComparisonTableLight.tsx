@@ -443,10 +443,10 @@ export function CasinoComparisonTableLight({ casinos, locale = 'es' }: Compariso
 
                 {/* Actions */}
                 <td className="p-4">
-                  <div className="flex gap-2">
+                  <div className="flex gap-3 justify-center">
                     <a
                       href={`/${locale}/casinos/${casino.slug}`}
-                      className="text-sm text-gray-600 hover:text-primary-600 transition-colors"
+                      className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl text-base font-semibold transition-colors min-h-[48px] flex items-center justify-center"
                     >
                       {locale === 'es' ? 'Reseña' : 'Review'}
                     </a>
@@ -454,10 +454,10 @@ export function CasinoComparisonTableLight({ casinos, locale = 'es' }: Compariso
                       href={casino.affiliateLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-all flex items-center gap-1 shadow-md hover:shadow-lg"
+                      className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-xl font-bold text-base transition-all transform hover:scale-105 min-h-[48px] flex items-center justify-center gap-2 shadow-lg"
                     >
                       {locale === 'es' ? 'Jugar' : 'Play'}
-                      <ChevronRight className="w-4 h-4" />
+                      <ChevronRight className="w-5 h-5" />
                     </a>
                   </div>
                 </td>
@@ -542,10 +542,10 @@ export function CasinoComparisonTableLight({ casinos, locale = 'es' }: Compariso
             </div>
 
             {/* Actions */}
-            <div className="flex gap-2">
+            <div className="flex gap-3 justify-center items-center px-2">
               <a
                 href={`/${locale}/casinos/${casino.slug}`}
-                className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-center py-2 rounded-lg text-sm font-medium transition-colors border border-gray-200"
+                className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-center py-4 px-6 rounded-xl text-base font-semibold transition-colors border border-gray-200 min-h-[52px] flex items-center justify-center"
               >
                 {locale === 'es' ? 'Ver Reseña' : 'View Review'}
               </a>
@@ -553,7 +553,7 @@ export function CasinoComparisonTableLight({ casinos, locale = 'es' }: Compariso
                 href={casino.affiliateLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-center py-2 rounded-lg text-sm font-bold shadow-md hover:shadow-lg transition-all"
+                className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-center py-4 px-6 rounded-xl text-base font-bold shadow-lg hover:shadow-xl transition-all transform hover:scale-105 min-h-[52px] flex items-center justify-center"
               >
                 {getCTAByName(casino.name, locale as 'es' | 'en')}
               </a>
