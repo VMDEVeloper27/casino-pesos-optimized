@@ -57,33 +57,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 const bonusCategories = [
-  { name: 'Sin Depósito', count: 12, iconName: 'gift', color: 'from-purple-500 to-pink-500', slug: 'sin-deposito' },
-  { name: 'Bienvenida', count: 45, iconName: 'percent', color: 'from-blue-500 to-cyan-500', slug: 'bienvenida' },
-  { name: 'Giros Gratis', count: 38, iconName: 'dice', color: 'from-green-500 to-emerald-500', slug: 'giros-gratis' },
-  { name: 'Cashback', count: 15, iconName: 'arrows', color: 'from-orange-500 to-red-500', slug: 'cashback' },
-  { name: 'Recarga', count: 22, iconName: 'rotate', color: 'from-indigo-500 to-purple-500', slug: 'recarga' },
-  { name: 'VIP', count: 8, iconName: 'crown', color: 'from-yellow-500 to-orange-500', slug: 'vip' }
+  { name: 'Sin Depósito', count: 12, icon: Gift, color: 'from-purple-500 to-pink-500', slug: 'sin-deposito' },
+  { name: 'Bienvenida', count: 45, icon: Percent, color: 'from-blue-500 to-cyan-500', slug: 'bienvenida' },
+  { name: 'Giros Gratis', count: 38, icon: Dice1, color: 'from-green-500 to-emerald-500', slug: 'giros-gratis' },
+  { name: 'Cashback', count: 15, icon: ArrowLeftRight, color: 'from-orange-500 to-red-500', slug: 'cashback' },
+  { name: 'Recarga', count: 22, icon: RotateCcw, color: 'from-indigo-500 to-purple-500', slug: 'recarga' },
+  { name: 'VIP', count: 8, icon: Crown, color: 'from-yellow-500 to-orange-500', slug: 'vip' }
 ];
-
-// Icon component helper
-function BonusIcon({ iconName, className }: { iconName: string; className?: string }) {
-  switch (iconName) {
-    case 'gift':
-      return <Gift className={className} />;
-    case 'percent':
-      return <Percent className={className} />;
-    case 'dice':
-      return <Dice1 className={className} />;
-    case 'arrows':
-      return <ArrowLeftRight className={className} />;
-    case 'rotate':
-      return <RotateCcw className={className} />;
-    case 'crown':
-      return <Crown className={className} />;
-    default:
-      return <Gift className={className} />;
-  }
-}
 
 export default async function BonosPage({ params }: PageProps) {
   const { locale } = await params;
@@ -168,7 +148,7 @@ export default async function BonosPage({ params }: PageProps) {
                 <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-10 transition-opacity`}></div>
                 <div className="mb-2 flex justify-center">
                   <div className="w-8 h-8 flex items-center justify-center">
-                    <BonusIcon iconName={category.iconName} className="w-6 h-6 text-green-600 group-hover:text-green-700 transition-colors" />
+                    <category.icon className="w-6 h-6 text-green-600 group-hover:text-green-700 transition-colors" />
                   </div>
                 </div>
                 <div className="text-sm font-semibold text-gray-900">{category.name}</div>
