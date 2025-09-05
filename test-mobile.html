@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Test Checklist</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1a73e8;
+            border-bottom: 2px solid #1a73e8;
+            padding-bottom: 10px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border-left: 4px solid #1a73e8;
+            background: #f8f9fa;
+        }
+        .test-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+        .pass { background: #d4edda; border-color: #28a745; }
+        .fail { background: #f8d7da; border-color: #dc3545; }
+        button {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #1557b0;
+        }
+        .test-button {
+            min-height: 48px;
+            min-width: 48px;
+            background: #34a853;
+            margin: 5px;
+        }
+        .small-text { font-size: 12px; color: #666; }
+        .normal-text { font-size: 14px; color: #333; }
+        .large-text { font-size: 16px; color: #000; }
+        .results {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+        }
+        .results.show { display: block; }
+        .results.success { background: #d4edda; color: #155724; }
+        .results.warning { background: #fff3cd; color: #856404; }
+        .results.error { background: #f8d7da; color: #721c24; }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📱 Mobile-Friendly Test - Локальная проверка</h1>
+        
+        <div class="test-section">
+            <h2>1️⃣ Viewport Test</h2>
+            <div class="test-item">
+                <input type="checkbox" id="viewport-test">
+                <label for="viewport-test">Viewport настроен правильно</label>
+            </div>
+            <p class="small-text">Ширина экрана: <span id="viewport-width"></span>px</p>
+            <p class="small-text">Viewport meta tag: <code id="viewport-meta"></code></p>
+        </div>
+
+        <div class="test-section">
+            <h2>2️⃣ Font Size Test</h2>
+            <div class="test-item">
+                <p class="small-text">12px текст - слишком мелкий ❌</p>
+            </div>
+            <div class="test-item">
+                <p class="normal-text">14px текст - минимально допустимый ⚠️</p>
+            </div>
+            <div class="test-item">
+                <p class="large-text">16px текст - рекомендуемый ✅</p>
+            </div>
+            <div class="test-item">
+                <input type="checkbox" id="font-test">
+                <label for="font-test">Весь текст читается без зума</label>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>3️⃣ Tap Targets Test</h2>
+            <p>Все кнопки должны быть минимум 48x48px:</p>
+            <div class="test-item">
+                <button class="test-button">48x48</button>
+                <button style="padding: 5px; min-height: 30px;">Маленькая ❌</button>
+                <button class="test-button">Норм ✅</button>
+            </div>
+            <div class="test-item">
+                <input type="checkbox" id="tap-test">
+                <label for="tap-test">Все кнопки удобны для нажатия</label>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>4️⃣ Horizontal Scroll Test</h2>
+            <div class="test-item">
+                <input type="checkbox" id="scroll-test">
+                <label for="scroll-test">Нет горизонтального скролла</label>
+            </div>
+            <p class="small-text">Ширина документа: <span id="doc-width"></span>px</p>
+            <p class="small-text">Overflow: <span id="overflow-status"></span></p>
+        </div>
+
+        <div class="test-section">
+            <h2>5️⃣ Content Test</h2>
+            <div class="test-item">
+                <input type="checkbox" id="images-test">
+                <label for="images-test">Изображения адаптивные</label>
+            </div>
+            <div class="test-item">
+                <input type="checkbox" id="tables-test">
+                <label for="tables-test">Таблицы не выходят за экран</label>
+            </div>
+            <div class="test-item">
+                <input type="checkbox" id="forms-test">
+                <label for="forms-test">Формы удобны для заполнения</label>
+            </div>
+        </div>
+
+        <button onclick="runTest()">🔍 Запустить проверку</button>
+        <button onclick="openSite()">🌐 Открыть сайт</button>
+        <button onclick="openDevTools()">🛠️ Chrome DevTools инструкция</button>
+
+        <div id="results" class="results"></div>
+    </div>
+
+    <script>
+        // Check viewport
+        document.getElementById('viewport-width').textContent = window.innerWidth;
+        const viewportMeta = document.querySelector('meta[name="viewport"]');
+        document.getElementById('viewport-meta').textContent = viewportMeta ? viewportMeta.content : 'Не найден';
+
+        // Check document width
+        document.getElementById('doc-width').textContent = document.documentElement.scrollWidth;
+        document.getElementById('overflow-status').textContent = 
+            document.documentElement.scrollWidth > window.innerWidth ? '❌ Есть overflow!' : '✅ Нет overflow';
+
+        function runTest() {
+            const tests = {
+                viewport: document.getElementById('viewport-test').checked,
+                font: document.getElementById('font-test').checked,
+                tap: document.getElementById('tap-test').checked,
+                scroll: document.getElementById('scroll-test').checked,
+                images: document.getElementById('images-test').checked,
+                tables: document.getElementById('tables-test').checked,
+                forms: document.getElementById('forms-test').checked
+            };
+
+            const passed = Object.values(tests).filter(t => t).length;
+            const total = Object.values(tests).length;
+            const percentage = Math.round((passed / total) * 100);
+
+            let resultsDiv = document.getElementById('results');
+            resultsDiv.classList.remove('success', 'warning', 'error');
+            resultsDiv.classList.add('show');
+
+            if (percentage >= 90) {
+                resultsDiv.classList.add('success');
+                resultsDiv.innerHTML = `
+                    <h2>✅ Тест пройден! (${percentage}%)</h2>
+                    <p>Сайт оптимизирован для мобильных устройств!</p>
+                    <p>Пройдено тестов: ${passed} из ${total}</p>
+                `;
+            } else if (percentage >= 70) {
+                resultsDiv.classList.add('warning');
+                resultsDiv.innerHTML = `
+                    <h2>⚠️ Требуются улучшения (${percentage}%)</h2>
+                    <p>Сайт частично оптимизирован для мобильных.</p>
+                    <p>Пройдено тестов: ${passed} из ${total}</p>
+                `;
+            } else {
+                resultsDiv.classList.add('error');
+                resultsDiv.innerHTML = `
+                    <h2>❌ Тест не пройден (${percentage}%)</h2>
+                    <p>Сайт не оптимизирован для мобильных устройств.</p>
+                    <p>Пройдено тестов: ${passed} из ${total}</p>
+                `;
+            }
+        }
+
+        function openSite() {
+            window.open('http://localhost:3001/es', '_blank');
+        }
+
+        function openDevTools() {
+            alert(`Chrome DevTools Mobile Test:
+            
+1. Открой http://localhost:3001/es
+2. Нажми F12
+3. Нажми Ctrl+Shift+M (мобильный режим)
+4. Выбери iPhone или Android
+5. Проверь каждый пункт из чеклиста
+6. Сделай скриншот для отчёта`);
+        }
+
+        // Auto-check some items
+        window.addEventListener('load', () => {
+            // Auto-check viewport if configured
+            if (viewportMeta && viewportMeta.content.includes('width=device-width')) {
+                document.getElementById('viewport-test').checked = true;
+            }
+            
+            // Auto-check scroll if no overflow
+            if (document.documentElement.scrollWidth <= window.innerWidth) {
+                document.getElementById('scroll-test').checked = true;
+            }
+        });
+    </script>
+</body>
+</html>
