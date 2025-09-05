@@ -77,6 +77,111 @@ let cachedCasinos: Casino[] | null = null;
 let cacheTimestamp: number = 0;
 const CACHE_DURATION = 300000; // 5 minutes cache
 
+// Fallback casino data with local images
+function getCasinoFallbackData(): Casino[] {
+  return [
+    {
+      id: 'caliente',
+      name: 'Caliente',
+      slug: 'caliente',
+      logo: '/images/caliente-logo.png',
+      rating: 4.8,
+      established: 1916,
+      affiliateLink: 'https://caliente.mx',
+      features: ['Deportes', 'Casino en vivo', 'Apuestas rápidas'],
+      bonus: {
+        type: 'welcome',
+        amount: 10000,
+        percentage: 100,
+        freeSpins: 100,
+        minDeposit: 200,
+        wageringRequirement: 30,
+        code: 'CALIENTE2024'
+      },
+      games: {
+        total: 2000,
+        slots: 1500,
+        live: 200,
+        table: 300
+      },
+      paymentMethods: ['SPEI', 'OXXO', 'Tarjetas', 'Bitcoin'],
+      withdrawalTime: '24-48 horas',
+      licenses: ['SEGOB'],
+      currencies: ['MXN'],
+      pros: ['Marca mexicana establecida', 'Retiros rápidos', 'Excelente app móvil'],
+      cons: ['Verificación puede tomar tiempo'],
+      status: 'active',
+      lastModified: new Date().toISOString()
+    },
+    {
+      id: 'bet365',
+      name: 'Bet365',
+      slug: 'bet365',
+      logo: '/images/bet365-logo.png',
+      rating: 4.9,
+      established: 2000,
+      affiliateLink: 'https://bet365.mx',
+      features: ['Líder mundial', 'Streaming en vivo', 'Cash out'],
+      bonus: {
+        type: 'welcome',
+        amount: 3000,
+        percentage: 100,
+        freeSpins: 0,
+        minDeposit: 100,
+        wageringRequirement: 25,
+        code: ''
+      },
+      games: {
+        total: 3000,
+        slots: 2000,
+        live: 500,
+        table: 500
+      },
+      paymentMethods: ['SPEI', 'Tarjetas', 'Skrill', 'Neteller'],
+      withdrawalTime: '1-3 días',
+      licenses: ['Gibraltar', 'Malta'],
+      currencies: ['MXN', 'USD', 'EUR'],
+      pros: ['Mejor plataforma deportiva', 'Streaming gratuito', 'Confiabilidad mundial'],
+      cons: ['Interfaz puede ser compleja para principiantes'],
+      status: 'active',
+      lastModified: new Date().toISOString()
+    },
+    {
+      id: 'codere',
+      name: 'Codere',
+      slug: 'codere',
+      logo: '/images/codere-logo.png',
+      rating: 4.7,
+      established: 1980,
+      affiliateLink: 'https://codere.mx',
+      features: ['Marca española', 'Promociones frecuentes', 'Club VIP'],
+      bonus: {
+        type: 'welcome',
+        amount: 5000,
+        percentage: 200,
+        freeSpins: 200,
+        minDeposit: 200,
+        wageringRequirement: 35,
+        code: 'CODERE200'
+      },
+      games: {
+        total: 1800,
+        slots: 1400,
+        live: 150,
+        table: 250
+      },
+      paymentMethods: ['SPEI', 'OXXO', 'PayPal', 'Tarjetas'],
+      withdrawalTime: '2-5 días',
+      licenses: ['SEGOB', 'DGJS España'],
+      currencies: ['MXN'],
+      pros: ['Bonos generosos', 'Muchas promociones', 'Buen soporte'],
+      cons: ['Retiros pueden ser lentos'],
+      status: 'active',
+      lastModified: new Date().toISOString()
+    }
+  ];
+}
+
 // Get all casinos from Supabase
 export async function getAllCasinos(): Promise<Casino[]> {
   try {
