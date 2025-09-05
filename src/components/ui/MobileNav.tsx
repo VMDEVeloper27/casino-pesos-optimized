@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useScrollLock } from '@/hooks/use-scroll-lock';
 import { 
   BookOpen,
   ChevronRight,
@@ -38,17 +39,8 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
     setActiveSubmenu(null);
   }, [pathname]);
 
-  // Prevent body scroll when menu is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isOpen]);
+  // Use scroll lock hook to prevent body scroll when menu is open
+  useScrollLock(isOpen);
 
   const menuItems: Array<{
     id: string;
@@ -173,7 +165,7 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
           {/* Menu Toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="relative w-10 h-10 flex items-center justify-center"
+            className="relative w-12 h-12 flex items-center justify-center rounded-lg hover:bg-neutral-800 transition-colors"
             aria-label="Toggle menu"
           >
             <AnimatePresence mode="wait">
@@ -209,7 +201,7 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
             <input
               type="search"
               placeholder={locale === 'es' ? 'Buscar casinos o juegos...' : 'Search casinos or games...'}
-              className="w-full bg-neutral-800 text-white pl-10 pr-4 py-2 rounded-lg text-sm placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full bg-neutral-800 text-white pl-10 pr-4 py-3 rounded-lg text-sm placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary min-h-[48px]"
             />
           </div>
         </div>
@@ -248,7 +240,7 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
                   </Link>
                   <button
                     onClick={() => setIsOpen(false)}
-                    className="w-8 h-8 flex items-center justify-center text-neutral-400 hover:text-white transition-colors"
+                    className="w-12 h-12 flex items-center justify-center text-neutral-400 hover:text-white transition-colors rounded-lg hover:bg-neutral-800"
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -276,7 +268,7 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
                         <button
                           onClick={() => setActiveSubmenu(activeSubmenu === item.id ? null : item.id)}
                           className={cn(
-                            "w-full flex items-center justify-between p-3 rounded-lg transition-colors",
+                            "w-full flex items-center justify-between p-3 rounded-lg transition-colors min-h-[48px]",
                             pathname.startsWith(item.href) 
                               ? "bg-primary/20 text-primary" 
                               : "text-neutral-300 hover:bg-neutral-800 hover:text-white"
@@ -313,7 +305,7 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
                                   <Link
                                     key={subItem.href}
                                     href={subItem.href}
-                                    className="flex items-center gap-3 p-2 rounded-lg text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors"
+                                    className="flex items-center gap-3 p-3 rounded-lg text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors min-h-[48px]"
                                   >
                                     <subItem.icon className="w-4 h-4" />
                                     <span>{subItem.label}</span>
@@ -333,7 +325,7 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
                       <Link
                         href={item.href}
                         className={cn(
-                          "w-full flex items-center gap-3 p-3 rounded-lg transition-colors",
+                          "w-full flex items-center gap-3 p-3 rounded-lg transition-colors min-h-[48px]",
                           pathname === item.href 
                             ? "bg-primary/20 text-primary" 
                             : "text-neutral-300 hover:bg-neutral-800 hover:text-white"
@@ -359,7 +351,7 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="flex items-center gap-3 p-3 rounded-lg text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors"
+                    className="flex items-center gap-3 p-3 rounded-lg text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors min-h-[48px]"
                   >
                     <link.icon className="w-5 h-5" />
                     <span className="text-sm">{link.label}</span>
@@ -378,7 +370,7 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
                     <Link
                       href="/es"
                       className={cn(
-                        "text-center py-2 rounded-lg text-sm font-medium transition-colors",
+                        "text-center py-3 rounded-lg text-sm font-medium transition-colors min-h-[48px] flex items-center justify-center",
                         locale === 'es' 
                           ? "bg-primary text-black" 
                           : "bg-neutral-700 text-neutral-300 hover:text-white"
@@ -389,7 +381,7 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
                     <Link
                       href="/en"
                       className={cn(
-                        "text-center py-2 rounded-lg text-sm font-medium transition-colors",
+                        "text-center py-3 rounded-lg text-sm font-medium transition-colors min-h-[48px] flex items-center justify-center",
                         locale === 'en' 
                           ? "bg-primary text-black" 
                           : "bg-neutral-700 text-neutral-300 hover:text-white"
@@ -404,7 +396,7 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
                 <div className="mt-4">
                   <Link
                     href={`/${locale}/casinos`}
-                    className="block w-full bg-gradient-to-r from-primary to-accent text-black text-center py-3 rounded-lg font-bold"
+                    className="block w-full bg-gradient-to-r from-primary to-accent text-black text-center py-3 rounded-lg font-bold min-h-[48px] flex items-center justify-center"
                   >
                     {locale === 'es' ? '🎰 Ver Mejores Casinos' : '🎰 View Best Casinos'}
                   </Link>
@@ -421,7 +413,7 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
           <Link
             href={`/${locale}`}
             className={cn(
-              "flex flex-col items-center justify-center py-2 rounded-lg transition-colors",
+              "flex flex-col items-center justify-center py-2 rounded-lg transition-colors min-h-[48px]",
               pathname === `/${locale}` 
                 ? "bg-primary/20 text-primary" 
                 : "text-neutral-400 hover:text-white"
@@ -433,7 +425,7 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
           <Link
             href={`/${locale}/casinos`}
             className={cn(
-              "flex flex-col items-center justify-center py-2 rounded-lg transition-colors",
+              "flex flex-col items-center justify-center py-2 rounded-lg transition-colors min-h-[48px]",
               pathname.startsWith(`/${locale}/casinos`) 
                 ? "bg-primary/20 text-primary" 
                 : "text-neutral-400 hover:text-white"
@@ -445,7 +437,7 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
           <Link
             href={`/${locale}/bonos`}
             className={cn(
-              "flex flex-col items-center justify-center py-2 rounded-lg transition-colors relative",
+              "flex flex-col items-center justify-center py-2 rounded-lg transition-colors relative min-h-[48px]",
               pathname.startsWith(`/${locale}/bonos`) 
                 ? "bg-primary/20 text-primary" 
                 : "text-neutral-400 hover:text-white"
@@ -458,7 +450,7 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
           <Link
             href={`/${locale}/guias`}
             className={cn(
-              "flex flex-col items-center justify-center py-2 rounded-lg transition-colors",
+              "flex flex-col items-center justify-center py-2 rounded-lg transition-colors min-h-[48px]",
               pathname.startsWith(`/${locale}/guias`) 
                 ? "bg-primary/20 text-primary" 
                 : "text-neutral-400 hover:text-white"
