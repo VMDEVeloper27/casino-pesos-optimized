@@ -48,76 +48,114 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
       // Save current scroll position
       const scrollY = window.scrollY;
       
-      // Prevent scroll on all elements
-      const preventScroll = (e: Event) => {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-      };
+      // Create a fixed overlay that captures all events
+      const overlay = document.createElement('div');
+      overlay.id = 'scroll-lock-overlay';
+      overlay.style.position = 'fixed';
+      overlay.style.top = '0';
+      overlay.style.left = '0';
+      overlay.style.right = '0';
+      overlay.style.bottom = '0';
+      overlay.style.zIndex = '1';
+      overlay.style.touchAction = 'none';
+      overlay.style.userSelect = 'none';
+      overlay.style.WebkitUserSelect = 'none';
+      document.body.appendChild(overlay);
       
-      // Prevent touch scroll
-      const preventTouchMove = (e: TouchEvent) => {
-        // Allow scrolling inside menu panel
-        const menuPanel = document.querySelector('.mobile-menu-panel');
-        if (menuPanel && menuPanel.contains(e.target as Node)) {
+      // Prevent all scroll events
+      const preventAll = (e: Event) => {
+        // Allow scrolling only in menu panel
+        const target = e.target as HTMLElement;
+        if (target.closest('.mobile-menu-panel')) {
           return;
         }
         e.preventDefault();
         e.stopPropagation();
+        e.stopImmediatePropagation();
         return false;
       };
       
-      // Block all scroll attempts
-      document.addEventListener('touchmove', preventTouchMove, { passive: false, capture: true });
-      document.addEventListener('scroll', preventScroll, { passive: false, capture: true });
-      document.addEventListener('wheel', preventScroll, { passive: false, capture: true });
-      window.addEventListener('scroll', preventScroll, { passive: false, capture: true });
+      // Add listeners to multiple elements to be sure
+      const elements = [document, document.body, document.documentElement, window];
+      const events = ['scroll', 'wheel', 'touchmove', 'touchstart', 'mousewheel', 'DOMMouseScroll'];
       
-      // ULTRA AGGRESSIVE: Lock everything
+      elements.forEach(el => {
+        events.forEach(event => {
+          el.addEventListener(event, preventAll, { passive: false, capture: true });
+        });
+      });
+      
+      // Apply all locking styles
+      const originalStyles = {
+        bodyPosition: document.body.style.position,
+        bodyTop: document.body.style.top,
+        bodyLeft: document.body.style.left,
+        bodyRight: document.body.style.right,
+        bodyBottom: document.body.style.bottom,
+        bodyOverflow: document.body.style.overflow,
+        bodyWidth: document.body.style.width,
+        bodyHeight: document.body.style.height,
+        htmlOverflow: document.documentElement.style.overflow,
+        htmlPosition: document.documentElement.style.position,
+        htmlHeight: document.documentElement.style.height,
+      };
+      
+      // Lock body completely
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;
       document.body.style.left = '0';
       document.body.style.right = '0';
+      document.body.style.bottom = '0';
       document.body.style.width = '100%';
-      document.body.style.height = '100vh';
+      document.body.style.height = '100%';
       document.body.style.overflow = 'hidden';
-      document.body.style.overscrollBehavior = 'none';
       document.body.style.touchAction = 'none';
+      document.body.style.overscrollBehavior = 'none';
       document.body.style.userSelect = 'none';
-      document.body.style.WebkitOverflowScrolling = 'auto';
+      document.body.style.WebkitOverflowScrolling = 'touch';
+      document.body.setAttribute('data-scroll-locked', 'true');
       
+      // Lock html too
       document.documentElement.style.overflow = 'hidden';
-      document.documentElement.style.overscrollBehavior = 'none';
-      document.documentElement.style.touchAction = 'none';
       document.documentElement.style.position = 'fixed';
-      document.documentElement.style.width = '100%';
       document.documentElement.style.height = '100%';
+      document.documentElement.style.touchAction = 'none';
+      document.documentElement.style.overscrollBehavior = 'none';
       
       return () => {
-        document.removeEventListener('touchmove', preventTouchMove, { capture: true });
-        document.removeEventListener('scroll', preventScroll, { capture: true });
-        document.removeEventListener('wheel', preventScroll, { capture: true });
-        window.removeEventListener('scroll', preventScroll, { capture: true });
+        // Remove overlay
+        const overlay = document.getElementById('scroll-lock-overlay');
+        if (overlay) {
+          overlay.remove();
+        }
+        
+        // Remove all event listeners
+        elements.forEach(el => {
+          events.forEach(event => {
+            el.removeEventListener(event, preventAll, { capture: true });
+          });
+        });
         
         // Restore ALL styles properly
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.left = '';
-        document.body.style.right = '';
-        document.body.style.width = '';
-        document.body.style.height = '';
-        document.body.style.overflow = '';
-        document.body.style.overscrollBehavior = '';
+        document.body.style.position = originalStyles.bodyPosition;
+        document.body.style.top = originalStyles.bodyTop;
+        document.body.style.left = originalStyles.bodyLeft;
+        document.body.style.right = originalStyles.bodyRight;
+        document.body.style.bottom = originalStyles.bodyBottom;
+        document.body.style.overflow = originalStyles.bodyOverflow;
+        document.body.style.width = originalStyles.bodyWidth;
+        document.body.style.height = originalStyles.bodyHeight;
         document.body.style.touchAction = '';
+        document.body.style.overscrollBehavior = '';
         document.body.style.userSelect = '';
         document.body.style.WebkitOverflowScrolling = '';
+        document.body.removeAttribute('data-scroll-locked');
         
-        document.documentElement.style.overflow = '';
-        document.documentElement.style.overscrollBehavior = '';
+        document.documentElement.style.overflow = originalStyles.htmlOverflow;
+        document.documentElement.style.position = originalStyles.htmlPosition;
+        document.documentElement.style.height = originalStyles.htmlHeight;
         document.documentElement.style.touchAction = '';
-        document.documentElement.style.position = '';
-        document.documentElement.style.width = '';
-        document.documentElement.style.height = '';
+        document.documentElement.style.overscrollBehavior = '';
         
         // Restore scroll position
         window.scrollTo(0, scrollY);
@@ -126,11 +164,19 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
     
     // Cleanup on unmount
     return () => {
+      // Remove overlay if exists
+      const overlay = document.getElementById('scroll-lock-overlay');
+      if (overlay) {
+        overlay.remove();
+      }
+      
       // Make sure everything is cleaned up if component unmounts while open
+      document.body.removeAttribute('data-scroll-locked');
       document.body.style.position = '';
       document.body.style.top = '';
       document.body.style.left = '';
       document.body.style.right = '';
+      document.body.style.bottom = '';
       document.body.style.width = '';
       document.body.style.height = '';
       document.body.style.overflow = '';
