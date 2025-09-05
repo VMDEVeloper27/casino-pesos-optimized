@@ -8,6 +8,42 @@
 @import './accessibility.css';
 
 @layer base {
+  /* Container with 1920px max-width */
+  .container {
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: 1920px !important;
+  }
+  
+  @screen sm {
+    .container {
+      max-width: 640px;
+    }
+  }
+  
+  @screen md {
+    .container {
+      max-width: 768px;
+    }
+  }
+  
+  @screen lg {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  
+  @screen xl {
+    .container {
+      max-width: 1280px;
+    }
+  }
+  
+  @screen 2xl {
+    .container {
+      max-width: 1920px !important;
+    }
+  }
+  
   :root {
     /* Trustworthy Design Language - Professional Color Palette */
     
@@ -249,6 +285,17 @@
 }
 
 @layer utilities {
+  /* Wide container utility class */
+  .container-wide {
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: 1920px !important;
+  }
+  
+  .container-full {
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: 100% !important;
+  }
+  
   /* Professional Text Colors */
   .text-primary {
     color: #1e3a8a;
