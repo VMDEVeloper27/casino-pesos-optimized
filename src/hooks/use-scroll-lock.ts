@@ -52,17 +52,46 @@ export function useScrollLock(isLocked: boolean) {
       document.body.classList.add('scroll-locked', 'menu-open');
       document.documentElement.classList.add('scroll-locked', 'menu-open');
       
-      // Prevent touchmove events on mobile
-      const preventScroll = (e: TouchEvent) => {
+      // Prevent all scroll-related events on mobile and desktop
+      const preventScroll = (e: Event) => {
         e.preventDefault();
+        e.stopPropagation();
+        return false;
       };
       
+      const preventWheel = (e: WheelEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      };
+      
+      const preventKeyScroll = (e: KeyboardEvent) => {
+        // Prevent scroll keys: arrows, space, page up/down, home, end
+        const scrollKeys = [32, 33, 34, 35, 36, 37, 38, 39, 40];
+        if (scrollKeys.includes(e.keyCode)) {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+      };
+      
+      // Add all event listeners to prevent scrolling
       document.addEventListener('touchmove', preventScroll, { passive: false });
+      document.addEventListener('wheel', preventWheel, { passive: false });
+      document.addEventListener('keydown', preventKeyScroll, { passive: false });
+      document.addEventListener('touchstart', preventScroll, { passive: false });
+      
+      // Also prevent scrolling on the window
+      window.addEventListener('scroll', preventScroll, { passive: false });
       
       // Cleanup function
       return () => {
-        // Remove event listener
+        // Remove all event listeners
         document.removeEventListener('touchmove', preventScroll);
+        document.removeEventListener('wheel', preventWheel);
+        document.removeEventListener('keydown', preventKeyScroll);
+        document.removeEventListener('touchstart', preventScroll);
+        window.removeEventListener('scroll', preventScroll);
         
         // Restore original styles
         if (originalStylesRef.current) {
