@@ -2,13 +2,30 @@
 
 import { ChevronRight, Gift, Shield, Trophy, Zap, Search, Star } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 
 export function Hero() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [placeholder, setPlaceholder] = useState('Buscar casinos, bonos, juegos...');
   const router = useRouter();
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 480) {
+        setPlaceholder('Buscar...');
+      } else if (window.innerWidth < 640) {
+        setPlaceholder('Buscar casinos...');
+      } else {
+        setPlaceholder('Buscar casinos, bonos, juegos...');
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleSearch = (e?: React.FormEvent) => {
     e?.preventDefault();
@@ -86,19 +103,23 @@ export function Hero() {
             <form onSubmit={handleSearch} className="relative">
               <input
                 type="text"
-                placeholder="Buscar casinos, bonos, juegos..."
+                placeholder={placeholder}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                className="w-full px-6 py-4 pl-14 bg-white border border-gray-200 rounded-2xl text-gray-900 placeholder-gray-500 shadow-lg focus:outline-none focus:ring-4 focus:ring-primary-100 focus:border-primary-400 transition-all"
+                className="hero-search-input w-full px-4 sm:px-6 py-4 pl-12 sm:pl-14 pr-16 sm:pr-28 bg-white border border-gray-200 rounded-2xl text-gray-900 shadow-lg focus:outline-none focus:ring-4 focus:ring-primary-100 focus:border-primary-400 transition-all text-sm sm:text-base"
+                style={{
+                  fontSize: '16px' // Prevent zoom on iOS
+                }}
               />
-              <Search className="absolute left-5 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <Search className="absolute left-3 sm:left-5 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
               <button 
                 type="submit"
                 onClick={handleSearch}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-2.5 rounded-xl font-semibold transition-all shadow-md hover:shadow-lg"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-3 sm:px-6 py-2 sm:py-2.5 rounded-lg sm:rounded-xl font-semibold transition-all shadow-md hover:shadow-lg"
               >
-                Buscar
+                <span className="hidden sm:inline text-sm sm:text-base">Buscar</span>
+                <Search className="sm:hidden w-5 h-5" />
               </button>
             </form>
             

@@ -6,6 +6,7 @@ import { Check, ChevronRight, Star, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { CasinoLogo } from '@/components/ui/CasinoLogo';
 import FavoriteButtonAuth from '@/components/FavoriteButtonAuth';
+import { getCTAByName, getCTAByType } from '@/lib/cta-texts';
 
 interface CasinoCardProps {
   casino: {
@@ -40,6 +41,11 @@ interface CasinoCardProps {
 }
 
 export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCardProps) {
+  // Get unique CTA text based on casino name for variety
+  const ctaText = casino.bonus?.type 
+    ? getCTAByType(casino.bonus.type, locale as 'es' | 'en')
+    : getCTAByName(casino.name, locale as 'es' | 'en');
+  
   const handleVisitCasino = () => {
     // Track click event
     if (typeof window !== 'undefined' && window.gtag) {
@@ -219,16 +225,16 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
         <div className="flex gap-3 mt-4">
           <Link
             href={`/${locale}/casinos/${casino.slug}`}
-            className="flex-1 bg-slate-700 hover:bg-slate-600 text-white px-4 py-3 rounded-xl font-semibold text-center transition-colors duration-200 flex items-center justify-center gap-2"
+            className="flex-1 bg-slate-700 hover:bg-slate-600 text-white px-5 py-4 rounded-xl font-semibold text-center transition-colors duration-200 flex items-center justify-center gap-2 min-h-[52px] text-base"
           >
             {locale === 'es' ? 'Leer Reseña' : 'Read Review'}
           </Link>
           <button
             onClick={handleVisitCasino}
-            className="flex-1 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-black px-4 py-3 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg"
+            className="flex-1 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-black px-5 py-4 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg min-h-[52px] text-base"
           >
-            {locale === 'es' ? 'Jugar Ahora' : 'Play Now'}
-            <ChevronRight className="w-4 h-4" />
+            {ctaText}
+            <ChevronRight className="w-5 h-5" />
           </button>
         </div>
 

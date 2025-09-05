@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import { getAllCasinos } from '@/lib/casino-database';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getCanonicalUrl } from '@/lib/canonical';
+import { getCTAByType } from '@/lib/cta-texts';
 import { 
   faGift, 
   faPercent,
@@ -315,7 +316,7 @@ export default async function BonusCategoryPage({ params }: PageProps) {
                   <Link 
                     href={`/${locale}/casinos/${bonus.slug}`}
                     className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 block text-center">
-                    Reclamar Bono
+                    {getCTAByType(casino.bonus.type, locale as 'es' | 'en')}
                   </Link>
                   <Link 
                     href={`/${locale}/casinos/${bonus.slug}`}

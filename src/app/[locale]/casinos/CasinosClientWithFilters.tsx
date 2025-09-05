@@ -12,6 +12,7 @@ import CasinoFilters, { FilterState } from '@/components/CasinoFilters';
 import ActiveFilterChips from '@/components/ActiveFilterChips';
 import FavoriteButtonAuth from '@/components/FavoriteButtonAuth';
 import { CasinoLogo } from '@/components/ui/CasinoLogo';
+import { getCTAByPosition } from '@/lib/cta-texts';
 
 interface CasinosClientWithFiltersProps {
   casinos: Casino[];
@@ -237,7 +238,7 @@ export default function CasinosClientWithFilters({ casinos }: CasinosClientWithF
 
   return (
     <main className="min-h-screen bg-gray-50 pt-8 pb-16">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-3 sm:px-4 max-w-full overflow-x-hidden">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
@@ -249,10 +250,10 @@ export default function CasinosClientWithFilters({ casinos }: CasinosClientWithF
         </div>
 
         {/* Search and Sort Bar */}
-        <div className="bg-white border border-gray-200 rounded-xl p-4 mb-6 shadow-sm">
-          <div className="flex flex-col lg:flex-row gap-4">
+        <div className="bg-white border border-gray-200 rounded-xl p-3 sm:p-4 mb-6 shadow-sm overflow-hidden">
+          <div className="flex flex-col lg:flex-row gap-3 sm:gap-4">
             {/* Search */}
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400 w-5 h-5" />
                 <input
@@ -260,17 +261,17 @@ export default function CasinosClientWithFilters({ casinos }: CasinosClientWithF
                   placeholder="Buscar casino..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 bg-white border border-gray-300 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 shadow-sm"
+                  className="w-full pl-10 pr-4 py-3 bg-white border border-gray-300 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 shadow-sm min-h-[48px]"
                 />
               </div>
             </div>
 
             {/* Sort and Filter Toggle */}
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 w-full sm:w-auto">
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-3 bg-white border border-gray-300 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 shadow-sm"
+                className="flex-1 sm:flex-initial px-4 py-3 bg-white border border-gray-300 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 shadow-sm min-h-[48px]"
               >
                 <option value="rating">Mayor Calificación</option>
                 <option value="bonus">Mayor Bono</option>
@@ -281,10 +282,10 @@ export default function CasinosClientWithFilters({ casinos }: CasinosClientWithF
               {/* Mobile Filter Toggle */}
               <button
                 onClick={() => setShowMobileFilters(!showMobileFilters)}
-                className="lg:hidden flex items-center gap-2 px-4 py-3 bg-green-100 text-green-700 rounded-lg font-medium hover:bg-green-200 transition-colors"
+                className="lg:hidden flex items-center justify-center gap-2 px-4 py-3 bg-green-100 text-green-700 rounded-lg font-medium hover:bg-green-200 transition-colors min-h-[48px]"
               >
                 <Filter className="w-5 h-5" />
-                Filtros
+                <span>Filtros</span>
                 {activeFilterCount > 0 && (
                   <span className="bg-green-600 text-white text-xs px-2 py-0.5 rounded-full">
                     {activeFilterCount}
@@ -307,7 +308,7 @@ export default function CasinosClientWithFilters({ casinos }: CasinosClientWithF
         )}
 
         {/* Main Content */}
-        <div className="flex gap-6">
+        <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
           {/* Desktop Filters Sidebar */}
           <div className="hidden lg:block w-80">
             <div className="sticky top-24">
@@ -458,7 +459,7 @@ export default function CasinosClientWithFilters({ casinos }: CasinosClientWithF
                           rel="noopener noreferrer"
                           className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-6 py-3 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 text-center shadow-lg hover:shadow-xl"
                         >
-                          Jugar Ahora
+                          {getCTAByPosition(index, 'es')}
                         </a>
                         <Link 
                           href={`/es/casinos/${casino.slug}`}

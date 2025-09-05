@@ -1,21 +1,23 @@
-import { ChevronRight, Info, Star } from 'lucide-react';
+import { 
+  ChevronRight, 
+  Info, 
+  Star,
+  Gift,
+  Coins,
+  Dice1,
+  ArrowLeftRight,
+  RotateCcw,
+  Crown,
+  TrendingUp,
+  Zap,
+  Shield,
+  Percent
+} from 'lucide-react';
 import Link from 'next/link';
 import { getAllCasinos } from '@/lib/casino-database';
 import type { Metadata } from 'next';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getCanonicalUrl } from '@/lib/canonical';
-import { 
-  faGift, 
-  faCoins, 
-  faDice, 
-  faMoneyBillTransfer,
-  faRotate,
-  faCrown,
-  faChartLine,
-  faBolt,
-  faShieldAlt,
-  faPercent
-} from '@fortawesome/free-solid-svg-icons';
+import { getCTAByType, getCTAByName } from '@/lib/cta-texts';
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -55,13 +57,33 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 const bonusCategories = [
-  { name: 'Sin Depósito', count: 12, icon: faGift, color: 'from-purple-500 to-pink-500', slug: 'sin-deposito' },
-  { name: 'Bienvenida', count: 45, icon: faPercent, color: 'from-blue-500 to-cyan-500', slug: 'bienvenida' },
-  { name: 'Giros Gratis', count: 38, icon: faDice, color: 'from-green-500 to-emerald-500', slug: 'giros-gratis' },
-  { name: 'Cashback', count: 15, icon: faMoneyBillTransfer, color: 'from-orange-500 to-red-500', slug: 'cashback' },
-  { name: 'Recarga', count: 22, icon: faRotate, color: 'from-indigo-500 to-purple-500', slug: 'recarga' },
-  { name: 'VIP', count: 8, icon: faCrown, color: 'from-yellow-500 to-orange-500', slug: 'vip' }
+  { name: 'Sin Depósito', count: 12, iconName: 'gift', color: 'from-purple-500 to-pink-500', slug: 'sin-deposito' },
+  { name: 'Bienvenida', count: 45, iconName: 'percent', color: 'from-blue-500 to-cyan-500', slug: 'bienvenida' },
+  { name: 'Giros Gratis', count: 38, iconName: 'dice', color: 'from-green-500 to-emerald-500', slug: 'giros-gratis' },
+  { name: 'Cashback', count: 15, iconName: 'arrows', color: 'from-orange-500 to-red-500', slug: 'cashback' },
+  { name: 'Recarga', count: 22, iconName: 'rotate', color: 'from-indigo-500 to-purple-500', slug: 'recarga' },
+  { name: 'VIP', count: 8, iconName: 'crown', color: 'from-yellow-500 to-orange-500', slug: 'vip' }
 ];
+
+// Icon component helper
+function BonusIcon({ iconName, className }: { iconName: string; className?: string }) {
+  switch (iconName) {
+    case 'gift':
+      return <Gift className={className} />;
+    case 'percent':
+      return <Percent className={className} />;
+    case 'dice':
+      return <Dice1 className={className} />;
+    case 'arrows':
+      return <ArrowLeftRight className={className} />;
+    case 'rotate':
+      return <RotateCcw className={className} />;
+    case 'crown':
+      return <Crown className={className} />;
+    default:
+      return <Gift className={className} />;
+  }
+}
 
 export default async function BonosPage({ params }: PageProps) {
   const { locale } = await params;
@@ -105,28 +127,28 @@ export default async function BonosPage({ params }: PageProps) {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
             <div className="w-8 h-8 mb-2">
-              <FontAwesomeIcon icon={faChartLine} className="text-green-600" style={{ fontSize: '1.5rem' }} />
+              <TrendingUp className="w-6 h-6 text-green-600" />
             </div>
             <div className="text-2xl font-bold text-gray-900">$250K+</div>
             <div className="text-sm text-gray-600">En Bonos Totales</div>
           </div>
           <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-6 border border-yellow-200">
             <div className="w-8 h-8 mb-2">
-              <FontAwesomeIcon icon={faGift} className="text-orange-600" style={{ fontSize: '1.5rem' }} />
+              <Gift className="w-6 h-6 text-orange-600" />
             </div>
             <div className="text-2xl font-bold text-gray-900">140+</div>
             <div className="text-sm text-gray-600">Bonos Activos</div>
           </div>
           <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-200">
             <div className="w-8 h-8 mb-2">
-              <FontAwesomeIcon icon={faBolt} className="text-purple-600" style={{ fontSize: '1.5rem' }} />
+              <Zap className="w-6 h-6 text-purple-600" />
             </div>
             <div className="text-2xl font-bold text-gray-900">5,000+</div>
             <div className="text-sm text-gray-600">Giros Gratis</div>
           </div>
           <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 border border-blue-200">
             <div className="w-8 h-8 mb-2">
-              <FontAwesomeIcon icon={faShieldAlt} className="text-blue-600" style={{ fontSize: '1.5rem' }} />
+              <Shield className="w-6 h-6 text-blue-600" />
             </div>
             <div className="text-2xl font-bold text-gray-900">100%</div>
             <div className="text-sm text-gray-600">Verificados</div>
@@ -146,7 +168,7 @@ export default async function BonosPage({ params }: PageProps) {
                 <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-10 transition-opacity`}></div>
                 <div className="mb-2 flex justify-center">
                   <div className="w-8 h-8 flex items-center justify-center">
-                    <FontAwesomeIcon icon={category.icon} className="text-green-600 group-hover:text-green-700 transition-colors" style={{ fontSize: '1.5rem' }} />
+                    <BonusIcon iconName={category.iconName} className="w-6 h-6 text-green-600 group-hover:text-green-700 transition-colors" />
                   </div>
                 </div>
                 <div className="text-sm font-semibold text-gray-900">{category.name}</div>
@@ -161,7 +183,7 @@ export default async function BonosPage({ params }: PageProps) {
           <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-2xl p-8 mb-12 relative overflow-hidden shadow-xl">
             <div className="absolute top-0 right-0 opacity-20">
               <div className="w-24 h-24">
-                <FontAwesomeIcon icon={faGift} className="text-white" style={{ fontSize: '4rem' }} />
+                <Gift className="w-16 h-16 text-white" />
               </div>
             </div>
             <div className="relative z-10">
@@ -180,7 +202,7 @@ export default async function BonosPage({ params }: PageProps) {
                   href={`/${locale}/casinos/${featuredBonus.slug}`}
                   className="bg-white text-green-700 px-6 py-3 rounded-xl font-bold hover:bg-green-50 transition-colors shadow-lg border border-green-200"
                 >
-                  Reclamar Bono
+                  {getCTAByType(featuredBonus.bonus.type, locale as 'es' | 'en')}
                 </Link>
                 {featuredBonus.code !== 'AUTO' && (
                   <div className="bg-white/20 px-4 py-3 rounded-xl">
@@ -271,7 +293,7 @@ export default async function BonosPage({ params }: PageProps) {
                     href={`/${locale}/casinos/${bonus.slug}`}
                     className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
                   >
-                    Reclamar
+                    {getCTAByName(casino.name, locale as 'es' | 'en')}
                     <ChevronRight className="w-4 h-4" />
                   </Link>
                   <button className="text-gray-500 hover:text-gray-900 text-sm flex items-center justify-center gap-1 transition-colors">

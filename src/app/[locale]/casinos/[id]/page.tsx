@@ -10,6 +10,7 @@ import FavoriteButtonAuth from '@/components/FavoriteButtonAuth';
 import { getCasinoBySlug } from '@/lib/casino-database';
 import type { Metadata } from 'next';
 import { getCanonicalUrl } from '@/lib/canonical';
+import { getCTAByName, getCTAByType } from '@/lib/cta-texts';
 
 interface PageProps {
   params: Promise<{ locale: string; id: string }>;
@@ -27,26 +28,46 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   
   const isSpanish = locale === 'es';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://casinospesos.com';
   const pageUrl = getCanonicalUrl(`/casinos/${id}`, locale);
-  const bonusText = `${casino.bonus.percentage}% hasta $${casino.bonus.amount.toLocaleString()} MXN`;
+  const bonusAmount = casino.bonus.amount.toLocaleString('es-MX');
+  const bonusText = `${casino.bonus.percentage}% hasta $${bonusAmount} MXN`;
+  
+  // Unique selling points for each casino
+  const uspMap: { [key: string]: string } = {
+    'bet365': 'Líder Mundial en Apuestas',
+    'codere': 'Casa de Apuestas Española',
+    'leovegas-new': 'Rey del Casino Móvil',
+    'caliente': '100% Mexicano desde 1916',
+    'betano': 'Super Cuotas Mejoradas',
+    'betway-new': 'Especialista en eSports',
+    'novibet': 'Boost en Apuestas Múltiples',
+    'bovada-2025': 'Acepta Criptomonedas',
+    'betano-2025': 'Plataforma Renovada 2025',
+    '888casino-new': 'Veterano desde 1997',
+    'betonline-2025': 'Bonos Crypto Exclusivos',
+    'winpot': 'Casino 100% Mexicano'
+  };
+  
+  const usp = uspMap[id] || casino.features[0];
   
   if (isSpanish) {
     return {
-      title: `${casino.name} Reseña 2025 - Bono ${bonusText} | CasinosPesos`,
-      description: `Reseña completa de ${casino.name} ✅ Bono ${bonusText} ✅ Retiros ${casino.withdrawalTime} ✅ ${casino.paymentMethods.join(', ')}.`,
-      keywords: `${casino.name.toLowerCase()}, ${casino.name.toLowerCase()} casino, ${casino.name.toLowerCase()} reseña, ${casino.name.toLowerCase()} bono, casino online méxico`,
+      title: `${casino.name} Casino México | Bono $${bonusAmount} | CasinosPesos`,
+      description: `${casino.name} México ⭐ Bono hasta $${bonusAmount} ✅ ${usp} ✅ Reseña 2025`,
+      keywords: `${casino.name.toLowerCase()}, ${casino.name.toLowerCase()} casino, ${casino.name.toLowerCase()} méxico, ${casino.name.toLowerCase()} bono, ${casino.name.toLowerCase()} reseña, casino online méxico`,
       openGraph: {
-        title: `${casino.name} - Bono ${bonusText} | Reseña 2025`,
-        description: `Calificación ${casino.rating}/5 ⭐ Retiros en ${casino.withdrawalTime} 🚀`,
+        title: `${casino.name} Casino México | Bono $${bonusAmount} | CasinosPesos`,
+        description: `${casino.name} México ⭐ Bono hasta $${bonusAmount} ✅ ${usp} ✅ Reseña 2025`,
         url: pageUrl,
         siteName: 'CasinosPesos',
         locale: 'es_MX',
         type: 'article',
         images: [{
-          url: `${baseUrl}/images/casinos/${id}-review.jpg`,
+          url: casino.logo && casino.logo.startsWith('http') ? casino.logo : `${baseUrl}${casino.logo || `/images/${id}-og.jpg`}`,
           width: 1200,
           height: 630,
-          alt: `${casino.name} Reseña`
+          alt: `${casino.name} Casino México`
         }]
       },
       twitter: {
@@ -241,7 +262,7 @@ export default async function CasinoDetailPage({ params }: PageProps) {
                 rel="noopener noreferrer"
                 className="block w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-xl font-bold text-center transition-all duration-200 transform hover:scale-105"
               >
-                Obtener Bono
+                {getCTAByType(casino.bonus.type, locale as 'es' | 'en')}
               </a>
             </div>
           </div>
@@ -425,7 +446,7 @@ export default async function CasinoDetailPage({ params }: PageProps) {
                   rel="noopener noreferrer"
                   className="block w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-xl font-bold text-center transition-all duration-200"
                 >
-                  Jugar Ahora
+                  {getCTAByName(casino.name, locale as 'es' | 'en')}
                 </a>
                 <Link 
                   href={`/${locale}/casinos`}

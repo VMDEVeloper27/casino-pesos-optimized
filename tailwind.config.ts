@@ -8,10 +8,26 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: '1rem',
+      screens: {
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1920px',
+      },
+    },
     extend: {
       screens: {
         'xl': '1300px', // Override xl breakpoint to 1300px for menu
         '2xl': '1536px',
+        '3xl': '1920px',
+      },
+      maxWidth: {
+        '8xl': '1920px',
+        '9xl': '2048px',
       },
       colors: {
         // Clean, Consistent Color Palette

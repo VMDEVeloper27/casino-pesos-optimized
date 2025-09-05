@@ -172,10 +172,11 @@ export default async function HomePage({ params }: HomePageProps) {
         <div className="text-center mb-16">
           <a 
             href={`/${locale}/casinos`}
-            className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 border-2 border-gray-200 hover:border-primary-200 text-gray-900 px-6 py-3 rounded-xl font-semibold transition-all duration-200 shadow-md hover:shadow-lg"
+            className="inline-flex items-center gap-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 min-h-[56px]"
           >
+            <span className="text-xl">🎰</span>
             Ver Todos los Casinos
-            <span className="text-primary-600">→</span>
+            <span className="text-xl">→</span>
           </a>
         </div>
 
@@ -188,6 +189,18 @@ export default async function HomePage({ params }: HomePageProps) {
             casinos={casinos}
             locale={locale}
           />
+          
+          {/* Big Compare Button */}
+          <div className="text-center mt-8">
+            <Link 
+              href={`/${locale}/comparar`}
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-10 py-5 rounded-xl font-bold text-lg transition-all duration-200 shadow-xl hover:shadow-2xl transform hover:scale-105 min-h-[64px]"
+            >
+              <span className="text-xl">⚖️</span>
+              {locale === 'es' ? 'Ver Comparación Completa' : 'View Full Comparison'}
+              <ChevronRight className="w-6 h-6" />
+            </Link>
+          </div>
         </div>
         
         {/* Related Content Section */}
@@ -325,17 +338,19 @@ export default async function HomePage({ params }: HomePageProps) {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/es/casinos"
-              className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-8 py-4 rounded-xl font-bold text-lg transform hover:scale-105 transition-all shadow-lg hover:shadow-xl inline-flex items-center justify-center gap-2"
+              className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-10 py-5 rounded-xl font-bold text-lg transform hover:scale-105 transition-all shadow-lg hover:shadow-xl inline-flex items-center justify-center gap-3 min-h-[64px]"
             >
+              <span className="text-xl">🎰</span>
               Explorar Casinos 
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-6 h-6" />
             </Link>
             <Link
               href="/es/bonos"
-              className="bg-white hover:bg-gray-50 text-gray-900 px-8 py-4 rounded-xl font-bold text-lg border-2 border-gray-200 hover:border-primary-200 transition-all shadow-md hover:shadow-lg inline-flex items-center justify-center gap-2"
+              className="bg-white hover:bg-gray-50 text-gray-900 px-10 py-5 rounded-xl font-bold text-lg border-2 border-gray-200 hover:border-primary-200 transition-all shadow-md hover:shadow-lg inline-flex items-center justify-center gap-3 min-h-[64px]"
             >
-              <Gift className="w-5 h-5 text-red-500" />
+              <Gift className="w-6 h-6 text-red-500" />
               Comparar Bonos
+              <span className="text-xl">🎁</span>
             </Link>
           </div>
         </div>

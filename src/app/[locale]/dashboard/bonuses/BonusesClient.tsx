@@ -18,6 +18,7 @@ import {
   Info
 } from 'lucide-react';
 import Link from 'next/link';
+import { getCTAByName, getCTAByType } from '@/lib/cta-texts';
 
 interface Bonus {
   id: string;
@@ -440,7 +441,7 @@ export default function BonusesClient({ locale }: BonusesClientProps) {
                           className="inline-flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          {isSpanish ? 'Jugar Ahora' : 'Play Now'}
+                          {getCTAByType(bonus.type, isSpanish ? 'es' : 'en')}
                           <ArrowRight className="w-4 h-4" />
                         </Link>
                       </>

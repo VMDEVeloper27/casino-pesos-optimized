@@ -77,6 +77,408 @@ let cachedCasinos: Casino[] | null = null;
 let cacheTimestamp: number = 0;
 const CACHE_DURATION = 300000; // 5 minutes cache
 
+// Fallback casino data with local images
+function getCasinoFallbackData(): Casino[] {
+  return [
+    {
+      id: 'caliente',
+      name: 'Caliente',
+      slug: 'caliente',
+      logo: '/images/caliente-logo.png',
+      rating: 4.8,
+      established: 1916,
+      affiliateLink: 'https://caliente.mx',
+      features: ['Deportes', 'Casino en vivo', 'Apuestas rápidas'],
+      bonus: {
+        type: 'welcome',
+        amount: 10000,
+        percentage: 100,
+        freeSpins: 100,
+        minDeposit: 200,
+        wageringRequirement: 30,
+        code: 'CALIENTE2024'
+      },
+      games: {
+        total: 2000,
+        slots: 1500,
+        live: 200,
+        table: 300
+      },
+      paymentMethods: ['SPEI', 'OXXO', 'Tarjetas', 'Bitcoin'],
+      withdrawalTime: '24-48 horas',
+      licenses: ['SEGOB'],
+      currencies: ['MXN'],
+      pros: ['Marca mexicana establecida', 'Retiros rápidos', 'Excelente app móvil'],
+      cons: ['Verificación puede tomar tiempo'],
+      status: 'active',
+      lastModified: new Date().toISOString()
+    },
+    {
+      id: 'bet365',
+      name: 'Bet365',
+      slug: 'bet365',
+      logo: '/images/bet365-logo.png',
+      rating: 4.9,
+      established: 2000,
+      affiliateLink: 'https://bet365.mx',
+      features: ['Líder mundial', 'Streaming en vivo', 'Cash out'],
+      bonus: {
+        type: 'welcome',
+        amount: 3000,
+        percentage: 100,
+        freeSpins: 0,
+        minDeposit: 100,
+        wageringRequirement: 25,
+        code: ''
+      },
+      games: {
+        total: 3000,
+        slots: 2000,
+        live: 500,
+        table: 500
+      },
+      paymentMethods: ['SPEI', 'Tarjetas', 'Skrill', 'Neteller'],
+      withdrawalTime: '1-3 días',
+      licenses: ['Gibraltar', 'Malta'],
+      currencies: ['MXN', 'USD', 'EUR'],
+      pros: ['Mejor plataforma deportiva', 'Streaming gratuito', 'Confiabilidad mundial'],
+      cons: ['Interfaz puede ser compleja para principiantes'],
+      status: 'active',
+      lastModified: new Date().toISOString()
+    },
+    {
+      id: 'codere',
+      name: 'Codere',
+      slug: 'codere',
+      logo: '/images/codere-logo.png',
+      rating: 4.7,
+      established: 1980,
+      affiliateLink: 'https://codere.mx',
+      features: ['Marca española', 'Promociones frecuentes', 'Club VIP'],
+      bonus: {
+        type: 'welcome',
+        amount: 5000,
+        percentage: 200,
+        freeSpins: 200,
+        minDeposit: 200,
+        wageringRequirement: 35,
+        code: 'CODERE200'
+      },
+      games: {
+        total: 1800,
+        slots: 1400,
+        live: 150,
+        table: 250
+      },
+      paymentMethods: ['SPEI', 'OXXO', 'PayPal', 'Tarjetas'],
+      withdrawalTime: '2-5 días',
+      licenses: ['SEGOB', 'DGJS España'],
+      currencies: ['MXN'],
+      pros: ['Bonos generosos', 'Muchas promociones', 'Buen soporte'],
+      cons: ['Retiros pueden ser lentos'],
+      status: 'active',
+      lastModified: new Date().toISOString()
+    },
+    {
+      id: 'leovegas-new',
+      name: 'LeoVegas',
+      slug: 'leovegas-new',
+      logo: '/images/leovegas-logo.png',
+      rating: 4.8,
+      established: 2012,
+      affiliateLink: 'https://leovegas.mx',
+      features: ['Rey del móvil', 'Jackpots millonarios', 'Casino en vivo premium'],
+      bonus: {
+        type: 'welcome',
+        amount: 25000,
+        percentage: 150,
+        freeSpins: 50,
+        minDeposit: 100,
+        wageringRequirement: 35,
+        code: ''
+      },
+      games: {
+        total: 2500,
+        slots: 2000,
+        live: 300,
+        table: 200
+      },
+      paymentMethods: ['SPEI', 'Tarjetas', 'MuchBetter', 'AstroPay'],
+      withdrawalTime: '24-72 horas',
+      licenses: ['Malta Gaming Authority', 'UK Gambling Commission'],
+      currencies: ['MXN', 'USD', 'EUR'],
+      pros: ['Mejor casino móvil', 'Jackpots progresivos', 'Retiros rápidos'],
+      cons: ['Sin PayPal en México'],
+      status: 'active',
+      lastModified: new Date().toISOString()
+    },
+    {
+      id: 'betano',
+      name: 'Betano',
+      slug: 'betano',
+      logo: '/images/betano-logo.png',
+      rating: 4.7,
+      established: 2013,
+      affiliateLink: 'https://betano.mx',
+      features: ['Super cuotas', 'Cash out parcial', 'Apuestas gratis'],
+      bonus: {
+        type: 'welcome',
+        amount: 5000,
+        percentage: 100,
+        freeSpins: 100,
+        minDeposit: 200,
+        wageringRequirement: 30,
+        code: ''
+      },
+      games: {
+        total: 2200,
+        slots: 1700,
+        live: 250,
+        table: 250
+      },
+      paymentMethods: ['SPEI', 'OXXO', 'Tarjetas', 'Skrill'],
+      withdrawalTime: '1-3 días',
+      licenses: ['Malta Gaming Authority'],
+      currencies: ['MXN'],
+      pros: ['Excelentes cuotas deportivas', 'App móvil rápida', 'Bono sin código'],
+      cons: ['Pocos métodos de pago'],
+      status: 'active',
+      lastModified: new Date().toISOString()
+    },
+    {
+      id: 'betway-new',
+      name: 'Betway',
+      slug: 'betway-new',
+      logo: '/images/betway-logo.png',
+      rating: 4.6,
+      established: 2006,
+      affiliateLink: 'https://betway.mx',
+      features: ['eSports líder', 'Free bets', 'Live streaming'],
+      bonus: {
+        type: 'welcome',
+        amount: 2000,
+        percentage: 100,
+        freeSpins: 0,
+        minDeposit: 100,
+        wageringRequirement: 30,
+        code: ''
+      },
+      games: {
+        total: 1800,
+        slots: 1200,
+        live: 300,
+        table: 300
+      },
+      paymentMethods: ['SPEI', 'Tarjetas', 'Neteller', 'ecoPayz'],
+      withdrawalTime: '24-48 horas',
+      licenses: ['Malta Gaming Authority', 'UK Gambling Commission'],
+      currencies: ['MXN', 'USD'],
+      pros: ['Líder en eSports', 'Patrocinador oficial', 'Retiros rápidos'],
+      cons: ['Bono modesto'],
+      status: 'active',
+      lastModified: new Date().toISOString()
+    },
+    {
+      id: 'novibet',
+      name: 'Novibet',
+      slug: 'novibet',
+      logo: '/images/novibet-logo.png',
+      rating: 4.5,
+      established: 2010,
+      affiliateLink: 'https://novibet.mx',
+      features: ['Super boost', 'Combo boost', 'Early payout'],
+      bonus: {
+        type: 'welcome',
+        amount: 10000,
+        percentage: 200,
+        freeSpins: 50,
+        minDeposit: 200,
+        wageringRequirement: 35,
+        code: 'NOVI200'
+      },
+      games: {
+        total: 2000,
+        slots: 1500,
+        live: 250,
+        table: 250
+      },
+      paymentMethods: ['SPEI', 'OXXO', 'Tarjetas', 'CoDi'],
+      withdrawalTime: '1-5 días',
+      licenses: ['Malta Gaming Authority'],
+      currencies: ['MXN'],
+      pros: ['Bonos generosos', 'Muchas promociones', 'Boost en apuestas'],
+      cons: ['Retiros pueden demorar'],
+      status: 'active',
+      lastModified: new Date().toISOString()
+    },
+    {
+      id: 'bovada-2025',
+      name: 'Bovada',
+      slug: 'bovada-2025',
+      logo: '/images/bovada-logo.png',
+      rating: 4.8,
+      established: 2011,
+      affiliateLink: 'https://bovada.lv',
+      features: ['Crypto friendly', 'Poker room', 'Sports betting'],
+      bonus: {
+        type: 'welcome',
+        amount: 3000,
+        percentage: 100,
+        freeSpins: 0,
+        minDeposit: 20,
+        wageringRequirement: 25,
+        code: ''
+      },
+      games: {
+        total: 2500,
+        slots: 2000,
+        live: 200,
+        table: 300
+      },
+      paymentMethods: ['Bitcoin', 'Ethereum', 'Litecoin', 'Tarjetas'],
+      withdrawalTime: '24-48 horas',
+      licenses: ['Curacao eGaming'],
+      currencies: ['USD', 'BTC', 'ETH'],
+      pros: ['Acepta criptomonedas', 'Retiros rápidos en crypto', 'Gran sala de poker'],
+      cons: ['No acepta MXN directamente'],
+      status: 'active',
+      lastModified: new Date().toISOString()
+    },
+    {
+      id: 'betano-2025',
+      name: 'Betano 2025',
+      slug: 'betano-2025',
+      logo: '/images/betano-2025-logo.png',
+      rating: 4.9,
+      established: 2013,
+      affiliateLink: 'https://betano.mx',
+      features: ['Nueva plataforma', 'Super odds', 'Aviator exclusivo'],
+      bonus: {
+        type: 'welcome',
+        amount: 8000,
+        percentage: 150,
+        freeSpins: 150,
+        minDeposit: 100,
+        wageringRequirement: 30,
+        code: 'BETA2025'
+      },
+      games: {
+        total: 3000,
+        slots: 2400,
+        live: 350,
+        table: 250
+      },
+      paymentMethods: ['SPEI', 'CoDi', 'Tarjetas', 'Criptomonedas'],
+      withdrawalTime: '1-2 días',
+      licenses: ['Malta Gaming Authority', 'SEGOB'],
+      currencies: ['MXN', 'USD'],
+      pros: ['Plataforma renovada 2025', 'Mejores cuotas del mercado', 'Aviator exclusivo'],
+      cons: ['Nuevo en México'],
+      status: 'active',
+      lastModified: new Date().toISOString()
+    },
+    {
+      id: '888casino-new',
+      name: '888 Casino',
+      slug: '888casino-new',
+      logo: '/images/888casino-logo.png',
+      rating: 4.7,
+      established: 1997,
+      affiliateLink: 'https://888casino.mx',
+      features: ['Veterano confiable', 'Ruleta exclusiva', 'Daily deals'],
+      bonus: {
+        type: 'welcome',
+        amount: 20000,
+        percentage: 200,
+        freeSpins: 88,
+        minDeposit: 200,
+        wageringRequirement: 30,
+        code: ''
+      },
+      games: {
+        total: 2000,
+        slots: 1500,
+        live: 200,
+        table: 300
+      },
+      paymentMethods: ['SPEI', 'PayPal', 'Tarjetas', 'Neteller'],
+      withdrawalTime: '1-3 días',
+      licenses: ['Gibraltar', 'Malta Gaming Authority', 'UK Gambling Commission'],
+      currencies: ['MXN', 'USD', 'EUR'],
+      pros: ['Marca establecida desde 1997', 'PayPal disponible', 'Juegos exclusivos'],
+      cons: ['Interfaz necesita actualización'],
+      status: 'active',
+      lastModified: new Date().toISOString()
+    },
+    {
+      id: 'betonline-2025',
+      name: 'BetOnline',
+      slug: 'betonline-2025',
+      logo: '/images/betonline-logo.png',
+      rating: 4.6,
+      established: 2001,
+      affiliateLink: 'https://betonline.ag',
+      features: ['Acepta USA', 'Crypto bonuses', 'Live betting'],
+      bonus: {
+        type: 'welcome',
+        amount: 3000,
+        percentage: 100,
+        freeSpins: 0,
+        minDeposit: 55,
+        wageringRequirement: 30,
+        code: 'BOL1000'
+      },
+      games: {
+        total: 2000,
+        slots: 1600,
+        live: 200,
+        table: 200
+      },
+      paymentMethods: ['Bitcoin', 'Ethereum', 'Tarjetas', 'Money Order'],
+      withdrawalTime: '48-72 horas',
+      licenses: ['Panama Gaming Commission'],
+      currencies: ['USD', 'BTC'],
+      pros: ['Acepta jugadores de USA', 'Buenos bonos crypto', 'Establecido'],
+      cons: ['Sin licencia europea'],
+      status: 'active',
+      lastModified: new Date().toISOString()
+    },
+    {
+      id: 'winpot',
+      name: 'WinPot',
+      slug: 'winpot',
+      logo: '/images/winpot-logo.png',
+      rating: 4.5,
+      established: 2020,
+      affiliateLink: 'https://winpot.mx',
+      features: ['100% Mexicano', 'Salas físicas', 'App móvil'],
+      bonus: {
+        type: 'welcome',
+        amount: 3000,
+        percentage: 100,
+        freeSpins: 50,
+        minDeposit: 100,
+        wageringRequirement: 35,
+        code: ''
+      },
+      games: {
+        total: 1500,
+        slots: 1200,
+        live: 150,
+        table: 150
+      },
+      paymentMethods: ['SPEI', 'OXXO', 'Tarjetas', 'Puntos WinPot'],
+      withdrawalTime: '24-48 horas',
+      licenses: ['SEGOB'],
+      currencies: ['MXN'],
+      pros: ['Casino 100% mexicano', 'Salas físicas en México', 'Programa de lealtad'],
+      cons: ['Catálogo de juegos limitado'],
+      status: 'active',
+      lastModified: new Date().toISOString()
+    }
+  ];
+}
+
 // Get all casinos from Supabase
 export async function getAllCasinos(): Promise<Casino[]> {
   try {
@@ -96,13 +498,24 @@ export async function getAllCasinos(): Promise<Casino[]> {
 
     if (error) {
       console.error('Supabase error:', error);
-      throw error;
+      // Use fallback data instead of throwing
+      const fallbackData = getCasinoFallbackData();
+      if (typeof window !== 'undefined') {
+        cachedCasinos = fallbackData;
+        cacheTimestamp = Date.now();
+      }
+      return fallbackData;
     }
 
-    // Если данных нет, возвращаем пустой массив
+    // Если данных нет, используем fallback
     if (!data || data.length === 0) {
-      console.log('No casinos found in database');
-      return [];
+      console.log('No casinos found in database, using fallback');
+      const fallbackData = getCasinoFallbackData();
+      if (typeof window !== 'undefined') {
+        cachedCasinos = fallbackData;
+        cacheTimestamp = Date.now();
+      }
+      return fallbackData;
     }
 
     const casinos = data.map(transformSupabaseToCasino);
@@ -116,8 +529,13 @@ export async function getAllCasinos(): Promise<Casino[]> {
     return casinos;
   } catch (error) {
     console.error('Error getting casinos from Supabase:', error);
-    // Return empty array as fallback
-    return [];
+    // Return fallback data instead of empty array
+    const fallbackData = getCasinoFallbackData();
+    if (typeof window !== 'undefined') {
+      cachedCasinos = fallbackData;
+      cacheTimestamp = Date.now();
+    }
+    return fallbackData;
   }
 }
 
@@ -156,13 +574,19 @@ export async function getCasinoById(id: string): Promise<Casino | null> {
 // Get casino by slug
 export async function getCasinoBySlug(slug: string): Promise<Casino | null> {
   try {
+    // First try Supabase
     const { data, error } = await supabase
       .from('casinos')
       .select('*')
       .eq('slug', slug)
       .single();
 
-    if (error) throw error;
+    if (error) {
+      // If Supabase fails, fall back to local data
+      console.warn('Supabase error, falling back to local data:', error.message);
+      const localCasinos = await getAllCasinos();
+      return localCasinos.find(c => c.slug === slug) || null;
+    }
 
     return data ? transformSupabaseToCasino(data) : null;
   } catch (error) {

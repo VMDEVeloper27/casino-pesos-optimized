@@ -296,10 +296,10 @@ export default function FavoritesClientDB({ userEmail }: FavoritesClientProps) {
                           )}
 
                           {/* Actions */}
-                          <div className="flex gap-2">
+                          <div className="flex gap-3">
                             <Link
                               href={`/es/casinos/${casino.slug || casino.id}`}
-                              className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded-lg font-semibold text-center transition-colors"
+                              className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-4 px-4 rounded-xl font-semibold text-center transition-colors min-h-[48px] flex items-center justify-center text-base"
                             >
                               Ver Reseña
                             </Link>
@@ -307,7 +307,7 @@ export default function FavoritesClientDB({ userEmail }: FavoritesClientProps) {
                               href={casino.affiliateLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg font-semibold text-center transition-colors"
+                              className="flex-1 bg-green-500 hover:bg-green-600 text-white py-4 px-4 rounded-xl font-bold text-center transition-colors min-h-[48px] flex items-center justify-center text-base shadow-lg"
                             >
                               Visitar
                             </a>

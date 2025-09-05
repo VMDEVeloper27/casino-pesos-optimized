@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import { useState } from 'react';
 
 interface CasinoLogoProps {
   name: string;
@@ -8,6 +11,7 @@ interface CasinoLogoProps {
 }
 
 export function CasinoLogo({ name, logo, size = 'md', className = '' }: CasinoLogoProps) {
+  const [imageError, setImageError] = useState(false);
   const sizeClasses = {
     sm: 'w-24 h-14',
     md: 'w-32 h-20',
@@ -45,8 +49,8 @@ export function CasinoLogo({ name, logo, size = 'md', className = '' }: CasinoLo
   const gradientColors = getGradientColors(name);
   const gradientId = `gradient-${name.replace(/\s+/g, '-')}`;
 
-  // Display actual image if available
-  if (isImagePath) {
+  // Display actual image if available (with error handling)
+  if (isImagePath && !imageError) {
     return (
       <div className={`${sizeClasses[size]} ${className} relative overflow-hidden rounded-lg flex items-center justify-center bg-gradient-to-br from-green-50 to-emerald-50`}>
         <Image
@@ -57,8 +61,8 @@ export function CasinoLogo({ name, logo, size = 'md', className = '' }: CasinoLo
           height={imageSizes[size].height}
           className="object-contain p-2 w-full h-full"
           loading="lazy"
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwABmX/9k="
+          onError={() => setImageError(true)}
+          unoptimized={logo.includes('supabase.co')} // Don't optimize Supabase images
         />
       </div>
     );

@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Import comprehensive responsive styles */
+@import '../styles/responsive-media-queries.css';
+@import '../styles/mobile-fixes.css';
+@import '../styles/accessibility.css';
+@import '../styles/casino-mobile-fixes.css';
+@import '../styles/google-mobile-optimization.css';
