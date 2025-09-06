@@ -416,7 +416,7 @@
       width: 100% !important;
       height: 100vh !important;
       height: -webkit-fill-available !important;
-      -webkit-overflow-scrolling: touch !important;
+      -webkit-overflow-scrolling: none !important;
     }
   }
   
