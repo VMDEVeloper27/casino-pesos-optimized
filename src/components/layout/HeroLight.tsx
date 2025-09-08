@@ -103,7 +103,6 @@ export function Hero() {
             <form onSubmit={handleSearch} className="relative">
               <input
                 type="text"
-                placeholder={placeholder}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
