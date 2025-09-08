@@ -171,17 +171,17 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="bg-gradient-to-r from-gray-900 to-gray-800 py-6">
+      <div className="bg-gradient-to-r from-green-800 to-green-700 py-6">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             {/* Copyright */}
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-sm">C</span>
+              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-lg">
+                <span className="text-green-700 font-bold text-sm">C</span>
               </div>
-              <p className="text-gray-300 text-sm font-medium">
+              <p className="text-green-100 text-sm font-medium">
                 © {currentYear} <span className="text-white font-semibold">CasinosPesos</span>. 
-                <span className="text-gray-400 ml-1">Todos los derechos reservados.</span>
+                <span className="text-green-200 ml-1">Todos los derechos reservados.</span>
               </p>
             </div>
             
@@ -189,7 +189,7 @@ export default function Footer() {
             <div className="flex flex-wrap items-center gap-3 md:gap-6">
               <Link 
                 href="/sitemap.xml" 
-                className="text-gray-400 hover:text-green-400 transition-colors duration-200 text-sm font-medium flex items-center gap-1.5"
+                className="text-green-200 hover:text-white transition-colors duration-200 text-sm font-medium flex items-center gap-1.5"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
@@ -197,33 +197,33 @@ export default function Footer() {
                 <span>Sitemap</span>
               </Link>
               
-              <span className="text-gray-600 hidden md:inline">|</span>
+              <span className="text-green-300 hidden md:inline">|</span>
               
               <Link 
                 href="/rss" 
-                className="text-gray-400 hover:text-orange-400 transition-colors duration-200 text-sm font-medium flex items-center gap-1.5"
+                className="text-green-200 hover:text-white transition-colors duration-200 text-sm font-medium flex items-center gap-1.5"
               >
                 <Rss className="w-4 h-4" />
                 <span>RSS Feed</span>
               </Link>
               
-              <span className="text-gray-600 hidden md:inline">|</span>
+              <span className="text-green-300 hidden md:inline">|</span>
               
-              <div className="flex items-center gap-1.5 text-gray-400">
-                <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 24 24">
+              <div className="flex items-center gap-1.5 text-green-200">
+                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                 </svg>
                 <span className="text-sm">
-                  Actualizado: <span className="text-green-400 font-medium">{lastUpdate}</span>
+                  Actualizado: <span className="text-white font-medium">{lastUpdate}</span>
                 </span>
               </div>
             </div>
           </div>
           
           {/* Additional Info */}
-          <div className="mt-6 pt-6 border-t border-gray-700">
-            <p className="text-center text-xs text-gray-500">
-              CasinosPesos es operado por <span className="text-gray-400">Digital Gaming Solutions S.A. de C.V.</span> | 
+          <div className="mt-6 pt-6 border-t border-green-600">
+            <p className="text-center text-xs text-green-200">
+              CasinosPesos es operado por <span className="text-green-100">Digital Gaming Solutions S.A. de C.V.</span> | 
               <span className="ml-1">Registro SEGOB: MX-2024-CGS-0012</span> | 
               <span className="ml-1">Ciudad de México, México</span>
             </p>
