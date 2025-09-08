@@ -35,13 +35,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       title: 'Mejores Casinos Online México 2025 | Pesos Mexicanos | CasinosPesos',
       description: 'Descubre los mejores casinos online que aceptan pesos mexicanos ⭐ Bonos hasta $50,000 MXN ✅ OXXO, SPEI, PayPal ✅ Retiros rápidos ✅ Guías expertas',
       keywords: 'casinos online méxico, casino pesos mexicanos, mejores casinos mexico, casino online seguro méxico, bonos casino méxico, casino OXXO, casino PayPal méxico',
-      alternates: {
-        canonical: getCanonicalUrl('/', locale),
-      },
       openGraph: {
         title: 'Mejores Casinos Online México 2025 | Bonos hasta $50,000 MXN',
         description: 'Los casinos online más seguros de México. Bonos exclusivos, pagos con OXXO y retiros rápidos.',
-        url: 'https://www.casinospesos.com/es',
+        url: getCanonicalUrl('/', locale),
         siteName: 'CasinosPesos',
         locale: 'es_MX',
         type: 'website',
@@ -58,11 +55,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         description: 'Bonos exclusivos hasta $50,000 MXN en los casinos más seguros',
       },
       alternates: {
-        canonical: 'https://www.casinospesos.com/es',
+        canonical: getCanonicalUrl('/', locale),
         languages: {
-          'es-MX': 'https://www.casinospesos.com/es',
-          'en-US': 'https://www.casinospesos.com/en',
-          'x-default': 'https://www.casinospesos.com/es'
+          'es-MX': getCanonicalUrl('/', 'es'),
+          'en-US': getCanonicalUrl('/', 'en'),
+          'x-default': getCanonicalUrl('/', 'es')
         }
       },
       robots: {

@@ -1,5 +1,6 @@
-export function getCanonicalUrl(path: string, locale: string = 'es'): string {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://casinospesos.com';
+export function getCanonicalUrl(path: string, locale: string = 'es', headers?: Headers): string {
+  // Always use the production domain
+  const baseUrl = 'https://www.casinospesos.com';
   
   // Remove any query parameters or hash fragments
   const cleanPath = path.split('?')[0].split('#')[0];

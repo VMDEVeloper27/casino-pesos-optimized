@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { Cookie, Settings, Shield, Eye, Trash2, Info, CheckCircle } from 'lucide-react';
+import { getCanonicalUrl } from '@/lib/canonical';
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -16,16 +17,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: 'Información completa sobre cómo usamos las cookies y tecnologías similares en CasinosPesos. Tipos, gestión, configuración y control de cookies.',
       keywords: 'politica cookies casinospesos, gestion cookies casinos, configuracion cookies, tecnologias seguimiento, cookies analiticas, cookies marketing',
       alternates: {
-        canonical: 'https://www.casinospesos.com/es/cookies',
+        canonical: getCanonicalUrl('/cookies', locale),
         languages: {
-          'es-MX': 'https://www.casinospesos.com/es/cookies',
-          'en-US': 'https://www.casinospesos.com/en/cookies',
+          'es-MX': getCanonicalUrl('/cookies', 'es'),
+          'en-US': getCanonicalUrl('/cookies', 'en'),
         }
       },
       openGraph: {
         title: 'Política de Cookies | CasinosPesos México',
         description: 'Aprende sobre nuestro uso de cookies. Gestiona tus preferencias y entiende cómo mejoramos tu experiencia web.',
-        url: 'https://www.casinospesos.com/es/cookies',
+        url: getCanonicalUrl('/cookies', locale),
         siteName: 'CasinosPesos',
         locale: 'es_MX',
         type: 'website',
@@ -49,16 +50,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: 'Complete information about how we use cookies and similar technologies at CasinosPesos. Types, management, configuration and cookie control.',
       keywords: 'cookie policy casinospesos, casino cookie management, cookie configuration, tracking technologies, analytics cookies, marketing cookies',
       alternates: {
-        canonical: 'https://www.casinospesos.com/en/cookies',
+        canonical: getCanonicalUrl('/cookies', locale),
         languages: {
-          'es-MX': 'https://www.casinospesos.com/es/cookies',
-          'en-US': 'https://www.casinospesos.com/en/cookies',
+          'es-MX': getCanonicalUrl('/cookies', 'es'),
+          'en-US': getCanonicalUrl('/cookies', 'en'),
         }
       },
       openGraph: {
         title: 'Cookie Policy | CasinosPesos Mexico',
         description: 'Learn about our cookie usage. Manage your preferences and understand how we improve your web experience.',
-        url: 'https://www.casinospesos.com/en/cookies',
+        url: getCanonicalUrl('/cookies', locale),
         siteName: 'CasinosPesos',
         locale: 'en_US',
         type: 'website',

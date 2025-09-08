@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Calculator, TrendingUp, AlertCircle, Lightbulb, DollarSign, Target } from 'lucide-react';
 import BonusCalculator from '@/components/BonusCalculator';
+import { getCanonicalUrl } from '@/lib/canonical';
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -16,16 +17,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: 'Calcula exactamente cuánto apostar para liberar bonos de casino. Herramienta gratuita para calcular requisitos de rollover 30x, 35x, 40x y más.',
       keywords: 'calculadora bonos casino, rollover mexico, requisitos apuesta, wagering requirements, calculadora rollover, liberar bono casino',
       alternates: {
-        canonical: 'https://www.casinospesos.com/es/calculadora',
+        canonical: getCanonicalUrl('/calculadora', locale),
         languages: {
-          'es-MX': 'https://www.casinospesos.com/es/calculadora',
-          'en-US': 'https://www.casinospesos.com/en/calculator',
+          'es-MX': getCanonicalUrl('/calculadora', 'es'),
+          'en-US': getCanonicalUrl('/calculator', 'en'),
         }
       },
       openGraph: {
         title: 'Calculadora de Bonos de Casino | Rollover Gratis',
         description: 'Calcula los requisitos de apuesta de cualquier bono. Descubre cuánto apostar para retirar tus ganancias.',
-        url: 'https://www.casinospesos.com/es/calculadora',
+        url: getCanonicalUrl('/calculadora', locale),
         siteName: 'CasinosPesos',
         locale: 'es_MX',
         type: 'website',
@@ -49,16 +50,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: 'Calculate exactly how much to wager to clear casino bonuses. Free tool to calculate 30x, 35x, 40x rollover requirements and more.',
       keywords: 'casino bonus calculator, rollover mexico, wagering requirements, rollover calculator, clear casino bonus',
       alternates: {
-        canonical: 'https://www.casinospesos.com/en/calculator',
+        canonical: getCanonicalUrl('/calculator', locale),
         languages: {
-          'es-MX': 'https://www.casinospesos.com/es/calculadora',
-          'en-US': 'https://www.casinospesos.com/en/calculator',
+          'es-MX': getCanonicalUrl('/calculadora', 'es'),
+          'en-US': getCanonicalUrl('/calculator', 'en'),
         }
       },
       openGraph: {
         title: 'Casino Bonus Calculator | Free Rollover Tool',
         description: 'Calculate wagering requirements for any bonus. Find out how much to bet to withdraw your winnings.',
-        url: 'https://www.casinospesos.com/en/calculator',
+        url: getCanonicalUrl('/calculator', locale),
         siteName: 'CasinosPesos',
         locale: 'en_US',
         type: 'website',
