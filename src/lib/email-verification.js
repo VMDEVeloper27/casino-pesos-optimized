@@ -3,7 +3,7 @@ const { sendEmail } = require('./gmail-working');
 
 async function sendVerificationEmail(email, name, token) {
   try {
-    const verificationUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/es/auth/verify-email?token=${token}`;
+    const verificationUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://localhost:3000'}/es/auth/verify-email?token=${token}`;
     
     const html = `
       <!DOCTYPE html>
@@ -146,7 +146,7 @@ async function sendVerificationEmail(email, name, token) {
 
 async function sendWelcomeEmail(email, name) {
   try {
-    const dashboardUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/dashboard`;
+    const dashboardUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://localhost:3000'}/dashboard`;
     
     const html = `
       <!DOCTYPE html>

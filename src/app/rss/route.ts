@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 // Sample data for RSS feed
-const siteUrl = process.env.SITE_URL || 'http://localhost:3002';
+const siteUrl = process.env.SITE_URL || 'https://localhost:3002';
 const siteName = 'CasinosPesos';
 const siteDescription = 'Los mejores casinos online en México - Guías, bonos y estrategias';
 

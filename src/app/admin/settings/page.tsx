@@ -111,7 +111,7 @@ export default function SettingsPage() {
       supabaseUrl: '',
       supabaseAnonKey: '',
       nextAuthSecret: '',
-      nextAuthUrl: 'http://localhost:3000'
+      nextAuthUrl: 'https://localhost:3000'
     },
     features: {
       enableRegistration: true,

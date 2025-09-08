@@ -385,7 +385,7 @@ async function sendNewPostNotifications(post: BlogPost) {
     
     for (const subscriber of blogSubscribers) {
       try {
-        const unsubscribeUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3001'}/api/newsletter/unsubscribe?email=${encodeURIComponent(subscriber.email)}`;
+        const unsubscribeUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://localhost:3001'}/api/newsletter/unsubscribe?email=${encodeURIComponent(subscriber.email)}`;
         
         // Create email HTML
         const emailHtml = `
@@ -456,7 +456,7 @@ async function sendNewPostNotifications(post: BlogPost) {
                                 <span style="margin-left: 15px;">⏱️ ${post.read_time} min de lectura</span>
                               </div>
                               
-                              <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3001'}/es/blog/${post.slug}" style="display: inline-block; padding: 12px 30px; background-color: #10b981; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold; border-radius: 6px; margin-top: 10px;">
+                              <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://localhost:3001'}/es/blog/${post.slug}" style="display: inline-block; padding: 12px 30px; background-color: #10b981; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold; border-radius: 6px; margin-top: 10px;">
                                 Leer Artículo Completo →
                               </a>
                             </td>

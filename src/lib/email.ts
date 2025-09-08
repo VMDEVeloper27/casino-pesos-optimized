@@ -32,7 +32,7 @@ export async function sendVerificationEmail(
   verificationToken: string
 ): Promise<boolean> {
   try {
-    const verificationUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/auth/verify-email?token=${verificationToken}`;
+    const verificationUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://localhost:3000'}/api/auth/verify-email?token=${verificationToken}`;
     
     const html = renderEmailTemplate('verification', {
       name,
@@ -67,7 +67,7 @@ export async function sendWelcomeEmail(
   name: string
 ): Promise<boolean> {
   try {
-    const dashboardUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/dashboard`;
+    const dashboardUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://localhost:3000'}/dashboard`;
     
     const html = renderEmailTemplate('welcome', {
       name,
@@ -97,7 +97,7 @@ export async function sendPasswordResetEmail(
   resetToken: string
 ): Promise<boolean> {
   try {
-    const resetUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/auth/reset-password?token=${resetToken}`;
+    const resetUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://localhost:3000'}/auth/reset-password?token=${resetToken}`;
     
     const html = renderEmailTemplate('passwordReset', {
       name,

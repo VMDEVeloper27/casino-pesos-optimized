@@ -10,7 +10,7 @@ export default function RSSPage() {
   
   const rssUrl = typeof window !== 'undefined' 
     ? `${window.location.origin}/rss` 
-    : 'http://localhost:3002/rss';
+    : 'https://localhost:3002/rss';
 
   const handleCopyRSS = () => {
     navigator.clipboard.writeText(rssUrl);

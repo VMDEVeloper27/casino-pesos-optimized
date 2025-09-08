@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
     const emailHtml = await render(
       NewsletterWelcomeEmail({
         email: body.email,
-        unsubscribeUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3013'}/api/newsletter/unsubscribe?email=${encodeURIComponent(body.email)}&token=${unsubscribeToken}`
+        unsubscribeUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://localhost:3013'}/api/newsletter/unsubscribe?email=${encodeURIComponent(body.email)}&token=${unsubscribeToken}`
       })
     )
     

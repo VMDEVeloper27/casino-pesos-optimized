@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
     const isExpired = new Date(tokenData.expires_at) < new Date();
     
     // Generate the verification URL
-    const verificationUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/auth/verify-email?token=${tokenData.token}`;
+    const verificationUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://localhost:3000'}/api/auth/verify-email?token=${tokenData.token}`;
     
     return NextResponse.json({
       email,

@@ -31,7 +31,7 @@ function BlogPostNotificationEmail({
   subscriber: Subscriber;
   unsubscribeUrl: string;
 }) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3003';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://localhost:3003';
   const postUrl = `${siteUrl}/es/blog/${post.slug}`;
   
   return `
@@ -180,7 +180,7 @@ export async function POST(request: NextRequest) {
       await Promise.all(batch.map(async (subscriber) => {
         try {
           const unsubscribeToken = Buffer.from(subscriber.email).toString('base64');
-          const unsubscribeUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3003'}/api/newsletter/unsubscribe?email=${encodeURIComponent(subscriber.email)}&token=${unsubscribeToken}`;
+          const unsubscribeUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://localhost:3003'}/api/newsletter/unsubscribe?email=${encodeURIComponent(subscriber.email)}&token=${unsubscribeToken}`;
           
           const emailHtml = BlogPostNotificationEmail({
             post,
