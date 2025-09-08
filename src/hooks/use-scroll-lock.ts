@@ -52,15 +52,32 @@ export function useScrollLock(isLocked: boolean) {
       document.body.classList.add('scroll-locked', 'menu-open');
       document.documentElement.classList.add('scroll-locked', 'menu-open');
       
+      // Check if passive is supported
+      let supportsPassive = false;
+      try {
+        const opts = Object.defineProperty({}, 'passive', {
+          get: function() {
+            supportsPassive = true;
+            return true;
+          }
+        });
+        window.addEventListener("testPassive", null as any, opts);
+        window.removeEventListener("testPassive", null as any, opts);
+      } catch (e) {}
+      
       // Prevent all scroll-related events on mobile and desktop
       const preventScroll = (e: Event) => {
-        e.preventDefault();
+        if (e.cancelable) {
+          e.preventDefault();
+        }
         e.stopPropagation();
         return false;
       };
       
       const preventWheel = (e: WheelEvent) => {
-        e.preventDefault();
+        if (e.cancelable) {
+          e.preventDefault();
+        }
         e.stopPropagation();
         return false;
       };
@@ -69,20 +86,25 @@ export function useScrollLock(isLocked: boolean) {
         // Prevent scroll keys: arrows, space, page up/down, home, end
         const scrollKeys = [32, 33, 34, 35, 36, 37, 38, 39, 40];
         if (scrollKeys.includes(e.keyCode)) {
-          e.preventDefault();
+          if (e.cancelable) {
+            e.preventDefault();
+          }
           e.stopPropagation();
           return false;
         }
       };
       
       // Add all event listeners to prevent scrolling
-      document.addEventListener('touchmove', preventScroll, { passive: false });
-      document.addEventListener('wheel', preventWheel, { passive: false });
-      document.addEventListener('keydown', preventKeyScroll, { passive: false });
-      document.addEventListener('touchstart', preventScroll, { passive: false });
+      const passiveOption = supportsPassive ? { passive: false } : false;
+      document.addEventListener('touchmove', preventScroll, passiveOption);
+      document.addEventListener('wheel', preventWheel, passiveOption);
+      document.addEventListener('keydown', preventKeyScroll, passiveOption);
+      
+      // Don't prevent touchstart - it's not needed for scroll prevention
+      // document.addEventListener('touchstart', preventScroll, passiveOption);
       
       // Also prevent scrolling on the window
-      window.addEventListener('scroll', preventScroll, { passive: false });
+      window.addEventListener('scroll', preventScroll, passiveOption);
       
       // Cleanup function
       return () => {
@@ -90,7 +112,6 @@ export function useScrollLock(isLocked: boolean) {
         document.removeEventListener('touchmove', preventScroll);
         document.removeEventListener('wheel', preventWheel);
         document.removeEventListener('keydown', preventKeyScroll);
-        document.removeEventListener('touchstart', preventScroll);
         window.removeEventListener('scroll', preventScroll);
         
         // Restore original styles
