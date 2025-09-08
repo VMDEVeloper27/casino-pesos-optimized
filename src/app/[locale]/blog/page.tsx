@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import BlogClient from './BlogClient';
 import { getCanonicalUrl } from '@/lib/canonical';
-import { supabase } from '@/lib/supabase';
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -83,45 +82,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-// Fetch blog posts from database
-async function getBlogPosts() {
-  try {
-    const { data: posts, error } = await supabase
-      .from('blog_posts')
-      .select('*')
-      .eq('status', 'published')
-      .order('published_at', { ascending: false })
-      .limit(20);
-    
-    if (error) {
-      console.error('Error fetching blog posts:', error);
-      return [];
-    }
-    
-    // Format posts to match the expected structure
-    return (posts || []).map(post => ({
-      id: post.id,
-      slug: post.slug,
-      title: post.title_es || post.title,
-      excerpt: post.excerpt_es || post.excerpt,
-      author: post.author,
-      authorRole: post.author_role,
-      category: post.category,
-      tags: post.tags || [],
-      publishedAt: post.published_at,
-      readTime: post.read_time || 5,
-      views: post.views || 0,
-      likes: post.likes || 0,
-      featured_image: post.featured_image // This is the key field for images
-    }));
-  } catch (error) {
-    console.error('Error in getBlogPosts:', error);
-    return [];
-  }
-}
-
-// Mock blog posts as fallback
-const mockBlogPosts = [
+// Mock blog posts data - In production, this would come from a CMS or database
+const blogPosts = [
   {
     id: '1',
     slug: 'regulacion-casinos-online-mexico-2025',
@@ -212,12 +174,6 @@ const mockBlogPosts = [
 
 export default async function BlogPage({ params }: PageProps) {
   const { locale } = await params;
-  
-  // Fetch real blog posts from database
-  const dbPosts = await getBlogPosts();
-  
-  // If no posts from database, use mock data as fallback
-  const blogPosts = dbPosts.length > 0 ? dbPosts : mockBlogPosts;
   
   return <BlogClient locale={locale} initialPosts={blogPosts} />;
 }
