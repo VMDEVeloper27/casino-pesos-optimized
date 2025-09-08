@@ -813,7 +813,7 @@
     "id": "leon",
     "name": "Leon Casino",
     "slug": "leon",
-    "logo": "/images/leon-logo.png",
+    "logo": "https://zwtadapqdlthqafdsloi.supabase.co/storage/v1/object/public/casino-logos/leon-1755859089032.png",
     "rating": 4.5,
     "established": 2007,
     "affiliateLink": "https://leon.mx",

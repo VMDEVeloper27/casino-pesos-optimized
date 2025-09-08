@@ -455,7 +455,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
                       rel="noopener noreferrer"
                       className="bg-gradient-to-r from-primary to-accent text-black px-6 py-3 rounded-xl font-bold text-base hover:opacity-90 transition-opacity flex items-center justify-center gap-2 min-h-[48px] shadow-lg"
                     >
-                      {locale === 'es' ? 'Jugar' : 'Play'}
+                      {getCTAByIndex(index, locale as 'es' | 'en')}
                       <ChevronRight className="w-5 h-5" />
                     </a>
                   </div>
@@ -552,7 +552,7 @@ export function CasinoComparisonTable({ casinos, locale = 'es' }: ComparisonTabl
                 rel="noopener noreferrer"
                 className="flex-1 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-black text-center py-4 px-6 rounded-xl text-base font-bold transition-all transform hover:scale-105 min-h-[52px] flex items-center justify-center shadow-lg"
               >
-                {getCTAByName(casino.name, locale as 'es' | 'en')}
+                {getCTAByIndex(index, locale as 'es' | 'en')}
               </a>
             </div>
           </motion.div>

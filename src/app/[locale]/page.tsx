@@ -158,12 +158,13 @@ export default async function HomePage({ params }: HomePageProps) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 items-stretch">
-          {casinos.slice(0, 6).map((casino) => (
+          {casinos.slice(0, 6).map((casino, index) => (
             <CasinoCard 
               key={casino.id} 
               casino={casino} 
               featured={casino.id === '1'}
               locale={locale}
+              index={index}
             />
           ))}
         </div>

@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import type { Casino } from '@/lib/casino-database';
 import CasinoSelector from '@/components/CasinoSelector';
 import CopyButton from '@/components/CopyButton';
+import { getCTAByIndex } from '@/lib/cta-texts';
 
 interface CompararClientProps {
   allCasinos: Casino[];
@@ -434,7 +435,7 @@ export default function CompararClientCompact({ allCasinos, initialCasinos, loca
                     <td className="sticky left-0 bg-gray-50 p-2 text-xs font-medium text-gray-600 border-r border-gray-100">
                       Acciones
                     </td>
-                    {compareData.map((casino) => (
+                    {compareData.map((casino, idx) => (
                       <td key={casino.id} className="p-2 text-center">
                         <div className="space-y-1">
                           <a
@@ -443,7 +444,7 @@ export default function CompararClientCompact({ allCasinos, initialCasinos, loca
                             rel="noopener noreferrer"
                             className="block w-full bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded text-xs font-medium transition-colors"
                           >
-                            Jugar
+                            {getCTAByIndex(idx, locale as 'es' | 'en')}
                           </a>
                           <Link
                             href={`/${locale}/casinos/${casino.slug}`}
