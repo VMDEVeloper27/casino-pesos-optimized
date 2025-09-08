@@ -13,9 +13,9 @@ export function getCanonicalUrl(path: string, locale: string = 'es', headers?: H
     ? normalizedPath 
     : normalizedPath.replace(/\/$/, '');
   
-  // Build the full URL
-  const fullPath = locale === 'es' 
-    ? pathWithoutTrailingSlash 
+  // Build the full URL - always include locale
+  const fullPath = pathWithoutTrailingSlash === '/' 
+    ? `/${locale}` 
     : `/${locale}${pathWithoutTrailingSlash}`;
     
   return `${baseUrl}${fullPath}`;
