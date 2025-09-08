@@ -160,6 +160,15 @@ export default async function LocaleLayout({
           .loading { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
           @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
           
+          /* AGGRESSIVE Mobile Menu Scroll Lock */
+          html.menu-open, body.menu-open {
+            overflow: hidden !important;
+            position: fixed !important;
+            width: 100% !important;
+            height: 100% !important;
+            touch-action: none !important;
+          }
+          
           /* Critical color utilities for immediate paint */
           .text-green-700 { color: rgb(21 128 61); }
           .text-green-600 { color: rgb(22 163 74); }

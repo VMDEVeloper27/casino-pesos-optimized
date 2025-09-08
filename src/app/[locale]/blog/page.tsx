@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import BlogClient from './BlogClient';
 import { getCanonicalUrl } from '@/lib/canonical';
+import { supabase } from '@/lib/supabase';
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -175,5 +176,39 @@ const blogPosts = [
 export default async function BlogPage({ params }: PageProps) {
   const { locale } = await params;
   
-  return <BlogClient locale={locale} initialPosts={blogPosts} />;
+  // Try to fetch from database first
+  let posts = blogPosts; // Use mock data as default
+  
+  try {
+    const { data: dbPosts, error } = await supabase
+      .from('blog_posts')
+      .select('*')
+      .eq('status', 'published')
+      .order('published_at', { ascending: false })
+      .limit(20);
+    
+    if (!error && dbPosts && dbPosts.length > 0) {
+      // Map database posts to expected format
+      posts = dbPosts.map(post => ({
+        id: post.id,
+        slug: post.slug,
+        title: post.title_es || post.title,
+        excerpt: post.excerpt_es || post.excerpt,
+        author: post.author,
+        authorRole: post.author_role,
+        category: post.category,
+        tags: post.tags || [],
+        publishedAt: post.published_at,
+        readTime: post.read_time || 5,
+        views: post.views || 0,
+        likes: post.likes || 0,
+        featured_image: post.featured_image // Key field for images from DB
+      }));
+    }
+  } catch (error) {
+    console.error('Error fetching blog posts from DB:', error);
+    // Will use mock data
+  }
+  
+  return <BlogClient locale={locale} initialPosts={posts} />;
 }

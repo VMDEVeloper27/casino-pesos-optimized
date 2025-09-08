@@ -317,7 +317,7 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
           {/* Menu Toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="relative w-12 h-12 flex items-center justify-center rounded-lg hover:bg-neutral-800 transition-colors"
+            className="relative min-w-[47px] min-h-[47px] w-12 h-12 flex items-center justify-center rounded-lg hover:bg-neutral-800 transition-colors"
             aria-label="Toggle menu"
           >
             <AnimatePresence mode="wait">
@@ -413,7 +413,7 @@ export function MobileNav({ locale = 'es' }: MobileNavProps) {
                   </Link>
                   <button
                     onClick={() => setIsOpen(false)}
-                    className="w-12 h-12 flex items-center justify-center text-neutral-400 hover:text-white transition-colors rounded-lg hover:bg-neutral-800"
+                    className="min-w-[47px] min-h-[47px] w-12 h-12 flex items-center justify-center text-neutral-400 hover:text-white transition-colors rounded-lg hover:bg-neutral-800"
                   >
                     <X className="w-5 h-5" />
                   </button>

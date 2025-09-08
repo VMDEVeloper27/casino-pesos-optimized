@@ -45,7 +45,7 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
     ? getCTAByType(casino.bonus.type, locale as 'es' | 'en')
     : getCTAByName(casino.name, locale as 'es' | 'en');
   
-  const handleVisitCasino = () => {
+  const handleTrackClick = () => {
     // Track click event
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', 'casino_click', {
@@ -54,8 +54,6 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
         position: featured ? 'featured' : 'list',
       });
     }
-    // Open affiliate link
-    window.open(casino.affiliateLink, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -227,13 +225,16 @@ export function CasinoCard({ casino, featured = false, locale = 'es' }: CasinoCa
           >
             {locale === 'es' ? 'Leer Reseña' : 'Read Review'}
           </Link>
-          <button
-            onClick={handleVisitCasino}
+          <Link
+            href={casino.affiliateLink}
+            onClick={handleTrackClick}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-5 py-4 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg min-h-[52px] text-base"
           >
             {ctaText}
             <ChevronRight className="w-5 h-5" />
-          </button>
+          </Link>
         </div>
 
         {/* Trust Indicators */}

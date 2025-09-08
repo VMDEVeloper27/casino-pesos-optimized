@@ -26,6 +26,7 @@ import { cn } from '@/lib/utils';
 import { useCountry, countries } from '@/contexts/CountryContext';
 import { useSession, signOut } from 'next-auth/react';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { useScrollLock } from '@/hooks/use-scroll-lock';
 
 interface ProfessionalHeaderProps {
   locale: string;
@@ -97,17 +98,8 @@ export function ProfessionalHeader({ locale }: ProfessionalHeaderProps) {
     setActiveMobileSubmenu(null);
   }, [pathname]);
 
-  // Prevent body scroll when mobile menu is open
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isMobileMenuOpen]);
+  // Use proper scroll lock hook to prevent body scroll when mobile menu is open
+  useScrollLock(isMobileMenuOpen);
 
   return (
     <>
