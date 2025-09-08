@@ -5,6 +5,35 @@ import { ArrowRight, Calendar, ChevronRight, Clock, User, Eye, Heart, Tag, Searc
 import Link from 'next/link';
 import { BreadcrumbStructuredData } from '@/components/StructuredData';
 
+// Helper function to get proper image URL
+function getImageUrl(imageUrl: string | undefined): string | undefined {
+  if (!imageUrl) return undefined;
+  
+  // If it's already a full URL, return as is
+  if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+    return imageUrl;
+  }
+  
+  // If it's a Supabase storage path, construct the full URL
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  if (supabaseUrl && imageUrl.includes('storage/v1/object/public/')) {
+    return `${supabaseUrl}/${imageUrl}`;
+  }
+  
+  // If it starts with /storage, add the Supabase URL
+  if (supabaseUrl && imageUrl.startsWith('/storage')) {
+    return `${supabaseUrl}${imageUrl}`;
+  }
+  
+  // If it's just a filename or path, assume it's in the blog-images bucket
+  if (supabaseUrl && !imageUrl.startsWith('/')) {
+    return `${supabaseUrl}/storage/v1/object/public/blog-images/${imageUrl}`;
+  }
+  
+  // Default: return as is (for local images starting with /)
+  return imageUrl;
+}
+
 interface BlogPost {
   id: string;
   slug: string;
@@ -158,18 +187,25 @@ export default function BlogClient({ locale, initialPosts }: BlogClientProps) {
                 <article key={post.id} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group">
                   {/* Featured Image */}
                   <div className="h-48 relative overflow-hidden bg-gradient-to-br from-green-400 to-emerald-500">
-                    {(post.featuredImage || post.featured_image) ? (
-                      <>
-                        <img 
-                          src={post.featuredImage || post.featured_image}
-                          alt={post.title}
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-black/20" />
-                      </>
-                    ) : (
-                      <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-emerald-500" />
-                    )}
+                    {(() => {
+                      const imageUrl = getImageUrl(post.featuredImage || post.featured_image);
+                      return imageUrl ? (
+                        <>
+                          <img 
+                            src={imageUrl}
+                            alt={post.title}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              console.error('Image failed to load:', imageUrl);
+                              e.currentTarget.style.display = 'none';
+                            }}
+                          />
+                          <div className="absolute inset-0 bg-black/20" />
+                        </>
+                      ) : (
+                        <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-emerald-500" />
+                      );
+                    })()}
                     <div className="absolute bottom-4 left-4">
                       <span className="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
                         {post.category}
