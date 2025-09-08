@@ -75,7 +75,7 @@ export default function BlogClient({ locale, initialPosts }: BlogClientProps) {
       <div className="bg-gradient-to-br from-green-600 via-green-700 to-emerald-800 text-white">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
               Blog de Casino México
             </h1>
             <p className="text-xl text-green-100 mb-8">
@@ -157,16 +157,25 @@ export default function BlogClient({ locale, initialPosts }: BlogClientProps) {
               {paginatedPosts.map((post) => (
                 <article key={post.id} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group">
                   {/* Featured Image */}
-                  {(post.featuredImage || post.featured_image) && (
-                    <div className="h-48 bg-gradient-to-br from-green-400 to-emerald-500 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-black/20" />
-                      <div className="absolute bottom-4 left-4">
-                        <span className="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                          {post.category}
-                        </span>
-                      </div>
+                  <div className="h-48 relative overflow-hidden bg-gradient-to-br from-green-400 to-emerald-500">
+                    {(post.featuredImage || post.featured_image) ? (
+                      <>
+                        <img 
+                          src={post.featuredImage || post.featured_image}
+                          alt={post.title}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/20" />
+                      </>
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-emerald-500" />
+                    )}
+                    <div className="absolute bottom-4 left-4">
+                      <span className="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                        {post.category}
+                      </span>
                     </div>
-                  )}
+                  </div>
                   
                   <div className="p-6">
                     {/* Title */}
