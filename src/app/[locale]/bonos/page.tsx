@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   
   if (isSpanish) {
     return {
-      title: 'Mejores Bonos de Casino 2025 - Ofertas Exclusivas | CasinosPesos',
+      title: 'Bonos de Casino México 2025 | Hasta $50,000 MXN',
       description: 'Bonos de casino verificados diariamente. Sin depósito, bienvenida, giros gratis y más. Códigos promocionales exclusivos para México.',
       keywords: 'bonos casino, bonos sin depósito, giros gratis, códigos promocionales casino, ofertas casino méxico',
       alternates: {
@@ -39,6 +39,26 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           'en-US': getCanonicalUrl('/bonuses', 'en'),
         }
       },
+      openGraph: {
+        title: 'Bonos de Casino México 2025 | Hasta $50,000 MXN',
+        description: 'Encuentra los mejores bonos de casino en México. Sin depósito, bienvenida y giros gratis verificados diariamente.',
+        url: getCanonicalUrl('/bonos', locale),
+        siteName: 'CasinosPesos',
+        locale: 'es_MX',
+        type: 'website',
+        images: [{
+          url: 'https://www.casinospesos.com/logo.png',
+          width: 1200,
+          height: 630,
+          alt: 'Bonos de Casino México'
+        }]
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Bonos de Casino México 2025',
+        description: 'Mejores bonos hasta $50,000 MXN. Sin depósito y giros gratis.',
+        images: ['https://www.casinospesos.com/logo.png'],
+      }
     };
   } else {
     return {
@@ -52,6 +72,26 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           'en-US': getCanonicalUrl('/bonuses', 'en'),
         }
       },
+      openGraph: {
+        title: 'Best Casino Bonuses 2025 - Up to $50,000 MXN',
+        description: 'Find the best casino bonuses in Mexico. No deposit, welcome and free spins verified daily.',
+        url: getCanonicalUrl('/bonuses', locale),
+        siteName: 'CasinosPesos',
+        locale: 'en_US',
+        type: 'website',
+        images: [{
+          url: 'https://www.casinospesos.com/logo.png',
+          width: 1200,
+          height: 630,
+          alt: 'Casino Bonuses Mexico'
+        }]
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Casino Bonuses Mexico 2025',
+        description: 'Best bonuses up to $50,000 MXN. No deposit and free spins.',
+        images: ['https://www.casinospesos.com/logo.png'],
+      }
     };
   }
 }

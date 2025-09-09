@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (isSpanish) {
     return {
       title: 'Términos y Condiciones | CasinosPesos | Uso Sitio Web 2025',
-      description: 'Términos y condiciones de uso del sitio web CasinosPesos. Normas, responsabilidades y derechos de usuarios. Lee antes de usar nuestros servicios de comparación de casinos.',
+      description: 'Términos y condiciones de uso del sitio web CasinosPesos. Normas, responsabilidades y derechos de usuarios al usar nuestros servicios de comparación.',
       keywords: 'terminos condiciones casinospesos, uso sitio web casinos, responsabilidades usuario, derechos casinos online, politicas uso mexico',
       alternates: {
         canonical: 'https://www.casinospesos.com/es/terms',

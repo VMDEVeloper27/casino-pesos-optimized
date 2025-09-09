@@ -9,7 +9,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     '/contacto',
     'Contacto | CasinosPesos',
     'Contact | CasinosPesos',
-    'Contáctanos para cualquier consulta sobre casinos online. Equipo experto disponible para ayudarte.',
+    'Contáctanos para cualquier consulta sobre casinos online en México. Equipo experto disponible 24/7 para ayudarte con bonos, juegos y más. Respuesta en 24 horas.',
     'Contact us for any inquiry about online casinos. Expert team available to help you.',
     {
       keywords: {

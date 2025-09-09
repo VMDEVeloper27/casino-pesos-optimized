@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   
   if (isSpanish) {
     return {
-      title: 'Juegos de Casino Online Gratis y con Dinero Real 2025 | CasinosPesos',
+      title: 'Juegos de Casino Online México 2025 | CasinosPesos',
       description: 'Juega +1000 juegos de casino online: tragamonedas, ruleta, blackjack, póker y casino en vivo. Prueba gratis o juega con dinero real en México.',
       keywords: 'juegos casino mexico, tragamonedas gratis, slots online, casino en vivo, ruleta online, blackjack mexico, crash games, aviator',
       alternates: {

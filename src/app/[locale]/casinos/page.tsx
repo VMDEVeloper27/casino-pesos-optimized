@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   
   if (locale === 'es') {
     return {
-      title: 'Todos los Casinos Online México 2025 | Lista Completa | CasinosPesos',
+      title: 'Casinos Online en Pesos Mexicanos 2025 | CasinosPesos',
       description: 'Lista completa de +50 casinos online en México. Compara bonos, métodos de pago, juegos y licencias. Encuentra el casino perfecto para ti.',
       keywords: 'lista casinos mexico, todos los casinos online, comparar casinos mexico, casinos pesos mexicanos, mejores casinos 2025',
       alternates: {

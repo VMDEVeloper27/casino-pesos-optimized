@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   
   if (locale === 'es') {
     return {
-      title: 'Mejores Casinos Online México 2025 | Pesos Mexicanos | CasinosPesos',
+      title: 'Mejores Casinos Online México 2025 | CasinosPesos',
       description: 'Descubre los mejores casinos online que aceptan pesos mexicanos ⭐ Bonos hasta $50,000 MXN ✅ OXXO, SPEI, PayPal ✅ Retiros rápidos ✅ Guías expertas',
       keywords: 'casinos online méxico, casino pesos mexicanos, mejores casinos mexico, casino online seguro méxico, bonos casino méxico, casino OXXO, casino PayPal méxico',
       openGraph: {

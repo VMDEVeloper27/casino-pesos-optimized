@@ -9,7 +9,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     '/guias',
     'Guías de Casino | Estrategias y Consejos | CasinosPesos',
     'Casino Guides | Strategies and Tips | CasinosPesos',
-    'Guías completas sobre casinos online, estrategias de juego, consejos de expertos y tutoriales para principiantes',
+    'Guías completas sobre casinos online en México, estrategias de juego ganadoras, consejos de expertos y tutoriales paso a paso para principiantes y profesionales.',
     'Complete guides about online casinos, gaming strategies, expert tips and tutorials for beginners',
     {
       keywords: {

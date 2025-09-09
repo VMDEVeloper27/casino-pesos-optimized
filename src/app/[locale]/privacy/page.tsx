@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   
   if (isSpanish) {
     return {
-      title: 'Política de Privacidad | CasinosPesos | Protección Datos 2025',
+      title: 'Política de Privacidad | CasinosPesos',
       description: 'Conoce cómo protegemos tu información personal y respetamos tu privacidad en CasinosPesos. GDPR, cookies, derechos usuario y seguridad de datos.',
       keywords: 'politica privacidad casinospesos, proteccion datos personales, privacidad usuario casinos, gdpr mexico, seguridad informacion, derechos usuario',
       alternates: {

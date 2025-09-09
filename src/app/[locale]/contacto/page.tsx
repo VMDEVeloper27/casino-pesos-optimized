@@ -265,22 +265,45 @@ export default function ContactoPage() {
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-1">¿Cuánto tardan en responder?</h4>
                   <p className="text-sm text-gray-600">
-                    Normalmente respondemos en menos de 24 horas.
+                    Normalmente respondemos en menos de 24 horas hábiles. Para consultas urgentes sobre bonos activos o problemas técnicos, 
+                    priorizamos tu mensaje para una respuesta más rápida.
                   </p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-1">¿Ofrecen soporte telefónico?</h4>
                   <p className="text-sm text-gray-600">
-                    Sí, estamos disponibles de lunes a domingo, 24/7.
+                    Sí, estamos disponibles de lunes a domingo, 24/7. Nuestro equipo de expertos en casinos online puede ayudarte 
+                    en español con cualquier duda sobre bonos, métodos de pago o requisitos de apuesta.
                   </p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-1">¿Puedo solicitar una reseña de un casino?</h4>
                   <p className="text-sm text-gray-600">
-                    Por supuesto, envíanos el nombre del casino y lo evaluaremos.
+                    Por supuesto, envíanos el nombre del casino y lo evaluaremos. Analizamos licencias, seguridad, variedad de juegos, 
+                    bonos disponibles y métodos de pago para jugadores mexicanos antes de publicar cualquier reseña.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-1">¿Cómo reporto un problema con un casino?</h4>
+                  <p className="text-sm text-gray-600">
+                    Si tienes problemas con algún casino listado, contáctanos inmediatamente. Investigamos todas las quejas 
+                    y actualizamos nuestras recomendaciones para proteger a nuestra comunidad de jugadores.
                   </p>
                 </div>
               </div>
+            </div>
+            
+            {/* Additional Info */}
+            <div className="bg-white rounded-xl p-6">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">¿Por qué contactarnos?</h3>
+              <p className="text-sm text-gray-600 mb-3">
+                En CasinosPesos somos más que un sitio de comparación. Somos tu aliado en el mundo de los casinos online en México. 
+                Nuestro equipo está formado por expertos en la industria del juego online con años de experiencia.
+              </p>
+              <p className="text-sm text-gray-600">
+                Ya sea que necesites ayuda para entender los términos de un bono, comparar métodos de pago, o simplemente 
+                quieras nuestra opinión experta sobre un casino específico, estamos aquí para ayudarte a tomar las mejores decisiones.
+              </p>
             </div>
 
           </div>
