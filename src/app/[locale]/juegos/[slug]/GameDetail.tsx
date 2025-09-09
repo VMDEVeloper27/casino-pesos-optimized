@@ -70,11 +70,11 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-gray-50 overflow-x-hidden">
       {/* Breadcrumb */}
       <div className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 py-3">
-          <nav className="flex items-center gap-2 text-sm">
+        <div className="container mx-auto px-2 sm:px-4 py-3">
+          <nav className="flex flex-wrap items-center gap-1 sm:gap-2 text-xs sm:text-sm">
             <Link href={`/${locale}`} className="text-gray-500 hover:text-gray-700">
               {isSpanish ? 'Inicio' : 'Home'}
             </Link>
@@ -88,14 +88,14 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid lg:grid-cols-3 gap-8">
+      <div className="w-full px-2 sm:px-4 py-4 sm:py-6 lg:py-8 max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
           {/* Main Content */}
           <div className="lg:col-span-2">
             {/* Game Player */}
-            <div className="bg-black rounded-xl overflow-hidden shadow-xl">
+            <div className="bg-black rounded-lg sm:rounded-xl overflow-hidden shadow-xl w-full">
               {!isPlaying ? (
-                <div className="relative aspect-video">
+                <div className="relative aspect-video w-full">
                   {game.image && (
                     game.image.startsWith('http') ? (
                       <img
@@ -116,15 +116,15 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
                     {game.embedUrl ? (
                       <button
                         onClick={() => setIsPlaying(true)}
-                        className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-3 transition-all transform hover:scale-105 shadow-lg"
+                        className="bg-green-600 hover:bg-green-700 text-white px-3 sm:px-6 py-2.5 sm:py-3.5 rounded-lg sm:rounded-xl font-bold text-sm sm:text-base lg:text-lg flex items-center gap-1.5 sm:gap-2 transition-all transform hover:scale-105 shadow-lg"
                       >
-                        <PlayCircle className="w-8 h-8" />
+                        <PlayCircle className="w-6 h-6 sm:w-7 sm:h-7" />
                         {isSpanish ? 'Jugar Demo Gratis' : 'Play Free Demo'}
                       </button>
                     ) : (
                       <div className="text-center">
                         <AlertCircle className="w-12 h-12 mx-auto mb-3 text-yellow-400" />
-                        <p className="text-lg font-semibold text-white mb-2">
+                        <p className="text-base sm:text-lg font-semibold text-white mb-2">
                           {isSpanish ? 'Demo no disponible' : 'Demo not available'}
                         </p>
                         <p className="text-sm text-gray-300 max-w-xs">
@@ -136,11 +136,11 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
                     )}
                   </div>
                   {/* Game Info Overlay */}
-                  <div className="absolute top-4 left-4 right-4 flex justify-between">
-                    <div className="bg-black/60 backdrop-blur-sm text-white px-3 py-1.5 rounded-lg">
+                  <div className="absolute top-2 sm:top-4 left-2 sm:left-4 right-2 sm:right-4 flex justify-between gap-2">
+                    <div className="bg-black/60 backdrop-blur-sm text-white px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg">
                       <span className="text-sm">{game.provider}</span>
                     </div>
-                    <div className="bg-black/60 backdrop-blur-sm text-white px-3 py-1.5 rounded-lg flex items-center gap-1">
+                    <div className="bg-black/60 backdrop-blur-sm text-white px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg flex items-center gap-1">
                       <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                       <span className="text-sm font-semibold">{game.popularity}</span>
                     </div>
@@ -150,13 +150,14 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
                 <div className="relative">
                   {game.embedUrl ? (
                     <>
-                      <div className="aspect-video">
+                      <div className="aspect-video w-full">
                         <iframe
                           src={game.embedUrl}
                           className="w-full h-full"
                           allowFullScreen
                           allow="autoplay"
                           title={game.name}
+                          style={{ maxWidth: '100%' }}
                         />
                       </div>
                       <button
@@ -171,7 +172,7 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
                     <div className="aspect-video bg-gray-900 flex items-center justify-center">
                       <div className="text-center text-white">
                         <AlertCircle className="w-12 h-12 mx-auto mb-3 text-yellow-400" />
-                        <p className="text-lg font-semibold mb-2">
+                        <p className="text-base sm:text-lg font-semibold mb-2">
                           {isSpanish ? 'Demo no disponible' : 'Demo not available'}
                         </p>
                         <p className="text-sm text-gray-300">
@@ -187,11 +188,11 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
             </div>
 
             {/* Game Title and Actions */}
-            <div className="bg-white rounded-xl p-6 mt-6">
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex-1">
-                  <h1 className="text-3xl font-bold text-gray-900 mb-2">{game.name}</h1>
-                  <p className="text-gray-600">{game.description}</p>
+            <div className="bg-white rounded-lg sm:rounded-xl p-4 sm:p-5 lg:p-6 mt-4 sm:mt-6">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-0 mb-4">
+                <div className="flex-1 min-w-0">
+                  <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">{game.name}</h1>
+                  <p className="text-gray-600 break-words">{game.description}</p>
                 </div>
                 <FavoriteButton 
                   entityId={game.id}
@@ -201,14 +202,14 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
               </div>
 
               {/* Quick Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6">
                 {game.rtp && (
                   <div className="bg-gray-50 rounded-lg p-3">
                     <div className="flex items-center gap-2 text-gray-500 text-sm mb-1">
                       <Target className="w-4 h-4" />
                       RTP
                     </div>
-                    <div className="font-bold text-lg text-gray-900">{game.rtp}%</div>
+                    <div className="font-bold text-base sm:text-lg text-gray-900">{game.rtp}%</div>
                   </div>
                 )}
                 {game.volatility && (
@@ -228,7 +229,7 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
                       <Award className="w-4 h-4" />
                       Max Win
                     </div>
-                    <div className="font-bold text-lg text-gray-900">{game.maxWin.toLocaleString()}x</div>
+                    <div className="font-bold text-base sm:text-lg text-gray-900">{game.maxWin.toLocaleString()}x</div>
                   </div>
                 )}
                 {game.paylines && (
@@ -237,14 +238,14 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
                       <Gamepad2 className="w-4 h-4" />
                       {isSpanish ? 'Líneas' : 'Paylines'}
                     </div>
-                    <div className="font-bold text-lg text-gray-900">{game.paylines}</div>
+                    <div className="font-bold text-base sm:text-lg text-gray-900">{game.paylines}</div>
                   </div>
                 )}
               </div>
 
               {/* Tabs */}
               <div className="border-b border-gray-200 mb-6">
-                <nav className="flex gap-6">
+                <nav className="flex gap-3 sm:gap-4 lg:gap-6 overflow-x-auto">
                   <button
                     onClick={() => setActiveTab('info')}
                     className={`pb-3 px-1 border-b-2 font-medium transition-colors ${
@@ -414,9 +415,9 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
                     {availableCasinos.map((casino) => (
                       <div key={casino.id} className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition-shadow">
                         <div className="flex items-start justify-between">
-                          <div className="flex-1">
+                          <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-3 mb-2">
-                              <h4 className="font-bold text-lg text-gray-900">
+                              <h4 className="font-bold text-base sm:text-lg text-gray-900">
                                 {casino.name}
                               </h4>
                               <div className="flex items-center gap-1 bg-green-100 px-2 py-1 rounded-full">
@@ -482,7 +483,7 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="grid grid-cols-2 md:grid-cols-3 gap-4"
+                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4"
                   >
                     {similarGames.map((similarGame) => (
                       <Link
@@ -510,9 +511,9 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {/* Play Count */}
-            <div className="bg-white rounded-xl p-6">
+            <div className="bg-white rounded-lg sm:rounded-xl p-4 sm:p-5 lg:p-6">
               <div className="flex items-center gap-3 mb-4">
                 <Users className="w-5 h-5 text-green-600" />
                 <h3 className="font-bold text-gray-900">
@@ -542,7 +543,7 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
             </div>
 
             {/* Provider Info */}
-            <div className="bg-white rounded-xl p-6">
+            <div className="bg-white rounded-lg sm:rounded-xl p-4 sm:p-5 lg:p-6">
               <h3 className="font-bold text-gray-900 mb-3">
                 {isSpanish ? 'Acerca del Proveedor' : 'About Provider'}
               </h3>
@@ -590,7 +591,7 @@ export default function GameDetail({ game, locale }: GameDetailProps) {
             className="fixed inset-0 bg-black z-50 flex flex-col"
           >
             <div className="flex justify-between items-center p-4 bg-black/80">
-              <h2 className="text-white font-bold text-lg">{game.name}</h2>
+              <h2 className="text-white font-bold text-base sm:text-lg">{game.name}</h2>
               <button
                 onClick={exitFullscreen}
                 className="text-white hover:text-gray-300 p-2"

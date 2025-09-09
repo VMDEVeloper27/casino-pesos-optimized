@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Prevent horizontal scroll globally */
+@layer base {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+}
+
 /* Import comprehensive responsive styles */
 @import '../styles/responsive-media-queries.css';
 @import '../styles/mobile-fixes.css';

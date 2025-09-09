@@ -13,7 +13,10 @@
     "format:check": "prettier --check .",
     "type-check": "tsc --noEmit",
     "clean": "rm -rf .next out dist",
-    "migrate:data": "tsx scripts/migrate-to-supabase.ts"
+    "migrate:data": "tsx scripts/migrate-to-supabase.ts",
+    "migrate:games": "tsx scripts/migrate-games-to-supabase.ts",
+    "migrate:game-details": "tsx scripts/migrate-games-to-game-details.ts",
+    "test:embed-urls": "tsx scripts/test-embed-urls.ts"
   },
   "dependencies": {
     "@auth/supabase-adapter": "^1.10.0",

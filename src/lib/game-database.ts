@@ -355,7 +355,8 @@ export const games: Game[] = [
     popularity: 90,
     availableAt: ['bet365', 'codere', 'caliente', 'betway', 'rushbet', 'strendus'],
     description: 'Traditional blackjack with standard rules and up to 99.5% RTP.',
-    image: 'https://img.freepik.com/free-photo/playing-cards-chips-casino-table_1142-51567.jpg'
+    image: 'https://images.unsplash.com/photo-1596709231542-e6aea48d7044?w=800&q=80',
+    embedUrl: 'https://demo.egamingsolutions.com/blackjack/classic'
   },
   {
     id: 'baccarat',

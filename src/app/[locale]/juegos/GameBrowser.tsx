@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Game } from '@/lib/game-database';
-import { getGameTypes, getUniqueProviders } from '@/lib/game-database';
 import { getAllCasinos } from '@/lib/casino-database';
 import FavoriteButtonAuth from '@/components/FavoriteButtonAuth';
 
@@ -45,8 +44,21 @@ export default function GameBrowser({
   const [showFilters, setShowFilters] = useState(false);
 
   const isSpanish = locale === 'es';
-  const gameTypes = getGameTypes();
-  const providers = getUniqueProviders();
+  
+  // Get game types and providers from the actual games data (including database)
+  const gameTypes = useMemo(() => {
+    return [
+      { value: 'slot', label: isSpanish ? 'Tragamonedas' : 'Slots', count: allGames.filter(g => g.type === 'slot').length },
+      { value: 'live', label: isSpanish ? 'Casino en Vivo' : 'Live Casino', count: allGames.filter(g => g.type === 'live').length },
+      { value: 'table', label: isSpanish ? 'Juegos de Mesa' : 'Table Games', count: allGames.filter(g => g.type === 'table').length },
+      { value: 'crash', label: 'Crash Games', count: allGames.filter(g => g.type === 'crash').length },
+      { value: 'instant', label: isSpanish ? 'Instantáneos' : 'Instant Win', count: allGames.filter(g => g.type === 'instant').length },
+    ].filter(type => type.count > 0);
+  }, [allGames, isSpanish]);
+  
+  const providers = useMemo(() => {
+    return [...new Set(allGames.map(game => game.provider))].sort();
+  }, [allGames]);
 
   // Update URL when filters change
   useEffect(() => {
@@ -223,21 +235,54 @@ export default function GameBrowser({
                 </div>
               </div>
 
+              {/* Clear Filters Button */}
+              {(selectedType !== 'all' || selectedProvider !== 'all') && (
+                <button
+                  onClick={() => {
+                    setSelectedType('all');
+                    setSelectedProvider('all');
+                  }}
+                  className="w-full mb-4 px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors flex items-center justify-center gap-2"
+                >
+                  <X className="w-4 h-4" />
+                  {isSpanish ? 'Limpiar Filtros' : 'Clear Filters'}
+                </button>
+              )}
+
               {/* Provider Filter */}
-              <div>
+              <div className="mb-6">
                 <h4 className="font-semibold text-gray-700 mb-3">
                   {isSpanish ? 'Proveedor' : 'Provider'}
                 </h4>
-                <select
-                  value={selectedProvider}
-                  onChange={(e) => setSelectedProvider(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                >
-                  <option value="all">{isSpanish ? 'Todos' : 'All'}</option>
-                  {providers.map((provider) => (
-                    <option key={provider} value={provider}>{provider}</option>
-                  ))}
-                </select>
+                <div className="space-y-2 max-h-64 overflow-y-auto">
+                  <button
+                    onClick={() => setSelectedProvider('all')}
+                    className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                      selectedProvider === 'all' 
+                        ? 'bg-green-100 text-green-700' 
+                        : 'hover:bg-gray-100 text-gray-700'
+                    }`}
+                  >
+                    {isSpanish ? 'Todos' : 'All'} ({allGames.length})
+                  </button>
+                  {providers.map((provider) => {
+                    const count = allGames.filter(g => g.provider === provider).length;
+                    return (
+                      <button
+                        key={provider}
+                        onClick={() => setSelectedProvider(provider)}
+                        className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center justify-between ${
+                          selectedProvider === provider 
+                            ? 'bg-green-100 text-green-700' 
+                            : 'hover:bg-gray-100 text-gray-700'
+                        }`}
+                      >
+                        <span className="truncate">{provider}</span>
+                        <span className="text-sm flex-shrink-0 ml-2">({count})</span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
@@ -517,24 +562,61 @@ export default function GameBrowser({
                   </div>
                 </div>
 
+                {/* Clear Filters Button - Mobile */}
+                {(selectedType !== 'all' || selectedProvider !== 'all') && (
+                  <button
+                    onClick={() => {
+                      setSelectedType('all');
+                      setSelectedProvider('all');
+                      setShowFilters(false);
+                    }}
+                    className="w-full mb-4 px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors flex items-center justify-center gap-2"
+                  >
+                    <X className="w-4 h-4" />
+                    {isSpanish ? 'Limpiar Filtros' : 'Clear Filters'}
+                  </button>
+                )}
+
                 {/* Mobile Provider Filter */}
-                <div>
+                <div className="mb-6">
                   <h4 className="font-semibold text-gray-700 mb-3">
                     {isSpanish ? 'Proveedor' : 'Provider'}
                   </h4>
-                  <select
-                    value={selectedProvider}
-                    onChange={(e) => {
-                      setSelectedProvider(e.target.value);
-                      setShowFilters(false);
-                    }}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                  >
-                    <option value="all">{isSpanish ? 'Todos' : 'All'}</option>
-                    {providers.map((provider) => (
-                      <option key={provider} value={provider}>{provider}</option>
-                    ))}
-                  </select>
+                  <div className="space-y-2 max-h-64 overflow-y-auto">
+                    <button
+                      onClick={() => {
+                        setSelectedProvider('all');
+                        setShowFilters(false);
+                      }}
+                      className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                        selectedProvider === 'all' 
+                          ? 'bg-green-100 text-green-700' 
+                          : 'hover:bg-gray-100 text-gray-700'
+                      }`}
+                    >
+                      {isSpanish ? 'Todos' : 'All'} ({allGames.length})
+                    </button>
+                    {providers.map((provider) => {
+                      const count = allGames.filter(g => g.provider === provider).length;
+                      return (
+                        <button
+                          key={provider}
+                          onClick={() => {
+                            setSelectedProvider(provider);
+                            setShowFilters(false);
+                          }}
+                          className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center justify-between ${
+                            selectedProvider === provider 
+                              ? 'bg-green-100 text-green-700' 
+                              : 'hover:bg-gray-100 text-gray-700'
+                          }`}
+                        >
+                          <span className="truncate">{provider}</span>
+                          <span className="text-sm flex-shrink-0 ml-2">({count})</span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </motion.div>

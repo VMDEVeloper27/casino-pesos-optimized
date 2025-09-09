@@ -85,6 +85,22 @@ export default async function JuegosPage({ params, searchParams }: PageProps) {
   const { locale } = await params;
   const { type, provider, search } = await searchParams;
   const games = await getAllGames();
+  
+  console.log(`Total games loaded: ${games.length}`);
+  const uniqueProviders = [...new Set(games.map(g => g.provider))];
+  console.log(`Unique providers: ${uniqueProviders.length}`);
+  console.log('Providers:', uniqueProviders);
+  
+  // Подсчет игр по провайдерам
+  const providerCounts = {};
+  uniqueProviders.forEach(provider => {
+    providerCounts[provider] = games.filter(g => g.provider === provider).length;
+  });
+  console.log('Games per provider:', providerCounts);
+  
+  // Проверка, все ли игры имеют провайдера
+  const gamesWithoutProvider = games.filter(g => !g.provider);
+  console.log(`Games without provider: ${gamesWithoutProvider.length}`);
 
   return (
     <GameBrowser 
